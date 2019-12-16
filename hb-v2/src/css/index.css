@@ -50,8 +50,8 @@ p{
   transform: translate(-50%, -50%);
 }
 
-.green-button{
-  background: #00AB50;
+.green-button, .green-button:active, .green-button:focus{
+  background-color: #00AB50 !important;
   border-radius: 5px;
   font-style: normal;
   font-weight: normal;
@@ -63,6 +63,7 @@ p{
   color: #FFFFFF;
   border: none;
   padding: 0.1rem 1.25rem;
+  box-shadow: none !important;
 }
 
 .search-box{
