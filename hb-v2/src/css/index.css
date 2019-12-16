@@ -1,5 +1,6 @@
 :root {
   --hb-green: #00AB50;
+  --hb-blue: #0F4C81;
 }
 
 body {
@@ -50,8 +51,21 @@ p{
   transform: translate(-50%, -50%);
 }
 
+.content{
+  padding: 1rem 2rem;
+}
 .green-button, .green-button:active, .green-button:focus{
-  background-color: #00AB50 !important;
+  background-color: var(--hb-green) !important;
+  color: #FFFFFF;
+  padding: 0.1rem 1.25rem;
+  border-color: transparent;
+}
+
+.blue-button{
+  background-color: var(--hb-blue);
+  border-radius: 0;
+}
+button, button:active, button:focus{
   border-radius: 5px;
   font-style: normal;
   font-weight: normal;
@@ -60,7 +74,6 @@ p{
   display: flex;
   align-items: center;
   text-align: center;
-  color: #FFFFFF;
   border: none;
   padding: 0.1rem 1.25rem;
   box-shadow: none !important;
@@ -84,7 +97,6 @@ p{
   line-height: 27px;
   display: flex;
   align-items: center;
-
-  color: #C4C4C4;
+  color: black;
 }
 
