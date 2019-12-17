@@ -5,7 +5,7 @@ import { StyledRating } from "../StyledRating/StyledRating";
 function ReviewCard(props){
     return(
         <div className='col-12'>
-            <div>
+            <div style={{borderBottom:'2px solid #c4c4c4'}}>
                 <div style={{marginBottom:'1rem'}}>
                     <p>{props.review.review}</p>
                 </div>
