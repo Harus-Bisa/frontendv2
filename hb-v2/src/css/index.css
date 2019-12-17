@@ -1,6 +1,6 @@
 :root {
   --hb-green: #00AB50;
-  --hb-blue: #0F4C81;
+  --hb-blue: #39A3FF;
 }
 
 body {
@@ -62,7 +62,7 @@ p{
 }
 
 .blue-button{
-  background-color: var(--hb-blue);
+  background-color: black;
 }
 /* button, button:active, button:focus{
   border-radius: 5px;

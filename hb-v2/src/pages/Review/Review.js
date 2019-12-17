@@ -11,7 +11,7 @@ function Review(props){
     return(
         <div className="container content">
             <header>
-                <h2>{props.professor.name}</h2>
+                <h2 style={{borderBottom:"4px solid #39A3FF"}}>{props.professor.name}</h2>
                 <p>{props.professor.school}</p>
             </header>
             <div style={{display:"flex", alignItems:'center', flexDirection:'column'}}>
