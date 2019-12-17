@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { FormGroup, Label, Input, Button } from "reactstrap";
 import Rating from "@material-ui/lab/Rating";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined } from "@material-ui/icons";
 
@@ -24,13 +24,13 @@ function ReviewForm(props){
             flexDirection:'column'
         },
         ratingSpan:{
-            alignSelf:'center'
+            alignSelf:'center',
         }
     }
     return(
         <div className="container content">
             <h5>Terima Kasih anda sudah mau berkontribusi!</h5>
-            <Form onSubmit={submit}>
+            <form onSubmit={submit}>
                 <FormGroup>
                     <Label>Nama Dosen*</Label>
                     <Input type="text" id="profName" value={profName} required onChange={(event) => setProfName(event.target.value)}/>
@@ -39,9 +39,12 @@ function ReviewForm(props){
                     <Label>Nama Kelas*</Label>
                     <Input type="text" id="courseName" value={courseName} required onChange={(event) => setCourseName(event.target.value)}/>
                 </FormGroup>
-                <FormGroup>
+                <FormGroup style={style.ratingBox}>
                     <Label>Apakah anda sedang mengambil kelas ini?*</Label>
-                    <Input type="text" id="currentlyTaking" value={currentlyTaking} required onChange={(event) => setCurrentlyTaking(event.target.value)}/>
+                    <div className="button-group-container" id="currentlyTaking">
+                        <Button id="currentlyTaking-Yes" onChange={() => setCurrentlyTaking(true)} className={currentlyTaking ? "button-group-selected" : "button-group"}>Iya!</Button>
+                        <Button id="currentlyTaking-No" onChange={() => setCurrentlyTaking(false)} className={!currentlyTaking ? "button-group-selected" : "button-group"}>Sudah lama!</Button>
+                    </div>
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
                     <Label>Penilaian*</Label>
@@ -82,7 +85,7 @@ function ReviewForm(props){
                     <Input type="textarea" id="review" value={review} required onChange={(event) => setReview(event.target.value)}/>
                 </FormGroup>
                 <Button className="blue-button" submit style={{width:'100%'}}>Selesai</Button>
-            </Form>
+            </form>
         </div>
     )
 }

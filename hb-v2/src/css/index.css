@@ -99,6 +99,24 @@ button, button:active, button:focus{
   color: black;
 }
 
+.button-group-container{
+  width: 100%;
+  display: flex;
+}
+.button-group{
+  border-radius: 0;
+  border: 0;
+  background-color: transparent;
+  color: black;
+  width: 50%;
+}
+.button-group-selected{
+  background-color: var(--hb-blue);
+  color: white;
+  border-radius: 0;
+  border: 0;
+  width: 50%;
+}
 .form-control{
   border: 1px solid #000000;
   box-sizing: border-box;
