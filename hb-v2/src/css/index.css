@@ -39,7 +39,7 @@ h5{
 
 p{
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 21px;
 }
@@ -63,7 +63,6 @@ p{
 
 .blue-button{
   background-color: var(--hb-blue);
-  border-radius: 0;
 }
 button, button:active, button:focus{
   border-radius: 5px;
@@ -98,5 +97,11 @@ button, button:active, button:focus{
   display: flex;
   align-items: center;
   color: black;
+}
+
+.form-control{
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 0px;
 }
 
