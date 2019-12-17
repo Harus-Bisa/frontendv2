@@ -5,7 +5,7 @@ import Rating from "@material-ui/lab/Rating";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined } from "@material-ui/icons";
 
 function ReviewForm(props){
-    var [profName, setProfName] = React.useState("")
+    var [profName, setProfName] = React.useState(props.profName)
     var [courseName, setCourseName] = React.useState("")
     var [currentlyTaking, setCurrentlyTaking]= React.useState(true)
     var [overallRating, setOverallRating] = React.useState(0) 
@@ -17,6 +17,7 @@ function ReviewForm(props){
 
     const submit = (event) =>{
         event.preventDefault()
+        props.history.push("/review/"+props.match.params.profId)
     }
     const style={
         ratingBox:{
@@ -42,8 +43,8 @@ function ReviewForm(props){
                 <FormGroup style={style.ratingBox}>
                     <Label>Apakah anda sedang mengambil kelas ini?*</Label>
                     <div className="button-group-container" id="currentlyTaking">
-                        <Button id="currentlyTaking-Yes" onChange={() => setCurrentlyTaking(true)} className={currentlyTaking ? "button-group-selected" : "button-group"}>Iya!</Button>
-                        <Button id="currentlyTaking-No" onChange={() => setCurrentlyTaking(false)} className={!currentlyTaking ? "button-group-selected" : "button-group"}>Sudah lama!</Button>
+                        <Button type="button" id="currentlyTaking-Yes" onClick={(event) => setCurrentlyTaking(true)} className={currentlyTaking ? "button-group-selected" : "button-group"}>Iya!</Button>
+                        <Button type="button" id="currentlyTaking-No" onClick={(event) => setCurrentlyTaking(false)} className={!currentlyTaking ? "button-group-selected" : "button-group"}>Sudah lama!</Button>
                     </div>
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
@@ -90,4 +91,9 @@ function ReviewForm(props){
     )
 }
 
-export default connect()(ReviewForm);
+function mapStateToProps(state){
+    return{
+        profName: state.professor.name
+    }
+}
+export default connect(mapStateToProps)(ReviewForm);

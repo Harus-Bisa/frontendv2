@@ -6,7 +6,7 @@ import { Button } from "reactstrap";
 
 function Review(props){
     const addReview = () =>{
-        props.history.push("/review/add")
+        props.history.push("/review/1/add")
     }
     return(
         <div className="container content">

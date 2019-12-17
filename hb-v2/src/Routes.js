@@ -8,7 +8,7 @@ function Routes() {
     return(
         <Switch>
             <Route exact path="/" component={Landing}/>
-            <Route exact path="/review/add" component={ReviewForm}/>
+            <Route exact path="/review/:profId/add" component={ReviewForm}/>
             <Route exact path="/review/:profId" component={Review}/>
         </Switch>
     )

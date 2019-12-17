@@ -64,7 +64,7 @@ p{
 .blue-button{
   background-color: var(--hb-blue);
 }
-button, button:active, button:focus{
+/* button, button:active, button:focus{
   border-radius: 5px;
   font-style: normal;
   font-weight: normal;
@@ -76,7 +76,7 @@ button, button:active, button:focus{
   border: none;
   padding: 0.1rem 1.25rem;
   box-shadow: none !important;
-}
+} */
 
 .search-box{
   border-bottom: 1px solid black;
@@ -103,19 +103,21 @@ button, button:active, button:focus{
   width: 100%;
   display: flex;
 }
-.button-group{
+.button-group, .button-group:active, .button-group:focus, .button-group:not(:disabled):not(.disabled):active, .button-group:hover{
   border-radius: 0;
   border: 0;
   background-color: transparent;
   color: black;
   width: 50%;
+  /* text-align: center; */
 }
-.button-group-selected{
+.button-group-selected, .button-group-selected:active, .button-group-selected:focus, .button-group-selected:not(:disabled):not(.disabled):active, .button-group-selected:hover{
   background-color: var(--hb-blue);
   color: white;
   border-radius: 0;
   border: 0;
   width: 50%;
+  /* text-align: center; */
 }
 .form-control{
   border: 1px solid #000000;
