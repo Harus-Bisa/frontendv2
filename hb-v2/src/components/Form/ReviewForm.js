@@ -3,6 +3,17 @@ import {connect} from "react-redux";
 import { FormGroup, Label, Input, Button } from "reactstrap";
 import Rating from "@material-ui/lab/Rating";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined } from "@material-ui/icons";
+import { withStyles } from "@material-ui/core";
+import {GiCoffeeCup} from "react-icons/gi"
+
+const StyledRating = withStyles({
+    iconFilled: {
+      color: "#39A3FF",
+    },
+    iconHover: {
+      color: "#39A3FF",
+    },
+  })(Rating)
 
 function ReviewForm(props){
     var [profName, setProfName] = React.useState(props.profName)
@@ -49,7 +60,7 @@ function ReviewForm(props){
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
                     <Label>Penilaian*</Label>
-                    <Rating 
+                    <StyledRating
                         style={style.ratingSpan} 
                         id="overallRating" 
                         value={overallRating} 
@@ -60,7 +71,7 @@ function ReviewForm(props){
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
                     <Label>Apakah anda merekomendasi dosen ini ke teman anda?*</Label>
-                    <Rating 
+                    <StyledRating 
                         style={style.ratingSpan} 
                         id="recommendationRating" 
                         value={recommendationRating} 
@@ -71,7 +82,13 @@ function ReviewForm(props){
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
                     <Label>Kesusahan Kelas*</Label>
-                    <Rating style={style.ratingSpan} id="difficultyRating" value={difficultyRating} onChange={(event, value) => setDifficultyRating(value)}/>
+                    <StyledRating 
+                        style={style.ratingSpan} 
+                        id="difficultyRating" 
+                        value={difficultyRating} 
+                        onChange={(event, value) => setDifficultyRating(value)}
+                        icon={<GiCoffeeCup/>}
+                    />
                 </FormGroup>
                 <FormGroup>
                     <Label>Nilai yang Anda dapatkan*</Label>
