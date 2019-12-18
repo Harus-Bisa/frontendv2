@@ -1,5 +1,4 @@
 import React from "react";
-import { Input } from "reactstrap";
 import PropTypes from 'prop-types';
 import { withRouter } from "react-router-dom";
 import {Autocomplete} from '@material-ui/lab'
@@ -23,7 +22,7 @@ function SearchBox(props){
             return undefined;
         }
 
-        const search = (async () => {
+        const find = (async () => {
             const response = props.search(text);
             if(active){
                 setOptions(response)
@@ -31,7 +30,7 @@ function SearchBox(props){
         });
         
         if(text.length > 0){
-            search();
+            find();
         }
         else{
             setOptions([])
@@ -78,7 +77,7 @@ function SearchBox(props){
                 )}
                 renderOption={option => {
                     return(
-                        <div onClick={() => select(option.id)} style={{width:'100%'}}>
+                        <div onClick={() => select(option.id)} style={{width:'100%'}} id={"option-"+option.name}>
                             <p style={{fontWeight:'bold', margin:0}}>{option.name}</p>
                             <p style={{fontSize:'12px', margin:0}}>{option.school}</p>    
                         </div>
