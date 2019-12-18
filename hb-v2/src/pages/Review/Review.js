@@ -23,7 +23,7 @@ function Review(props){
                     icon={<ThumbUp/>}
                     emptyIcon={<ThumbUpOutlined/>} />
                 <p>{props.professor.numberOfReviews} Review</p>
-                <Button className='blue-button' onClick={addReview}>Tambah Review</Button>
+                <Button className='blue-button' id="addReview" onClick={addReview}>Tambah Review</Button>
             </div>
             <div style={{margin:'1rem -15px'}}>
                 <ReviewContent/>
