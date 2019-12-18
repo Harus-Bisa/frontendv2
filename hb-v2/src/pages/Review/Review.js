@@ -2,8 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import {ThumbUp, ThumbUpOutlined} from "@material-ui/icons"
 import { Button } from "reactstrap";
-import { StyledRating } from "../../components/StyledRating/StyledRating";
+import { StyledRating } from "../../components/Rating/StyledRating";
 import ReviewContent from "../../components/ReviewContent/ReviewContent";
+import "../../css/review.css";
 
 function Review(props){
     const addReview = () =>{
@@ -24,7 +25,7 @@ function Review(props){
                 <p>{props.professor.numberOfReviews} Review</p>
                 <Button className='blue-button' onClick={addReview}>Tambah Review</Button>
             </div>
-            <div style={{marginTop:'1rem'}}>
+            <div style={{margin:'1rem -15px'}}>
                 <ReviewContent/>
             </div>
 

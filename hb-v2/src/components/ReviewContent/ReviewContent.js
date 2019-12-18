@@ -12,7 +12,7 @@ function ReviewContent(props){
     }
     return(
         <div>
-            <Nav tabs>
+            <Nav tabs style={{borderBottom:'1px solid #C4C4C4'}}>
                 <NavItem>
                     <NavLink
                         className={activeTab === 'review' ? "active":""}

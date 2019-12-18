@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import { FormGroup, Label, Input, Button } from "reactstrap";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined } from "@material-ui/icons";
 import {GiCoffeeCup} from "react-icons/gi"
-import { StyledRating } from "../StyledRating/StyledRating";
+import { StyledRating } from "../Rating/StyledRating";
 
 
 

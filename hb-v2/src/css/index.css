@@ -37,11 +37,15 @@ h5{
   line-height: 21px;
 }
 
-p{
+p, a{
   font-style: normal;
   font-weight: normal;
-  font-size: 11px;
-  line-height: 16px;
+  font-size: 16px;
+  line-height: 21px;
+}
+
+a:hover{
+  text-decoration-line: underline;
 }
 
 .center{
@@ -55,7 +59,7 @@ p{
   padding: 1rem 2rem;
 }
 .green-button, .green-button:active, .green-button:focus{
-  background-color: var(--hb-green) !important;
+  background-color: var(--hb-blue) !important;
   color: #FFFFFF;
   padding: 0.1rem 1.25rem;
   border-color: transparent;
@@ -64,19 +68,6 @@ p{
 .blue-button{
   background-color: black;
 }
-/* button, button:active, button:focus{
-  border-radius: 5px;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 27px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  border: none;
-  padding: 0.1rem 1.25rem;
-  box-shadow: none !important;
-} */
 
 .search-box{
   border-bottom: 1px solid black;
@@ -109,7 +100,6 @@ p{
   background-color: transparent;
   color: black;
   width: 50%;
-  /* text-align: center; */
 }
 .button-group-selected, .button-group-selected:active, .button-group-selected:focus, .button-group-selected:not(:disabled):not(.disabled):active, .button-group-selected:hover{
   background-color: var(--hb-blue);
@@ -117,11 +107,21 @@ p{
   border-radius: 0;
   border: 0;
   width: 50%;
-  /* text-align: center; */
 }
 .form-control{
   border: 1px solid #000000;
   box-sizing: border-box;
   border-radius: 0px;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+  color:black;
+  font-weight: bold;
+  border-color: transparent;
+  border-bottom-color: #C4C4C4;
+}
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
+  border-color: transparent;
+  border-bottom-color: #C4C4C4;
 }
 

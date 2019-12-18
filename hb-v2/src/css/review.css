@@ -1,0 +1,29 @@
+.review-details p{
+    font-size: 14px;
+    line-height: 16px;
+    color: #000000;
+}
+
+.review-footer p, a{
+    font-size: 11px !important;
+    line-height: 15px;
+    color: #000000;
+    margin: auto 5px;
+}
+
+.review-footer .icon{
+    font-size: 12px !important;
+    margin:auto 0;
+}
+
+.review-footer .vote-button{
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 2px;
+    padding:1px 1.5px;
+    font-size: 11px !important;
+    line-height: 15px;
+    min-width: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
