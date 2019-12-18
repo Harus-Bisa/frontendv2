@@ -12,8 +12,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, p, a {
-  font-family: 'Poppins', sans-serif;
+h1, h2, h3, h4, h5, p, a, input, span {
+  font-family: 'Poppins', sans-serif !important;
 }
 
 h1{
@@ -37,7 +37,7 @@ h5{
   line-height: 21px;
 }
 
-p, a{
+p, a, input{
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -69,12 +69,6 @@ a:hover{
   background-color: black;
 }
 
-.search-box{
-  border-bottom: 1px solid black;
-  display: flex;
-  flex-direction: row;
-  padding-bottom: 0.25rem;
-}
 
 .search-box #search-box, .search-box #search-box:focus{
   border: 0px;
@@ -90,6 +84,11 @@ a:hover{
   color: black;
 }
 
+.option-button{
+  text-transform: none;
+  display: flex;
+  flex-direction: column;
+}
 .button-group-container{
   width: 100%;
   display: flex;

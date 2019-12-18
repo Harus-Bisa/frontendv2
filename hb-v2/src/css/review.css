@@ -4,7 +4,7 @@
     color: #000000;
 }
 
-.review-footer p, a{
+.review-footer p, .review-footer a{
     font-size: 11px !important;
     line-height: 15px;
     color: #000000;
