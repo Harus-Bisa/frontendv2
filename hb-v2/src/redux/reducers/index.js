@@ -1,42 +1,17 @@
+import { FIND_USERS, GET_REVIEWS } from "../constants/action-types";
+
 const initialState ={
-    professor:{
-        name: "Agus W. Soehadi",
-        school: "Universitas Prasetya Mulya",
-        overallRating: 4,
-        numberOfReviews: 2,
-        professorId: 1,
-        reviews:[
-            {
-                review:"Prof agus sangat baik dalam mengajar kelas bisnis dasar! Ulangannya pake pilgan semua!",
-                courseName:"Brand Management 101",
-                rating:{
-                    overall:4,
-                    recommendation:5,
-                    difficulty: 1
-                },
-                yearTaken:2010,
-                vote:{
-                    up:25,
-                    down: 2
-                }
-            },
-            {
-                review:"Prof agus sangat baik dalam mengajar kelas bisnis dasar! Ulangannya pake pilgan semua!",
-                courseName:"Brand Management 101",
-                rating:{
-                    overall:4,
-                    recommendation:5,
-                    difficulty: 1
-                },
-                yearTaken:2010,
-                vote:{
-                    up:25,
-                    down: 2
-                }
-            }
-        ]
-    }
 }
 export default function rootReducer(state = initialState, action){
+    if(action.type === FIND_USERS){
+        return Object.assign({}, state, {
+            users: action.payload
+        })
+    }
+    if(action.type === GET_REVIEWS){
+        return Object.assign({}, state, {
+            professor: action.payload
+        })
+    }
     return state;
 }

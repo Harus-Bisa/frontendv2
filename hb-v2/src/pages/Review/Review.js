@@ -5,10 +5,19 @@ import { Button } from "reactstrap";
 import { StyledRating } from "../../components/Rating/StyledRating";
 import ReviewContent from "../../components/ReviewContent/ReviewContent";
 import "../../css/review.css";
+import { getReviews } from "../../redux/actions";
 
 function Review(props){
     const addReview = () =>{
-        props.history.push("/review/1/add")
+        props.history.push("/review/"+props.professor.userId+"/add")
+    }
+    React.useEffect(() =>{
+        if(!props.professor){
+            props.getReviews(props.match.params.userId)
+        }   
+    },[props])
+    if(!props.professor){
+        return(<div>Loading</div>)
     }
     return(
         <div className="container content">
@@ -38,4 +47,4 @@ function mapStateToProps(state){
         professor: state.professor
     }
 }
-export default connect(mapStateToProps)(Review);
+export default connect(mapStateToProps, {getReviews})(Review);

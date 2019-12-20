@@ -8,8 +8,8 @@ function Routes() {
     return(
         <Switch>
             <Route exact path="/" component={Landing}/>
-            <Route exact path="/review/:profId/add" component={ReviewForm}/>
-            <Route exact path="/review/:profId" component={Review}/>
+            <Route exact path="/review/:userId/add" component={ReviewForm}/>
+            <Route exact path="/review/:userId" component={Review}/>
         </Switch>
     )
 }

@@ -20,8 +20,9 @@ function ReviewCard(props){
                         <div className="col-5" style={{display:'flex'}}>
                             <StyledRating 
                                 id="overallRating"
+                                precision={0.5}
                                 style={{margin:'auto'}} 
-                                value={props.review.rating.overall} 
+                                value={props.review.overallRating} 
                                 readOnly
                                 icon={<ThumbUp/>} 
                                 emptyIcon={<ThumbUpOutlined/>}
@@ -35,8 +36,9 @@ function ReviewCard(props){
                         <div className="col-5" style={{display:'flex'}}>
                             <StyledRating 
                                 id="recommendationRating"
+                                precision={0.5}
                                 style={{margin:'auto'}} 
-                                value={props.review.rating.recommendation} 
+                                value={props.review.recommendationRating} 
                                 readOnly
                                 icon={<Check/>}
                                 emptyIcon={<CheckOutlined/>}
@@ -50,8 +52,9 @@ function ReviewCard(props){
                         <div className="col-5" style={{display:'flex'}}>
                             <StyledRating 
                                 id="difficultyRating"
+                                precision={0.5}
                                 style={{margin:'auto'}} 
-                                value={props.review.rating.difficulty} 
+                                value={props.review.difficultyRating} 
                                 readOnly
                                 icon={<GiCoffeeCup/>}
                             />
@@ -78,8 +81,8 @@ function ReviewCard(props){
                     <div className="row justify-content-between">
                         <div className="col-6" style={{display:'flex', flexDirection:'row'}}>
                             <p>Membantu?</p>
-                            <Button className="vote-button">{props.review.vote.up}<ArrowUpward className="icon"/></Button>
-                            <Button className="vote-button">{props.review.vote.down}<ArrowDownward className="icon"/></Button>
+                            <Button className="vote-button">{props.review.helpfulUpVote}<ArrowUpward className="icon"/></Button>
+                            <Button className="vote-button">{props.review.helpfulDownVote}<ArrowDownward className="icon"/></Button>
                         </div>
                         <div className="col-6" style={{display:'flex', justifyContent:'flex-end'}}>
                             <a href="/" style={{color:'black'}}>Laporkan</a>

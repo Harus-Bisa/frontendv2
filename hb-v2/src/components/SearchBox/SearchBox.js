@@ -5,7 +5,7 @@ import {Autocomplete} from '@material-ui/lab'
 import { TextField } from "@material-ui/core";
 
 const profs = [
-    {name:'Agus Hartanto', school:'Universitas Atma Jaya', id:'1'},
+    {name:'Agus Hartanto', school:'Universitas Atma Jaya', id:'5dfc72dd4178bc4e185dbe8e'},
     {name:'Agus C. Kristiono', school:'Universitas Maranata', id:'2'},
     {name:'Agus W. Soehadi', school:'Universitas Prasetya Mulya', id:'3'}
 ]
