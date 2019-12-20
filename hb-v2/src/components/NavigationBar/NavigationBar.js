@@ -26,7 +26,7 @@ function NavigationBar(props){
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            <NavItem>
+            {/* <NavItem>
               <NavLink href="/components/">Components</NavLink>
             </NavItem>
             <NavItem>
@@ -48,7 +48,7 @@ function NavigationBar(props){
                   Reset
                 </DropdownItem>
               </DropdownMenu>
-            </UncontrolledDropdown>
+            </UncontrolledDropdown> */}
           </Nav>
           <NavbarText>Simple Text</NavbarText>
         </Collapse>
