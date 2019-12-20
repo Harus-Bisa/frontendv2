@@ -3,56 +3,25 @@ import PropTypes from 'prop-types';
 import { withRouter } from "react-router-dom";
 import {Autocomplete} from '@material-ui/lab'
 import { TextField } from "@material-ui/core";
+import { throttle, debounce } from "throttle-debounce";
+import { findUsers } from "../../redux/actions";
+import { connect } from "react-redux";
 
-const profs = [
-    {name:'Agus Hartanto', school:'Universitas Atma Jaya', id:'5dfc72dd4178bc4e185dbe8e'},
-    {name:'Agus C. Kristiono', school:'Universitas Maranata', id:'2'},
-    {name:'Agus W. Soehadi', school:'Universitas Prasetya Mulya', id:'3'}
-]
 function SearchBox(props){
     var [text, setText] = React.useState("")
     var [open, setOpen] = React.useState(false)
-    var [options, setOptions] = React.useState([])
-    const loading = open && options.length === 0
+    const loading = open && (!props.users)
 
-    React.useEffect(() => {
-        let active = true;
-        
-        if (!loading){
-            return undefined;
-        }
-
-        const find = (async () => {
-            const response = props.search(text);
-            if(active){
-                setOptions(response)
-            }
-        });
-        
-        if(text.length > 0){
-            find();
+    const handleChange = (event) =>{
+        var query = event.target.value
+        setText(query)
+        if(query.length < 5 || query.endsWith(' ')){
+            throttle(500, props.findUsers(query))
         }
         else{
-            setOptions([])
+            debounce(500, props.findUsers(query))
         }
-        return () =>{
-            active = false
-        }
-    }, [loading, text])
-
-    React.useEffect(() => {
-        if(!open){
-            setOptions([])
-            setText("")
-        }
-    }, [open]);
-
-    React.useEffect(() => {
-        if (text.length === 0){
-            setOptions([])
-        }
-    }, [text])
-
+    }
     const select = (id) =>{
         props.history.push("/review/"+id)
     }
@@ -64,7 +33,7 @@ function SearchBox(props){
                 open={open}
                 onOpen={() => {setOpen(true)}}
                 onClose={() => setOpen(false)}
-                options={options}
+                options={props.users}
                 loading={loading}
                 noOptionsText="Dosen tidak ditemukan."
                 renderInput={params => (
@@ -72,12 +41,13 @@ function SearchBox(props){
                       {...params}
                       placeholder="Cari nama dosen Anda"
                       fullWidth
-                      onChange={(event) => setText(event.target.value)}
+                      onChange={handleChange}
+                      value={text}
                     />
                 )}
                 renderOption={option => {
                     return(
-                        <div onClick={() => select(option.id)} style={{width:'100%'}} id={"option-"+option.name}>
+                        <div onClick={() => select(option.userId)} style={{width:'100%'}} id={"option-"+option.name}>
                             <p style={{fontWeight:'bold', margin:0}}>{option.name}</p>
                             <p style={{fontSize:'12px', margin:0}}>{option.school}</p>    
                         </div>
@@ -88,12 +58,14 @@ function SearchBox(props){
     )
 }
 
-SearchBox.defaultProps={
-    search: (text) => {return profs}
-}
-
 SearchBox.propTypes={
-    search: PropTypes.func
+    users: PropTypes.array,
+    findUsers: PropTypes.func
 }
 
-export default withRouter(SearchBox);
+function mapStateToProps(state){
+    return{
+        users:state.users
+    }
+}
+export default connect(mapStateToProps, {findUsers})(withRouter(SearchBox));
