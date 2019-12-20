@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { StyledRating } from "../Rating/StyledRating";
-import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, EmojiFlagsOutlined, ArrowUpward, ArrowDownward } from "@material-ui/icons";
-import {GiCoffeeCup} from "react-icons/gi"
+import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, EmojiFlagsOutlined, ArrowUpward, ArrowDownward, LocalCafe, LocalCafeOutlined } from "@material-ui/icons";
 import { Button } from "@material-ui/core";
 import { voteReview } from "../../redux/actions";
 
@@ -60,7 +59,8 @@ function ReviewCard(props){
                                 style={{margin:'auto'}} 
                                 value={props.review.difficultyRating} 
                                 readOnly
-                                icon={<GiCoffeeCup/>}
+                                icon={<LocalCafe/>}
+                                emptyIcon={<LocalCafeOutlined/>}
                             />
                         </div>
                     </div>

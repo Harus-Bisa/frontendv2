@@ -1,8 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import { FormGroup, Label, Input, Button } from "reactstrap";
-import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined } from "@material-ui/icons";
-import {GiCoffeeCup} from "react-icons/gi"
+import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, LocalCafe, LocalCafeOutlined } from "@material-ui/icons";
 import { StyledRating } from "../Rating/StyledRating";
 import { addReview } from "../../redux/actions";
 
@@ -63,6 +62,7 @@ function ReviewForm(props){
                 <FormGroup style={style.ratingBox}>
                     <Label>Penilaian*</Label>
                     <StyledRating
+                        // precision={0.5}
                         style={style.ratingSpan} 
                         id="overallRating" 
                         value={overallRating} 
@@ -74,6 +74,7 @@ function ReviewForm(props){
                 <FormGroup style={style.ratingBox}>
                     <Label>Apakah anda merekomendasi dosen ini ke teman anda?*</Label>
                     <StyledRating
+                        // precision={0.5}
                         style={style.ratingSpan} 
                         id="recommendationRating" 
                         value={recommendationRating} 
@@ -84,12 +85,14 @@ function ReviewForm(props){
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
                     <Label>Kesusahan Kelas*</Label>
-                    <StyledRating 
+                    <StyledRating
+                        // precision={0.5} 
                         style={style.ratingSpan} 
                         id="difficultyRating" 
                         value={difficultyRating} 
                         onChange={(event, value) => setDifficultyRating(value)}
-                        icon={<GiCoffeeCup/>}
+                        icon={<LocalCafe/>}
+                        emptyIcon={<LocalCafeOutlined/>}
                     />
                 </FormGroup>
                 <FormGroup>
