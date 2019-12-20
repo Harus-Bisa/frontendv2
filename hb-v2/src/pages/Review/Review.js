@@ -12,10 +12,10 @@ function Review(props){
         props.history.push("/review/"+props.professor.userId+"/add")
     }
     React.useEffect(() =>{
-        if(!props.professor){
-            props.getReviews(props.match.params.userId)
-        }   
-    },[props])
+        props.getReviews(props.match.params.userId) 
+    },[])
+
+
     if(!props.professor){
         return(<div>Loading</div>)
     }

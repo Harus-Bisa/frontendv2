@@ -4,6 +4,7 @@ import { FormGroup, Label, Input, Button } from "reactstrap";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined } from "@material-ui/icons";
 import {GiCoffeeCup} from "react-icons/gi"
 import { StyledRating } from "../Rating/StyledRating";
+import { addReview } from "../../redux/actions";
 
 
 
@@ -20,7 +21,16 @@ function ReviewForm(props){
 
     const submit = (event) =>{
         event.preventDefault()
-        props.history.push("/review/"+props.match.params.profId)
+        const newReview = {
+            review: review,
+            courseName: courseName,
+            overallRating: overallRating,
+            recommendationRating: recommendationRating,
+            difficultyRating: difficultyRating,
+            yearTaken: 2019,
+        }
+        props.addReview(props.match.params.userId, newReview);
+        props.history.push("/review/"+props.match.params.userId)
     }
     const style={
         ratingBox:{
@@ -105,4 +115,4 @@ function mapStateToProps(state){
         profName: state.professor.name
     }
 }
-export default connect(mapStateToProps)(ReviewForm);
+export default connect(mapStateToProps,{addReview})(ReviewForm);

@@ -30,6 +30,28 @@ class Services{
             throw new Error(error.response.statusText)
         })
     }
+
+    async addReview(userId, review){
+        const url = this.domain+ "/users/"+userId+"/reviews"
+        return axios.post(url, review, {headers:this.headers})
+        .then(response =>{
+            return response.data
+        })
+        .catch(error =>{
+            throw new Error(error.response.statusText)
+        })
+    }
+
+    async voteReview(userId, reviewId, vote){
+        const url = this.domain + "/users/"+userId+"/reviews/"+reviewId+"/"+vote
+        return axios.post(url, null, {headers: this.headers})
+        .then(response =>{
+            return response.data
+        })
+        .catch(error =>{
+            throw new Error(error.response.statusText)
+        })
+    }
 }
 const services = new Services();
 export default services;

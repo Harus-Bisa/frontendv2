@@ -4,8 +4,9 @@ import configureMockStore from "redux-mock-store";
 import '../../test-config';
 import {Provider} from "react-redux";
 import Review from "./Review";
+import thunk from "redux-thunk";
 
-const mockStore = configureMockStore();
+const mockStore = configureMockStore([thunk]);
 describe("Review component", () =>{
     let initialState;
     let component;
@@ -13,34 +14,44 @@ describe("Review component", () =>{
     let mockPush = jest.fn();
     beforeEach(() =>{
         initialState = {
-            professor:{
-                name: "Agus W. Soehadi",
-                school: "Universitas Prasetya Mulya",
-                overallRating: 4,
-                numberOfReviews: 1,
-                professorId: 1,
-                reviews:[
+            professor: {
+                "name": "Timothy Bryan",
+                "school": "Universitas Indonesia",
+                "reviews": [
                     {
-                        review:"Prof agus sangat baik dalam mengajar kelas bisnis dasar! Ulangannya pake pilgan semua!",
-                        courseName:"Brand Management 101",
-                        rating:{
-                            overall:4,
-                            recommendation:5,
-                            difficulty: 1
-                        },
-                        yearTaken:2010,
-                        vote:{
-                            up:25,
-                            down: 2
-                        }
+                        "review": "He is the best!",
+                        "courseName": "UX 101",
+                        "overallRating": 4,
+                        "recommendationRating": 4.5,
+                        "difficultyRating": 2,
+                        "yearTaken": 2019,
+                        "helpfulUpVote": 0,
+                        "helpfulDownVote": 0,
+                        "reviewId": "5dfc72dd4178bc4e185dbe8f"
+                    },
+                    {
+                        "review": "Attendance is required! Tips: give him starbucks.",
+                        "courseName": "Design 101",
+                        "overallRating": 4,
+                        "recommendationRating": 5,
+                        "difficultyRating": 2.5,
+                        "yearTaken": 2018,
+                        "helpfulUpVote": 0,
+                        "helpfulDownVote": 0,
+                        "reviewId": "5dfc733a4178bc4e185dbe91"
                     }
-                ]
+                ],
+                "userId": "5dfc72dd4178bc4e185dbe8e",
+                "numberOfReviews": 2,
+                "overallRating": 4,
+                "recommendationRating": 4.75,
+                "difficultyRating": 2.25
             }
         }
         store = mockStore(initialState);
         component = mount(
         <Provider store={store}>
-            <Review history={{push:mockPush}}/>
+            <Review history={{push:mockPush}} match={{params:{userId:initialState.professor.userId}}}/>
         </Provider>)
     })
 

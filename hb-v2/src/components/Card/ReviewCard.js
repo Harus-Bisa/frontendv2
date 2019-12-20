@@ -4,8 +4,12 @@ import { StyledRating } from "../Rating/StyledRating";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, EmojiFlagsOutlined, ArrowUpward, ArrowDownward } from "@material-ui/icons";
 import {GiCoffeeCup} from "react-icons/gi"
 import { Button } from "@material-ui/core";
+import { voteReview } from "../../redux/actions";
 
 function ReviewCard(props){
+    const vote = (v) => {
+        props.voteReview(props.userId, props.review.reviewId, v)
+    }
     return(
         <div className='col-12' style={{paddingTop:'15px', paddingBottom:'15px', borderBottom:'3px solid #EEEEEE'}}>
             <div>
@@ -81,8 +85,8 @@ function ReviewCard(props){
                     <div className="row justify-content-between">
                         <div className="col-6" style={{display:'flex', flexDirection:'row'}}>
                             <p>Membantu?</p>
-                            <Button className="vote-button">{props.review.helpfulUpVote}<ArrowUpward className="icon"/></Button>
-                            <Button className="vote-button">{props.review.helpfulDownVote}<ArrowDownward className="icon"/></Button>
+                            <Button className="vote-button" onClick={() => vote("upVote")}>{props.review.helpfulUpVote}<ArrowUpward className="icon"/></Button>
+                            <Button className="vote-button" onClick={() => vote("downVote")}>{props.review.helpfulDownVote}<ArrowDownward className="icon"/></Button>
                         </div>
                         <div className="col-6" style={{display:'flex', justifyContent:'flex-end'}}>
                             <a href="/" style={{color:'black'}}>Laporkan</a>
@@ -97,7 +101,8 @@ function ReviewCard(props){
 
 function mapStateToProps(state, ownProps){
     return{
-        review: state.professor.reviews[ownProps.id]
+        review: state.professor.reviews[ownProps.id],
+        userId: state.professor.userId
     }
 }
-export default connect(mapStateToProps)(ReviewCard);
+export default connect(mapStateToProps,{voteReview})(ReviewCard);
