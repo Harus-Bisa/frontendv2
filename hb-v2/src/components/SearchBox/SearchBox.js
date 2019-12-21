@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import {Autocomplete} from '@material-ui/lab'
 import { TextField } from "@material-ui/core";
 import { throttle, debounce } from "throttle-debounce";
-import { findUsers } from "../../redux/actions";
+import { findUsers, clearUsers } from "../../redux/actions";
 import { connect } from "react-redux";
 
 function SearchBox(props){
@@ -30,9 +30,14 @@ function SearchBox(props){
             <Autocomplete
                 id="search-box"
                 style={{width:'100%'}}
+                freeSolo
+                getOptionLabel={option => option.name}
                 open={open}
                 onOpen={() => {setOpen(true)}}
-                onClose={() => setOpen(false)}
+                onClose={() => {
+                    setOpen(false) 
+                    props.clearUsers()
+                }}
                 options={props.users}
                 loading={loading}
                 noOptionsText="Dosen tidak ditemukan."
@@ -68,4 +73,4 @@ function mapStateToProps(state){
         users:state.users
     }
 }
-export default connect(mapStateToProps, {findUsers})(withRouter(SearchBox));
+export default connect(mapStateToProps, {findUsers, clearUsers})(withRouter(SearchBox));

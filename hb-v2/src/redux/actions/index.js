@@ -1,5 +1,5 @@
 import services from "../../Services"
-import { FIND_USERS, GET_REVIEWS, ADD_REVIEW, VOTE } from "../constants/action-types"
+import { FIND_USERS, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_USERS } from "../constants/action-types"
 
 
 export function findUsers(name){
@@ -11,6 +11,9 @@ export function findUsers(name){
     }
 }
 
+export function clearUsers(){
+    return ({type:CLEAR_USERS})
+}
 export function getReviews(userId){
     return async function(dispatch){
         return await services.getReviews(userId)

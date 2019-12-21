@@ -9,6 +9,7 @@ import { addReview } from "../../redux/actions";
 
 function ReviewForm(props){
     var [profName, setProfName] = React.useState(props.profName)
+    var [profSchool, setProfSchool] = React.useState(props.profSchool)
     var [courseName, setCourseName] = React.useState("")
     var [currentlyTaking, setCurrentlyTaking]= React.useState(true)
     var [overallRating, setOverallRating] = React.useState(0) 
@@ -28,8 +29,14 @@ function ReviewForm(props){
             difficultyRating: difficultyRating,
             yearTaken: 2019,
         }
-        props.addReview(props.match.params.userId, newReview);
-        props.history.push("/review/"+props.match.params.userId)
+        if (props.match.params.userId){
+            props.addReview(props.match.params.userId, newReview);
+            props.history.push("/review/"+props.match.params.userId)
+        }
+        else{
+            
+        }
+        
     }
     const style={
         ratingBox:{
@@ -47,6 +54,10 @@ function ReviewForm(props){
                 <FormGroup>
                     <Label>Nama Dosen*</Label>
                     <Input type="text" id="profName" value={profName} required onChange={(event) => setProfName(event.target.value)}/>
+                </FormGroup>
+                <FormGroup>
+                    <Label>Nama Perguruan Tinggi*</Label>
+                    <Input type="text" id="profSchool" value={profSchool} required onChange={(event) => setProfSchool(event.target.value)}/>
                 </FormGroup>
                 <FormGroup>
                     <Label>Nama Kelas*</Label>
@@ -113,9 +124,19 @@ function ReviewForm(props){
     )
 }
 
-function mapStateToProps(state){
-    return{
-        profName: state.professor.name
+function mapStateToProps(state, ownProps){
+    if (ownProps.match.params.userId){
+        return{
+            profName: state.professor.name,
+            profSchool: state.professor.school
+        }
     }
+    else{
+        return{
+            profName: "",
+            profSchool: ""
+        }
+    }
+    
 }
 export default connect(mapStateToProps,{addReview})(ReviewForm);
