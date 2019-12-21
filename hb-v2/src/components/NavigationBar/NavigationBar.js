@@ -25,7 +25,7 @@ function NavigationBar(props){
       <Navbar light expand="md" style={{backgroundColor:'white', position:'sticky', top:0, zIndex:999}}>
         <NavbarBrand href="/">Harus Bisa</NavbarBrand>
         <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar style={{height:'100vh'}}>
+        <Collapse isOpen={isOpen} navbar style={isOpen ? {height:'100vh'} : {}}>
           <Nav className="mr-auto" navbar>
             <NavItem>
               <SearchBox/>
