@@ -13,6 +13,7 @@ import {
   DropdownItem,
   NavbarText
 } from 'reactstrap';
+import SearchBox from "../SearchBox/SearchBox";
 
 function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);
@@ -21,36 +22,15 @@ function NavigationBar(props){
 
   return (
     <div>
-      <Navbar color="light" light expand="md" style={{background:'transparent', position:'sticky', top:0, zIndex:999}}>
+      <Navbar light expand="md" style={{backgroundColor:'white', position:'sticky', top:0, zIndex:999}}>
         <NavbarBrand href="/">Harus Bisa</NavbarBrand>
         <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
+        <Collapse isOpen={isOpen} navbar style={{height:'100vh'}}>
           <Nav className="mr-auto" navbar>
-            {/* <NavItem>
-              <NavLink href="/components/">Components</NavLink>
-            </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+              <SearchBox/>
             </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown> */}
           </Nav>
-          <NavbarText>Simple Text</NavbarText>
         </Collapse>
       </Navbar>
     </div>
