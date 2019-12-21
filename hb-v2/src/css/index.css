@@ -29,7 +29,12 @@ h2{
   font-size: 36px;
   line-height: 111%;
 }
-
+h3{
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 27px;
+}
 h5{
   font-style: normal;
   font-weight: 500;
@@ -69,7 +74,18 @@ a:hover{
   background-color: black;
 }
 
+.google-button{
+  background-color: #E24436 !important;
+  width:100%;
+}
 
+.facebook-button{
+  background-color: #517DBC !important;
+  width:100%;
+}
+.button{
+  text-transform: none !important;
+}
 .search-box #search-box, .search-box #search-box:focus{
   border: 0px;
   width: 100%;
@@ -122,5 +138,20 @@ a:hover{
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
   border-color: transparent;
   border-bottom-color: #C4C4C4;
+}
+
+.blue-box{
+  background-color: var(--hb-blue);
+  color:white !important;
+}
+
+.blue-box .button{
+  color: white !important;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 300;
+  margin:5px auto;
+  display:flex;
+  justify-content: space-between;
 }
 
