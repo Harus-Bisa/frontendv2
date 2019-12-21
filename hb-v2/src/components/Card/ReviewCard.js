@@ -1,27 +1,30 @@
 import React from "react";
 import { connect } from "react-redux";
 import { StyledRating } from "../Rating/StyledRating";
-import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, EmojiFlagsOutlined, ArrowUpward, ArrowDownward, LocalCafe, LocalCafeOutlined } from "@material-ui/icons";
-import { Button } from "@material-ui/core";
+import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, EmojiFlagsOutlined, ArrowUpward, ArrowDownward, LocalCafe, LocalCafeOutlined, KeyboardArrowUp, KeyboardArrowDown } from "@material-ui/icons";
+import { Button, Collapse } from "@material-ui/core";
 import { voteReview } from "../../redux/actions";
 
 function ReviewCard(props){
+    var [expand, setExpand] = React.useState(false)
     const vote = (v) => {
         props.voteReview(props.userId, props.review.reviewId, v)
     }
     return(
         <div className='col-12' style={{paddingTop:'15px', paddingBottom:'15px', borderBottom:'3px solid #EEEEEE'}}>
-            <div>
-                <div style={{marginBottom:'2rem'}}>
+            <div className="review-card">
+                <div style={{marginBottom:'1rem'}}>
                     <p id="review">{props.review.review}</p>
                 </div>
                 <div style={{marginBottom:'2rem'}} className="review-details">
-                    <div className="row justify-content-between" style={{margin:'15px -15px'}}>
+                    <div className="row justify-content-between">
                         <div className="col-7" style={{display:'flex'}}>
                             <p style={{margin:'auto 0'}}>Penilaian Keseluruhan</p>
                         </div>
                         <div className="col-5" style={{display:'flex'}}>
-                            <StyledRating 
+                            <p>{(props.review.overallRating).toFixed(1)}</p>
+                            <StyledRating
+                                size="small" 
                                 id="overallRating"
                                 precision={0.5}
                                 style={{margin:'auto'}} 
@@ -32,12 +35,14 @@ function ReviewCard(props){
                             />
                         </div>
                     </div>
-                    <div className="row justify-content-between" style={{margin:'15px -15px'}}>
+                    <div className="row justify-content-between">
                         <div className="col-7" style={{display:'flex'}}>
                             <p style={{margin:'auto 0'}}>Likelihood to recommend teman</p>
                         </div>
                         <div className="col-5" style={{display:'flex'}}>
-                            <StyledRating 
+                            <p>{(props.review.recommendationRating).toFixed(1)}</p>
+                            <StyledRating
+                                size="small" 
                                 id="recommendationRating"
                                 precision={0.5}
                                 style={{margin:'auto'}} 
@@ -48,12 +53,14 @@ function ReviewCard(props){
                             />
                         </div>
                     </div>
-                    <div className="row justify-content-between" style={{margin:'15px -15px'}}>
+                    <div className="row justify-content-between">
                         <div className="col-7" style={{display:'flex'}}>
                             <p style={{margin:'auto 0'}}>Tingkat kesusahan Kelas</p>
                         </div>
                         <div className="col-5" style={{display:'flex'}}>
-                            <StyledRating 
+                            <p>{(props.review.difficultyRating).toFixed(1)}</p>
+                            <StyledRating
+                                size="small" 
                                 id="difficultyRating"
                                 precision={0.5}
                                 style={{margin:'auto'}} 
@@ -64,22 +71,35 @@ function ReviewCard(props){
                             />
                         </div>
                     </div>
-                    <div className="row justify-content-between">
-                        <div className="col-7">
-                            <p >Kelas:</p>
+                    <Button className="show-button" onClick={() => setExpand(!expand)}>Show {expand ? "less" : "more"} {expand ? <KeyboardArrowDown/> : <KeyboardArrowUp/>}</Button>
+                    <Collapse in={expand} timeout="auto" unmountOnExit>
+                        <div style={{marginRight:'15px', marginLeft:'15px'}}>
+                            <div className="row justify-content-between">
+                                <div className="col-7">
+                                    <p >Kelas:</p>
+                                </div>
+                                <div className="col-5" style={{display:'flex'}}>
+                                    <p style={{margin:'auto'}}>{props.review.courseName}</p>
+                                </div>
+                            </div>
+                            <div className="row justify-content-between">
+                                <div className="col-7">
+                                    <p>Nilai:</p>
+                                </div>
+                                <div className="col-5" style={{display:'flex'}}>
+                                    <p style={{margin:'auto'}}>A</p>
+                                </div>
+                            </div>
+                            <div className="row justify-content-between">
+                                <div className="col-7">
+                                    <p>Tahun mengambil kelas:</p>
+                                </div>
+                                <div className="col-5" style={{display:'flex'}}>
+                                    <p style={{margin:'auto'}}>{props.review.yearTaken}</p>
+                                </div>
+                            </div>
                         </div>
-                        <div className="col-5" style={{display:'flex'}}>
-                            <p style={{margin:'auto'}}>{props.review.courseName}</p>
-                        </div>
-                    </div>
-                    <div className="row justify-content-between">
-                        <div className="col-7">
-                            <p>Tahun mengambil kelas:</p>
-                        </div>
-                        <div className="col-5" style={{display:'flex'}}>
-                            <p style={{margin:'auto'}}>{props.review.yearTaken}</p>
-                        </div>
-                    </div>
+                    </Collapse>
                 </div>
                 <div className="review-footer">
                     <div className="row justify-content-between">

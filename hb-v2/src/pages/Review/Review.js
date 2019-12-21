@@ -34,7 +34,7 @@ function Review(props){
                 <p>{props.professor.numberOfReviews} Review</p>
                 <Button className='blue-button' id="addReview" onClick={addReview}>Tambah Review</Button>
             </div>
-            <div style={{margin:'1rem -15px'}}>
+            <div style={{margin:'1rem -30px'}}>
                 <ReviewContent/>
             </div>
 
