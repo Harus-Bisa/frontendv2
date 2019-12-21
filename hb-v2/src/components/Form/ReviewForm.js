@@ -29,12 +29,15 @@ function ReviewForm(props){
             difficultyRating: difficultyRating,
             yearTaken: 2019,
         }
-        if (props.match.params.userId){
+        if (props.match.params.userId !== "new"){
             props.addReview(props.match.params.userId, newReview);
             props.history.push("/review/"+props.match.params.userId)
         }
         else{
-            
+            newReview.name = profName;
+            newReview.school = profSchool;
+            props.addReview(null, newReview);
+            props.history.push("/")
         }
         
     }
@@ -125,7 +128,7 @@ function ReviewForm(props){
 }
 
 function mapStateToProps(state, ownProps){
-    if (ownProps.match.params.userId){
+    if (state.professor){
         return{
             profName: state.professor.name,
             profSchool: state.professor.school

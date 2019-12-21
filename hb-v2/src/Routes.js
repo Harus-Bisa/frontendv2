@@ -9,7 +9,6 @@ function Routes() {
         <Switch>
             <Route exact path="/" component={Landing}/>
             <Route exact path="/review/:userId/add" component={ReviewForm}/>
-            <Route exact path="/review/new/add" component={ReviewForm}/>
             <Route exact path="/review/:userId" component={Review}/>
         </Switch>
     )

@@ -32,16 +32,29 @@ class Services{
     }
 
     async addReview(userId, review){
-        const url = this.domain+ "/users/"+userId+"/reviews"
-        return axios.post(url, review, {headers:this.headers})
-        .then(response =>{
-            return response.data
-        })
-        .catch(error =>{
-            throw new Error(error.response.statusText)
-        })
+        if(userId){
+            const url = this.domain+ "/users/"+userId+"/reviews"
+            return axios.post(url, review, {headers:this.headers})
+            .then(response =>{
+                return response.data
+            })
+            .catch(error =>{
+                throw new Error(error.response.statusText)
+            })
+        }
+        else{
+            const url = this.domain + "/reviews"
+            return axios.post(url, review, {headers:this.headers})
+            .then(response =>{
+                return response.data
+            })
+            .catch(error =>{
+                throw new Error(error.response.statusText)
+            })
+        }
+        
     }
-
+    
     async voteReview(userId, reviewId, vote){
         const url = this.domain + "/users/"+userId+"/reviews/"+reviewId+"/"+vote
         return axios.post(url, null, {headers: this.headers})
