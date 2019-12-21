@@ -123,10 +123,17 @@ a:hover{
   border: 0;
   width: 50%;
 }
-.form-control{
+.form-control, .PrivateNotchedOutline-root-102, .MuiOutlinedInput-notchedOutline{
   border: 1px solid #000000;
+  border-color: black !important;
   box-sizing: border-box;
-  border-radius: 0px;
+  border-radius: 0px !important;
+}
+
+.form-control:focus{
+  outline-color: var(--hb-blue);
+  border-color: var(--hb-blue);
+  box-shadow: none;
 }
 
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{

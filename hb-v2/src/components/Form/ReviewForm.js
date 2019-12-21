@@ -4,8 +4,36 @@ import { FormGroup, Label, Input, Button } from "reactstrap";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, LocalCafe, LocalCafeOutlined } from "@material-ui/icons";
 import { StyledRating } from "../Rating/StyledRating";
 import { addReview } from "../../redux/actions";
+import Checkbox from '@material-ui/core/Checkbox';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import { withStyles } from "@material-ui/core";
+
+const Icon = withStyles({
+    root: {
+      color: "#39A3FF",
+      '&$checked': {
+        color: "#39A3FF",
+      },
+    },
+    checked: {},
+  })(props => <CheckBoxOutlineBlankIcon fontSize="small" {...props} />);
+
+const CheckedIcon = withStyles({
+    root: {
+      color: "#39A3FF",
+      '&$checked': {
+        color: "#39A3FF",
+      },
+    },
+    checked: {},
+  })(props => <CheckBoxIcon fontSize="small" {...props} />);
 
 
+const teachingStyleOptions= ["Audio", "Visual"]
+const tagsOptions=["Inspirasional","Memberi banyak feedback yang baik","Kalo kasi nilai susah","Lucu","Membosankan","Berwibawa","Peduli dengan mahasiswa"]
 
 function ReviewForm(props){
     var [profName, setProfName] = React.useState(props.profName)
@@ -16,7 +44,8 @@ function ReviewForm(props){
     var [recommendationRating, setRecommendationRating] = React.useState(0)
     var [difficultyRating, setDifficultyRating] = React.useState(0)
     var [grade, setGrade] = React.useState(null)
-    var [teachingStyle, setTeachingStyle] = React.useState("")
+    var [teachingStyle, setTeachingStyle] = React.useState([])
+    var [tags, setTags] = React.useState([])
     var [review, setReview] = React.useState("")
     var [yearTaken, setYearTaken] = React.useState(2019)
 
@@ -130,11 +159,85 @@ function ReviewForm(props){
                 </FormGroup>
                 <FormGroup>
                     <Label>Nilai yang Anda dapatkan*</Label>
-                    <Input type="text" id="grade" value={grade} required onChange={(event) => setGrade(event.target.value)}/>
+                    <Autocomplete
+                        id="grade"
+                        options={["A", "B", "C", "D", "E", "F"]}
+                        freeSolo
+                        getOptionLabel={option => option}
+                        value={grade}
+                        onChange={(event, value) => setGrade(value)}
+                        style={{ width: "100% "}}
+                        renderInput={params => (
+                            <TextField
+                                {...params}
+                                variant="outlined"
+                                fullWidth
+                                onChange={(event) => setGrade(event.target.value)}
+                            />
+                        )}
+                    />
                 </FormGroup>
                 <FormGroup>
                     <Label>Gaya mengajar dosen*</Label>
-                    <Input type="text" id="teachingStyle" value={teachingStyle} required onChange={(event) => setTeachingStyle(event.target.value)}/>
+                    <Autocomplete
+                        multiple
+                        id="teachingStyle"
+                        options={teachingStyleOptions}
+                        disableCloseOnSelect
+                        getOptionLabel={option => option}
+                        onChange={(event, value) => setTeachingStyle(value)}
+                        value={teachingStyle}
+                        renderOption={(option, { selected }) => (
+                            <React.Fragment>
+                                <Checkbox
+                                    icon={<Icon/>}
+                                    checkedIcon={<CheckedIcon/>}
+                                    style={{ marginRight: 8 }}
+                                    checked={selected}
+                                />
+                                {option}
+                            </React.Fragment>
+                        )}
+                        style={{ width: "100% "}}
+                        renderInput={params => (
+                            <TextField
+                                {...params}
+                                variant="outlined"
+                                fullWidth
+                            />
+                        )}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Pilih 3 tag yang menjelaskan mengenai dosen ini*</Label>
+                    <Autocomplete
+                        multiple
+                        id="tags"
+                        options={tagsOptions}
+                        disableCloseOnSelect
+                        getOptionLabel={option => option}
+                        value={tags}
+                        onChange={(event, value) => setTags(value)}
+                        renderOption={(option, { selected }) => (
+                            <React.Fragment>
+                                <Checkbox
+                                    icon={<Icon/>}
+                                    checkedIcon={<CheckedIcon/>}
+                                    style={{ marginRight: 8 }}
+                                    checked={selected}
+                                />
+                                {option}
+                            </React.Fragment>
+                        )}
+                        style={{ width: "100% "}}
+                        renderInput={params => (
+                            <TextField
+                                {...params}
+                                variant="outlined"
+                                fullWidth
+                            />
+                        )}
+                    />
                 </FormGroup>
                 <FormGroup>
                     <Label>Review anda*</Label>

@@ -71,7 +71,7 @@ function ReviewCard(props){
                             />
                         </div>
                     </div>
-                    <Button className="show-button" onClick={() => setExpand(!expand)}>Show {expand ? "less" : "more"} {expand ? <KeyboardArrowDown/> : <KeyboardArrowUp/>}</Button>
+                    <Button className="show-button" onClick={() => setExpand(!expand)}>Show {expand ? "less" : "more"} {expand ? <KeyboardArrowUp/>: <KeyboardArrowDown/>}</Button>
                     <Collapse in={expand} timeout="auto" unmountOnExit>
                         <div style={{marginRight:'15px', marginLeft:'15px'}}>
                             <div className="row justify-content-between">
