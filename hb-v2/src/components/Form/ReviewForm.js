@@ -18,6 +18,7 @@ function ReviewForm(props){
     var [grade, setGrade] = React.useState(null)
     var [teachingStyle, setTeachingStyle] = React.useState("")
     var [review, setReview] = React.useState("")
+    var [yearTaken, setYearTaken] = React.useState(2019)
 
     const submit = (event) =>{
         event.preventDefault()
@@ -27,7 +28,7 @@ function ReviewForm(props){
             overallRating: overallRating,
             recommendationRating: recommendationRating,
             difficultyRating: difficultyRating,
-            yearTaken: 2019,
+            yearTaken: yearTaken,
         }
         if (props.match.params.userId !== "new"){
             props.addReview(props.match.params.userId, newReview);
@@ -49,6 +50,16 @@ function ReviewForm(props){
         ratingSpan:{
             alignSelf:'center',
         }
+    }
+    const renderYears = () =>{
+        let yearOptions = []
+        let currentYear = (new Date()).getFullYear()
+        let min = currentYear - 10
+        while (currentYear > min){
+            yearOptions.push(<option value={currentYear}>{currentYear}</option>)
+            currentYear -= 1
+        }
+        return yearOptions;
     }
     return(
         <div className="container content">
@@ -73,6 +84,14 @@ function ReviewForm(props){
                         <Button type="button" id="currentlyTaking-No" onClick={(event) => setCurrentlyTaking(false)} className={!currentlyTaking ? "button-group-selected" : "button-group"}>Sudah lama!</Button>
                     </div>
                 </FormGroup>
+                {!currentlyTaking && 
+                    <FormGroup>
+                        <Label>Tahun mengambil kelas</Label>
+                        <Input type="select" name="yearTaken" id="yearTaken" onChange={(event) => {setYearTaken(event.target.value)}}>
+                            {renderYears()}
+                        </Input>
+                    </FormGroup>
+                }
                 <FormGroup style={style.ratingBox}>
                     <Label>Penilaian*</Label>
                     <StyledRating
