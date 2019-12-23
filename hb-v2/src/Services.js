@@ -55,8 +55,8 @@ class Services{
         
     }
     
-    async voteReview(userId, reviewId, vote){
-        const url = this.domain + "/reviewees/"+userId+"/reviews/"+reviewId+"/"+vote
+    async voteReview(revieweeId, reviewId, vote){
+        const url = this.domain + "/reviewees/"+revieweeId+"/reviews/"+reviewId+"/"+vote
         return axios.post(url, null, {headers: this.headers})
         .then(response =>{
             return response.data
