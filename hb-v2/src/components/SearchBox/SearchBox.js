@@ -64,7 +64,7 @@ function SearchBox(props){
             />
             {props.users && props.users.length === 0 && 
                 <div style={{marginTop:'1.5rem'}}>
-                    <p>Tidak menemukan nama Dosen Anda? <a href="/review/new/add">Laporkan Sekarang!</a></p>
+                    <p>Tidak menemukan nama Dosen Anda? <a href="/review/new/add/0">Laporkan Sekarang!</a></p>
                 </div>}
         </div>
     )
