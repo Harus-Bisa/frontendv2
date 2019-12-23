@@ -9,8 +9,11 @@ import { getReviews } from "../../redux/actions";
 import SignUpLoginPrompt from "../../components/Card/SignUpLoginPrompt";
 
 function Review(props){
-    const addReview = () =>{
-        props.history.push("/review/"+props.professor.revieweeId+"/add")
+    var [rating, setRating] = React.useState(0)
+
+    const addReview = (event, value) =>{
+        setRating(value)
+        props.history.push("/review/"+props.professor.revieweeId+"/add/"+value)
     }
     React.useEffect(() =>{
         props.getReviews(props.match.params.revieweeId) 
@@ -22,19 +25,30 @@ function Review(props){
     }
     return(
         <div className="container content">
-            <header>
+            <header className="review-header">
                 <h2 style={{borderBottom:"4px solid #39A3FF"}}>{props.professor.name}</h2>
                 <p>{props.professor.school}</p>
+                <div style={{display:'flex', marginTop:'10px'}}>
+                    <StyledRating
+                        precision={0.1}
+                        value={props.professor.overallRating} 
+                        readOnly 
+                        icon={<ThumbUp/>}
+                        emptyIcon={<ThumbUpOutlined/>} 
+                    />
+                    <p style={{fontSize:'11px', marginLeft:'10px', marginBottom:'0px'}}>{props.professor.numberOfReviews} Review</p>
+                </div>
             </header>
             <div style={{display:"flex", alignItems:'center', flexDirection:'column'}}>
+                <p className="grey-text">Tulis Review Anda</p>
                 <StyledRating
-                    precision={0.1}
-                    value={props.professor.overallRating} 
-                    readOnly 
+                    id="addReview"
+                    onChange={addReview}
+                    value={rating}
                     icon={<ThumbUp/>}
-                    emptyIcon={<ThumbUpOutlined/>} />
-                <p>{props.professor.numberOfReviews} Review</p>
-                <Button className='blue-button' id="addReview" onClick={addReview}>Tambah Review</Button>
+                    emptyIcon={<ThumbUpOutlined/>} 
+                    className="large-rating"
+                />
             </div>
             <div style={{margin:'1rem -30px'}}>
                 <ReviewContent/>

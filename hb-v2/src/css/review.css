@@ -80,3 +80,10 @@
 .tag p{
     color: var(--hb-blue) !important;
 }
+
+.review-header{
+    margin-bottom: 15px;
+}
+.review-header p{
+    margin: auto 0;
+}

@@ -40,7 +40,7 @@ function ReviewForm(props){
     var [profSchool, setProfSchool] = React.useState(props.profSchool)
     var [courseName, setCourseName] = React.useState("")
     var [currentlyTaking, setCurrentlyTaking]= React.useState(true)
-    var [overallRating, setOverallRating] = React.useState(0) 
+    var [overallRating, setOverallRating] = React.useState(props.match.params.overallRating ? props.match.params.overallRating : 0) 
     var [recommendationRating, setRecommendationRating] = React.useState(0)
     var [difficultyRating, setDifficultyRating] = React.useState(0)
     var [grade, setGrade] = React.useState(null)

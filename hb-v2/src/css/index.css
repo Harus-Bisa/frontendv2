@@ -47,6 +47,7 @@ p, a, input{
   font-weight: normal;
   font-size: 16px;
   line-height: 21px;
+  margin-bottom: 0.5rem;
 }
 
 a:hover{
@@ -140,11 +141,12 @@ a:hover{
   color:black;
   font-weight: bold;
   border-color: transparent;
-  border-bottom-color: #C4C4C4;
+  cursor: pointer;
 }
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
   border-color: transparent;
-  border-bottom-color: #C4C4C4;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .blue-box{
@@ -160,5 +162,18 @@ a:hover{
   margin:5px auto;
   display:flex;
   justify-content: space-between;
+}
+
+.grey-text{
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #979797;
+}
+.large-rating svg{
+  font-size: 3rem;
 }
 
