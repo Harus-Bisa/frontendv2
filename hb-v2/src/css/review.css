@@ -1,3 +1,7 @@
+:root {
+    --hb-green: #00AB50;
+    --hb-blue: #39A3FF;
+}
 .review-card{
     border: 1px solid #EEEEEE;
     box-sizing: border-box;
@@ -64,4 +68,16 @@
     color: #757575 !important;
     text-transform: none !important;
     padding: 0 !important;
+}
+
+.tag{
+    background: #E0E0E0;
+    border-radius: 3px;
+    padding: 5px 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.tag p{
+    color: var(--hb-blue) !important;
 }

@@ -7,6 +7,17 @@ import { voteReview } from "../../redux/actions";
 
 function ReviewCard(props){
     var [expand, setExpand] = React.useState(false)
+    const makeTags = () =>{
+        var tags = [];
+        for(let i=0; i<props.review.tags.length; i++){
+            tags.push(
+                <div className="tag" key={i}>
+                    <p>{props.review.tags[i]}</p>
+                </div>
+            )
+        }
+        return tags;
+    }
     const vote = (v) => {
         props.voteReview(props.revieweeId, props.review.reviewId, v)
     }
@@ -80,23 +91,42 @@ function ReviewCard(props){
                         <div style={{marginRight:'15px', marginLeft:'15px'}}>
                             <div className="row justify-content-between">
                                 <div className="col-7">
-                                    <p>Nilai:</p>
-                                </div>
-                                <div className="col-5" style={{textAlign:'right'}}>
-                                    <p>A</p>
-                                </div>
-                            </div>
-                            <div className="row justify-content-between">
-                                <div className="col-7">
                                     <p>Tahun mengambil kelas:</p>
                                 </div>
                                 <div className="col-5" style={{textAlign:'right'}}>
                                     <p>{props.review.yearTaken}</p>
                                 </div>
                             </div>
+                            <div className="row justify-content-between">
+                                <div className="col-7">
+                                    <p>Nilai:</p>
+                                </div>
+                                <div className="col-5" style={{textAlign:'right'}}>
+                                    <p>{props.review.grade}</p>
+                                </div>
+                            </div>
+                            <div className="row justify-content-between">
+                                <div className="col-7">
+                                    <p>Gaya Mengajar:</p>
+                                </div>
+                                <div className="col-5" style={{textAlign:'right'}}>
+                                    <p>{props.review.teachingStyles.length === 0 ? "-" : props.review.teachingStyles.toString()}</p>
+                                </div>
+                            </div>
+                            <div className="row justify-content-between">
+                                <div className="col-7">
+                                    <p>Membutuhkan textbook:</p>
+                                </div>
+                                <div className="col-5" style={{textAlign:'right'}}>
+                                    <p>{props.review.textbookRequired ? "Iya" : "Tidak"}</p>
+                                </div>
+                            </div>
                         </div>
                     </Collapse>
                     <Button className="show-button" onClick={() => setExpand(!expand)}>Show {expand ? "less" : "more"} {expand ? <KeyboardArrowUp/>: <KeyboardArrowDown/>}</Button>
+                    <div id="tags" className="row">
+                        {makeTags()}
+                    </div>
                 </div>
                 <div className="review-footer">
                     <div className="row justify-content-between">
