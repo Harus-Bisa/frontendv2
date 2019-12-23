@@ -11,12 +11,12 @@ function ReviewCard(props){
         props.voteReview(props.userId, props.review.reviewId, v)
     }
     return(
-        <div className='col-12' style={{paddingTop:'15px', paddingBottom:'15px', borderBottom:'3px solid #EEEEEE'}}>
+        <div className='col-12' style={{paddingTop:'15px', paddingBottom:'15px'}}>
             <div className="review-card">
-                <div style={{marginBottom:'1rem'}}>
+                <div className="review-details">
                     <p id="review">{props.review.review}</p>
                 </div>
-                <div style={{marginBottom:'2rem'}} className="review-details">
+                <div className="review-details">
                     <div className="row justify-content-between">
                         <div className="col-7" style={{display:'flex'}}>
                             <p style={{margin:'auto 0'}}>Penilaian Keseluruhan</p>

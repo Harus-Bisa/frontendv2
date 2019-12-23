@@ -1,3 +1,7 @@
+.review-card{
+    border: 1px solid #EEEEEE;
+    box-sizing: border-box;
+}
 .review-card p{
     margin: auto;
 }
@@ -5,6 +9,10 @@
 .review-card #review{
     font-weight: bold;
     font-size: 12px;
+}
+
+.review-details{
+    padding: 15px;
 }
 .review-details p{
     font-size: 11px;
@@ -18,6 +26,11 @@
 
 .review-details .row{
     margin: 5px -15px;
+}
+
+.review-footer{
+    border-top: 1px solid #EEEEEE;
+    padding: 10px 15px;
 }
 .review-footer p, .review-footer a{
     font-size: 11px !important;
