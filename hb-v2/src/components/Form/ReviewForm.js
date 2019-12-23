@@ -59,9 +59,9 @@ function ReviewForm(props){
             difficultyRating: difficultyRating,
             yearTaken: yearTaken,
         }
-        if (props.match.params.userId !== "new"){
-            props.addReview(props.match.params.userId, newReview);
-            props.history.push("/review/"+props.match.params.userId)
+        if (props.match.params.revieweeId !== "new"){
+            props.addReview(props.match.params.revieweeId, newReview);
+            props.history.push("/review/"+props.match.params.revieweeId)
         }
         else{
             newReview.name = profName;

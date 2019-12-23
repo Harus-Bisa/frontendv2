@@ -8,7 +8,7 @@ import { voteReview } from "../../redux/actions";
 function ReviewCard(props){
     var [expand, setExpand] = React.useState(false)
     const vote = (v) => {
-        props.voteReview(props.userId, props.review.reviewId, v)
+        props.voteReview(props.revieweeId, props.review.reviewId, v)
     }
     return(
         <div className='col-12' style={{paddingTop:'15px', paddingBottom:'15px'}}>
@@ -119,7 +119,7 @@ function ReviewCard(props){
 function mapStateToProps(state, ownProps){
     return{
         review: state.professor.reviews[ownProps.id],
-        userId: state.professor.userId
+        revieweeId: state.professor.revieweeId
     }
 }
 export default connect(mapStateToProps,{voteReview})(ReviewCard);

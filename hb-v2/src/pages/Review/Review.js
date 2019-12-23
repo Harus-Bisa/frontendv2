@@ -10,11 +10,11 @@ import SignUpLoginPrompt from "../../components/Card/SignUpLoginPrompt";
 
 function Review(props){
     const addReview = () =>{
-        props.history.push("/review/"+props.professor.userId+"/add")
+        props.history.push("/review/"+props.professor.revieweeId+"/add")
     }
     React.useEffect(() =>{
-        props.getReviews(props.match.params.userId) 
-    },[props.match.params.userId])
+        props.getReviews(props.match.params.revieweeId) 
+    },[props.match.params.revieweeId])
 
 
     if(!props.professor){
@@ -47,7 +47,8 @@ function Review(props){
 
 function mapStateToProps(state){
     return{
-        professor: state.professor
+        professor: state.professor,
+        error: state.error
     }
 }
 export default connect(mapStateToProps, {getReviews})(Review);

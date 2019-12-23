@@ -39,7 +39,7 @@ describe("ReviewCard component", () =>{
                         "reviewId": "5dfc733a4178bc4e185dbe91"
                     }
                 ],
-                "userId": "5dfc72dd4178bc4e185dbe8e",
+                "revieweeId": "5dfc72dd4178bc4e185dbe8e",
                 "numberOfReviews": 2,
                 "overallRating": 4,
                 "recommendationRating": 4.75,

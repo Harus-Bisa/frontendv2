@@ -55,7 +55,7 @@ function SearchBox(props){
                 )}
                 renderOption={option => {
                     return(
-                        <div onClick={() => select(option.userId)} style={{width:'100%'}} id={"option-"+option.name}>
+                        <div onClick={() => select(option.revieweeId)} style={{width:'100%'}} id={"option-"+option.name}>
                             <p style={{fontWeight:'bold', margin:0}}>{option.name}</p>
                             <p style={{fontSize:'12px', margin:0}}>{option.school}</p>    
                         </div>

@@ -10,7 +10,7 @@ class Services{
     }
     
     async findUsers(name){
-        const url = this.domain + "/users/?name="+name;
+        const url = this.domain + "/reviewees/?name="+name;
         return axios.get(url,{headers:this.headers})
         .then(response =>{
             return response.data
@@ -21,7 +21,7 @@ class Services{
     }
 
     async getReviews(userId){
-        const url = this.domain + "/users/"+userId+"/reviews";
+        const url = this.domain + "/reviewees/"+userId;
         return axios.get(url, {headers:this.headers})
         .then(response =>{
             return response.data
@@ -33,7 +33,7 @@ class Services{
 
     async addReview(userId, review){
         if(userId){
-            const url = this.domain+ "/users/"+userId+"/reviews"
+            const url = this.domain+ "/reviewees/"+userId+"/reviews"
             return axios.post(url, review, {headers:this.headers})
             .then(response =>{
                 return response.data
@@ -56,7 +56,7 @@ class Services{
     }
     
     async voteReview(userId, reviewId, vote){
-        const url = this.domain + "/users/"+userId+"/reviews/"+reviewId+"/"+vote
+        const url = this.domain + "/reviewees/"+userId+"/reviews/"+reviewId+"/"+vote
         return axios.post(url, null, {headers: this.headers})
         .then(response =>{
             return response.data
