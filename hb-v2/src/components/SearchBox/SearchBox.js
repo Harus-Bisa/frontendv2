@@ -24,11 +24,14 @@ function SearchBox(props){
     }
     const select = (id) =>{
         props.history.push("/review/"+id)
+        if(props.close){
+            props.close()
+        }
     }
     return(
         <div className="search-box">
             <Autocomplete
-                id="search-box"
+                id={props.close ? "search-box-navbar" : "search-box"}
                 style={{width:'100%'}}
                 freeSolo
                 getOptionLabel={option => option.name}

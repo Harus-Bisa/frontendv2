@@ -28,7 +28,7 @@ function NavigationBar(props){
         <Collapse isOpen={isOpen} navbar style={isOpen ? {height:'100vh'} : {}}>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <SearchBox/>
+              <SearchBox close={toggle}/>
             </NavItem>
           </Nav>
         </Collapse>

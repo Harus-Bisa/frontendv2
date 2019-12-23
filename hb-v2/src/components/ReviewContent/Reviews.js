@@ -12,7 +12,7 @@ function Reviews(props){
     }
     return(
         <div className="container">
-            <div className="row">
+            <div className="row" style={{margin:'0'}}>
                 {makeReviewCard()}
             </div>
         </div>

@@ -27,7 +27,6 @@ function ReviewCard(props){
                                 size="small" 
                                 id="overallRating"
                                 precision={0.5}
-                                style={{margin:'auto'}} 
                                 value={props.review.overallRating} 
                                 readOnly
                                 icon={<ThumbUp/>} 
@@ -45,7 +44,6 @@ function ReviewCard(props){
                                 size="small" 
                                 id="recommendationRating"
                                 precision={0.5}
-                                style={{margin:'auto'}} 
                                 value={props.review.recommendationRating} 
                                 readOnly
                                 icon={<Check/>}
@@ -63,7 +61,6 @@ function ReviewCard(props){
                                 size="small" 
                                 id="difficultyRating"
                                 precision={0.5}
-                                style={{margin:'auto'}} 
                                 value={props.review.difficultyRating} 
                                 readOnly
                                 icon={<LocalCafe/>}
@@ -71,35 +68,35 @@ function ReviewCard(props){
                             />
                         </div>
                     </div>
-                    <Button className="show-button" onClick={() => setExpand(!expand)}>Show {expand ? "less" : "more"} {expand ? <KeyboardArrowUp/>: <KeyboardArrowDown/>}</Button>
+                    <div className="row justify-content-between">
+                        <div className="col-7">
+                            <p >Kelas:</p>
+                        </div>
+                        <div className="col-5" style={{textAlign:'right'}}>
+                            <p>{props.review.courseName}</p>
+                        </div>
+                    </div>
                     <Collapse in={expand} timeout="auto" unmountOnExit>
                         <div style={{marginRight:'15px', marginLeft:'15px'}}>
                             <div className="row justify-content-between">
                                 <div className="col-7">
-                                    <p >Kelas:</p>
-                                </div>
-                                <div className="col-5" style={{display:'flex'}}>
-                                    <p style={{margin:'auto'}}>{props.review.courseName}</p>
-                                </div>
-                            </div>
-                            <div className="row justify-content-between">
-                                <div className="col-7">
                                     <p>Nilai:</p>
                                 </div>
-                                <div className="col-5" style={{display:'flex'}}>
-                                    <p style={{margin:'auto'}}>A</p>
+                                <div className="col-5" style={{textAlign:'right'}}>
+                                    <p>A</p>
                                 </div>
                             </div>
                             <div className="row justify-content-between">
                                 <div className="col-7">
                                     <p>Tahun mengambil kelas:</p>
                                 </div>
-                                <div className="col-5" style={{display:'flex'}}>
-                                    <p style={{margin:'auto'}}>{props.review.yearTaken}</p>
+                                <div className="col-5" style={{textAlign:'right'}}>
+                                    <p>{props.review.yearTaken}</p>
                                 </div>
                             </div>
                         </div>
                     </Collapse>
+                    <Button className="show-button" onClick={() => setExpand(!expand)}>Show {expand ? "less" : "more"} {expand ? <KeyboardArrowUp/>: <KeyboardArrowDown/>}</Button>
                 </div>
                 <div className="review-footer">
                     <div className="row justify-content-between">

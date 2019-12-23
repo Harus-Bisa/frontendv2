@@ -14,7 +14,7 @@ function Review(props){
     }
     React.useEffect(() =>{
         props.getReviews(props.match.params.userId) 
-    },[])
+    },[props.match.params.userId])
 
 
     if(!props.professor){
@@ -28,6 +28,7 @@ function Review(props){
             </header>
             <div style={{display:"flex", alignItems:'center', flexDirection:'column'}}>
                 <StyledRating
+                    precision={0.1}
                     value={props.professor.overallRating} 
                     readOnly 
                     icon={<ThumbUp/>}
