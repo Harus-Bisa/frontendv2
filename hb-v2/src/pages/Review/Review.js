@@ -14,7 +14,7 @@ function Review(props){
     }
     React.useEffect(() =>{
         props.getReviews(props.match.params.revieweeId) 
-    },[props.match.params.revieweeId])
+    }, [props.match.params.revieweeId])
 
 
     if(!props.professor){

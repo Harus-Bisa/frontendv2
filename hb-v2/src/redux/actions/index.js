@@ -7,10 +7,10 @@ export function findUsers(name){
         return await services.findUsers(name)
         .then(async response =>{
             await dispatch({type:FIND_USERS, payload: response})
-            removeError()
+            dispatch(removeError())
         })
         .catch(error =>{
-            setError(error);
+            dispatch(setError(error));
         })
     }
 }
@@ -18,41 +18,42 @@ export function findUsers(name){
 export function clearUsers(){
     return ({type:CLEAR_USERS})
 }
-export function getReviews(userId){
+export function getReviews(revieweeId){
     return async function(dispatch){
-        return await services.getReviews(userId)
+        return await services.getReviews(revieweeId)
         .then(async response =>{
             await dispatch({type:GET_REVIEWS, payload:response})
-            removeError()
+            dispatch(removeError())
         })
         .catch(error =>{
-            setError(error);
+            dispatch(setError(error));
         })
     }
 }
 
-export function addReview(userId, review){
+export function addReview(revieweeId, review){
     return async function(dispatch){
-        return await services.addReview(userId, review)
+        return await services.addReview(revieweeId, review)
         .then(async response =>{
             await dispatch({type:ADD_REVIEW, payload: response})
-            removeError()
+            dispatch(getReviews(revieweeId))
+            dispatch(removeError())
         })
         .catch(error =>{
-            setError(error);
+            dispatch(setError(error));
         })
     }
 }
 
-export function voteReview(userId, reviewId, vote){
+export function voteReview(revieweeId, reviewId, vote){
     return async function(dispatch){
-        return await services.voteReview(userId, reviewId, vote)
+        return await services.voteReview(revieweeId, reviewId, vote)
         .then(async response =>{
             await dispatch({type: VOTE, payload: response})
-            removeError()
+            dispatch(removeError())
         })
         .catch(error =>{
-            setError(error);
+            dispatch(setError(error));
         })
     }
 }

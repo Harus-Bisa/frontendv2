@@ -102,7 +102,7 @@ function ReviewCard(props){
                                     <p>Nilai:</p>
                                 </div>
                                 <div className="col-5" style={{textAlign:'right'}}>
-                                    <p>{props.review.grade}</p>
+                                    <p>{props.review.grade ? props.review.grade : "-"}</p>
                                 </div>
                             </div>
                             <div className="row justify-content-between">
@@ -110,7 +110,7 @@ function ReviewCard(props){
                                     <p>Gaya Mengajar:</p>
                                 </div>
                                 <div className="col-5" style={{textAlign:'right'}}>
-                                    <p>{props.review.teachingStyles.length === 0 ? "-" : props.review.teachingStyles.toString()}</p>
+                                    <p>{props.review.teachingStyles.length === 0 ? "-" : props.review.teachingStyles.join(', ')}</p>
                                 </div>
                             </div>
                             <div className="row justify-content-between">

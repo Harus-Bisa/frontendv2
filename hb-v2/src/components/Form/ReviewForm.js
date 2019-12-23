@@ -48,6 +48,7 @@ function ReviewForm(props){
     var [tags, setTags] = React.useState([])
     var [review, setReview] = React.useState("")
     var [yearTaken, setYearTaken] = React.useState(2019)
+    var [textbookRequired, setTextbookRequired] = React.useState(true)
 
     const submit = (event) =>{
         event.preventDefault()
@@ -58,6 +59,10 @@ function ReviewForm(props){
             recommendationRating: recommendationRating,
             difficultyRating: difficultyRating,
             yearTaken: yearTaken,
+            tags: tags,
+            teachingStyles: teachingStyle,
+            textbookRequired: textbookRequired,
+            grade: grade
         }
         if (props.match.params.revieweeId !== "new"){
             props.addReview(props.match.params.revieweeId, newReview);
@@ -107,6 +112,39 @@ function ReviewForm(props){
                     <Input type="text" id="courseName" value={courseName} required onChange={(event) => setCourseName(event.target.value)}/>
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
+                    <Label>Penilaian*</Label>
+                    <StyledRating
+                        style={style.ratingSpan} 
+                        id="overallRating" 
+                        value={overallRating} 
+                        onChange={(event, value) => setOverallRating(value)}
+                        icon={<ThumbUp/>}
+                        emptyIcon={<ThumbUpOutlined/>}
+                    />
+                </FormGroup>
+                <FormGroup style={style.ratingBox}>
+                    <Label>Apakah anda merekomendasi dosen ini ke teman anda?*</Label>
+                    <StyledRating
+                        style={style.ratingSpan} 
+                        id="recommendationRating" 
+                        value={recommendationRating} 
+                        onChange={(event, value) => setRecommendationRating(value)}
+                        icon={<Check/>}
+                        emptyIcon={<CheckOutlined/>}
+                    />
+                </FormGroup>
+                <FormGroup style={style.ratingBox}>
+                    <Label>Kesusahan Kelas*</Label>
+                    <StyledRating 
+                        style={style.ratingSpan} 
+                        id="difficultyRating" 
+                        value={difficultyRating} 
+                        onChange={(event, value) => setDifficultyRating(value)}
+                        icon={<LocalCafe/>}
+                        emptyIcon={<LocalCafeOutlined/>}
+                    />
+                </FormGroup>
+                <FormGroup style={style.ratingBox}>
                     <Label>Apakah anda sedang mengambil kelas ini?*</Label>
                     <div className="button-group-container" id="currentlyTaking">
                         <Button type="button" id="currentlyTaking-Yes" onClick={(event) => setCurrentlyTaking(true)} className={currentlyTaking ? "button-group-selected" : "button-group"}>Iya!</Button>
@@ -121,42 +159,6 @@ function ReviewForm(props){
                         </Input>
                     </FormGroup>
                 }
-                <FormGroup style={style.ratingBox}>
-                    <Label>Penilaian*</Label>
-                    <StyledRating
-                        // precision={0.5}
-                        style={style.ratingSpan} 
-                        id="overallRating" 
-                        value={overallRating} 
-                        onChange={(event, value) => setOverallRating(value)}
-                        icon={<ThumbUp/>}
-                        emptyIcon={<ThumbUpOutlined/>}
-                    />
-                </FormGroup>
-                <FormGroup style={style.ratingBox}>
-                    <Label>Apakah anda merekomendasi dosen ini ke teman anda?*</Label>
-                    <StyledRating
-                        // precision={0.5}
-                        style={style.ratingSpan} 
-                        id="recommendationRating" 
-                        value={recommendationRating} 
-                        onChange={(event, value) => setRecommendationRating(value)}
-                        icon={<Check/>}
-                        emptyIcon={<CheckOutlined/>}
-                    />
-                </FormGroup>
-                <FormGroup style={style.ratingBox}>
-                    <Label>Kesusahan Kelas*</Label>
-                    <StyledRating
-                        // precision={0.5} 
-                        style={style.ratingSpan} 
-                        id="difficultyRating" 
-                        value={difficultyRating} 
-                        onChange={(event, value) => setDifficultyRating(value)}
-                        icon={<LocalCafe/>}
-                        emptyIcon={<LocalCafeOutlined/>}
-                    />
-                </FormGroup>
                 <FormGroup>
                     <Label>Nilai yang Anda dapatkan*</Label>
                     <Autocomplete
@@ -207,6 +209,13 @@ function ReviewForm(props){
                             />
                         )}
                     />
+                </FormGroup>
+                <FormGroup style={style.ratingBox}>
+                    <Label>Apakah Textbook digunakan?*</Label>
+                    <div className="button-group-container" id="textbookRequired">
+                        <Button type="button" id="textbookRequired-Yes" onClick={(event) => setTextbookRequired(true)} className={textbookRequired ? "button-group-selected" : "button-group"}>Iya</Button>
+                        <Button type="button" id="textbookRequired-No" onClick={(event) => setTextbookRequired(false)} className={!textbookRequired ? "button-group-selected" : "button-group"}>Tidak</Button>
+                    </div>
                 </FormGroup>
                 <FormGroup>
                     <Label>Pilih 3 tag yang menjelaskan mengenai dosen ini*</Label>
