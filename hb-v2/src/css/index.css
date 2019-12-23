@@ -84,19 +84,6 @@ a:hover{
 .button{
   text-transform: none !important;
 }
-.search-box #search-box, .search-box #search-box:focus{
-  border: 0px;
-  width: 100%;
-  box-shadow: none;
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 27px;
-  display: flex;
-  align-items: center;
-  color: black;
-}
 
 .option-button{
   text-transform: none;
@@ -121,6 +108,19 @@ a:hover{
   border: 0;
   width: 50%;
 }
+
+.contrast-button{
+  border: 1px solid var(--hb-blue) !important;
+  box-sizing: border-box !important;
+  font-weight: bold !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  text-align: center !important;
+  color: var(--hb-blue) !important;
+}
+
 .form-control, .PrivateNotchedOutline-root-102, .MuiOutlinedInput-notchedOutline{
   border: 1px solid #000000;
   border-color: black !important;
@@ -151,6 +151,13 @@ a:hover{
   color:white !important;
 }
 
+.grey-box{
+  background-color: #EEEEEE;
+}
+
+.grey-box a{
+  color: var(--hb-blue);
+}
 .blue-box .button{
   color: white !important;
   font-size: 12px;
@@ -170,5 +177,18 @@ a:hover{
 }
 .large-rating svg{
   font-size: 3rem;
+}
+.search-box #search-box, .search-box #search-box:focus{
+  border: 0px;
+  width: 100%;
+  box-shadow: none;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  color: black;
 }
 
