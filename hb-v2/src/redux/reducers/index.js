@@ -1,6 +1,7 @@
 import { FIND_USERS, GET_REVIEWS, CLEAR_USERS, SET_ERROR, REMOVE_ERROR, VOTE } from "../constants/action-types";
 
 const initialState ={
+    loggedIn: false
 }
 export default function rootReducer(state = initialState, action){
     if(action.type === FIND_USERS){
