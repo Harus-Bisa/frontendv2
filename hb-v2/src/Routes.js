@@ -11,7 +11,7 @@ function Routes() {
         <Switch>
             <Route exact path="/" component={Landing}/>
             <Route exact path="/review/:revieweeId/add/:overallRating" component={ReviewForm}/>
-            <Route exact path="/review/:new/add" component={ReviewForm}/>
+            <Route exact path="/review/new/add" component={ReviewForm}/>
             <Route exact path="/review/:revieweeId" component={Review}/>
             <Route exact path="/login" component={Login}/>
             <Route exact path="/signup" component={SignUp}/>
