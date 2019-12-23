@@ -24,11 +24,11 @@ function Popup(props){
 }
 
 Popup.defaultProps={
-    // purpose: "default purpose",
-    // trigger:{
-    //     component: Button
-    // },
-    // content: Login
+    purpose: "default purpose",
+    trigger:{
+        component: Button
+    },
+    content: Login
 }
 
 export default connect()(Popup)
