@@ -2,7 +2,7 @@ import axios from "axios";
 
 class Services{
     constructor(){
-        this.domain = "http://localhost:8000";
+        this.domain = "https://api.harusbisa.net";
         this.headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
