@@ -1,12 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import ReviewCard from "../Card/ReviewCard";
+import SignUpLoginPrompt from "../Card/SignUpLoginPrompt";
 
 function Reviews(props){
     const makeReviewCard = () =>{
         var cards = [];
-        for (let i=0; i<props.numberOfReviews; i++){
-            cards.push(<ReviewCard key={i} id={i}/>)
+        var max = props.numberOfReviews > 3 ? 3 : props.numberOfReviews
+        for (let i=0; i<max; i++){
+            if (i === max-1){
+                cards.push(<ReviewCard key={i} id={i} blur={true}/>)
+            }
+            else{
+                cards.push(<ReviewCard key={i} id={i}/>)
+            }  
         }
         return cards
     }
@@ -14,6 +21,7 @@ function Reviews(props){
         <div className="container">
             <div className="row">
                 {makeReviewCard()}
+                <SignUpLoginPrompt/>
             </div>
         </div>
     )

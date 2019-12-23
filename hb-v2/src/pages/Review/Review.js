@@ -6,7 +6,6 @@ import { StyledRating } from "../../components/Rating/StyledRating";
 import ReviewContent from "../../components/ReviewContent/ReviewContent";
 import "../../css/review.css";
 import { getReviews } from "../../redux/actions";
-import SignUpLoginPrompt from "../../components/Card/SignUpLoginPrompt";
 
 function Review(props){
     var [rating, setRating] = React.useState(0)
@@ -53,8 +52,6 @@ function Review(props){
             <div style={{margin:'1rem -30px'}}>
                 <ReviewContent/>
             </div>
-            <SignUpLoginPrompt/>
-
         </div>
     )
 }

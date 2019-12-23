@@ -75,15 +75,12 @@ a:hover{
   background-color: black;
 }
 
-.google-button{
-  background-color: #E24436 !important;
+.red-button{
+  background-color: #FA514B !important;
   width:100%;
 }
 
-.facebook-button{
-  background-color: #517DBC !important;
-  width:100%;
-}
+
 .button{
   text-transform: none !important;
 }
@@ -160,8 +157,6 @@ a:hover{
   line-height: 18px;
   font-weight: 300;
   margin:5px auto;
-  display:flex;
-  justify-content: space-between;
 }
 
 .grey-text{

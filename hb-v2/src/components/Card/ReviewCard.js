@@ -23,7 +23,7 @@ function ReviewCard(props){
     }
     return(
         <div className='col-12' style={{paddingTop:'15px', paddingBottom:'15px'}}>
-            <div className="review-card">
+            <div className="review-card" style={props.blur ? {filter: "blur(4px)"} : {}}>
                 <div className="review-details">
                     <p id="review">{props.review.review}</p>
                 </div>
