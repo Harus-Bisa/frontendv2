@@ -6,7 +6,7 @@ import SignUp from "../../pages/Sign Up/SignUp";
 
 export default function SignUpLoginPrompt(props){
     return(
-        <div className="blue-box" style={{padding:'2rem', position:'relative', margin:"auto", top:'-250px'}}>
+        <div className="blue-box" style={props.float ? {padding:'2rem', margin:"auto", position:'relative', top:'-250px'} : {padding:'2rem', margin:'auto'}}>
             <div style={{marginBottom:'1.5rem'}}>
                 <h3>Sign up dan lihat semua reviewnya. Gratis!</h3>
             </div>
