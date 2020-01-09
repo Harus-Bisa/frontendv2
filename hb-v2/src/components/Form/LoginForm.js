@@ -16,7 +16,7 @@ function LoginForm(props){
             <Form onSubmit={submit}>
                 <FormGroup>
                     <Label>Email*</Label>
-                    <Input type="text" id="email" value={email} onChange={(event) => setEmail(event.target.value)} required/>
+                    <Input type="text" id="email" value={email} onChange={(event) => setEmail(event.target.value)} required autoFocus/>
                 </FormGroup>
                 <FormGroup>
                     <Label>Password*</Label>
