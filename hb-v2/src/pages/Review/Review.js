@@ -36,7 +36,7 @@ function Review(props){
     return(
         <div className="container content">
             <header className="review-header">
-                <h2 style={{borderBottom:"4px solid #39A3FF"}}>{props.professor.name}</h2>
+                <h2 style={{borderBottom:"4px solid #39A3FF", width:'fit-content', fontSize: "calc(100% + 17px)"}}>{props.professor.name}</h2>
                 <p>{props.professor.school}</p>
                 <div style={{display:'flex', marginTop:'10px'}}>
                     <StyledRating
