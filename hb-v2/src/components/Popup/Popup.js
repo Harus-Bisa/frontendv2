@@ -1,7 +1,6 @@
 import React from "react";
-import { Dialog, DialogContent, Button } from "@material-ui/core";
+import { Dialog, DialogContent } from "@material-ui/core";
 import {connect} from "react-redux";
-import Login from "../../pages/Login/Login";
 
 function Popup(props){
     const [open, setOpen] = React.useState(false);
@@ -21,14 +20,6 @@ function Popup(props){
             </Dialog>
         </div>
     )   
-}
-
-Popup.defaultProps={
-    // purpose: "default purpose",
-    // trigger:{
-    //     component: Button
-    // },
-    // content: Login
 }
 
 export default connect()(Popup)

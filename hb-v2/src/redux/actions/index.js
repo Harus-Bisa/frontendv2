@@ -1,7 +1,24 @@
 import services from "../../Services"
-import { FIND_USERS, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_USERS, REMOVE_ERROR, SET_ERROR } from "../constants/action-types"
+import { FIND_USERS, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_USERS, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT } from "../constants/action-types"
 
-
+export function login(email, password){
+    return async function(dispatch){
+        return await services.login(email, password)
+        .then(async response => {
+            await dispatch({type: LOGIN, payload: response})
+            dispatch(removeError())
+        })
+        .catch(error =>{
+            dispatch(setError(error))
+        })
+    }
+}
+export function logout(){
+    return async function(dispatch){
+        services.logout()
+        return dispatch({type: LOGOUT})
+    }
+}
 export function findUsers(name){
     return async function(dispatch){
         return await services.findUsers(name)

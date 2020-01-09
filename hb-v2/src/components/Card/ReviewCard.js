@@ -4,6 +4,8 @@ import { StyledRating } from "../Rating/StyledRating";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, EmojiFlagsOutlined, ArrowUpward, ArrowDownward, LocalCafe, LocalCafeOutlined, KeyboardArrowUp, KeyboardArrowDown } from "@material-ui/icons";
 import { Button, Collapse } from "@material-ui/core";
 import { voteReview } from "../../redux/actions";
+import Login from "../../pages/Login/Login";
+import Popup from "../Popup/Popup";
 
 function ReviewCard(props){
     var [expand, setExpand] = React.useState(false)
@@ -19,7 +21,12 @@ function ReviewCard(props){
         return tags;
     }
     const vote = (v) => {
-        props.voteReview(props.revieweeId, props.review.reviewId, v)
+        if (props.loggedIn){
+            props.voteReview(props.revieweeId, props.review.reviewId, v)
+        }
+        else{
+            alert("Please login first!")
+        }
     }
     return(
         <div className='col-12' style={{paddingTop:'15px', paddingBottom:'15px'}}>
@@ -132,8 +139,32 @@ function ReviewCard(props){
                     <div className="row justify-content-between">
                         <div className="col-6" style={{display:'flex', flexDirection:'row'}}>
                             <p>Membantu?</p>
-                            <Button className="vote-button" onClick={() => vote("upVote")}>{props.review.helpfulUpVote}<ArrowUpward className="icon"/></Button>
-                            <Button className="vote-button" onClick={() => vote("downVote")}>{props.review.helpfulDownVote}<ArrowDownward className="icon"/></Button>
+                            {props.loggedIn && 
+                            <React.Fragment>
+                                <Button className="vote-button" onClick={() => vote("upVote")}>{props.review.helpfulUpVote}<ArrowUpward className="icon"/></Button>
+                                <Button className="vote-button" onClick={() => vote("downVote")}>{props.review.helpfulDownVote}<ArrowDownward className="icon"/></Button>
+                            </React.Fragment>
+                            }
+                            {!props.loggedIn && 
+                            <React.Fragment>
+                                <Popup
+                                    trigger={{
+                                        component:Button,
+                                        className:"vote-button",
+                                    }}
+                                    purpose={<React.Fragment>{props.review.helpfulUpVote}<ArrowUpward className="icon"/></React.Fragment>}
+                                    content={Login}
+                                />
+                                <Popup
+                                    trigger={{
+                                        component:Button,
+                                        className:"vote-button",
+                                    }}
+                                    purpose={<React.Fragment>{props.review.helpfulDownVote}<ArrowDownward className="icon"/></React.Fragment>}
+                                    content={Login}
+                                />
+                            </React.Fragment>
+                            }
                         </div>
                         <div className="col-6" style={{display:'flex', justifyContent:'flex-end'}}>
                             <a href="/" style={{color:'black'}}>Laporkan</a>
@@ -149,7 +180,8 @@ function ReviewCard(props){
 function mapStateToProps(state, ownProps){
     return{
         review: state.professor.reviews[ownProps.id],
-        revieweeId: state.professor.revieweeId
+        revieweeId: state.professor.revieweeId,
+        loggedIn: state.loggedIn
     }
 }
 export default connect(mapStateToProps,{voteReview})(ReviewCard);

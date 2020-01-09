@@ -1,4 +1,5 @@
 import axios from "axios";
+import decode from 'jwt-decode';
 
 class Services{
     constructor(){
@@ -8,7 +9,52 @@ class Services{
             'Content-Type': 'application/json'
         }
     }
+
+    getToken(){
+        return localStorage.getItem("token");
+    }
+    isTokenExpired(token){
+        try{
+            const decoded = decode(token);
+            if(decoded.exp < Date.now() / 1000){
+                return true
+            }
+            else{
+                return false
+            }
+        }
+        catch(error){
+            return false
+        }
+    }
+    async login(email, password){
+        const url = this.domain + "/login";
+        const data = {
+            email: email,
+            password: password
+        }
+        return axios.post(url,data)
+        .then(response =>{
+            localStorage.setItem("token", response.data.token)
+            return response.data.userId
+        })
+        .catch(error => {
+            throw new Error(error.response.statusText)
+        })
+    }
     
+    logout(){
+        localStorage.removeItem("token");
+    }
+
+    isLoggedIn(){
+        const token = this.getToken();
+        return !!token && !this.isTokenExpired(token)
+    }
+
+
+
+
     async findUsers(name){
         const url = this.domain + "/reviewees/?name="+name;
         return axios.get(url,{headers:this.headers})
@@ -57,13 +103,17 @@ class Services{
     
     async voteReview(revieweeId, reviewId, vote){
         const url = this.domain + "/reviewees/"+revieweeId+"/reviews/"+reviewId+"/"+vote
-        return axios.post(url, null, {headers: this.headers})
-        .then(response =>{
-            return response.data
-        })
-        .catch(error =>{
-            throw new Error(error.response.statusText)
-        })
+        const headers = this.headers;
+        if (this.isLoggedIn()) {
+            headers['Authorization'] = 'Bearer ' + this.getToken()
+            return axios.post(url, null, {headers: headers})
+            .then(response =>{
+                return response.data
+            })
+            .catch(error =>{
+                throw new Error(error.response.statusText)
+            })
+        }  
     }
 }
 const services = new Services();

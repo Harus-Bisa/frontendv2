@@ -1,7 +1,8 @@
-import { FIND_USERS, GET_REVIEWS, CLEAR_USERS, SET_ERROR, REMOVE_ERROR, VOTE } from "../constants/action-types";
+import { FIND_USERS, GET_REVIEWS, CLEAR_USERS, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT } from "../constants/action-types";
+import services from "../../Services";
 
 const initialState ={
-    loggedIn: false
+    loggedIn: services.isLoggedIn()
 }
 export default function rootReducer(state = initialState, action){
     if(action.type === FIND_USERS){
@@ -39,6 +40,18 @@ export default function rootReducer(state = initialState, action){
     if(action.type === REMOVE_ERROR){
         return Object.assign({}, state, {
             error: null
+        })
+    }
+    if(action.type === LOGIN){
+        return Object.assign({}, state, {
+            loggedIn: true,
+            userId: action.payload
+        })
+    }
+    if(action.type === LOGOUT){
+        return Object.assign({}, state, {
+            loggedIn: false,
+            userId: null
         })
     }
     return state;

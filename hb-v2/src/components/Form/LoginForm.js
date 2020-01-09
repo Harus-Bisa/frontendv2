@@ -2,13 +2,14 @@ import React from "react";
 import { FormGroup, Input, Label, Form } from "reactstrap";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
+import { login } from "../../redux/actions";
 
 function LoginForm(props){
     var [email, setEmail] = React.useState("")
     var [password, setPassword] = React.useState("")
     const submit = (event) =>{
         event.preventDefault();
-
+        props.login(email, password)
     }
     return(
         <div className="container content">
@@ -27,4 +28,4 @@ function LoginForm(props){
     )
 }
 
-export default connect()(LoginForm);
+export default connect(null, {login})(LoginForm);
