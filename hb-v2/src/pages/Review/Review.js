@@ -34,7 +34,7 @@ function Review(props){
         return(<div>Loading</div>)
     }
     return(
-        <div className="container content">
+        <div className="container content page-container">
             <header className="review-header">
                 <h2 style={{borderBottom:"4px solid #39A3FF", width:'fit-content', fontSize: "calc(100% + 17px)"}}>{props.professor.name}</h2>
                 <p>{props.professor.school}</p>

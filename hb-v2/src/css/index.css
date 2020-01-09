@@ -64,6 +64,19 @@ a:hover{
 .content{
   padding: 1rem 2rem;
 }
+
+.page-container{
+  padding-top: calc(64px + 1rem);
+}
+
+.navbar{
+  background-color:white;
+  position:fixed;
+  top:0;
+  z-index:999;
+  width:100%;
+}
+
 .blue-button{
   background-color: black;
 }
@@ -185,4 +198,5 @@ a:hover{
   align-items: center;
   color: black;
 }
+
 

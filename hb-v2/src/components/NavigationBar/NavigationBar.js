@@ -20,7 +20,7 @@ function NavigationBar(props){
 
   return (
     <div>
-      <Navbar light expand="md" style={{backgroundColor:'white', position:'sticky', top:0, zIndex:999}}>
+      <Navbar light expand="md" className="navbar">
         <NavbarBrand href="/">Harus Bisa</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar style={isOpen ? {height:'100vh'} : {}}>

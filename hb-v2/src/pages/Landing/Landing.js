@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 function Landing(props){
     return(
-        <div className='container center'>
+        <div className='container center page-container'>
             <header>
                 <h1>Review Dosen anda Sekarang</h1>
                 <p>Bergabung dengan komunitas pelajar seluruh Indonesia</p>
