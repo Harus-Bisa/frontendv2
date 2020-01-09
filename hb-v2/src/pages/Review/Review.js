@@ -5,13 +5,25 @@ import { StyledRating } from "../../components/Rating/StyledRating";
 import ReviewContent from "../../components/ReviewContent/ReviewContent";
 import "../../css/review.css";
 import { getReviews } from "../../redux/actions";
+import Popup from "../../components/Popup/Popup";
+import Login from "../Login/Login";
 
+function ThumbRating(props){
+    return (<StyledRating
+        icon={<ThumbUp/>}
+        emptyIcon={<ThumbUpOutlined/>} 
+        className="large-rating"
+        onChange={props.onChange}
+    />)
+}
 function Review(props){
     var [rating, setRating] = React.useState(0)
 
     const addReview = (event, value) =>{
         setRating(value)
-        props.history.push("/review/"+props.professor.revieweeId+"/add/"+value)
+        if(props.loggedIn){
+            props.history.push("/review/"+props.professor.revieweeId+"/add/"+value)
+        }
     }
     React.useEffect(() =>{
         props.getReviews(props.match.params.revieweeId) 
@@ -39,14 +51,24 @@ function Review(props){
             </header>
             <div style={{display:"flex", alignItems:'center', flexDirection:'column'}}>
                 <p className="grey-text">Tulis Review Anda</p>
-                <StyledRating
-                    id="addReview"
-                    onChange={addReview}
-                    value={rating}
-                    icon={<ThumbUp/>}
-                    emptyIcon={<ThumbUpOutlined/>} 
-                    className="large-rating"
-                />
+                {props.loggedIn && 
+                    <StyledRating
+                        id="addReview"
+                        onChange={addReview}
+                        value={rating}
+                        icon={<ThumbUp/>}
+                        emptyIcon={<ThumbUpOutlined/>} 
+                        className="large-rating"
+                    />
+                }
+                {!props.loggedIn && 
+                    <Popup
+                        trigger={{
+                            component:ThumbRating,
+                        }}
+                        content={Login}
+                    />
+                }
             </div>
             <div style={{margin:'1rem -30px'}}>
                 <ReviewContent/>
@@ -58,7 +80,8 @@ function Review(props){
 function mapStateToProps(state){
     return{
         professor: state.professor,
-        error: state.error
+        error: state.error,
+        loggedIn: state.loggedIn
     }
 }
 export default connect(mapStateToProps, {getReviews})(Review);

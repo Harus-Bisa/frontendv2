@@ -24,9 +24,6 @@ function ReviewCard(props){
         if (props.loggedIn){
             props.voteReview(props.revieweeId, props.review.reviewId, v)
         }
-        else{
-            alert("Please login first!")
-        }
     }
     return(
         <div className='col-12' style={{paddingTop:'15px', paddingBottom:'15px'}}>
@@ -66,6 +63,7 @@ function ReviewCard(props){
                                 readOnly
                                 icon={<Check/>}
                                 emptyIcon={<CheckOutlined/>}
+                                style={{margin:'auto 0'}}
                             />
                         </div>
                     </div>
