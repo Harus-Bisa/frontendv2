@@ -41,6 +41,7 @@ function SearchBox(props){
                     setOpen(false) 
                     props.clearUsers()
                 }}
+                onChange={(event, value) => {select(value.revieweeId)}}
                 options={props.users}
                 loading={loading}
                 noOptionsText="Dosen tidak ditemukan."
@@ -55,7 +56,7 @@ function SearchBox(props){
                 )}
                 renderOption={option => {
                     return(
-                        <div onClick={() => select(option.revieweeId)} style={{width:'100%'}} id={"option-"+option.name}>
+                        <div style={{width:'100%'}} id={"option-"+option.name}>
                             <p style={{fontWeight:'bold', margin:0}}>{option.name}</p>
                             <p style={{fontSize:'12px', margin:0}}>{option.school}</p>    
                         </div>
