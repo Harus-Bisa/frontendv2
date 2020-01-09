@@ -87,3 +87,31 @@
 .review-header p{
     margin: auto 0;
 }
+
+.review-statistics h2{
+    color: var(--hb-blue);
+    margin: auto;
+    font-weight: normal;
+}
+
+.review-statistics p{
+    margin: auto 0;
+}
+
+.review-statistics .icon{
+    font-size: 50px;
+    color: var(--hb-blue);
+    margin:auto;
+}
+
+.review-statistics .row{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 0 15px;
+}
+
+.review-statistics .col-3, .review-statistics .col-6{
+    display: flex;
+    padding-right: 5px;
+    padding-left:5px;
+}

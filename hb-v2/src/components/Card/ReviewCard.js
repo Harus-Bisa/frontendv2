@@ -135,7 +135,7 @@ function ReviewCard(props){
                 </div>
                 <div className="review-footer">
                     <div className="row justify-content-between">
-                        <div className="col-6" style={{display:'flex', flexDirection:'row'}}>
+                        <div className="col" style={{display:'flex', flexDirection:'row'}}>
                             <p>Membantu?</p>
                             {props.loggedIn && 
                             <React.Fragment>
@@ -164,7 +164,7 @@ function ReviewCard(props){
                             </React.Fragment>
                             }
                         </div>
-                        <div className="col-6" style={{display:'flex', justifyContent:'flex-end'}}>
+                        <div className="col" style={{display:'flex', justifyContent:'flex-end'}}>
                             <a href="/" style={{color:'black'}}>Laporkan</a>
                             <EmojiFlagsOutlined className="icon"/>
                         </div>

@@ -107,10 +107,6 @@ function ReviewForm(props){
                     <Label>Nama Perguruan Tinggi*</Label>
                     <Input type="text" id="profSchool" value={profSchool} required onChange={(event) => setProfSchool(event.target.value)}/>
                 </FormGroup>
-                <FormGroup>
-                    <Label>Nama Kelas*</Label>
-                    <Input type="text" id="courseName" value={courseName} required onChange={(event) => setCourseName(event.target.value)}/>
-                </FormGroup>
                 <FormGroup style={style.ratingBox}>
                     <Label>Penilaian*</Label>
                     <StyledRating
@@ -143,6 +139,10 @@ function ReviewForm(props){
                         icon={<LocalCafe/>}
                         emptyIcon={<LocalCafeOutlined/>}
                     />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Nama Kelas*</Label>
+                    <Input type="text" id="courseName" value={courseName} required onChange={(event) => setCourseName(event.target.value)}/>
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
                     <Label>Apakah anda sedang mengambil kelas ini?*</Label>
