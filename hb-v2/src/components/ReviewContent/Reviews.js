@@ -29,7 +29,6 @@ function Reviews(props){
         <div className="container">
             <div className="row">
                 {makeReviewCard()}
-                {!props.loggedIn && <SignUpLoginPrompt float/>}
             </div>
         </div>
     )

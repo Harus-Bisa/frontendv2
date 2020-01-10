@@ -6,6 +6,7 @@ import { Button, Collapse } from "@material-ui/core";
 import { voteReview } from "../../redux/actions";
 import Login from "../../pages/Login/Login";
 import Popup from "../Popup/Popup";
+import SignUpLoginPrompt from "./SignUpLoginPrompt";
 
 function ReviewCard(props){
     var [expand, setExpand] = React.useState(false)
@@ -171,6 +172,7 @@ function ReviewCard(props){
                     </div>
                 </div>
             </div>
+            {props.blur && <SignUpLoginPrompt float/>}
         </div>
     )
 }

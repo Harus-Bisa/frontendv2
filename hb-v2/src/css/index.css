@@ -154,8 +154,16 @@ a:hover{
 .blue-box{
   background-color: var(--hb-blue);
   color:white !important;
+  padding: 2rem;
+  box-shadow: 0 0.3125rem 1rem 0 rgba(0,0,0,.24);
 }
 
+.float{
+  position: absolute;
+  top: 70px;
+  left: 15px;
+  right: 15px;
+}
 .grey-box{
   background-color: #EEEEEE;
 }
@@ -186,7 +194,7 @@ a:hover{
 }
 
 .nav-link{
-  font-weight: bold;
+  /* font-weight: bold; */
   cursor: pointer;
 }
 .search-box{
