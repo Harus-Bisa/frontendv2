@@ -33,7 +33,13 @@ function Reviews(props){
                 )
             }
             else{
-                cards.push(<div className="col-12"><div className="content"><SignUpLoginPrompt/></div></div>)
+                cards.push(
+                    <div className="col-12">
+                        <div className="content">
+                            <SignUpLoginPrompt/>
+                        </div>
+                    </div>
+                )
             }
         }
         return cards
