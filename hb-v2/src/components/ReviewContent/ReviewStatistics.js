@@ -1,13 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Check, LocalCafe } from "@material-ui/icons";
+import SignUpLoginPrompt from "../Card/SignUpLoginPrompt";
 
 function ReviewStatistics(props){
+    if(!props.loggedIn){
+        return(<SignUpLoginPrompt/>)
+    }
     return(
         <div className="container review-statistics">
             <div className="row">
                 <div className="col-3">
-                    <h2>{(props.professor.recommendationRating).toFixed(1)}</h2>
+                    <h2>{props.professor.recommendationRating}</h2>
                 </div>
                 <div className="col-3">
                     <Check className="icon"/>
@@ -18,7 +22,7 @@ function ReviewStatistics(props){
             </div>
             <div className="row">
                 <div className="col-3">
-                    <h2>{(props.professor.difficultyRating).toFixed(1)}</h2>
+                    <h2>{props.professor.difficultyRating}</h2>
                 </div>
                 <div className="col-3">
                     <LocalCafe className="icon"/>
@@ -33,7 +37,8 @@ function ReviewStatistics(props){
 
 function mapStateToProps(state){
     return{
-        professor: state.professor
+        professor: state.professor,
+        loggedIn: state.loggedIn
     }
 }
 export default connect(mapStateToProps)(ReviewStatistics)

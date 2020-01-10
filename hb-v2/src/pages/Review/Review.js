@@ -1,31 +1,42 @@
 import React from "react";
 import { connect } from "react-redux";
 import {ThumbUp, ThumbUpOutlined} from "@material-ui/icons"
-import { Button } from "reactstrap";
 import { StyledRating } from "../../components/Rating/StyledRating";
 import ReviewContent from "../../components/ReviewContent/ReviewContent";
 import "../../css/review.css";
 import { getReviews } from "../../redux/actions";
+import Popup from "../../components/Popup/Popup";
+import Login from "../Login/Login";
 
+function ThumbRating(props){
+    return (<StyledRating
+        icon={<ThumbUp/>}
+        emptyIcon={<ThumbUpOutlined/>} 
+        className="large-rating"
+        onChange={props.onChange}
+    />)
+}
 function Review(props){
     var [rating, setRating] = React.useState(0)
 
     const addReview = (event, value) =>{
         setRating(value)
-        props.history.push("/review/"+props.professor.revieweeId+"/add/"+value)
+        if(props.loggedIn){
+            props.history.push("/review/"+props.professor.revieweeId+"/add/"+value)
+        }
     }
     React.useEffect(() =>{
         props.getReviews(props.match.params.revieweeId) 
-    }, [props.match.params.revieweeId])
+    }, [props.match.params.revieweeId, props.loggedIn])
 
 
     if(!props.professor){
         return(<div>Loading</div>)
     }
     return(
-        <div className="container content">
+        <div className="container content page-container">
             <header className="review-header">
-                <h2 style={{borderBottom:"4px solid #39A3FF"}}>{props.professor.name}</h2>
+                <h2 style={{borderBottom:"4px solid #39A3FF", width:'fit-content', fontSize: "calc(100% + 17px)"}}>{props.professor.name}</h2>
                 <p>{props.professor.school}</p>
                 <div style={{display:'flex', marginTop:'10px'}}>
                     <StyledRating
@@ -40,14 +51,24 @@ function Review(props){
             </header>
             <div style={{display:"flex", alignItems:'center', flexDirection:'column'}}>
                 <p className="grey-text">Tulis Review Anda</p>
-                <StyledRating
-                    id="addReview"
-                    onChange={addReview}
-                    value={rating}
-                    icon={<ThumbUp/>}
-                    emptyIcon={<ThumbUpOutlined/>} 
-                    className="large-rating"
-                />
+                {props.loggedIn && 
+                    <StyledRating
+                        id="addReview"
+                        onChange={addReview}
+                        value={rating}
+                        icon={<ThumbUp/>}
+                        emptyIcon={<ThumbUpOutlined/>} 
+                        className="large-rating"
+                    />
+                }
+                {!props.loggedIn && 
+                    <Popup
+                        trigger={{
+                            component:ThumbRating,
+                        }}
+                        content={Login}
+                    />
+                }
             </div>
             <div style={{margin:'1rem -30px'}}>
                 <ReviewContent/>
@@ -59,7 +80,8 @@ function Review(props){
 function mapStateToProps(state){
     return{
         professor: state.professor,
-        error: state.error
+        error: state.error,
+        loggedIn: state.loggedIn
     }
 }
 export default connect(mapStateToProps, {getReviews})(Review);

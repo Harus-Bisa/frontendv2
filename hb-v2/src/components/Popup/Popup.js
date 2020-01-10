@@ -1,7 +1,6 @@
 import React from "react";
-import { Dialog, DialogContent, Button } from "@material-ui/core";
+import { Dialog, DialogContent } from "@material-ui/core";
 import {connect} from "react-redux";
-import Login from "../../pages/Login/Login";
 
 function Popup(props){
     const [open, setOpen] = React.useState(false);
@@ -12,23 +11,15 @@ function Popup(props){
         setOpen(true)
     }
     return(
-        <div>
-            <Trigger className={props.trigger.className} onClick={openPopup} style={props.trigger.style} id={props.trigger.id}>{props.purpose}</Trigger>
+        <React.Fragment>
+            <Trigger className={props.trigger.className} onClick={openPopup} onChange={openPopup} style={props.trigger.style} id={props.trigger.id}>{props.purpose}</Trigger>
             <Dialog open={open} onClose={() => setOpen(false)} style={{padding:0}}>
                 <DialogContent style={{padding:'0'}}> 
                     <ContentComponent closePopup={() => setOpen(false)}/>
                 </DialogContent>
             </Dialog>
-        </div>
+        </React.Fragment>
     )   
-}
-
-Popup.defaultProps={
-    purpose: "default purpose",
-    trigger:{
-        component: Button
-    },
-    content: Login
 }
 
 export default connect()(Popup)

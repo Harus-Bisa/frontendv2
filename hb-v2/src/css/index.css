@@ -64,6 +64,18 @@ a:hover{
 .content{
   padding: 1rem 2rem;
 }
+
+.page-container{
+  padding-top: calc(64px + 1rem);
+}
+
+.navbar{
+  background-color:white;
+  position:fixed;
+  top:0;
+  z-index:999;
+  width:100%;
+}
 .blue-button{
   background-color: black;
 }
@@ -172,6 +184,15 @@ a:hover{
 .large-rating svg{
   font-size: 3rem;
 }
+
+.nav-link{
+  font-weight: bold;
+  cursor: pointer;
+}
+.search-box{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 .search-box #search-box, .search-box #search-box:focus{
   border: 0px;
   width: 100%;
@@ -185,4 +206,5 @@ a:hover{
   align-items: center;
   color: black;
 }
+
 

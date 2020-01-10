@@ -10,6 +10,8 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { withStyles } from "@material-ui/core";
+import Popup from "../Popup/Popup";
+import Login from "../../pages/Login/Login";
 
 const Icon = withStyles({
     root: {
@@ -31,7 +33,14 @@ const CheckedIcon = withStyles({
     checked: {},
   })(props => <CheckBoxIcon fontSize="small" {...props} />);
 
-
+function ProfNameInput(props){
+    return (
+        <FormGroup>
+            <Label>Nama Dosen*</Label>
+            <Input type="text" onChange={props.onChange}/>
+        </FormGroup>
+    )
+}
 const teachingStyleOptions= ["Audio", "Visual"]
 const tagsOptions=["Inspirasional","Memberi banyak feedback yang baik","Kalo kasi nilai susah","Lucu","Membosankan","Berwibawa","Peduli dengan mahasiswa"]
 
@@ -96,13 +105,22 @@ function ReviewForm(props){
         return yearOptions;
     }
     return(
-        <div className="container content">
+        <div className="container content page-container">
             <h5>Terima Kasih anda sudah mau berkontribusi!</h5>
             <form onSubmit={submit}>
+                {props.loggedIn && 
                 <FormGroup>
                     <Label>Nama Dosen*</Label>
                     <Input type="text" id="profName" value={profName} required onChange={(event) => setProfName(event.target.value)}/>
-                </FormGroup>
+                </FormGroup>}
+                {!props.loggedIn &&
+                    <Popup
+                        trigger={{
+                            component:ProfNameInput
+                        }}
+                        content={Login}
+                    />
+                }
                 <FormGroup>
                     <Label>Nama Perguruan Tinggi*</Label>
                     <Input type="text" id="profSchool" value={profSchool} required onChange={(event) => setProfSchool(event.target.value)}/>
@@ -262,13 +280,15 @@ function mapStateToProps(state, ownProps){
     if (state.professor){
         return{
             profName: state.professor.name,
-            profSchool: state.professor.school
+            profSchool: state.professor.school,
+            loggedIn: state.loggedIn
         }
     }
     else{
         return{
             profName: "",
-            profSchool: ""
+            profSchool: "",
+            loggedIn: state.loggedIn
         }
     }
     

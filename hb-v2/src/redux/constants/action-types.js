@@ -7,3 +7,6 @@ export const VOTE = "VOTE"
 
 export const SET_ERROR = "SET_ERROR";
 export const REMOVE_ERROR = "REMOVE_ERROR";
+
+export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
