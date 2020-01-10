@@ -4,17 +4,15 @@ import LoginForm from "../../components/Form/LoginForm";
 
 export default function Login(props){
     return(
-        <div className="page-container">
-            <PopupForm
-                header={<h1>Log In</h1>}
-                form={<LoginForm/>}
-                footer={
-                    <div>
-                        <a>Lupa password anda?</a>
-                        <p>Tidak punya akun? <a>Sign up sekarang!</a></p>
-                    </div>
-                }
-            />
-        </div>
+        <PopupForm
+            header={<h1>Log In</h1>}
+            form={<LoginForm/>}
+            footer={
+                <div>
+                    <a>Lupa password anda?</a>
+                    <p>Tidak punya akun? <a>Sign up sekarang!</a></p>
+                </div>
+            }
+        />
     )
 }

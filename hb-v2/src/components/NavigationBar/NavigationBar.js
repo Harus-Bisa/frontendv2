@@ -5,7 +5,8 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem
+  NavItem,
+  NavLink
 } from 'reactstrap';
 import SearchBox from "../SearchBox/SearchBox";
 import { connect } from 'react-redux';
@@ -23,22 +24,24 @@ function NavigationBar(props){
       <Navbar light expand="md" className="navbar">
         <NavbarBrand href="/">Harus Bisa</NavbarBrand>
         <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar style={isOpen ? {height:'100vh'} : {}}>
-          <Nav className="mr-auto" navbar>
+        <Collapse isOpen={isOpen} navbar style={isOpen ? {height:'100vh'} : {}} className="justify-content-end">
+          <Nav navbar>
             <NavItem>
               <SearchBox close={toggle}/>
             </NavItem>
-            {props.loggedIn && <NavItem id="logoff" onClick={props.logout}>Log Out</NavItem>}
+            <NavItem>
+            {props.loggedIn && <NavLink id="logoff" onClick={props.logout}>Log Out</NavLink>}
             {!props.loggedIn && 
               <Popup
                   trigger={{
-                      component:NavItem,
+                      component:NavLink,
                       id:'login'
                   }}
                   purpose="Login"
                   content={Login}
               />
             }
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>

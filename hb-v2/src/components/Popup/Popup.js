@@ -11,14 +11,14 @@ function Popup(props){
         setOpen(true)
     }
     return(
-        <div>
+        <React.Fragment>
             <Trigger className={props.trigger.className} onClick={openPopup} onChange={openPopup} style={props.trigger.style} id={props.trigger.id}>{props.purpose}</Trigger>
             <Dialog open={open} onClose={() => setOpen(false)} style={{padding:0}}>
                 <DialogContent style={{padding:'0'}}> 
                     <ContentComponent closePopup={() => setOpen(false)}/>
                 </DialogContent>
             </Dialog>
-        </div>
+        </React.Fragment>
     )   
 }
 
