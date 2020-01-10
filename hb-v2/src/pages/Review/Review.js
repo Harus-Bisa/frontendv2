@@ -53,7 +53,7 @@ function Review(props){
                 </div>
             </header>
             <div style={{display:"flex", alignItems:'center', flexDirection:'column'}}>
-                <p className="grey-text">Tulis Review Anda</p>
+                <p className="grey-text">{props.professor.numberOfReviews === 0 ? "Be the first to review!" : "Tulis Review Anda"}</p>
                 {props.loggedIn && 
                     <StyledRating
                         id="addReview"
