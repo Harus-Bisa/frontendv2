@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import ReviewCard from "../Card/ReviewCard";
-import SignUpLoginPrompt from "../Card/SignUpLoginPrompt";
 
 function Reviews(props){
     const makeReviewCard = () =>{
