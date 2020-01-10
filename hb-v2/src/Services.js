@@ -95,7 +95,7 @@ class Services{
             })
         }
         else{
-            const url = this.domain + "/reviews"
+            const url = this.domain + "/reviewees"
             return axios.post(url, review, {headers:this.headers()})
             .then(response =>{
                 return response.data
