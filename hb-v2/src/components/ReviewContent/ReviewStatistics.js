@@ -5,7 +5,11 @@ import SignUpLoginPrompt from "../Card/SignUpLoginPrompt";
 
 function ReviewStatistics(props){
     if(!props.loggedIn){
-        return(<SignUpLoginPrompt/>)
+        return(
+            <div className="container content">
+                <SignUpLoginPrompt/>
+            </div>
+        )
     }
     return(
         <div className="container review-statistics">

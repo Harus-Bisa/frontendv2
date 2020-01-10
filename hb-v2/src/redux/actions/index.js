@@ -1,6 +1,17 @@
 import services from "../../Services"
 import { FIND_USERS, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_USERS, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT } from "../constants/action-types"
 
+export function signup(newUserData){
+    return async function(dispatch){
+        return await services.signup(newUserData)
+        .then(response => {
+            dispatch(login(response.email, response.password));
+        })
+        .catch(error =>{
+            dispatch(setError(error))
+        })
+    }
+}
 export function login(email, password){
     return async function(dispatch){
         return await services.login(email, password)

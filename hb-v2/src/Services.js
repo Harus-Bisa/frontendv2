@@ -58,8 +58,16 @@ class Services{
         return !!token && !this.isTokenExpired(token)
     }
 
-
-
+    async signup(newUserData){
+        const url = this.domain + '/signup';
+        try{
+            await axios.post(url, newUserData, {headers: this.headers()})
+            return newUserData;
+        }
+        catch(error){
+            throw new Error(error.response.statusText);
+        }
+    }
 
     async findUsers(name){
         const url = this.domain + "/reviewees/?name="+name;

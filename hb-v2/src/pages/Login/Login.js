@@ -1,18 +1,10 @@
 import React from "react";
-import PopupForm from "../../components/Popup/PopupForm";
-import LoginForm from "../../components/Form/LoginForm";
+import LoginPopup from "../../components/Popup/LoginPopup";
 
-export default function Login(props){
+export default function Login(){
     return(
-        <PopupForm
-            header={<h1>Log In</h1>}
-            form={<LoginForm/>}
-            footer={
-                <div>
-                    <a>Lupa password anda?</a>
-                    <p>Tidak punya akun? <a>Sign up sekarang!</a></p>
-                </div>
-            }
-        />
+        <div className="page-container">
+            <LoginPopup/>
+        </div>
     )
 }

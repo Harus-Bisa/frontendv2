@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import ReviewCard from "../Card/ReviewCard";
-import SignUpLoginPrompt from "../Card/SignUpLoginPrompt";
 
 function Reviews(props){
     const makeReviewCard = () =>{
@@ -29,7 +28,6 @@ function Reviews(props){
         <div className="container">
             <div className="row">
                 {makeReviewCard()}
-                {!props.loggedIn && <SignUpLoginPrompt float/>}
             </div>
         </div>
     )

@@ -6,7 +6,7 @@ import ReviewContent from "../../components/ReviewContent/ReviewContent";
 import "../../css/review.css";
 import { getReviews } from "../../redux/actions";
 import Popup from "../../components/Popup/Popup";
-import Login from "../Login/Login";
+import LoginPopup from "../../components/Popup/LoginPopup";
 
 function ThumbRating(props){
     return (<StyledRating
@@ -25,9 +25,12 @@ function Review(props){
             props.history.push("/review/"+props.professor.revieweeId+"/add/"+value)
         }
     }
+    const revieweeId = props.match.params.revieweeId;
+    const loggedIn = props.loggedIn
+    const getReviews = props.getReviews;
     React.useEffect(() =>{
-        props.getReviews(props.match.params.revieweeId) 
-    }, [props.match.params.revieweeId, props.loggedIn])
+        getReviews(revieweeId) 
+    }, [getReviews, revieweeId, loggedIn])
 
 
     if(!props.professor){
@@ -66,7 +69,7 @@ function Review(props){
                         trigger={{
                             component:ThumbRating,
                         }}
-                        content={Login}
+                        content={LoginPopup}
                     />
                 }
             </div>
