@@ -51,6 +51,10 @@ function ReviewForm(props){
     var [yearTaken, setYearTaken] = React.useState(2019)
     var [textbookRequired, setTextbookRequired] = React.useState(true)
 
+    const valid = profName !== "" && profSchool !== "" && courseName !== "" && overallRating !== 0 && recommendationRating !== 0 && difficultyRating !== 0 && grade !== "" && teachingStyle.length !== 0 && tags.length !== 0 && review !== ""
+    const SubmitButton = (props) => {
+        return(<Button className="blue-button" submit style={{width:'100%'}} disabled={!valid}>Selesai</Button>)
+    }
     const submit = (event) =>{
         event.preventDefault()
         const newReview = {
@@ -254,8 +258,8 @@ function ReviewForm(props){
                     <Label>Review anda*</Label>
                     <Input type="textarea" id="review" value={review} required onChange={(event) => setReview(event.target.value)}/>
                 </FormGroup>
-                {props.loggedIn && <Button className="blue-button" submit style={{width:'100%'}}>Selesai</Button>}
-                {!props.loggedIn && <Popup trigger={{component:Button, className:'blue-button', style:{width:'100%'}}} purpose={"Selesai"} content={LoginPopup}/>}
+                {props.loggedIn && <SubmitButton/>}
+                {!props.loggedIn && <Popup trigger={{component:SubmitButton}} purpose={"Selesai"} content={LoginPopup}/>}
             </form>
         </div>
     )
