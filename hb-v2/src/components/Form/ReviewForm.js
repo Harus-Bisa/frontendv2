@@ -33,19 +33,11 @@ const CheckedIcon = withStyles({
     checked: {},
   })(props => <CheckBoxIcon fontSize="small" {...props} />);
 
-function ProfNameInput(props){
-    return (
-        <FormGroup>
-            <Label>Nama Dosen*</Label>
-            <Input type="text" onChange={props.onChange}/>
-        </FormGroup>
-    )
-}
 const teachingStyleOptions= ["Audio", "Visual"]
 const tagsOptions=["Inspirasional","Memberi banyak feedback yang baik","Kalo kasi nilai susah","Lucu","Membosankan","Berwibawa","Peduli dengan mahasiswa"]
 
 function ReviewForm(props){
-    var [profName, setProfName] = React.useState(props.profName)
+    var [profName, setProfName] = React.useState(props.match.params.revieweeName ? props.match.params.revieweeName : props.profName)
     var [profSchool, setProfSchool] = React.useState(props.profSchool)
     var [courseName, setCourseName] = React.useState("")
     var [currentlyTaking, setCurrentlyTaking]= React.useState(true)
@@ -73,17 +65,18 @@ function ReviewForm(props){
             textbookRequired: textbookRequired,
             grade: grade
         }
-        if (props.match.params.revieweeId !== "new"){
-            props.addReview(props.match.params.revieweeId, newReview);
-            props.history.push("/review/"+props.match.params.revieweeId)
-        }
-        else{
-            newReview.name = profName;
-            newReview.school = profSchool;
-            props.addReview(null, newReview);
-            props.history.push("/")
-        }
-        
+        if(props.loggedIn){
+            if (props.match.params.revieweeId !== "new"){
+                props.addReview(props.match.params.revieweeId, newReview);
+                props.history.push("/review/"+props.match.params.revieweeId)
+            }
+            else{
+                newReview.name = profName;
+                newReview.school = profSchool;
+                props.addReview(null, newReview);
+                props.history.push("/")
+            }
+        }        
     }
     const style={
         ratingBox:{
@@ -107,20 +100,11 @@ function ReviewForm(props){
     return(
         <div className="container content page-container">
             <h5>Terima Kasih anda sudah mau berkontribusi!</h5>
-            <form onSubmit={submit}>
-                {props.loggedIn && 
+            <form onSubmit={submit}> 
                 <FormGroup>
                     <Label>Nama Dosen*</Label>
                     <Input type="text" id="profName" value={profName} required onChange={(event) => setProfName(event.target.value)}/>
-                </FormGroup>}
-                {!props.loggedIn &&
-                    <Popup
-                        trigger={{
-                            component:ProfNameInput
-                        }}
-                        content={LoginPopup}
-                    />
-                }
+                </FormGroup>
                 <FormGroup>
                     <Label>Nama Perguruan Tinggi*</Label>
                     <Input type="text" id="profSchool" value={profSchool} required onChange={(event) => setProfSchool(event.target.value)}/>
@@ -270,7 +254,8 @@ function ReviewForm(props){
                     <Label>Review anda*</Label>
                     <Input type="textarea" id="review" value={review} required onChange={(event) => setReview(event.target.value)}/>
                 </FormGroup>
-                <Button className="blue-button" submit style={{width:'100%'}}>Selesai</Button>
+                {props.loggedIn && <Button className="blue-button" submit style={{width:'100%'}}>Selesai</Button>}
+                {!props.loggedIn && <Popup trigger={{component:Button, className:'blue-button', style:{width:'100%'}}} purpose={"Selesai"} content={LoginPopup}/>}
             </form>
         </div>
     )

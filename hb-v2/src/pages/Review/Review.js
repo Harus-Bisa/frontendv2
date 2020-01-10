@@ -6,7 +6,7 @@ import ReviewContent from "../../components/ReviewContent/ReviewContent";
 import "../../css/review.css";
 import { getReviews } from "../../redux/actions";
 import Popup from "../../components/Popup/Popup";
-import Login from "../Login/Login";
+import LoginPopup from "../../components/Popup/LoginPopup";
 
 function ThumbRating(props){
     return (<StyledRating
@@ -69,7 +69,7 @@ function Review(props){
                         trigger={{
                             component:ThumbRating,
                         }}
-                        content={Login}
+                        content={LoginPopup}
                     />
                 }
             </div>
