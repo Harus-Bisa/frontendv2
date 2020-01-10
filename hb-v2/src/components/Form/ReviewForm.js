@@ -11,7 +11,7 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { withStyles } from "@material-ui/core";
 import Popup from "../Popup/Popup";
-import Login from "../../pages/Login/Login";
+import LoginPopup from "../Popup/LoginPopup";
 
 const Icon = withStyles({
     root: {
@@ -118,7 +118,7 @@ function ReviewForm(props){
                         trigger={{
                             component:ProfNameInput
                         }}
-                        content={Login}
+                        content={LoginPopup}
                     />
                 }
                 <FormGroup>

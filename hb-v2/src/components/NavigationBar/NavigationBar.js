@@ -12,7 +12,7 @@ import SearchBox from "../SearchBox/SearchBox";
 import { connect } from 'react-redux';
 import { logout } from '../../redux/actions';
 import Popup from '../Popup/Popup';
-import Login from '../../pages/Login/Login';
+import LoginPopup from '../Popup/LoginPopup';
 
 function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +38,7 @@ function NavigationBar(props){
                       id:'login'
                   }}
                   purpose="Login"
-                  content={Login}
+                  content={LoginPopup}
               />
             }
             </NavItem>

@@ -4,9 +4,9 @@ import { StyledRating } from "../Rating/StyledRating";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, EmojiFlagsOutlined, ArrowUpward, ArrowDownward, LocalCafe, LocalCafeOutlined, KeyboardArrowUp, KeyboardArrowDown } from "@material-ui/icons";
 import { Button, Collapse } from "@material-ui/core";
 import { voteReview } from "../../redux/actions";
-import Login from "../../pages/Login/Login";
 import Popup from "../Popup/Popup";
 import SignUpLoginPrompt from "./SignUpLoginPrompt";
+import LoginPopup from "../Popup/LoginPopup";
 
 function ReviewCard(props){
     var [expand, setExpand] = React.useState(false)
@@ -152,7 +152,7 @@ function ReviewCard(props){
                                         className:"vote-button",
                                     }}
                                     purpose={<React.Fragment>{props.review.helpfulUpVote}<ArrowUpward className="icon"/></React.Fragment>}
-                                    content={Login}
+                                    content={LoginPopup}
                                 />
                                 <Popup
                                     trigger={{
@@ -160,7 +160,7 @@ function ReviewCard(props){
                                         className:"vote-button",
                                     }}
                                     purpose={<React.Fragment>{props.review.helpfulDownVote}<ArrowDownward className="icon"/></React.Fragment>}
-                                    content={Login}
+                                    content={LoginPopup}
                                 />
                             </React.Fragment>
                             }

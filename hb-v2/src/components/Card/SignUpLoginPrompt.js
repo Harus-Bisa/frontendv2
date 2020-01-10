@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import Popup from "../Popup/Popup";
-import Login from "../../pages/Login/Login";
-import SignUp from "../../pages/Sign Up/SignUp";
+import SignUpPopup from "../Popup/SignupPopup";
+import LoginPopup from "../Popup/LoginPopup";
 
 export default function SignUpLoginPrompt(props){
     return(
@@ -18,7 +18,7 @@ export default function SignUpLoginPrompt(props){
                         id:'signup'
                     }}
                     purpose="Buat akun sekarang"
-                    content={SignUp}
+                    content={SignUpPopup}
                 />
                 <Popup
                     trigger={{
@@ -27,7 +27,7 @@ export default function SignUpLoginPrompt(props){
                         id:'login'
                     }}
                     purpose="Login"
-                    content={Login}
+                    content={LoginPopup}
                 />
             </div>
         </div>
