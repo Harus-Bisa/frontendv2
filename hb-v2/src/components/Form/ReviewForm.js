@@ -232,7 +232,12 @@ function ReviewForm(props){
                         disableCloseOnSelect
                         getOptionLabel={option => option}
                         value={tags}
-                        onChange={(event, value) => setTags(value)}
+                        onChange={(event, value) => {
+                            if(value.length > 3){
+                                value = value.slice(1,value.length)
+                            }
+                            setTags(value)
+                        }}
                         renderOption={(option, { selected }) => (
                             <React.Fragment>
                                 <Checkbox

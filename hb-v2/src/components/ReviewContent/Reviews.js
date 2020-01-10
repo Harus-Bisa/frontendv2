@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import ReviewCard from "../Card/ReviewCard";
+import SignUpLoginPrompt from "../Card/SignUpLoginPrompt";
 
 function Reviews(props){
     const makeReviewCard = () =>{
@@ -21,7 +22,26 @@ function Reviews(props){
                 }  
             }
         }
-        
+        if(cards.length === 0){
+            if(props.loggedIn){
+                cards.push(
+                    <div className="col-12">
+                        <div className="blue-box" style={{marginTop:'1rem'}}>
+                            <p>Dosen ini belum mempunyai review. Buatlah review pertamanya!</p>
+                        </div>
+                    </div>
+                )
+            }
+            else{
+                cards.push(
+                    <div className="col-12">
+                        <div className="content">
+                            <SignUpLoginPrompt/>
+                        </div>
+                    </div>
+                )
+            }
+        }
         return cards
     }
     return(
