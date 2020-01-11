@@ -56,7 +56,7 @@ function ReviewForm(props){
 
     const valid = profName !== "" && profSchool !== "" && courseName !== "" && overallRating !== 0 && recommendationRating !== 0 && difficultyRating !== 0 && grade !== "" && teachingStyle.length !== 0 && tags.length !== 0 && review !== ""
     const SubmitButton = (props) => {
-        return(<Button className="blue-button" submit style={{width:'100%'}} disabled={!valid}>Selesai</Button>)
+        return(<Button className="blue-button" onClick={props.onClick} style={{width:'100%'}} disabled={!valid}>Selesai</Button>)
     }
 
     const revieweeId = props.match.params.revieweeId;
