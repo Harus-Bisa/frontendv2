@@ -3,7 +3,7 @@ import decode from 'jwt-decode';
 
 class Services{
     constructor(){
-        this.domain = "https://api.harusbisa.net/dev";
+        this.domain = "https://api.harusbisa.net";
     }
     errorHandling(error){
         if(error.response){
