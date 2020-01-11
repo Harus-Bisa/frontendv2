@@ -3,6 +3,7 @@ import { FormGroup, Input, Label, Form, FormText } from "reactstrap";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { signup } from "../../redux/actions";
+import { withRouter } from "react-router-dom";
 
 function SignUpForm(props){
     var [email, setEmail] = React.useState("")
@@ -17,7 +18,16 @@ function SignUpForm(props){
             email: email,
             password: password
         }
-        props.signup(data)
+        try{
+            props.signup(data)
+            if(props.page){
+                props.history.push("/")
+            }
+        }
+        catch(error){
+            console.log(error)
+        }
+        
     }
     var validEmail = email.includes(".edu") && email !==""
     var validPassword = password === confirmPassword && password !== ""
@@ -74,4 +84,4 @@ function SignUpForm(props){
     )
 }
 
-export default connect(null, {signup})(SignUpForm);
+export default connect(null, {signup})(withRouter(SignUpForm));

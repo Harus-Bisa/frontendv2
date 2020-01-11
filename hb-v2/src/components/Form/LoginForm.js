@@ -3,13 +3,22 @@ import { FormGroup, Input, Label, Form } from "reactstrap";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { login } from "../../redux/actions";
+import { withRouter } from "react-router-dom";
 
 function LoginForm(props){
     var [email, setEmail] = React.useState("")
     var [password, setPassword] = React.useState("")
     const submit = (event) =>{
         event.preventDefault();
-        props.login(email, password)
+        try{
+            props.login(email, password)
+            if(props.page){
+                props.history.push("/")
+            }
+        }
+        catch(error){
+            console.log(error)
+        }
     }
     return(
         <div className="container content">
@@ -27,5 +36,4 @@ function LoginForm(props){
         </div>
     )
 }
-
-export default connect(null, {login})(LoginForm);
+export default connect(null, {login})(withRouter(LoginForm));
