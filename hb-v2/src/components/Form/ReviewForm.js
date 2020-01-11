@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import { FormGroup, Label, Input, Button } from "reactstrap";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, LocalCafe, LocalCafeOutlined } from "@material-ui/icons";
 import { StyledRating } from "../Rating/StyledRating";
-import { addReview } from "../../redux/actions";
+import { addReview, getReviews } from "../../redux/actions";
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -38,8 +38,10 @@ const teachingStyleOptions= ["Audio", "Visual"]
 const tagsOptions=["Inspirasional","Memberi banyak feedback yang baik","Kalo kasi nilai susah","Lucu","Membosankan","Berwibawa","Peduli dengan mahasiswa"]
 
 function ReviewForm(props){
-    var [profName, setProfName] = React.useState(props.match.params.revieweeName ? props.match.params.revieweeName : props.profName)
-    var [profSchool, setProfSchool] = React.useState(props.profSchool)
+    const existingProf = props.match.params.revieweeId ? true : false
+
+    var [profName, setProfName] = React.useState("")
+    var [profSchool, setProfSchool] = React.useState("")
     var [courseName, setCourseName] = React.useState("")
     var [currentlyTaking, setCurrentlyTaking]= React.useState(true)
     var [overallRating, setOverallRating] = React.useState(props.match.params.overallRating ? props.match.params.overallRating : 0) 
@@ -52,12 +54,30 @@ function ReviewForm(props){
     var [yearTaken, setYearTaken] = React.useState(2019)
     var [textbookRequired, setTextbookRequired] = React.useState(true)
 
-    const existingProf = props.match.params.revieweeId ? true : false
-
     const valid = profName !== "" && profSchool !== "" && courseName !== "" && overallRating !== 0 && recommendationRating !== 0 && difficultyRating !== 0 && grade !== "" && teachingStyle.length !== 0 && tags.length !== 0 && review !== ""
     const SubmitButton = (props) => {
         return(<Button className="blue-button" submit style={{width:'100%'}} disabled={!valid}>Selesai</Button>)
     }
+
+    const revieweeId = props.match.params.revieweeId;
+    const revieweeName = props.match.params.revieweeName;
+    const getReviews = props.getReviews;
+    const professor = props.professor
+    React.useEffect(() =>{
+        if(existingProf){
+            if(!professor){
+                getReviews(revieweeId)
+            }
+            else{
+                setProfName(professor.name)
+                setProfSchool(professor.school)
+            }
+        }
+        else{
+            setProfName(revieweeName)
+        }
+    }, [getReviews, revieweeId, existingProf, professor, revieweeName])
+
     const submit = (event) =>{
         event.preventDefault()
         const newReview = {
@@ -74,8 +94,8 @@ function ReviewForm(props){
         }
         if(props.loggedIn){
             if (existingProf){
-                props.addReview(props.match.params.revieweeId, newReview);
-                props.history.push("/review/"+props.match.params.revieweeId)
+                props.addReview(revieweeId, newReview);
+                props.history.push("/review/"+revieweeId)
             }
             else{
                 newReview.name = profName;
@@ -308,20 +328,17 @@ function ReviewForm(props){
 }
 
 function mapStateToProps(state, ownProps){
-    if (state.professor){
+    if (ownProps.match.params.revieweeId){
         return{
-            profName: state.professor.name,
-            profSchool: state.professor.school,
+            professor: state.professor,
             loggedIn: state.loggedIn
         }
     }
     else{
         return{
-            profName: "",
-            profSchool: "",
             loggedIn: state.loggedIn
         }
     }
     
 }
-export default connect(mapStateToProps,{addReview})(ReviewForm);
+export default connect(mapStateToProps,{addReview, getReviews})(ReviewForm);
