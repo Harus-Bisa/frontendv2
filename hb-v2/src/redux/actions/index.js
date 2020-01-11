@@ -67,7 +67,12 @@ export function addReview(revieweeId, review){
         return await services.addReview(revieweeId, review)
         .then(async response =>{
             await dispatch({type:ADD_REVIEW, payload: response})
-            dispatch(getReviews(revieweeId))
+            if(revieweeId){
+                dispatch(getReviews(revieweeId))
+            }
+            else{
+                dispatch({type:GET_REVIEWS, payload: response})
+            }
             dispatch(removeError())
         })
         .catch(error =>{

@@ -52,6 +52,7 @@ function ReviewForm(props){
     var [review, setReview] = React.useState("")
     var [yearTaken, setYearTaken] = React.useState(2019)
     var [textbookRequired, setTextbookRequired] = React.useState(true)
+    var [submitted, setSubmitted] = React.useState(false)
 
     const valid = profName !== "" && profSchool !== "" && courseName !== "" && overallRating !== 0 && recommendationRating !== 0 && difficultyRating !== 0 && grade !== "" && teachingStyle.length !== 0 && tags.length !== 0 && review !== ""
     const SubmitButton = (props) => {
@@ -74,11 +75,15 @@ function ReviewForm(props){
         }
         else{
             setProfName(revieweeName)
+            if(submitted && professor){
+                props.history.push("/review/"+professor.revieweeId)
+            }
         }
-    }, [getReviews, revieweeId, existingProf, professor, revieweeName])
+    }, [getReviews, revieweeId, existingProf, professor, revieweeName, submitted])
 
     const submit = (event) =>{
         event.preventDefault()
+        
         const newReview = {
             review: review,
             courseName: courseName,
@@ -99,9 +104,9 @@ function ReviewForm(props){
             else{
                 newReview.name = profName;
                 newReview.school = profSchool;
-                props.addReview(null, newReview);
-                props.history.push("/")
+                props.addReview(null, newReview)               
             }
+            setSubmitted(true)
         }        
     }
     const style={
@@ -327,17 +332,9 @@ function ReviewForm(props){
 }
 
 function mapStateToProps(state, ownProps){
-    if (ownProps.match.params.revieweeId){
-        return{
-            professor: state.professor,
-            loggedIn: state.loggedIn
-        }
+    return{
+        professor: state.professor,
+        loggedIn: state.loggedIn
     }
-    else{
-        return{
-            loggedIn: state.loggedIn
-        }
-    }
-    
 }
 export default connect(mapStateToProps,{addReview, getReviews})(ReviewForm);
