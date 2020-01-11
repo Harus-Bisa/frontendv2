@@ -34,7 +34,7 @@ function Reviews(props){
             }
             else{
                 cards.push(
-                    <div className="col-12">
+                    <div className="col-12" key={0}>
                         <div className="content">
                             <SignUpLoginPrompt/>
                         </div>

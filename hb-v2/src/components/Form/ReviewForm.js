@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import { FormGroup, Label, Input, Button } from "reactstrap";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, LocalCafe, LocalCafeOutlined } from "@material-ui/icons";
 import { StyledRating } from "../Rating/StyledRating";
-import { addReview } from "../../redux/actions";
+import { addReview, getReviews } from "../../redux/actions";
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -12,6 +12,9 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { withStyles } from "@material-ui/core";
 import Popup from "../Popup/Popup";
 import LoginPopup from "../Popup/LoginPopup";
+import {options} from '../../data/UniversityList';
+import { teachingStyleOptions } from "../../data/TeachingStyle";
+import { tagsOptions } from "../../data/TagsOptions";
 
 const Icon = withStyles({
     root: {
@@ -33,12 +36,11 @@ const CheckedIcon = withStyles({
     checked: {},
   })(props => <CheckBoxIcon fontSize="small" {...props} />);
 
-const teachingStyleOptions= ["Audio", "Visual"]
-const tagsOptions=["Inspirasional","Memberi banyak feedback yang baik","Kalo kasi nilai susah","Lucu","Membosankan","Berwibawa","Peduli dengan mahasiswa"]
-
 function ReviewForm(props){
-    var [profName, setProfName] = React.useState(props.match.params.revieweeName ? props.match.params.revieweeName : props.profName)
-    var [profSchool, setProfSchool] = React.useState(props.profSchool)
+    const existingProf = props.match.params.revieweeId ? true : false
+
+    var [profName, setProfName] = React.useState("")
+    var [profSchool, setProfSchool] = React.useState("")
     var [courseName, setCourseName] = React.useState("")
     var [currentlyTaking, setCurrentlyTaking]= React.useState(true)
     var [overallRating, setOverallRating] = React.useState(props.match.params.overallRating ? props.match.params.overallRating : 0) 
@@ -55,6 +57,26 @@ function ReviewForm(props){
     const SubmitButton = (props) => {
         return(<Button className="blue-button" submit style={{width:'100%'}} disabled={!valid}>Selesai</Button>)
     }
+
+    const revieweeId = props.match.params.revieweeId;
+    const revieweeName = props.match.params.revieweeName;
+    const getReviews = props.getReviews;
+    const professor = props.professor
+    React.useEffect(() =>{
+        if(existingProf){
+            if(!professor){
+                getReviews(revieweeId)
+            }
+            else{
+                setProfName(professor.name)
+                setProfSchool(professor.school)
+            }
+        }
+        else{
+            setProfName(revieweeName)
+        }
+    }, [getReviews, revieweeId, existingProf, professor, revieweeName])
+
     const submit = (event) =>{
         event.preventDefault()
         const newReview = {
@@ -70,9 +92,9 @@ function ReviewForm(props){
             grade: grade
         }
         if(props.loggedIn){
-            if (props.match.params.revieweeId !== "new"){
-                props.addReview(props.match.params.revieweeId, newReview);
-                props.history.push("/review/"+props.match.params.revieweeId)
+            if (existingProf){
+                props.addReview(revieweeId, newReview);
+                props.history.push("/review/"+revieweeId)
             }
             else{
                 newReview.name = profName;
@@ -94,7 +116,7 @@ function ReviewForm(props){
     const renderYears = () =>{
         let yearOptions = []
         let currentYear = (new Date()).getFullYear()
-        let min = currentYear - 10
+        let min = currentYear - 20
         while (currentYear > min){
             yearOptions.push(<option value={currentYear}>{currentYear}</option>)
             currentYear -= 1
@@ -103,15 +125,41 @@ function ReviewForm(props){
     }
     return(
         <div className="container content page-container">
-            <h5>Terima Kasih anda sudah mau berkontribusi!</h5>
+            <h5>Terima kasih atas berkontribusi anda!</h5>
             <form onSubmit={submit}> 
                 <FormGroup>
                     <Label>Nama Dosen*</Label>
-                    <Input type="text" id="profName" value={profName} required onChange={(event) => setProfName(event.target.value)}/>
+                    <TextField 
+                        id="profName" 
+                        value={profName} 
+                        required 
+                        onChange={(event) => setProfName(event.target.value)} 
+                        fullWidth 
+                        variant="outlined"
+                        disabled={existingProf}
+                    />
                 </FormGroup>
                 <FormGroup>
                     <Label>Nama Perguruan Tinggi*</Label>
-                    <Input type="text" id="profSchool" value={profSchool} required onChange={(event) => setProfSchool(event.target.value)}/>
+                    <Autocomplete
+                        id="profSchool"
+                        options={options}
+                        freeSolo
+                        getOptionLabel={option => option}
+                        value={profSchool}
+                        onChange={(event, value) => setProfSchool(value)}
+                        style={{ width: "100% "}}
+                        disabled={existingProf}
+                        renderInput={params => (
+                            <TextField
+                                {...params}
+                                variant="outlined"
+                                fullWidth
+                                required
+                                onChange={(event) => setProfSchool(event.target.value)}
+                            />
+                        )}
+                    />
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
                     <Label>Penilaian*</Label>
@@ -125,7 +173,7 @@ function ReviewForm(props){
                     />
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
-                    <Label>Apakah anda merekomendasi dosen ini ke teman anda?*</Label>
+                    <Label>Apakah anda akan merekomendasi dosen ini ke teman anda?*</Label>
                     <StyledRating
                         style={style.ratingSpan} 
                         id="recommendationRating" 
@@ -148,7 +196,14 @@ function ReviewForm(props){
                 </FormGroup>
                 <FormGroup>
                     <Label>Nama Kelas*</Label>
-                    <Input type="text" id="courseName" value={courseName} required onChange={(event) => setCourseName(event.target.value)}/>
+                    <TextField 
+                        id="courseName" 
+                        value={courseName} 
+                        required 
+                        onChange={(event) => setCourseName(event.target.value)}
+                        fullWidth 
+                        variant="outlined"
+                    />
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
                     <Label>Apakah anda sedang mengambil kelas ini?*</Label>
@@ -169,7 +224,7 @@ function ReviewForm(props){
                     <Label>Nilai yang Anda dapatkan*</Label>
                     <Autocomplete
                         id="grade"
-                        options={["A", "B", "C", "D", "E", "F"]}
+                        options={["A", "B", "C", "D", "E", "F", "N/A"]}
                         freeSolo
                         getOptionLabel={option => option}
                         value={grade}
@@ -180,6 +235,7 @@ function ReviewForm(props){
                                 {...params}
                                 variant="outlined"
                                 fullWidth
+                                required
                                 onChange={(event) => setGrade(event.target.value)}
                             />
                         )}
@@ -271,20 +327,17 @@ function ReviewForm(props){
 }
 
 function mapStateToProps(state, ownProps){
-    if (state.professor){
+    if (ownProps.match.params.revieweeId){
         return{
-            profName: state.professor.name,
-            profSchool: state.professor.school,
+            professor: state.professor,
             loggedIn: state.loggedIn
         }
     }
     else{
         return{
-            profName: "",
-            profSchool: "",
             loggedIn: state.loggedIn
         }
     }
     
 }
-export default connect(mapStateToProps,{addReview})(ReviewForm);
+export default connect(mapStateToProps,{addReview, getReviews})(ReviewForm);

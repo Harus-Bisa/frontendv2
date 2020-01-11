@@ -1,8 +1,10 @@
-import { FIND_USERS, GET_REVIEWS, CLEAR_USERS, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT } from "../constants/action-types";
+import { FIND_USERS, GET_REVIEWS, CLEAR_USERS, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING } from "../constants/action-types";
 import services from "../../Services";
 
 const initialState ={
-    loggedIn: services.isLoggedIn()
+    loggedIn: services.isLoggedIn(),
+    loadingCount:0,
+    loading: true
 }
 export default function rootReducer(state = initialState, action){
     if(action.type === FIND_USERS){
@@ -52,6 +54,22 @@ export default function rootReducer(state = initialState, action){
         return Object.assign({}, state, {
             loggedIn: false,
             userId: null
+        })
+    }
+    if(action.type === SET_LOADING){
+        return Object.assign({}, state, {
+            loadingCount: state.loadingCount + 1,
+            loading: true
+        })
+    }
+    if(action.type === REMOVE_LOADING){
+        let count = state.loadingCount - 1;
+        if(count<0){
+            count = 0
+        }
+        return Object.assign({}, state, {
+            loadingCount: count,
+            loading: count !== 0
         })
     }
     return state;

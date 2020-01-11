@@ -2,11 +2,11 @@ import React from "react";
 import PopupForm from "./PopupForm";
 import LoginForm from "../Form/LoginForm";
 
-export default function LoginPopup(){
+export default function LoginPopup(props){
     return(
         <PopupForm
             header={<h1>Log In</h1>}
-            form={<LoginForm/>}
+            form={<LoginForm page={props.page}/>}
             footer={
                 <div>
                     <a href="/">Lupa password anda?</a>
