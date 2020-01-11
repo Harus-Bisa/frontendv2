@@ -60,8 +60,8 @@
     margin-right: 5px;
 }
 
-.review-footer .vote-button-selected{
-    background-color: var(--hb-blue);
+.review-footer .vote-button-selected, .review-footer .vote-button.selected:hover{
+    background-color: var(--hb-blue) !important;
 }
 
 .show-button{
