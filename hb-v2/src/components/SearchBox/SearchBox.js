@@ -42,7 +42,11 @@ function SearchBox(props){
                     setOpen(false) 
                     props.clearUsers()
                 }}
-                onChange={(event, value) => {select(value.revieweeId)}}
+                onChange={(event, value) => {
+                    if(value){
+                        select(value.revieweeId)
+                    }
+                }}
                 options={props.users}
                 loading={loading}
                 noOptionsText="Dosen tidak ditemukan."

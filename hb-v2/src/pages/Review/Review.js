@@ -55,7 +55,7 @@ function Review(props){
                     <div style={{display:'flex', marginTop:'10px'}}>
                         <StyledRating
                             precision={0.1}
-                            value={props.professor.overallRating} 
+                            value={props.professor.overallRating === "-" ? 0 : props.professor.overallRating} 
                             readOnly 
                             icon={<ThumbUp/>}
                             emptyIcon={<ThumbUpOutlined/>} 
@@ -67,6 +67,7 @@ function Review(props){
                     <p className="grey-text">{props.professor.numberOfReviews === 0 ? "Be the first to review!" : "Tulis Review Anda"}</p>
                     {props.loggedIn && 
                         <StyledRating
+                            name="addReview"
                             id="addReview"
                             onChange={addReview}
                             value={rating}
