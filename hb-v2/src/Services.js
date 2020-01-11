@@ -5,7 +5,14 @@ class Services{
     constructor(){
         this.domain = "https://api.harusbisa.net";
     }
-
+    errorHandling(error){
+        if(error.response){
+            this.errorHandling(error)
+        }
+        else{
+            throw error
+        }
+    }
     headers(){
         var headers = {
             'Accept': 'application/json',
@@ -45,7 +52,7 @@ class Services{
             return response.data.userId
         })
         .catch(error => {
-            throw new Error(error.response.statusText)
+            this.errorHandling(error)
         })
     }
     
@@ -65,7 +72,7 @@ class Services{
             return newUserData;
         }
         catch(error){
-            throw new Error(error.response.statusText);
+            this.errorHandling(error);
         }
     }
 
@@ -76,7 +83,7 @@ class Services{
             return response.data
         })
         .catch(error =>{
-            throw new Error(error.response.statusText)
+            this.errorHandling(error)
         })
     }
 
@@ -87,7 +94,7 @@ class Services{
             return response.data
         })
         .catch(error =>{
-            throw new Error(error.response.statusText)
+            this.errorHandling(error)
         })
     }
 
@@ -99,7 +106,7 @@ class Services{
                 return response.data
             })
             .catch(error =>{
-                throw new Error(error.response.statusText)
+                this.errorHandling(error)
             })
         }
         else{
@@ -109,7 +116,7 @@ class Services{
                 return response.data
             })
             .catch(error =>{
-                throw new Error(error.response.statusText)
+                this.errorHandling(error)
             })
         }
         
@@ -122,7 +129,7 @@ class Services{
             return response.data
         })
         .catch(error =>{
-            throw new Error(error.response.statusText)
+            this.errorHandling(error)
         }) 
     }
 }

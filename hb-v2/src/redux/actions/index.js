@@ -1,5 +1,5 @@
 import services from "../../Services"
-import { FIND_USERS, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_USERS, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT } from "../constants/action-types"
+import { FIND_USERS, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_USERS, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING } from "../constants/action-types"
 
 export function signup(newUserData){
     return async function(dispatch){
@@ -48,13 +48,16 @@ export function clearUsers(){
 }
 export function getReviews(revieweeId){
     return async function(dispatch){
+        dispatch(setLoading())
         return await services.getReviews(revieweeId)
         .then(async response =>{
             await dispatch({type:GET_REVIEWS, payload:response})
             dispatch(removeError())
+            dispatch(removeLoading())
         })
         .catch(error =>{
             dispatch(setError(error));
+            dispatch(removeLoading())
         })
     }
 }
@@ -64,7 +67,12 @@ export function addReview(revieweeId, review){
         return await services.addReview(revieweeId, review)
         .then(async response =>{
             await dispatch({type:ADD_REVIEW, payload: response})
-            dispatch(getReviews(revieweeId))
+            if(revieweeId){
+                dispatch(getReviews(revieweeId))
+            }
+            else{
+                dispatch({type:GET_REVIEWS, payload: response})
+            }
             dispatch(removeError())
         })
         .catch(error =>{
@@ -92,4 +100,12 @@ export function setError(error){
 
 export function removeError(){
     return {type: REMOVE_ERROR}
+}
+
+export function setLoading(){
+    return {type:SET_LOADING}
+}
+
+export function removeLoading(){
+    return {type:REMOVE_LOADING}
 }

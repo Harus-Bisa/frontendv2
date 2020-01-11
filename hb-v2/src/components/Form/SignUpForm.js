@@ -3,6 +3,7 @@ import { FormGroup, Input, Label, Form, FormText } from "reactstrap";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { signup } from "../../redux/actions";
+import { withRouter } from "react-router-dom";
 
 function SignUpForm(props){
     var [email, setEmail] = React.useState("")
@@ -17,9 +18,18 @@ function SignUpForm(props){
             email: email,
             password: password
         }
-        props.signup(data)
+        try{
+            props.signup(data)
+            if(props.page){
+                props.history.push("/")
+            }
+        }
+        catch(error){
+            console.log(error)
+        }
+        
     }
-    var validEmail = email.includes(".edu") && email !==""
+    var validEmail = email !==""
     var validPassword = password === confirmPassword && password !== ""
     var validName = name !== ""
 
@@ -28,7 +38,15 @@ function SignUpForm(props){
             <Form onSubmit={submit}>
                 <FormGroup>
                     <Label>Nama*</Label>
-                    <Input valid={validName} type="text" id="name" value={name} onChange={(event) => setName(event.target.value)} required autoFocus/>
+                    <Input 
+                        valid={validName} 
+                        type="text" 
+                        id="name" 
+                        value={name} 
+                        onChange={(event) => setName(event.target.value)} 
+                        required 
+                        autoFocus
+                    />
                 </FormGroup>
                 <FormGroup>
                     <Label>Email*</Label>
@@ -66,12 +84,12 @@ function SignUpForm(props){
                     />
                 </FormGroup>
                 <FormGroup>
-                    <FormText>Dengan Sign Up, Anda menerima Ketentuan Layanan dan Kebijakan Privasi Wah!</FormText>
-                    <Button type="submit" className="contrast-button" fullWidth disabled={!(validName && validEmail && validPassword)}>Daftar</Button>
+                    <FormText>Dengan Sign Up, Anda menerima Ketentuan Layanan dan Kebijakan Privasi kami.</FormText>
+                    <Button type="submit" className="contrast-button" fullWidth>Daftar</Button>
                 </FormGroup>
             </Form>
         </div>
     )
 }
 
-export default connect(null, {signup})(SignUpForm);
+export default connect(null, {signup})(withRouter(SignUpForm));

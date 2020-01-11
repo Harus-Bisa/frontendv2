@@ -6,6 +6,7 @@ import { TextField } from "@material-ui/core";
 import { throttle, debounce } from "throttle-debounce";
 import { findUsers, clearUsers } from "../../redux/actions";
 import { connect } from "react-redux";
+import Feedback from "../Feedback/Feedback";
 
 function SearchBox(props){
     var [text, setText] = React.useState("")
@@ -41,7 +42,11 @@ function SearchBox(props){
                     setOpen(false) 
                     props.clearUsers()
                 }}
-                onChange={(event, value) => {select(value.revieweeId)}}
+                onChange={(event, value) => {
+                    if(value){
+                        select(value.revieweeId)
+                    }
+                }}
                 options={props.users}
                 loading={loading}
                 noOptionsText="Dosen tidak ditemukan."
@@ -65,8 +70,10 @@ function SearchBox(props){
             />
             {props.users && props.users.length === 0 && 
                 <div style={{marginTop:'1.5rem'}}>
-                    <p>Tidak menemukan nama Dosen Anda? <a href={"/review/new/"+ text}>Laporkan Sekarang!</a></p>
-                </div>}
+                    <p>Tidak menemukan nama Dosen Anda? <a href={"/review/new/"+ (text === "" ? "Nama Dosen" : text)}>Laporkan Sekarang!</a></p>
+                </div>
+            }
+            {props.error && <Feedback color={"danger"} message={props.error.message}/>}
         </div>
     )
 }
@@ -78,7 +85,8 @@ SearchBox.propTypes={
 
 function mapStateToProps(state){
     return{
-        users:state.users
+        users:state.users,
+        error: state.error
     }
 }
 export default connect(mapStateToProps, {findUsers, clearUsers})(withRouter(SearchBox));
