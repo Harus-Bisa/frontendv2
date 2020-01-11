@@ -140,8 +140,8 @@ function ReviewCard(props){
                             <p>Membantu?</p>
                             {props.loggedIn && 
                             <React.Fragment>
-                                <Button className="vote-button" onClick={() => vote("upVote")}>{props.review.helpfulUpVote}<ArrowUpward className="icon"/></Button>
-                                <Button className="vote-button" onClick={() => vote("downVote")}>{props.review.helpfulDownVote}<ArrowDownward className="icon"/></Button>
+                                <Button className={props.review.userVote === "upVote" ? "vote-button vote-button-selected" : "vote-button"} onClick={() => vote("upVote")}>{props.review.helpfulUpVote}<ArrowUpward className="icon"/></Button>
+                                <Button className={props.review.userVote === "downVote" ? "vote-button vote-button-selected" : "vote-button"} onClick={() => vote("downVote")}>{props.review.helpfulDownVote}<ArrowDownward className="icon"/></Button>
                             </React.Fragment>
                             }
                             {!props.loggedIn && 

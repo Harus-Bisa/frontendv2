@@ -60,6 +60,10 @@
     margin-right: 5px;
 }
 
+.review-footer .vote-button-selected{
+    background-color: var(--hb-blue);
+}
+
 .show-button{
     font-weight: 500 !important;
     font-size: 10px !important;
