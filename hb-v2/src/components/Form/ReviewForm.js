@@ -12,6 +12,7 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { withStyles } from "@material-ui/core";
 import Popup from "../Popup/Popup";
 import LoginPopup from "../Popup/LoginPopup";
+import {options} from '../../data/UniversityList';
 
 const Icon = withStyles({
     root: {
@@ -51,6 +52,8 @@ function ReviewForm(props){
     var [yearTaken, setYearTaken] = React.useState(2019)
     var [textbookRequired, setTextbookRequired] = React.useState(true)
 
+    const existingProf = props.match.params.revieweeId ? true : false
+
     const valid = profName !== "" && profSchool !== "" && courseName !== "" && overallRating !== 0 && recommendationRating !== 0 && difficultyRating !== 0 && grade !== "" && teachingStyle.length !== 0 && tags.length !== 0 && review !== ""
     const SubmitButton = (props) => {
         return(<Button className="blue-button" submit style={{width:'100%'}} disabled={!valid}>Selesai</Button>)
@@ -70,7 +73,7 @@ function ReviewForm(props){
             grade: grade
         }
         if(props.loggedIn){
-            if (props.match.params.revieweeId !== "new"){
+            if (existingProf){
                 props.addReview(props.match.params.revieweeId, newReview);
                 props.history.push("/review/"+props.match.params.revieweeId)
             }
@@ -94,7 +97,7 @@ function ReviewForm(props){
     const renderYears = () =>{
         let yearOptions = []
         let currentYear = (new Date()).getFullYear()
-        let min = currentYear - 10
+        let min = currentYear - 20
         while (currentYear > min){
             yearOptions.push(<option value={currentYear}>{currentYear}</option>)
             currentYear -= 1
@@ -103,15 +106,41 @@ function ReviewForm(props){
     }
     return(
         <div className="container content page-container">
-            <h5>Terima Kasih anda sudah mau berkontribusi!</h5>
+            <h5>Terima kasih atas berkontribusi anda!</h5>
             <form onSubmit={submit}> 
                 <FormGroup>
                     <Label>Nama Dosen*</Label>
-                    <Input type="text" id="profName" value={profName} required onChange={(event) => setProfName(event.target.value)}/>
+                    <TextField 
+                        id="profName" 
+                        value={profName} 
+                        required 
+                        onChange={(event) => setProfName(event.target.value)} 
+                        fullWidth 
+                        variant="outlined"
+                        disabled={existingProf}
+                    />
                 </FormGroup>
                 <FormGroup>
                     <Label>Nama Perguruan Tinggi*</Label>
-                    <Input type="text" id="profSchool" value={profSchool} required onChange={(event) => setProfSchool(event.target.value)}/>
+                    <Autocomplete
+                        id="profSchool"
+                        options={options}
+                        freeSolo
+                        getOptionLabel={option => option}
+                        value={profSchool}
+                        onChange={(event, value) => setProfSchool(value)}
+                        style={{ width: "100% "}}
+                        disabled={existingProf}
+                        renderInput={params => (
+                            <TextField
+                                {...params}
+                                variant="outlined"
+                                fullWidth
+                                required
+                                onChange={(event) => setProfSchool(event.target.value)}
+                            />
+                        )}
+                    />
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
                     <Label>Penilaian*</Label>
@@ -125,7 +154,7 @@ function ReviewForm(props){
                     />
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
-                    <Label>Apakah anda merekomendasi dosen ini ke teman anda?*</Label>
+                    <Label>Apakah anda akan merekomendasi dosen ini ke teman anda?*</Label>
                     <StyledRating
                         style={style.ratingSpan} 
                         id="recommendationRating" 
@@ -148,7 +177,14 @@ function ReviewForm(props){
                 </FormGroup>
                 <FormGroup>
                     <Label>Nama Kelas*</Label>
-                    <Input type="text" id="courseName" value={courseName} required onChange={(event) => setCourseName(event.target.value)}/>
+                    <TextField 
+                        id="courseName" 
+                        value={courseName} 
+                        required 
+                        onChange={(event) => setCourseName(event.target.value)}
+                        fullWidth 
+                        variant="outlined"
+                    />
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
                     <Label>Apakah anda sedang mengambil kelas ini?*</Label>
@@ -169,7 +205,7 @@ function ReviewForm(props){
                     <Label>Nilai yang Anda dapatkan*</Label>
                     <Autocomplete
                         id="grade"
-                        options={["A", "B", "C", "D", "E", "F"]}
+                        options={["A", "B", "C", "D", "E", "F", "N/A"]}
                         freeSolo
                         getOptionLabel={option => option}
                         value={grade}
@@ -180,6 +216,7 @@ function ReviewForm(props){
                                 {...params}
                                 variant="outlined"
                                 fullWidth
+                                required
                                 onChange={(event) => setGrade(event.target.value)}
                             />
                         )}
