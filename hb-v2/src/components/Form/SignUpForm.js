@@ -29,7 +29,7 @@ function SignUpForm(props){
         }
         
     }
-    var validEmail = email.includes(".edu") && email !==""
+    var validEmail = email !==""
     var validPassword = password === confirmPassword && password !== ""
     var validName = name !== ""
 
@@ -38,7 +38,15 @@ function SignUpForm(props){
             <Form onSubmit={submit}>
                 <FormGroup>
                     <Label>Nama*</Label>
-                    <Input valid={validName} type="text" id="name" value={name} onChange={(event) => setName(event.target.value)} required autoFocus/>
+                    <Input 
+                        valid={validName} 
+                        type="text" 
+                        id="name" 
+                        value={name} 
+                        onChange={(event) => setName(event.target.value)} 
+                        required 
+                        autoFocus
+                    />
                 </FormGroup>
                 <FormGroup>
                     <Label>Email*</Label>
@@ -76,8 +84,8 @@ function SignUpForm(props){
                     />
                 </FormGroup>
                 <FormGroup>
-                    <FormText>Dengan Sign Up, Anda menerima Ketentuan Layanan dan Kebijakan Privasi Wah!</FormText>
-                    <Button type="submit" className="contrast-button" fullWidth disabled={!(validName && validEmail && validPassword)}>Daftar</Button>
+                    <FormText>Dengan Sign Up, Anda menerima Ketentuan Layanan dan Kebijakan Privasi kami.</FormText>
+                    <Button type="submit" className="contrast-button" fullWidth>Daftar</Button>
                 </FormGroup>
             </Form>
         </div>
