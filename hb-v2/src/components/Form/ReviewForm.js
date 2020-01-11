@@ -13,6 +13,8 @@ import { withStyles } from "@material-ui/core";
 import Popup from "../Popup/Popup";
 import LoginPopup from "../Popup/LoginPopup";
 import {options} from '../../data/UniversityList';
+import { teachingStyleOptions } from "../../data/TeachingStyle";
+import { tagsOptions } from "../../data/TagsOptions";
 
 const Icon = withStyles({
     root: {
@@ -33,9 +35,6 @@ const CheckedIcon = withStyles({
     },
     checked: {},
   })(props => <CheckBoxIcon fontSize="small" {...props} />);
-
-const teachingStyleOptions= ["Audio", "Visual"]
-const tagsOptions=["Inspirasional","Memberi banyak feedback yang baik","Kalo kasi nilai susah","Lucu","Membosankan","Berwibawa","Peduli dengan mahasiswa"]
 
 function ReviewForm(props){
     const existingProf = props.match.params.revieweeId ? true : false
