@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import { logout } from '../../redux/actions';
 import Popup from '../Popup/Popup';
 import LoginPopup from '../Popup/LoginPopup';
+import SignUpPopup from '../Popup/SignupPopup';
 
 function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);
@@ -41,6 +42,18 @@ function NavigationBar(props){
                   content={LoginPopup}
               />
             }
+            </NavItem>
+            <NavItem>
+              {!props.loggedIn &&
+                <Popup
+                  trigger={{
+                      component:NavLink,
+                      id:'signup'
+                  }}
+                  purpose="Sign Up"
+                  content={SignUpPopup}
+                />
+              }
             </NavItem>
           </Nav>
         </Collapse>
