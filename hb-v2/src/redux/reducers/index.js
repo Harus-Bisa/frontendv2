@@ -40,9 +40,11 @@ export default function rootReducer(state = initialState, action){
         })
     }
     if(action.type === REMOVE_ERROR){
-        return Object.assign({}, state, {
-            error: null
-        })
+        if(state.error){
+            return Object.assign({}, state, {
+                error: null
+            })
+        } 
     }
     if(action.type === LOGIN){
         return Object.assign({}, state, {

@@ -63,6 +63,7 @@ function ReviewForm(props){
     const revieweeName = props.match.params.revieweeName;
     const getReviews = props.getReviews;
     const professor = props.professor
+    const history = props.history
     React.useEffect(() =>{
         if(existingProf){
             if(!professor){
@@ -76,10 +77,10 @@ function ReviewForm(props){
         else{
             setProfName(revieweeName)
             if(submitted && professor){
-                props.history.push("/review/"+professor.revieweeId)
+                history.push("/review/"+professor.revieweeId)
             }
         }
-    }, [getReviews, revieweeId, existingProf, professor, revieweeName, submitted])
+    }, [getReviews, revieweeId, existingProf, professor, revieweeName, submitted, history])
 
     const submit = (event) =>{
         event.preventDefault()
