@@ -5,7 +5,7 @@ export function signup(newUserData){
     return async function(dispatch){
         return await services.signup(newUserData)
         .then(response => {
-            dispatch(login(response.email, response.password));
+            dispatch(removeError())
         })
         .catch(error =>{
             dispatch(setError(error))

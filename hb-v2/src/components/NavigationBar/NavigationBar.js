@@ -19,7 +19,9 @@ function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
-
+  const SignUp = (props) =>{
+    return(<SignUpPopup collapseNavbar={() => setIsOpen(false)} closePopup={props.closePopup}/>)
+  }
   return (
     <div>
       <Navbar light expand="md" className="navbar">
@@ -51,7 +53,7 @@ function NavigationBar(props){
                       id:'signup'
                   }}
                   purpose="Sign Up"
-                  content={SignUpPopup}
+                  content={SignUp}
                 />
               }
             </NavItem>
