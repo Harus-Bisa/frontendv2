@@ -5,7 +5,7 @@ export function signup(newUserData){
     return async function(dispatch){
         return await services.signup(newUserData)
         .then(response => {
-            dispatch(login(response.email, response.password));
+            dispatch(removeError())
         })
         .catch(error =>{
             dispatch(setError(error))
@@ -95,6 +95,7 @@ export function voteReview(revieweeId, reviewId, vote){
 }
 
 export function setError(error){
+    window.scrollTo(0,0)
     return {type: SET_ERROR, payload: error}
 }
 

@@ -4,24 +4,21 @@ import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { login } from "../../redux/actions";
 import { withRouter } from "react-router-dom";
+import Feedback from "../Feedback/Feedback";
 
 function LoginForm(props){
     var [email, setEmail] = React.useState("")
     var [password, setPassword] = React.useState("")
-    const submit = (event) =>{
+    const submit = async (event) =>{
         event.preventDefault();
-        try{
-            props.login(email, password)
-            if(props.page){
-                props.history.push("/")
-            }
-        }
-        catch(error){
-            console.log(error)
+        await props.login(email, password)
+        if(props.loggedIn && props.page){
+            props.history.push("/")
         }
     }
     return(
         <div className="container content">
+            {props.error && <Feedback color={"danger"} message={props.error.message}/>}
             <Form onSubmit={submit}>
                 <FormGroup>
                     <Label>Email*</Label>
@@ -36,4 +33,11 @@ function LoginForm(props){
         </div>
     )
 }
-export default connect(null, {login})(withRouter(LoginForm));
+
+function mapStateToProps(state){
+    return{
+        error: state.error,
+        loggedIn:state.loggedIn
+    }
+}
+export default connect(mapStateToProps, {login})(withRouter(LoginForm));

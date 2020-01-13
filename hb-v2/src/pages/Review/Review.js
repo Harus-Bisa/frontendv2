@@ -39,16 +39,17 @@ function Review(props){
     if(props.loading){
         return(<div className="container content page-container"><p>Loading</p></div>)
     }
-    else if (props.error){
+    if (props.error && !props.professor){
         return(
             <div className="container content page-container">
                 <Feedback color={"danger"} message={props.error.message}/>
             </div>
         )
     }
-    else{
+    if(props.professor){
         return(
             <div className="container content page-container">
+                {props.error && <Feedback color={"danger"} message={props.error.message}/>}
                 <header className="review-header">
                     <h2 style={{borderBottom:"4px solid #39A3FF", width:'fit-content', fontSize: "calc(100% + 17px)"}}>{props.professor.name}</h2>
                     <p>{props.professor.school}</p>

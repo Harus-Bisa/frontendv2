@@ -13,12 +13,15 @@ import { connect } from 'react-redux';
 import { logout } from '../../redux/actions';
 import Popup from '../Popup/Popup';
 import LoginPopup from '../Popup/LoginPopup';
+import SignUpPopup from '../Popup/SignupPopup';
 
 function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
-
+  const SignUp = (props) =>{
+    return(<SignUpPopup collapseNavbar={() => setIsOpen(false)} closePopup={props.closePopup}/>)
+  }
   return (
     <div>
       <Navbar light expand="md" className="navbar">
@@ -41,6 +44,18 @@ function NavigationBar(props){
                   content={LoginPopup}
               />
             }
+            </NavItem>
+            <NavItem>
+              {!props.loggedIn &&
+                <Popup
+                  trigger={{
+                      component:NavLink,
+                      id:'signup'
+                  }}
+                  purpose="Sign Up"
+                  content={SignUp}
+                />
+              }
             </NavItem>
           </Nav>
         </Collapse>
