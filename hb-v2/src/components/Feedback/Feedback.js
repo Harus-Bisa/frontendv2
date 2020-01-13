@@ -9,11 +9,20 @@ function Feedback(props){
         setVisible(false)
         props.removeError();
     };
+    const message = () =>{
+        var content=[];
+        var messages = props.message.split("\n")
+        
+        messages.forEach(m =>{
+            content.push(<p key={m} style={{marginBottom:0}}>{m}</p>)
+        })
 
+        return content
+    }
     return(
         <div style={{marginTop:'15px', marginBottom:"15px"}}>
             <Alert color={props.color} isOpen={visible} toggle={onDismiss}>
-                {props.message}
+                {message()}
             </Alert>
         </div>
     )
