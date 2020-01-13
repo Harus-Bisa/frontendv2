@@ -95,6 +95,7 @@ export function voteReview(revieweeId, reviewId, vote){
 }
 
 export function setError(error){
+    window.scrollTo(0,0)
     return {type: SET_ERROR, payload: error}
 }
 

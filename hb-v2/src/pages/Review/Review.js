@@ -39,7 +39,7 @@ function Review(props){
     if(props.loading){
         return(<div className="container content page-container"><p>Loading</p></div>)
     }
-    else if (props.error){
+    if (props.error && !props.professor){
         return(
             <div className="container content page-container">
                 <Feedback color={"danger"} message={props.error.message}/>
