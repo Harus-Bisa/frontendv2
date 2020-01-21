@@ -43,7 +43,7 @@ function SearchBox(props){
                     props.clearUsers()
                 }}
                 onChange={(event, value) => {
-                    if(value){
+                    if(value && value.revieweeId){
                         select(value.revieweeId)
                     }
                 }}
