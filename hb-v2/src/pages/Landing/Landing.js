@@ -13,7 +13,7 @@ function Landing(props){
                 </header>
                 <SearchBox/>
             </div>
-            <div style={{marginBottom:'10vh'}}>
+            <div style={{marginBottom:'10vh'}} className="d-sm-none">
                 <img src={landingpageimg} alt="landing" style={{width:"100%"}}/>
             </div>
         </div>
