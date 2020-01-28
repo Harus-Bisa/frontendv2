@@ -49,7 +49,7 @@ function SearchBox(props){
                     }
                 }}
                 options={props.users}
-                loading={true}
+                loading={props.loading}
                 noOptionsText="Dosen tidak ditemukan."
                 renderInput={params => (
                     <TextField
