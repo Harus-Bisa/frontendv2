@@ -7,7 +7,7 @@ class Services{
     }
     errorHandling(error){
         if(error.response){
-            this.errorHandling(error)
+            throw new Error(error.response.statusText)
         }
         else{
             throw error
