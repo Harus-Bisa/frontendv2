@@ -170,7 +170,7 @@ function ReviewForm(props){
     }
     return(
         <div className="container content page-container">
-            <h5>Terima kasih atas berkontribusi anda!</h5>
+            <h5>Terima kasih atas kontribusi anda!</h5>
             {props.error && <Feedback color={"danger"} message={props.error.message}/>}
             <form onSubmit={submit}> 
                 <FormGroup>

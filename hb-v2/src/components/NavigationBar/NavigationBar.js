@@ -29,9 +29,11 @@ function NavigationBar(props){
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar style={isOpen ? {height:'100vh'} : {}} className="justify-content-end">
           <Nav navbar>
-            <NavItem>
-              <SearchBox close={toggle}/>
-            </NavItem>
+            <div class="d-md-none">
+              <NavItem>
+                <SearchBox close={toggle}/>
+              </NavItem>
+            </div>
             <NavItem>
             {props.loggedIn && <NavLink id="logoff" onClick={props.logout}>Log Out</NavLink>}
             {!props.loggedIn && 

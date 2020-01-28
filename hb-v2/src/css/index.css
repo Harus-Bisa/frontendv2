@@ -206,7 +206,7 @@ a:hover{
 }
 .search-box #search-box, .search-box #search-box:focus{
   border: 0px;
-  width: 100%;
+  /* width: 100%; */
   box-shadow: none;
   font-family: Poppins;
   font-style: normal;
