@@ -1,5 +1,5 @@
 import services from "../../Services"
-import { FIND_USERS, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_USERS, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING } from "../constants/action-types"
+import { FIND_USERS, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_USERS, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_USERS } from "../constants/action-types"
 
 export function signup(newUserData){
     return async function(dispatch){
@@ -32,6 +32,7 @@ export function logout(){
 }
 export function findUsers(name){
     return async function(dispatch){
+        dispatch({type:LOAD_USERS})
         return await services.findUsers(name)
         .then(async response =>{
             await dispatch({type:FIND_USERS, payload: response})
