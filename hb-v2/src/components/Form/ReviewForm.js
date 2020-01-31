@@ -54,11 +54,35 @@ function ReviewForm(props){
     var [yearTaken, setYearTaken] = React.useState(2019)
     var [textbookRequired, setTextbookRequired] = React.useState(true)
     var [submitted, setSubmitted] = React.useState(false)
+    var [flag, setFlag] = React.useState(false)
 
     const valid = profName !== "" && profSchool !== "" && courseName !== "" && overallRating !== 0 && recommendationRating !== 0 && difficultyRating !== 0 && grade !== "" && teachingStyle.length >0 && tags.length === 3 && review !== ""
 
+    // const SubmitButton = (props) => {
+    //     return(
+    //     <Button 
+    //         className="blue-button" 
+    //         onClick={(event)=> {
+    //             if(!valid){
+    //                 submit(event)
+    //             }
+    //             else{
+    //                 props.onClick()
+    //             }
+    //         }} 
+    //         style={{width:'100%'}}
+    //     >
+    //         Selesai
+    //     </Button>)
+    // }
     const SubmitButton = (props) => {
-        return(<Button className="blue-button" onClick={props.onClick} style={{width:'100%'}}>Selesai</Button>)
+        return(
+        <Button 
+            className="blue-button" 
+            style={{width:'100%'}}
+        >
+            Selesai
+        </Button>)
     }
 
     const revieweeId = props.match.params.revieweeId;
@@ -112,42 +136,52 @@ function ReviewForm(props){
             }
             setSubmitted(true)
         }   
-        else{
-            var errorMessage = "Tolong cek/isi berikut ini:\n"
-
-            if(profName === ""){
-                errorMessage += "- Nama dosen\n"
-            }
-            if(profSchool === ""){
-                errorMessage += "- Nama Perguruan Tinggi\n"
-            }
-            if(courseName === ""){
-                errorMessage += "- Nama kelas\n"
-            }
-            if(overallRating === 0){
-                errorMessage += "- Penilaian\n"
-            }
-            if(recommendationRating === 0){
-                errorMessage += "- Rekomendasi\n"
-            }
-            if(difficultyRating === 0){
-                errorMessage += "- Kesulitan\n"
-            }
-            if(grade === ""){
-                errorMessage += "- Nilai (Silahkan pilih nilai jika tidak nyaman untuk mengisi nilai)\\n"
-            }
-            if(teachingStyle.length === 0){
-                errorMessage += "- Gaya mengajar\n"
-            }
-            if(tags.length !== 3){
-                errorMessage += "- 3 tag\n"
-            }
-            if(review === ""){
-                errorMessage += "- Review\n"
-            }
+        else if(!valid){
+            var errorMessage = makeErrorMessage()
             props.setError(new Error(errorMessage) )
             window.scrollTo(0, 0)
-        }    
+        }   
+        else if(!props.loggedIn){
+            if(props.error){
+                props.removeError()
+            }
+            setFlag(true)
+        } 
+    }
+    const makeErrorMessage = () =>{
+        var errorMessage = "Tolong cek/isi berikut ini:\n"
+
+        if(profName === ""){
+            errorMessage += "- Nama dosen\n"
+        }
+        if(profSchool === ""){
+            errorMessage += "- Nama Perguruan Tinggi\n"
+        }
+        if(courseName === ""){
+            errorMessage += "- Nama kelas\n"
+        }
+        if(overallRating === 0){
+            errorMessage += "- Penilaian\n"
+        }
+        if(recommendationRating === 0){
+            errorMessage += "- Rekomendasi\n"
+        }
+        if(difficultyRating === 0){
+            errorMessage += "- Kesulitan\n"
+        }
+        if(grade === ""){
+            errorMessage += "- Nilai (Silahkan pilih nilai jika tidak nyaman untuk mengisi nilai)\\n"
+        }
+        if(teachingStyle.length === 0){
+            errorMessage += "- Gaya mengajar\n"
+        }
+        if(tags.length !== 3){
+            errorMessage += "- 3 tag\n"
+        }
+        if(review === ""){
+            errorMessage += "- Review\n"
+        }
+        return errorMessage
     }
     const style={
         ratingBox:{
@@ -365,8 +399,8 @@ function ReviewForm(props){
                     <Label>Review anda*</Label>
                     <Input type="textarea" id="review" value={review} required onChange={(event) => setReview(event.target.value)}/>
                 </FormGroup>
-                {props.loggedIn && <SubmitButton/>}
-                {!props.loggedIn && <Popup trigger={{component:SubmitButton}} purpose={"Selesai"} content={LoginPopup}/>}
+                {flag && <Popup content={LoginPopup} auto disableFlag={() => setFlag(false)}/>}
+                <SubmitButton/>
             </form>
         </div>
     )
