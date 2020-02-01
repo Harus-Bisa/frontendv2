@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { withRouter } from "react-router-dom";
 import {Autocomplete} from '@material-ui/lab'
-import { TextField } from "@material-ui/core";
+import { TextField, CircularProgress } from "@material-ui/core";
 import { throttle, debounce } from "throttle-debounce";
 import { findUsers, clearUsers } from "../../redux/actions";
 import { connect } from "react-redux";
@@ -11,18 +11,19 @@ import Feedback from "../Feedback/Feedback";
 function SearchBox(props){
     var [text, setText] = React.useState("")
     var [open, setOpen] = React.useState(false)
-    const loading = open && (!props.users)
 
     const handleChange = (event) =>{
         var query = event.target.value
         setText(query)
-        if(query.length < 5 || query.endsWith(' ')){
+        setOpen(true)
+        if(query.length < 2 || query.endsWith(' ')){
             throttle(500, props.findUsers(query))
         }
         else{
             debounce(500, props.findUsers(query))
         }
     }
+    
     const select = (id) =>{
         props.history.push("/review/"+id)
         if(props.close){
@@ -43,12 +44,12 @@ function SearchBox(props){
                     props.clearUsers()
                 }}
                 onChange={(event, value) => {
-                    if(value){
+                    if(value && value.revieweeId){
                         select(value.revieweeId)
                     }
                 }}
                 options={props.users}
-                loading={loading}
+                loading={props.loading}
                 noOptionsText="Dosen tidak ditemukan."
                 renderInput={params => (
                     <TextField
@@ -57,6 +58,15 @@ function SearchBox(props){
                       fullWidth
                       onChange={handleChange}
                       value={text}
+                      InputProps={{
+                        ...params.InputProps,
+                        endAdornment: (
+                          <React.Fragment>
+                            {props.loading ? <CircularProgress color="inherit" size={15} /> : null}
+                            {params.InputProps.endAdornment}
+                          </React.Fragment>
+                        ),
+                      }}
                     />
                 )}
                 renderOption={option => {
@@ -68,7 +78,7 @@ function SearchBox(props){
                     )
                 }}
             />
-            {props.users && props.users.length === 0 && 
+            {props.found === false && 
                 <div style={{marginTop:'1.5rem'}}>
                     <p>Tidak menemukan nama Dosen Anda? <a href={"/review/new/"+ (text === "" ? "Nama Dosen" : text)}>Laporkan Sekarang!</a></p>
                 </div>
@@ -86,7 +96,9 @@ SearchBox.propTypes={
 function mapStateToProps(state){
     return{
         users:state.users,
-        error: state.error
+        error: state.error,
+        found: state.found,
+        loading: state.loadUsers
     }
 }
 export default connect(mapStateToProps, {findUsers, clearUsers})(withRouter(SearchBox));

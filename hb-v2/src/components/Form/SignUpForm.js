@@ -20,9 +20,10 @@ function SignUpForm(props){
         }
         try{
             props.signup(data)
-            if(props.page){
-                props.history.push("/")
+            if(props.closePopup){
+                props.closePopup()
             }
+            props.history.push('/verification')
         }
         catch(error){
             console.log(error)

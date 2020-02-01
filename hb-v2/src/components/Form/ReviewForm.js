@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import { FormGroup, Label, Input, Button } from "reactstrap";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, LocalCafe, LocalCafeOutlined } from "@material-ui/icons";
 import { StyledRating } from "../Rating/StyledRating";
-import { addReview, getReviews } from "../../redux/actions";
+import { addReview, getReviews, setError, removeError } from "../../redux/actions";
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -15,6 +15,7 @@ import LoginPopup from "../Popup/LoginPopup";
 import {options} from '../../data/UniversityList';
 import { teachingStyleOptions } from "../../data/TeachingStyle";
 import { tagsOptions } from "../../data/TagsOptions";
+import Feedback from "../Feedback/Feedback";
 
 const Icon = withStyles({
     root: {
@@ -54,15 +55,17 @@ function ReviewForm(props){
     var [textbookRequired, setTextbookRequired] = React.useState(true)
     var [submitted, setSubmitted] = React.useState(false)
 
-    const valid = profName !== "" && profSchool !== "" && courseName !== "" && overallRating !== 0 && recommendationRating !== 0 && difficultyRating !== 0 && grade !== "" && teachingStyle.length !== 0 && tags.length !== 0 && review !== ""
+    const valid = profName !== "" && profSchool !== "" && courseName !== "" && overallRating !== 0 && recommendationRating !== 0 && difficultyRating !== 0 && grade !== "" && teachingStyle.length >0 && tags.length === 3 && review !== ""
+
     const SubmitButton = (props) => {
-        return(<Button className="blue-button" onClick={props.onClick} style={{width:'100%'}} disabled={!valid}>Selesai</Button>)
+        return(<Button className="blue-button" onClick={props.onClick} style={{width:'100%'}}>Selesai</Button>)
     }
 
     const revieweeId = props.match.params.revieweeId;
     const revieweeName = props.match.params.revieweeName;
     const getReviews = props.getReviews;
     const professor = props.professor
+    const history = props.history
     React.useEffect(() =>{
         if(existingProf){
             if(!professor){
@@ -76,10 +79,10 @@ function ReviewForm(props){
         else{
             setProfName(revieweeName)
             if(submitted && professor){
-                props.history.push("/review/"+professor.revieweeId)
+                history.push("/review/"+professor.revieweeId)
             }
         }
-    }, [getReviews, revieweeId, existingProf, professor, revieweeName, submitted])
+    }, [getReviews, revieweeId, existingProf, professor, revieweeName, submitted, history])
 
     const submit = (event) =>{
         event.preventDefault()
@@ -96,7 +99,8 @@ function ReviewForm(props){
             textbookRequired: textbookRequired,
             grade: grade
         }
-        if(props.loggedIn){
+        if(props.loggedIn && valid){
+            props.removeError()
             if (existingProf){
                 props.addReview(revieweeId, newReview);
                 props.history.push("/review/"+revieweeId)
@@ -107,7 +111,43 @@ function ReviewForm(props){
                 props.addReview(null, newReview)               
             }
             setSubmitted(true)
-        }        
+        }   
+        else{
+            var errorMessage = "Tolong cek/isi berikut ini:\n"
+
+            if(profName === ""){
+                errorMessage += "- Nama dosen\n"
+            }
+            if(profSchool === ""){
+                errorMessage += "- Nama Perguruan Tinggi\n"
+            }
+            if(courseName === ""){
+                errorMessage += "- Nama kelas\n"
+            }
+            if(overallRating === 0){
+                errorMessage += "- Penilaian\n"
+            }
+            if(recommendationRating === 0){
+                errorMessage += "- Rekomendasi\n"
+            }
+            if(difficultyRating === 0){
+                errorMessage += "- Kesulitan\n"
+            }
+            if(grade === ""){
+                errorMessage += "- Nilai (Silahkan pilih nilai jika tidak nyaman untuk mengisi nilai)\\n"
+            }
+            if(teachingStyle.length === 0){
+                errorMessage += "- Gaya mengajar\n"
+            }
+            if(tags.length !== 3){
+                errorMessage += "- 3 tag\n"
+            }
+            if(review === ""){
+                errorMessage += "- Review\n"
+            }
+            props.setError(new Error(errorMessage) )
+            window.scrollTo(0, 0)
+        }    
     }
     const style={
         ratingBox:{
@@ -130,7 +170,8 @@ function ReviewForm(props){
     }
     return(
         <div className="container content page-container">
-            <h5>Terima kasih atas berkontribusi anda!</h5>
+            <h5>Terima kasih atas kontribusi anda!</h5>
+            {props.error && <Feedback color={"danger"} message={props.error.message}/>}
             <form onSubmit={submit}> 
                 <FormGroup>
                     <Label>Nama Dosen*</Label>
@@ -331,10 +372,11 @@ function ReviewForm(props){
     )
 }
 
-function mapStateToProps(state, ownProps){
+function mapStateToProps(state){
     return{
         professor: state.professor,
-        loggedIn: state.loggedIn
+        loggedIn: state.loggedIn,
+        error: state.error
     }
 }
-export default connect(mapStateToProps,{addReview, getReviews})(ReviewForm);
+export default connect(mapStateToProps,{addReview, getReviews, setError, removeError})(ReviewForm);
