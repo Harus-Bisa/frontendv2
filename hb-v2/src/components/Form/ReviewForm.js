@@ -167,7 +167,7 @@ function ReviewForm(props){
             errorMessage += "- Rekomendasi\n"
         }
         if(difficultyRating === 0){
-            errorMessage += "- Kesulitan\n"
+            errorMessage += "- Kesusahan Kelas\n"
         }
         if(grade === ""){
             errorMessage += "- Nilai (Silahkan pilih nilai jika tidak nyaman untuk mengisi nilai)\\n"
@@ -176,10 +176,10 @@ function ReviewForm(props){
             errorMessage += "- Gaya mengajar\n"
         }
         if(tags.length !== 3){
-            errorMessage += "- 3 tag\n"
+            errorMessage += "- Tag\n"
         }
         if(review === ""){
-            errorMessage += "- Review\n"
+            errorMessage += "- Review anda\n"
         }
         return errorMessage
     }
