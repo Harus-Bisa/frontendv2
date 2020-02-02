@@ -6,7 +6,7 @@ export default function LoginPopup(props){
     return(
         <PopupForm
             header={<h1>Log In</h1>}
-            form={<LoginForm page={props.page}/>}
+            form={<LoginForm page={props.page} closePopup={props.closePopup}/>}
             footer={
                 <div>
                     <a href="/">Lupa password anda?</a>

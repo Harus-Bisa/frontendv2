@@ -13,13 +13,27 @@ function Reviews(props){
         }
         else{
             var max = props.numberOfReviews > 3 ? 3 : props.numberOfReviews
-            for (let i=0; i<max; i++){
-                if (i === max-1){
-                    cards.push(<ReviewCard key={i} id={i} blur={true}/>)
-                }
-                else{
+            if(max<3){
+                for(let i=0; i<max; i++){
                     cards.push(<ReviewCard key={i} id={i}/>)
-                }  
+                }
+                cards.push(
+                    <div className="col-12" key={0}>
+                        <div className="content">
+                            <SignUpLoginPrompt/>
+                        </div>
+                    </div>
+                )
+            }
+            else{
+                for (let i=0; i<max; i++){
+                    if (i === max-1){
+                        cards.push(<ReviewCard key={i} id={i} blur={true}/>)
+                    }
+                    else{
+                        cards.push(<ReviewCard key={i} id={i}/>)
+                    }  
+                }
             }
         }
         if(cards.length === 0){

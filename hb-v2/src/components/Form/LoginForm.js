@@ -12,10 +12,20 @@ function LoginForm(props){
     const submit = async (event) =>{
         event.preventDefault();
         await props.login(email, password)
-        if(props.loggedIn && props.page){
-            props.history.push("/")
-        }
+        .then(() =>{
+            if(props.loggedIn && props.page){
+                props.history.push("/")
+            }
+        })
+        
     }
+    const loggedIn = props.loggedIn
+    const closePopup = props.closePopup
+    React.useEffect(() =>{
+        if(loggedIn && closePopup){
+            closePopup()
+        }
+    }, [loggedIn, closePopup])
     return(
         <div className="container content">
             {props.error && <Feedback color={"danger"} message={props.error.message}/>}
