@@ -56,7 +56,7 @@ function ReviewForm(props){
     var [submitted, setSubmitted] = React.useState(false)
     var [flag, setFlag] = React.useState(false)
 
-    const valid = profName !== "" && profSchool !== "" && courseName !== "" && overallRating !== 0 && recommendationRating !== 0 && difficultyRating !== 0 && grade !== "" && teachingStyle.length >0 && tags.length === 3 && review !== ""
+    const valid = profName !== "" && profSchool !== "" && courseName !== "" && overallRating !== 0 && recommendationRating !== 0 && difficultyRating !== 0 && grade !== "" && teachingStyle.length >0 && tags.length > 0 && review !== ""
 
     // const SubmitButton = (props) => {
     //     return(
@@ -360,7 +360,7 @@ function ReviewForm(props){
                     </div>
                 </FormGroup>
                 <FormGroup>
-                    <Label>Pilih 3 tag yang menjelaskan mengenai dosen ini*</Label>
+                    <Label>Pilih tag yang mendeskripsikan dosen ini (Max. 3)*</Label>
                     <Autocomplete
                         multiple
                         id="tags"
