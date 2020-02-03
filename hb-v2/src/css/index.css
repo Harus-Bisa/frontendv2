@@ -45,8 +45,8 @@ h5{
 p, a, input{
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
-  line-height: 21px;
+  font-size: 14px;
+  line-height: 20px;
   margin-bottom: 0.5rem;
 }
 
@@ -123,7 +123,9 @@ a:hover{
   display: flex !important;
   align-items: center !important;
   text-align: center !important;
-  color: var(--hb-blue) !important;
+  color: white !important;
+  background-color: var(--hb-blue) !important;
+  font-weight: normal !important;
 }
 
 .MuiButton-root.Mui-disabled {

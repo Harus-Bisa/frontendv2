@@ -1,13 +1,14 @@
 import React from "react";
+import { Button } from "@material-ui/core";
 
 export default function Verification(props){
     return(
         <div className="container content page-container">
-            <header style={{marginBottom:'15px'}}>
-                <h2>Selamat datang di keluarga Harus Bisa!</h2>
-                <p>Terima kasih sudah bergabung dengan komunitas pelajar seluruh Indonesia.</p>
+            <header style={{marginBottom:'30px'}}>
+                <h3 style={{textAlign:'center'}}>Konfirmasi Email Anda</h3>
+                <p>Silakan periksa inbox Anda untuk email konfirmasi. Klik link dalam email untuk mengonfirmasi email Anda</p>
             </header>
-            <p>Silahkan cek email anda untuk memverifikasi akun anda.</p>
+            <Button fullWidth className="contrast-button">Kirim Ulang Konfirmasi Email</Button>
         </div>
     )
 }
