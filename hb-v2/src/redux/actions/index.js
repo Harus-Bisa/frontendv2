@@ -1,5 +1,5 @@
 import services from "../../Services"
-import { FIND_USERS, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_USERS, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_USERS } from "../constants/action-types"
+import { FIND_USERS, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_USERS, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_USERS, RESEND_VERIFICATION } from "../constants/action-types"
 
 export function signup(newUserData){
     return async function(dispatch){
@@ -17,6 +17,19 @@ export function login(email, password){
         return await services.login(email, password)
         .then(async response => {
             await dispatch({type: LOGIN, payload: response})
+            
+        })
+        .catch(error =>{
+            dispatch(setError(error))
+        })
+    }
+}
+
+export function resendVerification(email){
+    return async function(dispatch){
+        return services.resendVerification(email)
+        .then(async response =>{
+            await dispatch({type: RESEND_VERIFICATION})
             dispatch(removeError())
         })
         .catch(error =>{

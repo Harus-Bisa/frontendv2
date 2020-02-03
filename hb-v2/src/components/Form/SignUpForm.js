@@ -23,7 +23,7 @@ function SignUpForm(props){
             if(props.closePopup){
                 props.closePopup()
             }
-            props.history.push('/verification')
+            props.history.push('/verification/'+email)
         }
         catch(error){
             console.log(error)

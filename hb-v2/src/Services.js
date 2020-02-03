@@ -76,6 +76,15 @@ class Services{
         }
     }
 
+    async resendVerification(email){
+        const url = this.domain + '/resend';
+        try{
+            await axios.post(url, {email:email}, {headers: this.headers()})
+        }
+        catch(error){
+            this.errorHandling(error);
+        }
+    }
     async findUsers(name){
         const url = this.domain + "/reviewees/?name="+name;
         return axios.get(url,{headers:this.headers()})
