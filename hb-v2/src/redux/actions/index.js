@@ -1,5 +1,5 @@
 import services from "../../Services"
-import { FIND_USERS, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_USERS, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_USERS, RESEND_VERIFICATION } from "../constants/action-types"
+import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, RESEND_VERIFICATION } from "../constants/action-types"
 
 export function signup(newUserData){
     return async function(dispatch){
@@ -45,10 +45,10 @@ export function logout(){
 }
 export function findUsers(name){
     return async function(dispatch){
-        dispatch({type:LOAD_USERS})
+        dispatch({type:LOAD_REVIEWEES})
         return await services.findUsers(name)
         .then(async response =>{
-            await dispatch({type:FIND_USERS, payload: response})
+            await dispatch({type:FIND_REVIEWEES, payload: response})
             dispatch(removeError())
         })
         .catch(error =>{
@@ -58,7 +58,7 @@ export function findUsers(name){
 }
 
 export function clearUsers(){
-    return ({type:CLEAR_USERS})
+    return ({type:CLEAR_REVIEWEES})
 }
 export function getReviews(revieweeId){
     return async function(dispatch){
