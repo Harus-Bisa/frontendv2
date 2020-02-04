@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import {Autocomplete} from '@material-ui/lab'
 import { TextField, CircularProgress } from "@material-ui/core";
 import { throttle, debounce } from "throttle-debounce";
-import { findReviewees, clearUsers } from "../../redux/actions";
+import { findReviewees, clearReviewees } from "../../redux/actions";
 import { connect } from "react-redux";
 import Feedback from "../Feedback/Feedback";
 
@@ -41,14 +41,14 @@ function SearchBox(props){
                 onOpen={() => {setOpen(true)}}
                 onClose={() => {
                     setOpen(false) 
-                    props.clearUsers()
+                    props.clearreviewees()
                 }}
                 onChange={(event, value) => {
                     if(value && value.revieweeId){
                         select(value.revieweeId)
                     }
                 }}
-                options={props.users}
+                options={props.reviewees}
                 loading={props.loading}
                 noOptionsText="Dosen tidak ditemukan."
                 renderInput={params => (
@@ -89,16 +89,16 @@ function SearchBox(props){
 }
 
 SearchBox.propTypes={
-    users: PropTypes.array,
+    reviewees: PropTypes.array,
     findReviewees: PropTypes.func
 }
 
 function mapStateToProps(state){
     return{
-        users:state.users,
+        reviewees:state.reviewees,
         error: state.error,
         found: state.found,
-        loading: state.loadUsers
+        loading: state.loadReviewees
     }
 }
-export default connect(mapStateToProps, {findReviewees, clearUsers})(withRouter(SearchBox));
+export default connect(mapStateToProps, {findReviewees, clearReviewees})(withRouter(SearchBox));

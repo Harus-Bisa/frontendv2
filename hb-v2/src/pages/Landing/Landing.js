@@ -21,7 +21,7 @@ function Landing(props){
 }
 function mapStateToProps(state){
     return{
-        users:state.users
+        reviewees:state.reviewees
     }
 }
 export default connect(mapStateToProps)(Landing);

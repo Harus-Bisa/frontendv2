@@ -17,7 +17,6 @@ export function login(email, password){
         return await services.login(email, password)
         .then(async response => {
             await dispatch({type: LOGIN, payload: response})
-            
         })
         .catch(error =>{
             dispatch(setError(error))
@@ -57,7 +56,7 @@ export function findReviewees(name){
     }
 }
 
-export function clearUsers(){
+export function clearReviewees(){
     return ({type:CLEAR_REVIEWEES})
 }
 export function getReviews(revieweeId){

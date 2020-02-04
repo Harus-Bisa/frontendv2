@@ -5,21 +5,21 @@ const initialState ={
     loggedIn: services.isLoggedIn(),
     loadingCount:0,
     loading: true,
-    users:[],
-    loadUsers: false,
+    reviewees:[],
+    loadReviewees: false,
     success: false
 }
 export default function rootReducer(state = initialState, action){
     if(action.type === LOAD_REVIEWEES){
         return Object.assign({}, state, {
-            loadUsers: true
+            loadReviewees: true
         })
     }
     if(action.type === FIND_REVIEWEES){
         return Object.assign({}, state, {
-            users: action.payload,
+            reviewees: action.payload,
             found: action.payload.length !== 0,
-            loadUsers: false
+            loadReviewees: false
         })
     }
     if(action.type === GET_REVIEWS){
@@ -41,7 +41,7 @@ export default function rootReducer(state = initialState, action){
     }
     if(action.type === CLEAR_REVIEWEES){
         return Object.assign({}, state, {
-            users: []
+            reviewees: []
         })
     }
     if(action.type === SET_ERROR){
@@ -59,7 +59,7 @@ export default function rootReducer(state = initialState, action){
     if(action.type === LOGIN){
         return Object.assign({}, state, {
             loggedIn: true,
-            userId: action.payload
+            user: action.payload
         })
     }
     if(action.type === LOGOUT){
