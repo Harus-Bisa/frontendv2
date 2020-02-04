@@ -1,5 +1,5 @@
 import React from "react";
-import { FormGroup, Input, Label, Form } from "reactstrap";
+import { FormGroup, Input, Label, Form, FormText } from "reactstrap";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { login } from "../../redux/actions";
@@ -46,8 +46,12 @@ function LoginForm(props){
                     <Label>Password*</Label>
                     <Input type="password" id="password" value={password} onChange={(event) => setPassword(event.target.value)} required/>
                 </FormGroup>
-                <p>Dengan masuk, Anda setuju dengan Syarat dan Ketentuan dan Kebijakan Privasi.</p>
-                <Button type="submit" className="contrast-button" fullWidth>Login</Button>
+                <FormGroup>
+                    <FormText>Dengan masuk, Anda setuju dengan Syarat dan Ketentuan dan Kebijakan Privasi.</FormText>
+                </FormGroup>
+                <FormGroup>
+                    <Button type="submit" className="contrast-button" fullWidth>Login</Button>
+                </FormGroup>
             </Form>
         </div>
     )

@@ -10,7 +10,7 @@ export default function LoginPopup(props){
             footer={
                 <div>
                     <a href="/">Lupa password anda?</a>
-                    <p>Tidak punya akun? <a href="/signup">Sign up sekarang!</a></p>
+                    <p>Tidak punya akun? <a href="/signup">Sign up!</a></p>
                 </div>
             }
         />

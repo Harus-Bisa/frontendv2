@@ -85,7 +85,9 @@ function SignUpForm(props){
                     />
                 </FormGroup>
                 <FormGroup>
-                    <FormText>Dengan Sign Up, Anda menerima Ketentuan Layanan dan Kebijakan Privasi kami.</FormText>
+                    <FormText>Dengan melanjutkan, Anda menyetujui Syarat dan Ketentuan Dosen Ku dan menyetujui Kebijakan Privasi Dosen Ku</FormText>
+                </FormGroup>
+                <FormGroup>
                     <Button type="submit" className="contrast-button" fullWidth>Daftar</Button>
                 </FormGroup>
             </Form>
