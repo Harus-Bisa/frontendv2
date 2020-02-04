@@ -10,7 +10,7 @@ import {
 } from 'reactstrap';
 import SearchBox from "../SearchBox/SearchBox";
 import { connect } from 'react-redux';
-import { logout } from '../../redux/actions';
+import { logout, getUser } from '../../redux/actions';
 import Popup from '../Popup/Popup';
 import LoginPopup from '../Popup/LoginPopup';
 import SignUpPopup from '../Popup/SignupPopup';
@@ -22,6 +22,14 @@ function NavigationBar(props){
   const SignUp = (props) =>{
     return(<SignUpPopup collapseNavbar={() => setIsOpen(false)} closePopup={props.closePopup}/>)
   }
+  const loggedIn = props.loggedIn
+  const name = props.name
+  const getUser = props.getUser
+  React.useEffect(() =>{
+    if(loggedIn && !name){
+      getUser(localStorage.getItem("userId"))
+    }
+  }, [loggedIn, name, getUser])
   return (
     <div>
       <Navbar light expand="md" className="navbar">
@@ -35,7 +43,7 @@ function NavigationBar(props){
               </NavItem>
             </div>
             <NavItem>
-            {props.loggedIn && <NavLink id="logoff" onClick={props.logout}>Log Out</NavLink>}
+            {props.loggedIn && props.name && <NavLink id="name" onClick={() => {}}>Hello, {props.name}!</NavLink>}
             {!props.loggedIn && 
               <Popup
                   trigger={{
@@ -48,6 +56,7 @@ function NavigationBar(props){
             }
             </NavItem>
             <NavItem>
+              {props.loggedIn && <NavLink id="logoff" onClick={props.logout}>Log Out</NavLink>}
               {!props.loggedIn &&
                 <Popup
                   trigger={{
@@ -68,7 +77,8 @@ function NavigationBar(props){
 
 function mapStateToProps(state){
   return{
-    loggedIn: state.loggedIn
+    loggedIn: state.loggedIn,
+    name: state.user? state.user.name : null
   }
 }
-export default connect(mapStateToProps, {logout})(NavigationBar);
+export default connect(mapStateToProps, {logout, getUser})(NavigationBar);

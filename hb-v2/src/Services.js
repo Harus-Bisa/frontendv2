@@ -50,6 +50,7 @@ class Services{
         .then(async response =>{
             localStorage.setItem("token", response.data.token)
             const userId = response.data.userId;
+            localStorage.setItem("userId", userId)
             return userId;
         })
         .catch(error => {
@@ -59,6 +60,7 @@ class Services{
     
     logout(){
         localStorage.removeItem("token");
+        localStorage.removeItem("userId")
     }
 
     isLoggedIn(){
