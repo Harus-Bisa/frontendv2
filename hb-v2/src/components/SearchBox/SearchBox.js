@@ -80,7 +80,7 @@ function SearchBox(props){
             />
             {props.found === false && 
                 <div style={{marginTop:'1.5rem'}}>
-                    <p>Tidak menemukan nama Dosen Anda? <a href={"/review/new/"+ (text === "" ? "Nama Dosen" : text)}>Laporkan Sekarang!</a></p>
+                    <p>Tidak menemukan nama Dosen Anda? <a href={"/review/new/"+ (text === "" ? "Nama Dosen" : text)}>Jadilah penulis pertama!</a></p>
                 </div>
             }
             {props.error && <Feedback color={"danger"} message={props.error.message}/>}
