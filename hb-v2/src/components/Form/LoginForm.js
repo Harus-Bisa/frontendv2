@@ -32,12 +32,21 @@ function LoginForm(props){
             <Form onSubmit={submit}>
                 <FormGroup>
                     <Label>Email*</Label>
-                    <Input type="text" id="email" value={email} onChange={(event) => setEmail(event.target.value)} required autoFocus/>
+                    <Input 
+                        type="email" 
+                        id="email" 
+                        value={email} 
+                        onChange={(event) => setEmail(event.target.value)} 
+                        required 
+                        autoFocus
+                        placeholder="Email Sekolah Anda"
+                    />
                 </FormGroup>
                 <FormGroup>
                     <Label>Password*</Label>
                     <Input type="password" id="password" value={password} onChange={(event) => setPassword(event.target.value)} required/>
                 </FormGroup>
+                <p>Dengan masuk, Anda setuju dengan Syarat dan Ketentuan dan Kebijakan Privasi.</p>
                 <Button type="submit" className="contrast-button" fullWidth>Login</Button>
             </Form>
         </div>

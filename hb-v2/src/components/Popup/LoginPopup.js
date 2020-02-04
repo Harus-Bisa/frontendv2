@@ -5,7 +5,7 @@ import LoginForm from "../Form/LoginForm";
 export default function LoginPopup(props){
     return(
         <PopupForm
-            header={<h1>Log In</h1>}
+            header={<h3>Masuk Ke Akun Anda</h3>}
             form={<LoginForm page={props.page} closePopup={props.closePopup}/>}
             footer={
                 <div>
