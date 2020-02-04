@@ -41,7 +41,7 @@ function SearchBox(props){
                 onOpen={() => {setOpen(true)}}
                 onClose={() => {
                     setOpen(false) 
-                    props.clearreviewees()
+                    props.clearReviewees()
                 }}
                 onChange={(event, value) => {
                     if(value && value.revieweeId){
