@@ -33,7 +33,7 @@ function NavigationBar(props){
   return (
     <div>
       <Navbar light expand="md" className="navbar">
-        <NavbarBrand href="/">Harus Bisa</NavbarBrand>
+        <NavbarBrand href="/">Dosen Ku</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar className="justify-content-end full-height">
           <Nav navbar>
