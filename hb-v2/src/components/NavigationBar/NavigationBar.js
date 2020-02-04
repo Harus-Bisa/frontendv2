@@ -35,9 +35,9 @@ function NavigationBar(props){
       <Navbar light expand="md" className="navbar">
         <NavbarBrand href="/">Harus Bisa</NavbarBrand>
         <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar style={isOpen ? {height:'100vh'} : {}} className="justify-content-end">
+        <Collapse isOpen={isOpen} navbar className="justify-content-end full-height">
           <Nav navbar>
-            <div class="d-md-none">
+            <div className="d-md-none">
               <NavItem>
                 <SearchBox close={toggle}/>
               </NavItem>
