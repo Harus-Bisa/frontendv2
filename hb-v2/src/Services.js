@@ -85,7 +85,7 @@ class Services{
             this.errorHandling(error);
         }
     }
-    async findUsers(name){
+    async findReviewees(name){
         const url = this.domain + "/reviewees/?name="+name;
         return axios.get(url,{headers:this.headers()})
         .then(response =>{

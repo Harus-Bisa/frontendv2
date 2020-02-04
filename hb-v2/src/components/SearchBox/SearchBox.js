@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import {Autocomplete} from '@material-ui/lab'
 import { TextField, CircularProgress } from "@material-ui/core";
 import { throttle, debounce } from "throttle-debounce";
-import { findUsers, clearUsers } from "../../redux/actions";
+import { findReviewees, clearUsers } from "../../redux/actions";
 import { connect } from "react-redux";
 import Feedback from "../Feedback/Feedback";
 
@@ -17,10 +17,10 @@ function SearchBox(props){
         setText(query)
         setOpen(true)
         if(query.length < 2 || query.endsWith(' ')){
-            throttle(500, props.findUsers(query))
+            throttle(500, props.findReviewees(query))
         }
         else{
-            debounce(500, props.findUsers(query))
+            debounce(500, props.findReviewees(query))
         }
     }
     
@@ -90,7 +90,7 @@ function SearchBox(props){
 
 SearchBox.propTypes={
     users: PropTypes.array,
-    findUsers: PropTypes.func
+    findReviewees: PropTypes.func
 }
 
 function mapStateToProps(state){
@@ -101,4 +101,4 @@ function mapStateToProps(state){
         loading: state.loadUsers
     }
 }
-export default connect(mapStateToProps, {findUsers, clearUsers})(withRouter(SearchBox));
+export default connect(mapStateToProps, {findReviewees, clearUsers})(withRouter(SearchBox));

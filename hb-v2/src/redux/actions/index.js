@@ -43,10 +43,10 @@ export function logout(){
         return dispatch({type: LOGOUT})
     }
 }
-export function findUsers(name){
+export function findReviewees(name){
     return async function(dispatch){
         dispatch({type:LOAD_REVIEWEES})
-        return await services.findUsers(name)
+        return await services.findReviewees(name)
         .then(async response =>{
             await dispatch({type:FIND_REVIEWEES, payload: response})
             dispatch(removeError())
