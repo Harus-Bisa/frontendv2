@@ -47,9 +47,10 @@ class Services{
             password: password
         }
         return axios.post(url,data)
-        .then(response =>{
+        .then(async response =>{
             localStorage.setItem("token", response.data.token)
-            return response.data.userId
+            const userId = response.data.userId;
+            return userId;
         })
         .catch(error => {
             this.errorHandling(error)
@@ -84,6 +85,17 @@ class Services{
         catch(error){
             this.errorHandling(error);
         }
+    }
+
+    async getUser(userId){
+        const url = this.domain + '/users/' + userId;
+        return axios.get(url,{headers:this.headers()})
+        .then(response =>{
+            return response.data
+        })
+        .catch(error =>{
+            this.errorHandling(error)
+        })
     }
     async findReviewees(name){
         const url = this.domain + "/reviewees/?name="+name;

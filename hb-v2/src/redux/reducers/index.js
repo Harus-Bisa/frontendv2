@@ -65,7 +65,7 @@ export default function rootReducer(state = initialState, action){
     if(action.type === LOGOUT){
         return Object.assign({}, state, {
             loggedIn: false,
-            userId: null
+            user:null
         })
     }
     if(action.type === RESEND_VERIFICATION){

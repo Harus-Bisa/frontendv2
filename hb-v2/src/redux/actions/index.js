@@ -15,8 +15,19 @@ export function signup(newUserData){
 export function login(email, password){
     return async function(dispatch){
         return await services.login(email, password)
+        .then(async userId => {
+            await dispatch(getUser(userId))        
+        })
+        .catch(error =>{
+            dispatch(setError(error))
+        })
+    }
+}
+export function getUser(userId){
+    return async function(dispatch){
+        return await services.getUser(userId)
         .then(async response => {
-            await dispatch({type: LOGIN, payload: response})
+            await dispatch({type: LOGIN, payload: response})       
         })
         .catch(error =>{
             dispatch(setError(error))
