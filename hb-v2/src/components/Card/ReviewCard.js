@@ -7,6 +7,7 @@ import { voteReview } from "../../redux/actions";
 import Popup from "../Popup/Popup";
 import SignUpLoginPrompt from "./SignUpLoginPrompt";
 import LoginPopup from "../Popup/LoginPopup";
+import ReportInappropriate from "../Popup/ReportInappropriatePopup";
 
 function ReviewCard(props){
     var [expand, setExpand] = React.useState(false)
@@ -25,6 +26,13 @@ function ReviewCard(props){
         if (props.loggedIn){
             props.voteReview(props.revieweeId, props.review.reviewId, v)
         }
+    }
+    const ReportInappropriateTrigger = (props) =>{ 
+        return(
+        <div className="col" style={{display:'flex', justifyContent:'flex-end'}}>
+            <button onClick={props.onClick} style={{color:'black'}}>Laporkan</button>
+            <EmojiFlagsOutlined className="icon"/>
+        </div>)
     }
     return(
         <div className='col-12' style={{paddingTop:'15px', paddingBottom:'15px'}}>
@@ -165,10 +173,13 @@ function ReviewCard(props){
                             </React.Fragment>
                             }
                         </div>
-                        <div className="col" style={{display:'flex', justifyContent:'flex-end'}}>
-                            <a href="/" style={{color:'black'}}>Laporkan</a>
-                            <EmojiFlagsOutlined className="icon"/>
-                        </div>
+                        <Popup 
+                            content={ReportInappropriate}
+                            trigger={{
+                                component:ReportInappropriateTrigger,
+                                id:'report-inappropriate-button'
+                            }}
+                        />
                     </div>
                 </div>
             </div>
