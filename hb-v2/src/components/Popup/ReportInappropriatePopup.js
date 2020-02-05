@@ -3,7 +3,12 @@ import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from "@m
 import { ExpandMore } from "@material-ui/icons";
 import ReportInappropriateForm from "../Form/ReportInappropriateForm";
 
-export default function ReportInappropriatePopup(){
+export default function ReportInappropriatePopup(props){
+    const [expanded, setExpanded] = React.useState(false);
+
+    const handleChange = panel => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : false);
+    };
     return(
         <div>
             <div className="content" style={{ marginBottom:'-15px'}}>
@@ -15,36 +20,36 @@ export default function ReportInappropriatePopup(){
                     <h4>Apa Permasalahannya?</h4>
                 </div>
                 <div>
-                    <ExpansionPanel id="inaccurate-content">
+                    <ExpansionPanel id="inaccurate-content" expanded={expanded === 'inaccurate-content'} onChange={handleChange('inaccurate-content')}>
                         <ExpansionPanelSummary expandIcon={<ExpandMore/>}>
                             <p>Konten yang ada tidak tepat</p>
                         </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                            <ReportInappropriateForm type="inaccurate"/>
+                        <ExpansionPanelDetails className="content">
+                            <ReportInappropriateForm closePopup={props.closePopup} type="inaccurate" />
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
-                    <ExpansionPanel id="irrelevant-content">
+                    <ExpansionPanel id="irrelevant-content" expanded={expanded === 'irrelevant-content'} onChange={handleChange('irrelevant-content')}>
                         <ExpansionPanelSummary expandIcon={<ExpandMore/>}>
                             <p>Konten yang ada tidak relevan</p>
                         </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                            <ReportInappropriateForm type="irrelevant"/>
+                        <ExpansionPanelDetails className="content">
+                            <ReportInappropriateForm closePopup={props.closePopup} type="irrelevant"/>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
-                    <ExpansionPanel id="inconsistent-content">
+                    <ExpansionPanel id="inconsistent-content" expanded={expanded === 'inconsistent-content'} onChange={handleChange('inconsistent-content')}>
                         <ExpansionPanelSummary expandIcon={<ExpandMore/>}>
                             <p>Konten yang ada tidak konsisten</p>
                         </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                            <ReportInappropriateForm type="inconsistent"/>
+                        <ExpansionPanelDetails className="content">
+                            <ReportInappropriateForm closePopup={props.closePopup} type="inconsistent"/>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>  
-                    <ExpansionPanel id="foulLanguage-content">  
+                    <ExpansionPanel id="foulLanguage-content" expanded={expanded === 'foulLanguage-content'} onChange={handleChange('foulLanguage-content')}>  
                         <ExpansionPanelSummary expandIcon={<ExpandMore/>}>
                             <p>Konten terdapat bahasa yang kasar, ungkapan kebencian, prasangka, ancaman, atau hinaan pribadi.</p>
                         </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                            <ReportInappropriateForm type="foulLanguage"/>
+                        <ExpansionPanelDetails className="content">
+                            <ReportInappropriateForm closePopup={props.closePopup} type="foulLanguage"/>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
                 </div>                

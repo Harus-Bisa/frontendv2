@@ -12,7 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, p, a, input, span {
+h1, h2, h3, h4, h5, p, a, input, span, label {
   font-family: 'Poppins', sans-serif !important;
 }
 
@@ -47,7 +47,7 @@ h5{
   line-height: 21px;
 }
 
-p, a, input{
+p, a, input, label{
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -67,7 +67,7 @@ a:hover{
 }
 
 .content{
-  padding: 1rem 2rem;
+  padding: 1rem 2rem !important;
 }
 
 .page-container{
@@ -93,6 +93,7 @@ a:hover{
 
 .button{
   text-transform: none !important;
+  letter-spacing: normal !important;
 }
 
 .option-button{
@@ -133,9 +134,17 @@ a:hover{
   font-weight: normal !important;
 }
 
+.contrast-opposite-button{
+  color: var(--hb-blue) !important;
+  background-color: white !important;
+}
+
 .MuiButton-root.Mui-disabled {
   background-color: rgba(0, 0, 0, 0.08) !important;
   border: 0px !important;
+}
+.MuiExpansionPanelSummary-root{
+  padding: 0 2rem !important;
 }
 .form-control, .PrivateNotchedOutline-root-102, .MuiOutlinedInput-notchedOutline{
   border: 1px solid #000000;

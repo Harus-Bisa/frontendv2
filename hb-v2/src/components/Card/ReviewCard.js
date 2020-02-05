@@ -7,7 +7,7 @@ import { voteReview } from "../../redux/actions";
 import Popup from "../Popup/Popup";
 import SignUpLoginPrompt from "./SignUpLoginPrompt";
 import LoginPopup from "../Popup/LoginPopup";
-import ReportInappropriate from "../Popup/ReportInappropriatePopup";
+import ReportInappropriatePopup from "../Popup/ReportInappropriatePopup";
 
 function ReviewCard(props){
     var [expand, setExpand] = React.useState(false)
@@ -30,8 +30,10 @@ function ReviewCard(props){
     const ReportInappropriateTrigger = (props) =>{ 
         return(
         <div className="col" style={{display:'flex', justifyContent:'flex-end'}}>
-            <button onClick={props.onClick} style={{color:'black'}}>Laporkan</button>
-            <EmojiFlagsOutlined className="icon"/>
+            <Button className="button" onClick={props.onClick} style={{color:'black'}}>
+                <p>Laporkan</p>
+                <EmojiFlagsOutlined className="icon"/>
+            </Button>
         </div>)
     }
     return(
@@ -174,7 +176,7 @@ function ReviewCard(props){
                             }
                         </div>
                         <Popup 
-                            content={ReportInappropriate}
+                            content={ReportInappropriatePopup}
                             trigger={{
                                 component:ReportInappropriateTrigger,
                                 id:'report-inappropriate-button'
