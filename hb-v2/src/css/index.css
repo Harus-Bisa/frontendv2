@@ -71,7 +71,7 @@ a:hover{
 }
 
 .page-container{
-  padding-top: calc(64px + 1rem);
+  padding-top: calc(64px + 1rem) !important;
 }
 
 .navbar{
