@@ -1,5 +1,5 @@
 import React from "react";
-import { FormGroup, Input, Label, Form } from "reactstrap";
+import { FormGroup, Input, Label, Form, FormText } from "reactstrap";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { login } from "../../redux/actions";
@@ -32,13 +32,26 @@ function LoginForm(props){
             <Form onSubmit={submit}>
                 <FormGroup>
                     <Label>Email*</Label>
-                    <Input type="text" id="email" value={email} onChange={(event) => setEmail(event.target.value)} required autoFocus/>
+                    <Input 
+                        type="email" 
+                        id="email" 
+                        value={email} 
+                        onChange={(event) => setEmail(event.target.value)} 
+                        required 
+                        autoFocus
+                        placeholder="Email Sekolah Anda"
+                    />
                 </FormGroup>
                 <FormGroup>
                     <Label>Password*</Label>
                     <Input type="password" id="password" value={password} onChange={(event) => setPassword(event.target.value)} required/>
                 </FormGroup>
-                <Button type="submit" className="contrast-button" fullWidth>Login</Button>
+                <FormGroup>
+                    <FormText>Dengan masuk, Anda setuju dengan Syarat dan Ketentuan dan Kebijakan Privasi.</FormText>
+                </FormGroup>
+                <FormGroup>
+                    <Button type="submit" className="contrast-button" fullWidth>Login</Button>
+                </FormGroup>
             </Form>
         </div>
     )

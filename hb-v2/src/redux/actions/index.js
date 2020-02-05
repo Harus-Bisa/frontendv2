@@ -1,5 +1,5 @@
 import services from "../../Services"
-import { FIND_USERS, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_USERS, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_USERS } from "../constants/action-types"
+import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, RESEND_VERIFICATION } from "../constants/action-types"
 
 export function signup(newUserData){
     return async function(dispatch){
@@ -15,8 +15,31 @@ export function signup(newUserData){
 export function login(email, password){
     return async function(dispatch){
         return await services.login(email, password)
+        .then(async userId => {
+            await dispatch(getUser(userId))        
+        })
+        .catch(error =>{
+            dispatch(setError(error))
+        })
+    }
+}
+export function getUser(userId){
+    return async function(dispatch){
+        return await services.getUser(userId)
         .then(async response => {
-            await dispatch({type: LOGIN, payload: response})
+            await dispatch({type: LOGIN, payload: response})       
+        })
+        .catch(error =>{
+            dispatch(setError(error))
+        })
+    }
+}
+
+export function resendVerification(email){
+    return async function(dispatch){
+        return services.resendVerification(email)
+        .then(async response =>{
+            await dispatch({type: RESEND_VERIFICATION})
             dispatch(removeError())
         })
         .catch(error =>{
@@ -30,12 +53,12 @@ export function logout(){
         return dispatch({type: LOGOUT})
     }
 }
-export function findUsers(name){
+export function findReviewees(name){
     return async function(dispatch){
-        dispatch({type:LOAD_USERS})
-        return await services.findUsers(name)
+        dispatch({type:LOAD_REVIEWEES})
+        return await services.findReviewees(name)
         .then(async response =>{
-            await dispatch({type:FIND_USERS, payload: response})
+            await dispatch({type:FIND_REVIEWEES, payload: response})
             dispatch(removeError())
         })
         .catch(error =>{
@@ -44,8 +67,8 @@ export function findUsers(name){
     }
 }
 
-export function clearUsers(){
-    return ({type:CLEAR_USERS})
+export function clearReviewees(){
+    return ({type:CLEAR_REVIEWEES})
 }
 export function getReviews(revieweeId){
     return async function(dispatch){

@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import {Autocomplete} from '@material-ui/lab'
 import { TextField, CircularProgress } from "@material-ui/core";
 import { throttle, debounce } from "throttle-debounce";
-import { findUsers, clearUsers } from "../../redux/actions";
+import { findReviewees, clearReviewees } from "../../redux/actions";
 import { connect } from "react-redux";
 import Feedback from "../Feedback/Feedback";
 
@@ -17,10 +17,10 @@ function SearchBox(props){
         setText(query)
         setOpen(true)
         if(query.length < 2 || query.endsWith(' ')){
-            throttle(500, props.findUsers(query))
+            throttle(500, props.findReviewees(query))
         }
         else{
-            debounce(500, props.findUsers(query))
+            debounce(500, props.findReviewees(query))
         }
     }
     
@@ -41,14 +41,14 @@ function SearchBox(props){
                 onOpen={() => {setOpen(true)}}
                 onClose={() => {
                     setOpen(false) 
-                    props.clearUsers()
+                    props.clearReviewees()
                 }}
                 onChange={(event, value) => {
                     if(value && value.revieweeId){
                         select(value.revieweeId)
                     }
                 }}
-                options={props.users}
+                options={props.reviewees}
                 loading={props.loading}
                 noOptionsText="Dosen tidak ditemukan."
                 renderInput={params => (
@@ -80,7 +80,7 @@ function SearchBox(props){
             />
             {props.found === false && 
                 <div style={{marginTop:'1.5rem'}}>
-                    <p>Tidak menemukan nama Dosen Anda? <a href={"/review/new/"+ (text === "" ? "Nama Dosen" : text)}>Laporkan Sekarang!</a></p>
+                    <p>Tidak menemukan nama Dosen Anda? <a href={"/review/new/"+ (text === "" ? "Nama Dosen" : text)}>Jadilah penulis pertama!</a></p>
                 </div>
             }
             {props.error && <Feedback color={"danger"} message={props.error.message}/>}
@@ -89,16 +89,16 @@ function SearchBox(props){
 }
 
 SearchBox.propTypes={
-    users: PropTypes.array,
-    findUsers: PropTypes.func
+    reviewees: PropTypes.array,
+    findReviewees: PropTypes.func
 }
 
 function mapStateToProps(state){
     return{
-        users:state.users,
+        reviewees:state.reviewees,
         error: state.error,
         found: state.found,
-        loading: state.loadUsers
+        loading: state.loadReviewees
     }
 }
-export default connect(mapStateToProps, {findUsers, clearUsers})(withRouter(SearchBox));
+export default connect(mapStateToProps, {findReviewees, clearReviewees})(withRouter(SearchBox));

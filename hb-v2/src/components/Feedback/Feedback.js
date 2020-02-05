@@ -7,7 +7,12 @@ function Feedback(props){
     const [visible, setVisible] = React.useState(true);
     const onDismiss = () => {
         setVisible(false)
-        props.removeError();
+        if(props.color === "danger"){
+            props.removeError();
+        }
+        else if(props.color === "success"){
+            //remove success
+        }
     };
     const message = () =>{
         var content=[];
