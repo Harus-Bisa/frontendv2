@@ -176,7 +176,7 @@ function ReviewCard(props){
                             }
                         </div>
                         <Popup 
-                            content={ReportInappropriatePopup}
+                            content={props.loggedIn ? ReportInappropriatePopup : LoginPopup}
                             trigger={{
                                 component:ReportInappropriateTrigger,
                                 id:'report-inappropriate-button'
