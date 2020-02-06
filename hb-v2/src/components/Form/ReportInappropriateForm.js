@@ -26,14 +26,7 @@ export default function ReportInappropriateForm(props){
                 />
             </FormGroup>
             <FormGroup>
-                <div className="row justify-content-between">
-                    <div className="col-6">
-                        <Button className="contrast-button button contrast-opposite-button" fullWidth id={"back-button-"+props.type} onClick={props.closePopup}>Kembali</Button>
-                    </div>
-                    <div className="col-6">
-                        <Button className="contrast-button button" fullWidth id={"submit-button"+props.type} type="submit">Kirim</Button>
-                    </div>
-                </div>
+                <Button className="contrast-button button" fullWidth id={"submit-button"+props.type} type="submit">Kirim</Button>
             </FormGroup>
         </Form>
     )
