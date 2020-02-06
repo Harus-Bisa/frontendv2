@@ -14,6 +14,7 @@ import { logout, getUser } from '../../redux/actions';
 import Popup from '../Popup/Popup';
 import LoginPopup from '../Popup/LoginPopup';
 import SignUpPopup from '../Popup/SignupPopup';
+import { withRouter } from 'react-router-dom';
 
 function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +22,10 @@ function NavigationBar(props){
   const toggle = () => setIsOpen(!isOpen);
   const SignUp = (props) =>{
     return(<SignUpPopup collapseNavbar={() => setIsOpen(false)} closePopup={props.closePopup}/>)
+  }
+  const logout = () =>{
+    props.logout()
+    props.history.push("/")
   }
   const loggedIn = props.loggedIn
   const name = props.name
@@ -56,7 +61,7 @@ function NavigationBar(props){
             }
             </NavItem>
             <NavItem>
-              {props.loggedIn && <NavLink id="logoff" onClick={props.logout}>Log Out</NavLink>}
+              {props.loggedIn && <NavLink id="logoff" onClick={logout}>Log Out</NavLink>}
               {!props.loggedIn &&
                 <Popup
                   trigger={{
@@ -81,4 +86,4 @@ function mapStateToProps(state){
     name: state.user? state.user.name : null
   }
 }
-export default connect(mapStateToProps, {logout, getUser})(NavigationBar);
+export default connect(mapStateToProps, {logout, getUser})(withRouter(NavigationBar));
