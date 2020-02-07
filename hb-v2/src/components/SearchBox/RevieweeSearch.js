@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { withRouter } from "react-router-dom";
 import {Autocomplete} from '@material-ui/lab'
 import { TextField, CircularProgress } from "@material-ui/core";
 import { throttle, debounce } from "throttle-debounce";
@@ -8,54 +7,41 @@ import { findReviewees, clearReviewees } from "../../redux/actions";
 import { connect } from "react-redux";
 
 function RevieweeSearch(props){
-    var [text, setText] = React.useState("")
-    var [open, setOpen] = React.useState(false)
 
-    const handleChange = (event) =>{
-        var query = event.target.value
-        setText(query)
-        setOpen(true)
-        if(query.length < 2 || query.endsWith(' ')){
-            throttle(500, props.findReviewees(query))
+    const handleChange = (event, value) =>{
+        props.setReviewee(value)
+        if(value.length < 2 || value.endsWith(' ')){
+            throttle(500, props.findReviewees(value))
         }
         else{
-            debounce(500, props.findReviewees(query))
-        }
-    }
-    
-    const select = (id) =>{
-        props.history.push("/review/"+id)
-        if(props.close){
-            props.close()
+            debounce(500, props.findReviewees(value))
         }
     }
     return(
         <Autocomplete
-            id={props.close ? "search-box-navbar" : "search-box"}
+            className="search-input"
             style={{width:'100%'}}
             freeSolo
             getOptionLabel={option => option.name}
-            open={open}
-            onOpen={() => {setOpen(true)}}
             onClose={() => {
-                setOpen(false) 
                 props.clearReviewees()
             }}
             onChange={(event, value) => {
-                if(value && value.revieweeId){
-                    select(value.revieweeId)
+                if(value){
+                    props.setReviewee(value.name)
+                    props.setSchool(value.school)
                 }
             }}
+            onInputChange={handleChange}
             options={props.reviewees}
             loading={props.loading}
             noOptionsText="Dosen tidak ditemukan."
             renderInput={params => (
                 <TextField
                     {...params}
-                    placeholder="Cari nama dosen Anda"
+                    placeholder="Cari dosen"
                     fullWidth
-                    onChange={handleChange}
-                    value={text}
+                    value={props.reviewee}
                     InputProps={{
                     ...params.InputProps,
                     endAdornment: (
@@ -90,4 +76,4 @@ function mapStateToProps(state){
         loading: state.loadReviewees
     }
 }
-export default connect(mapStateToProps, {findReviewees, clearReviewees})(withRouter(RevieweeSearch));
+export default connect(mapStateToProps, {findReviewees, clearReviewees})(RevieweeSearch);
