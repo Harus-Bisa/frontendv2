@@ -228,6 +228,7 @@ function ReviewForm(props){
                         getOptionLabel={option => option}
                         value={profSchool}
                         onChange={(event, value) => setProfSchool(value)}
+                        onInputChange={(event, value) => setProfSchool(value)}
                         style={{ width: "100% "}}
                         disabled={existingProf}
                         renderInput={params => (
@@ -236,7 +237,6 @@ function ReviewForm(props){
                                 variant="outlined"
                                 fullWidth
                                 required
-                                onChange={(event) => setProfSchool(event.target.value)}
                             />
                         )}
                     />
