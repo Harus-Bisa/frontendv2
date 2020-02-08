@@ -10,9 +10,12 @@ export const RESEND_VERIFICATION = "RESEND_VERIFICATION";
 
 export const SET_ERROR = "SET_ERROR";
 export const REMOVE_ERROR = "REMOVE_ERROR";
+export const SET_SUCCESS = "SET_SUCCESS";
+export const REMOVE_SUCCESS = "REMOVE_SUCCESS";
 
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
 export const SET_LOADING = "SET_LOADING";
 export const REMOVE_LOADING = "REMOVE_LOADING";
+

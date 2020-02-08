@@ -70,13 +70,13 @@ class Services{
 
     async signup(newUserData){
         const url = this.domain + '/signup';
-        try{
-            await axios.post(url, newUserData, {headers: this.headers()})
-            return newUserData;
-        }
-        catch(error){
+        await axios.post(url, newUserData, {headers: this.headers()})
+        .then(() =>{
+            return newUserData
+        })
+        .catch(error =>{
             this.errorHandling(error);
-        }
+        })
     }
 
     async resendVerification(email){
@@ -99,8 +99,8 @@ class Services{
             this.errorHandling(error)
         })
     }
-    async findReviewees(name){
-        const url = this.domain + "/reviewees/?name="+name;
+    async findReviewees(name, school){
+        const url = this.domain + "/reviewees/?name="+name+"&school="+school;
         return axios.get(url,{headers:this.headers()})
         .then(response =>{
             return response.data

@@ -186,7 +186,7 @@ a:hover{
   right: 15px;
 }
 .grey-box{
-  background-color: #EEEEEE;
+  background-color: #f4f4f4 !important;
 }
 
 .grey-box a{
@@ -224,22 +224,6 @@ a:hover{
     height:100vh;
   }
 }
-.search-box{
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-.search-box #search-box, .search-box #search-box:focus{
-  border: 0px;
-  /* width: 100%; */
-  box-shadow: none;
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 27px;
-  display: flex;
-  align-items: center;
-  color: black;
-}
+
 
 

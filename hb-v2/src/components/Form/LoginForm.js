@@ -12,11 +12,6 @@ function LoginForm(props){
     const submit = async (event) =>{
         event.preventDefault();
         await props.login(email, password)
-        .then(() =>{
-            if(props.loggedIn && props.page){
-                props.history.push("/")
-            }
-        })
         
     }
     const loggedIn = props.loggedIn
@@ -26,6 +21,15 @@ function LoginForm(props){
             closePopup()
         }
     }, [loggedIn, closePopup])
+    if(props.loggedIn && props.page){
+        if(localStorage.getItem("review")){
+            var name = JSON.parse(localStorage.getItem('review')).name
+            props.history.push("/review/new/"+name)
+        }
+        else{
+            props.history.push("/")
+        }
+    }
     return(
         <div className="container content">
             {props.error && <Feedback color={"danger"} message={props.error.message}/>}

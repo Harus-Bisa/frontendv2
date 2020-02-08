@@ -13282,9 +13282,10 @@
 //  ];
 
 export const options = [
-  "Institut Teknologi Bandung",
-  "Swiss German University",
-  "Universitas Pelita Harapan",
-  "Universitas Prasetya Mulya",
-  "Universitas Indonesia"
+    "Binus University",
+    "Institut Teknologi Bandung",
+    "Swiss German University",
+    "Universitas Pelita Harapan",
+    "Universitas Prasetya Mulya",
+    "Universitas Indonesia"
 ]

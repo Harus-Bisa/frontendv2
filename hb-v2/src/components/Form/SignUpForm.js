@@ -2,8 +2,9 @@ import React from "react";
 import { FormGroup, Input, Label, Form, FormText } from "reactstrap";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
-import { signup } from "../../redux/actions";
+import { signup, removeSuccess } from "../../redux/actions";
 import { withRouter } from "react-router-dom";
+import Feedback from "../Feedback/Feedback";
 
 function SignUpForm(props){
     var [email, setEmail] = React.useState("")
@@ -11,34 +12,31 @@ function SignUpForm(props){
     var [confirmPassword, setConfirmPassword] = React.useState("")
     var [name, setName] = React.useState("")
 
-    const submit = (event) =>{
+    const submit = async (event) =>{
         event.preventDefault();
         const data = {
             name: name,
             email: email,
             password: password
         }
-        try{
-            props.signup(data)
-            if(props.closePopup){
-                props.closePopup()
-            }
-            props.history.push('/verification/'+email)
-        }
-        catch(error){
-            console.log(error)
-        }
-        
+        await props.signup(data)
     }
+
     var validEmail = email !==""
     var validPassword = password === confirmPassword && password !== ""
     var validName = name !== ""
-
+    if(props.success){
+        if(props.closePopup){
+            props.closePopup()
+        }
+        props.history.push('/verification/'+email)
+        props.removeSuccess()
+    }  
     return(
-        <div className="container content">
+        <div className="container content" id="sign-up-form">
             <Form onSubmit={submit}>
                 <FormGroup>
-                    <Label>Nama*</Label>
+                    <Label>Nama Lengkap*</Label>
                     <Input 
                         valid={validName} 
                         type="text" 
@@ -87,6 +85,7 @@ function SignUpForm(props){
                 <FormGroup>
                     <FormText>Dengan melanjutkan, Anda menyetujui Syarat dan Ketentuan Dosen Ku dan menyetujui Kebijakan Privasi Dosen Ku</FormText>
                 </FormGroup>
+                {props.error && <Feedback color={"danger"} message={props.error.message}/>}
                 <FormGroup>
                     <Button type="submit" className="contrast-button" fullWidth>Daftar</Button>
                 </FormGroup>
@@ -94,5 +93,10 @@ function SignUpForm(props){
         </div>
     )
 }
-
-export default connect(null, {signup})(withRouter(SignUpForm));
+function mapStateToProps(state){
+    return{
+        error: state.error,
+        success: state.success
+    }
+}
+export default connect(mapStateToProps, {signup, removeSuccess})(withRouter(SignUpForm));
