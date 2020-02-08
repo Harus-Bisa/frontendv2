@@ -25,6 +25,7 @@ function NavigationBar(props){
   }
   const logout = () =>{
     props.logout()
+    setIsOpen(false)
     props.history.push("/")
   }
   const loggedIn = props.loggedIn
