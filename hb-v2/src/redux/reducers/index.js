@@ -1,4 +1,4 @@
-import { FIND_REVIEWEES, GET_REVIEWS, CLEAR_REVIEWEES, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, RESEND_VERIFICATION } from "../constants/action-types";
+import { FIND_REVIEWEES, GET_REVIEWS, CLEAR_REVIEWEES, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, RESEND_VERIFICATION, REMOVE_SUCCESS, SET_SUCCESS } from "../constants/action-types";
 import services from "../../Services";
 
 const initialState ={
@@ -56,6 +56,16 @@ export default function rootReducer(state = initialState, action){
             })
         } 
     }
+    if(action.type === SET_SUCCESS){
+        return Object.assign({}, state, {
+            success: true
+        })
+    }
+    if(action.type === REMOVE_SUCCESS){
+        return Object.assign({}, state, {
+            success: false
+        })
+    }
     if(action.type === LOGIN){
         return Object.assign({}, state, {
             loggedIn: true,
@@ -66,11 +76,6 @@ export default function rootReducer(state = initialState, action){
         return Object.assign({}, state, {
             loggedIn: false,
             user:null
-        })
-    }
-    if(action.type === RESEND_VERIFICATION){
-        return Object.assign({}, state, {
-            success: true
         })
     }
     if(action.type === SET_LOADING){

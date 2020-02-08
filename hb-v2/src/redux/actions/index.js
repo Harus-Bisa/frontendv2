@@ -1,10 +1,12 @@
 import services from "../../Services"
-import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, RESEND_VERIFICATION } from "../constants/action-types"
+import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, RESEND_VERIFICATION, SET_SUCCESS, REMOVE_SUCCESS } from "../constants/action-types"
 
 export function signup(newUserData){
     return async function(dispatch){
+        dispatch(removeSuccess())
         return await services.signup(newUserData)
         .then(response => {
+            dispatch(setSuccess())
             dispatch(removeError())
         })
         .catch(error =>{
@@ -37,9 +39,10 @@ export function getUser(userId){
 
 export function resendVerification(email){
     return async function(dispatch){
+        dispatch(removeSuccess())
         return services.resendVerification(email)
         .then(async response =>{
-            await dispatch({type: RESEND_VERIFICATION})
+            dispatch(setSuccess())
             dispatch(removeError())
         })
         .catch(error =>{
@@ -125,6 +128,13 @@ export function setError(error){
 
 export function removeError(){
     return {type: REMOVE_ERROR}
+}
+export function setSuccess(){
+    return {type: SET_SUCCESS}
+}
+
+export function removeSuccess(){
+    return {type: REMOVE_SUCCESS}
 }
 
 export function setLoading(){
