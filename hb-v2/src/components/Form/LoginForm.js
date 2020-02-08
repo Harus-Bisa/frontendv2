@@ -14,7 +14,13 @@ function LoginForm(props){
         await props.login(email, password)
         .then(() =>{
             if(props.loggedIn && props.page){
-                props.history.push("/")
+                if(localStorage.getItem("review")){
+                    var name = JSON.parse(localStorage.getItem('review')).name
+                    props.history.push("/review/new/"+name)
+                }
+                else{
+                    props.history.push("/")
+                }
             }
         })
         
