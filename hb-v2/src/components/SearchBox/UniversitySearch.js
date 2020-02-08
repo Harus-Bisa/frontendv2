@@ -17,6 +17,7 @@ function UniversitySearch(props){
             inputValue={props.school}
             onChange={(event, value) => props.setSchool(value)}
             onInputChange={(event, value) => props.setSchool(value)}
+            disableClearable
             style={{ width: "100% "}}
             renderInput={params => (
                 <TextField
