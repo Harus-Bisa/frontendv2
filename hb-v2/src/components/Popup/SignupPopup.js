@@ -8,11 +8,11 @@ export default function SignUpPopup(props){
     }
     return(
         <PopupForm
-            header={<h1>Buat Akun Gratis</h1>}
+            header={<h3>Daftar Akun Gratis</h3>}
             form={<SignUpForm page={props.page} closePopup={props.closePopup}/>}
             footer={
                 <div>
-                    <p>Sudah mempunyai akun? <a href="/login">Log In sekarang!</a></p>
+                    <p>Sudah punyai akun? <a href="/login">Log In!</a></p>
                 </div>
             }
         />

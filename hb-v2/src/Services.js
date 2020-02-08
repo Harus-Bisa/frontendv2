@@ -47,9 +47,11 @@ class Services{
             password: password
         }
         return axios.post(url,data)
-        .then(response =>{
+        .then(async response =>{
             localStorage.setItem("token", response.data.token)
-            return response.data.userId
+            const userId = response.data.userId;
+            localStorage.setItem("userId", userId)
+            return userId;
         })
         .catch(error => {
             this.errorHandling(error)
@@ -58,6 +60,7 @@ class Services{
     
     logout(){
         localStorage.removeItem("token");
+        localStorage.removeItem("userId")
     }
 
     isLoggedIn(){
@@ -67,17 +70,37 @@ class Services{
 
     async signup(newUserData){
         const url = this.domain + '/signup';
+        await axios.post(url, newUserData, {headers: this.headers()})
+        .then(() =>{
+            return newUserData
+        })
+        .catch(error =>{
+            this.errorHandling(error);
+        })
+    }
+
+    async resendVerification(email){
+        const url = this.domain + '/resend';
         try{
-            await axios.post(url, newUserData, {headers: this.headers()})
-            return newUserData;
+            await axios.post(url, {email:email}, {headers: this.headers()})
         }
         catch(error){
             this.errorHandling(error);
         }
     }
 
-    async findUsers(name){
-        const url = this.domain + "/reviewees/?name="+name;
+    async getUser(userId){
+        const url = this.domain + '/users/' + userId;
+        return axios.get(url,{headers:this.headers()})
+        .then(response =>{
+            return response.data
+        })
+        .catch(error =>{
+            this.errorHandling(error)
+        })
+    }
+    async findReviewees(name, school){
+        const url = this.domain + "/reviewees/?name="+name+"&school="+school;
         return axios.get(url,{headers:this.headers()})
         .then(response =>{
             return response.data

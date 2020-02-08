@@ -10,10 +10,11 @@ import {
 } from 'reactstrap';
 import SearchBox from "../SearchBox/SearchBox";
 import { connect } from 'react-redux';
-import { logout } from '../../redux/actions';
+import { logout, getUser } from '../../redux/actions';
 import Popup from '../Popup/Popup';
 import LoginPopup from '../Popup/LoginPopup';
 import SignUpPopup from '../Popup/SignupPopup';
+import { withRouter } from 'react-router-dom';
 
 function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);
@@ -22,20 +23,33 @@ function NavigationBar(props){
   const SignUp = (props) =>{
     return(<SignUpPopup collapseNavbar={() => setIsOpen(false)} closePopup={props.closePopup}/>)
   }
+  const logout = () =>{
+    props.logout()
+    setIsOpen(false)
+    props.history.push("/")
+  }
+  const loggedIn = props.loggedIn
+  const name = props.name
+  const getUser = props.getUser
+  React.useEffect(() =>{
+    if(loggedIn && !name){
+      getUser(localStorage.getItem("userId"))
+    }
+  }, [loggedIn, name, getUser])
   return (
     <div>
       <Navbar light expand="md" className="navbar">
-        <NavbarBrand href="/">Harus Bisa</NavbarBrand>
+        <NavbarBrand href="/">Dosen Ku</NavbarBrand>
         <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar style={isOpen ? {height:'100vh'} : {}} className="justify-content-end">
+        <Collapse isOpen={isOpen} navbar className="justify-content-end full-height">
           <Nav navbar>
-            <div class="d-md-none">
+            <div className="d-md-none">
               <NavItem>
                 <SearchBox close={toggle}/>
               </NavItem>
             </div>
             <NavItem>
-            {props.loggedIn && <NavLink id="logoff" onClick={props.logout}>Log Out</NavLink>}
+            {props.loggedIn && props.name && <NavLink id="name" onClick={() => {}}>Hello, {props.name}!</NavLink>}
             {!props.loggedIn && 
               <Popup
                   trigger={{
@@ -48,6 +62,7 @@ function NavigationBar(props){
             }
             </NavItem>
             <NavItem>
+              {props.loggedIn && <NavLink id="logoff" onClick={logout}>Log Out</NavLink>}
               {!props.loggedIn &&
                 <Popup
                   trigger={{
@@ -68,7 +83,8 @@ function NavigationBar(props){
 
 function mapStateToProps(state){
   return{
-    loggedIn: state.loggedIn
+    loggedIn: state.loggedIn,
+    name: state.user? state.user.name : null
   }
 }
-export default connect(mapStateToProps, {logout})(NavigationBar);
+export default connect(mapStateToProps, {logout, getUser})(withRouter(NavigationBar));

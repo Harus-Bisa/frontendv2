@@ -1,24 +1,25 @@
-import { FIND_USERS, GET_REVIEWS, CLEAR_USERS, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_USERS } from "../constants/action-types";
+import { FIND_REVIEWEES, GET_REVIEWS, CLEAR_REVIEWEES, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, REMOVE_SUCCESS, SET_SUCCESS } from "../constants/action-types";
 import services from "../../Services";
 
 const initialState ={
     loggedIn: services.isLoggedIn(),
     loadingCount:0,
     loading: true,
-    users:[],
-    loadUsers: false
+    reviewees:[],
+    loadReviewees: false,
+    success: false
 }
 export default function rootReducer(state = initialState, action){
-    if(action.type === LOAD_USERS){
+    if(action.type === LOAD_REVIEWEES){
         return Object.assign({}, state, {
-            loadUsers: true
+            loadReviewees: true
         })
     }
-    if(action.type === FIND_USERS){
+    if(action.type === FIND_REVIEWEES){
         return Object.assign({}, state, {
-            users: action.payload,
+            reviewees: action.payload,
             found: action.payload.length !== 0,
-            loadUsers: false
+            loadReviewees: false
         })
     }
     if(action.type === GET_REVIEWS){
@@ -38,9 +39,9 @@ export default function rootReducer(state = initialState, action){
             }
         })
     }
-    if(action.type === CLEAR_USERS){
+    if(action.type === CLEAR_REVIEWEES){
         return Object.assign({}, state, {
-            users: []
+            reviewees: []
         })
     }
     if(action.type === SET_ERROR){
@@ -55,16 +56,26 @@ export default function rootReducer(state = initialState, action){
             })
         } 
     }
+    if(action.type === SET_SUCCESS){
+        return Object.assign({}, state, {
+            success: true
+        })
+    }
+    if(action.type === REMOVE_SUCCESS){
+        return Object.assign({}, state, {
+            success: false
+        })
+    }
     if(action.type === LOGIN){
         return Object.assign({}, state, {
             loggedIn: true,
-            userId: action.payload
+            user: action.payload
         })
     }
     if(action.type === LOGOUT){
         return Object.assign({}, state, {
             loggedIn: false,
-            userId: null
+            user:null
         })
     }
     if(action.type === SET_LOADING){

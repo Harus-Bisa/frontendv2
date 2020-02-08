@@ -12,7 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, p, a, input, span {
+h1, h2, h3, h4, h5, p, a, input, span, label {
   font-family: 'Poppins', sans-serif !important;
 }
 
@@ -35,6 +35,11 @@ h3{
   font-size: 18px;
   line-height: 27px;
 }
+h4{
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
 h5{
   font-style: normal;
   font-weight: 500;
@@ -42,11 +47,11 @@ h5{
   line-height: 21px;
 }
 
-p, a, input{
+p, a, input, label{
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
-  line-height: 21px;
+  font-size: 14px;
+  line-height: 20px;
   margin-bottom: 0.5rem;
 }
 
@@ -62,11 +67,11 @@ a:hover{
 }
 
 .content{
-  padding: 1rem 2rem;
+  padding: 1rem 2rem !important;
 }
 
 .page-container{
-  padding-top: calc(64px + 1rem);
+  padding-top: calc(64px + 1rem) !important;
 }
 
 .navbar{
@@ -88,6 +93,7 @@ a:hover{
 
 .button{
   text-transform: none !important;
+  letter-spacing: normal !important;
 }
 
 .option-button{
@@ -123,11 +129,22 @@ a:hover{
   display: flex !important;
   align-items: center !important;
   text-align: center !important;
+  color: white !important;
+  background-color: var(--hb-blue) !important;
+  font-weight: normal !important;
+}
+
+.contrast-opposite-button{
   color: var(--hb-blue) !important;
+  background-color: white !important;
 }
 
 .MuiButton-root.Mui-disabled {
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: rgba(0, 0, 0, 0.08) !important;
+  border: 0px !important;
+}
+.MuiExpansionPanelSummary-root{
+  padding: 0 2rem !important;
 }
 .form-control, .PrivateNotchedOutline-root-102, .MuiOutlinedInput-notchedOutline{
   border: 1px solid #000000;
@@ -145,13 +162,14 @@ a:hover{
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
   color:black;
   font-weight: bold;
-  border-color: transparent;
+  border-color: rgb(196, 196, 196) rgb(196, 196, 196) #fff;
   cursor: pointer;
 }
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
-  border-color: transparent;
   cursor: pointer;
-  font-weight: bold;
+}
+.nav-link{
+  margin-bottom: 0;
 }
 
 .blue-box{
@@ -168,7 +186,7 @@ a:hover{
   right: 15px;
 }
 .grey-box{
-  background-color: #EEEEEE;
+  background-color: #f4f4f4 !important;
 }
 
 .grey-box a{
@@ -200,22 +218,12 @@ a:hover{
   /* font-weight: bold; */
   cursor: pointer;
 }
-.search-box{
-  margin-top: 15px;
-  margin-bottom: 15px;
+
+@media (max-width: 767px){
+  .full-height{
+    height:100vh;
+  }
 }
-.search-box #search-box, .search-box #search-box:focus{
-  border: 0px;
-  /* width: 100%; */
-  box-shadow: none;
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 27px;
-  display: flex;
-  align-items: center;
-  color: black;
-}
+
 
 
