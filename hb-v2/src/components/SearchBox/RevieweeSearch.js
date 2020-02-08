@@ -32,6 +32,7 @@ function RevieweeSearch(props){
                     props.setSchool(value.school)
                 }
             }}
+            disableClearable
             onInputChange={handleChange}
             options={props.reviewees}
             loading={props.loading}
