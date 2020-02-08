@@ -36,7 +36,7 @@ function SignUpForm(props){
         <div className="container content" id="sign-up-form">
             <Form onSubmit={submit}>
                 <FormGroup>
-                    <Label>Nama*</Label>
+                    <Label>Nama Lengkap*</Label>
                     <Input 
                         valid={validName} 
                         type="text" 

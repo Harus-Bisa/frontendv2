@@ -9,7 +9,7 @@ export default function LoginPopup(props){
             form={<LoginForm page={props.page} closePopup={props.closePopup}/>}
             footer={
                 <div>
-                    <a href="/">Lupa password anda?</a>
+                    {/* <a href="/">Lupa password anda?</a> */}
                     <p>Tidak punya akun? <a href="/signup">Sign up!</a></p>
                 </div>
             }
