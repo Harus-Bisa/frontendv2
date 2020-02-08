@@ -14,7 +14,7 @@ function Routes() {
             <Route exact path="/" component={Landing}/>
             <Route exact path={["/review/new/:revieweeName", "/review/:revieweeId/add/:overallRating" ]}component={ReviewForm}/>
             <Route exact path="/review/:revieweeId" component={Review}/>
-            <Route exact path="/query/:school/:name" component={Query}/>
+            <Route exact path="/query" component={Query}/>
             <Route exact path="/login" component={Login}/>
             <Route exact path="/signup" component={SignUp}/>
             <Route exact path="/verification/:email" component={Verification}/>

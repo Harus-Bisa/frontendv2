@@ -11,10 +11,10 @@ function RevieweeSearch(props){
     const handleChange = (event, value) =>{
         props.setReviewee(value)
         if(value.length < 2 || value.endsWith(' ')){
-            throttle(500, props.findReviewees(value))
+            throttle(500, props.findReviewees(value, ""))
         }
         else{
-            debounce(500, props.findReviewees(value))
+            debounce(500, props.findReviewees(value, ""))
         }
     }
     return(

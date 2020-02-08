@@ -17,14 +17,14 @@ function SearchBox(props){
 
     const find = async (event) =>{
         event.preventDefault();
-        props.findReviewees(reviewee)
+        props.findReviewees(reviewee, school)
         .then(response =>{
             if(props.reviewees.length === 1){
                 var id = props.reviewees[0].revieweeId
                 history.push("/review/"+id)
             }
             else{
-                history.push("/query/"+school+"/"+reviewee)
+                history.push("/query?name="+reviewee+"&school="+school)
             }
             
             if(props.close){

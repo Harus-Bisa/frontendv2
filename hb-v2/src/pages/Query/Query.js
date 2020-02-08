@@ -1,12 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import { findReviewees } from "../../redux/actions";
+import { useLocation } from "react-router-dom";
+
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
 
 function Query(props){
-    const revieweeName = props.match.params.name;
-    const revieweeSchool = props.match.params.school;
+    let query = useQuery();
+    const revieweeName = query.get('name');
+    const revieweeSchool = query.get('school');
+    
     React.useEffect(() =>{
-        props.findReviewees(revieweeName)
+        props.findReviewees(revieweeName, revieweeSchool)
     },[])
 
     const renderQueryResults = () =>{

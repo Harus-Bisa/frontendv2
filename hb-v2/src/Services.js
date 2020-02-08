@@ -99,8 +99,8 @@ class Services{
             this.errorHandling(error)
         })
     }
-    async findReviewees(name){
-        const url = this.domain + "/reviewees/?name="+name;
+    async findReviewees(name, school){
+        const url = this.domain + "/reviewees/?name="+name+"&school="+school;
         return axios.get(url,{headers:this.headers()})
         .then(response =>{
             return response.data
