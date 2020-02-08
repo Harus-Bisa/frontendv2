@@ -16,6 +16,7 @@ export function signup(newUserData){
 }
 export function login(email, password){
     return async function(dispatch){
+        dispatch(removeError())
         return await services.login(email, password)
         .then(async userId => {
             await dispatch(getUser(userId))        
