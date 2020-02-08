@@ -5,8 +5,8 @@ export function signup(newUserData){
     return async function(dispatch){
         dispatch(removeSuccess())
         return await services.signup(newUserData)
-        .then(response => {
-            dispatch(setSuccess())
+        .then(async response => {
+            await dispatch(setSuccess())
             dispatch(removeError())
         })
         .catch(error =>{

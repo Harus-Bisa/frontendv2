@@ -2,7 +2,7 @@ import React from "react";
 import { FormGroup, Input, Label, Form, FormText } from "reactstrap";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
-import { signup } from "../../redux/actions";
+import { signup, removeSuccess } from "../../redux/actions";
 import { withRouter } from "react-router-dom";
 import Feedback from "../Feedback/Feedback";
 
@@ -20,19 +20,18 @@ function SignUpForm(props){
             password: password
         }
         await props.signup(data)
-        .then(response => {
-            if(props.success){
-                if(props.closePopup){
-                    props.closePopup()
-                }
-                props.history.push('/verification/'+email)
-            }            
-        })
     }
+
     var validEmail = email !==""
     var validPassword = password === confirmPassword && password !== ""
     var validName = name !== ""
-
+    if(props.success){
+        if(props.closePopup){
+            props.closePopup()
+        }
+        props.history.push('/verification/'+email)
+        props.removeSuccess()
+    }  
     return(
         <div className="container content" id="sign-up-form">
             <Form onSubmit={submit}>
@@ -100,4 +99,4 @@ function mapStateToProps(state){
         success: state.success
     }
 }
-export default connect(mapStateToProps, {signup})(withRouter(SignUpForm));
+export default connect(mapStateToProps, {signup, removeSuccess})(withRouter(SignUpForm));
