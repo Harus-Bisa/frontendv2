@@ -41,8 +41,7 @@ function LoginForm(props){
                         id="email" 
                         value={email} 
                         onChange={(event) => setEmail(event.target.value)} 
-                        required 
-                        autoFocus
+                        required
                         placeholder="Email Sekolah Anda"
                     />
                 </FormGroup>
