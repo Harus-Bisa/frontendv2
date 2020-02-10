@@ -56,11 +56,6 @@ function SearchBox(props){
                     </div>
                 </form>
             </div>
-            {props.found === false && 
-                <div style={{marginTop:'1.5rem'}}>
-                    <p>Tidak menemukan nama Dosen Anda? <a href={"/review/new/"+ (reviewee === "" ? "Nama Dosen" : reviewee)}>Jadilah penulis pertama!</a></p>
-                </div>
-            }
             {props.error && <Feedback color={"danger"} message={props.error.message}/>}
         </div>
     )
