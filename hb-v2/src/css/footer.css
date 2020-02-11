@@ -1,3 +1,9 @@
+.footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
 .footer .row{
     margin-top: 5px;
     margin-bottom: 5px;
@@ -23,8 +29,10 @@
     color: #C4C4C4;
 }
 
+/* SMALL */
 @media (max-width: 576px) {
     .footer h2{
         font-size:29px;
     }
 }
+

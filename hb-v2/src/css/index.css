@@ -12,6 +12,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html, body{
+  width: 100%;
+  height: 100%;
+}
 h1, h2, h3, h4, h5, p, a, input, span, label {
   font-family: 'Poppins', sans-serif !important;
   color: #40444D;
@@ -66,15 +70,21 @@ a:hover{
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
+.flex{
+  display:flex
+}
+.margin-auto{
+  margin:auto;
+}
 .content{
   padding: 1rem 2rem !important;
 }
 
 .page-container{
   padding-top: calc(64px + 1rem) !important;
+  position: relative;
+  min-height: 100vh;
 }
-
 .navbar{
   background-color:white;
   position:fixed;
@@ -219,11 +229,29 @@ a:hover{
   /* font-weight: bold; */
   cursor: pointer;
 }
-
+.footer-adjust{
+  padding-bottom: 160px;
+}
+/* SM */
+@media (max-width: 576px) {
+  .footer-adjust{
+    padding-bottom: 179px;
+  }
+  
+}
+/* MD */
 @media (max-width: 767px){
   .full-height{
     height:100vh;
   }
+  .footer-adjust{
+    padding-bottom: 160px;
+  }
+}
+
+/*LG*/
+@media (max-width: 992px) {
+  
 }
 
 

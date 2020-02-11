@@ -6,7 +6,7 @@ import { AiFillInstagram } from "react-icons/ai";
 
 export default function Footer(){
     return(
-        <div className="footer">
+        <div className="footer container">
             <div className="row justify-content-center no-gutters">
                 <div className="col-lg-3 col-md-4 col-6" style={{display:'flex'}}>
                     <h2 style={{margin:'auto'}}>DOSEN KU</h2>
@@ -31,7 +31,7 @@ export default function Footer(){
                 </div>
                 <Divider orientation="vertical"/>
                 <div className="col col-lg-2">
-                    <a href="/">Tentang Kami</a>
+                    <a href="/about">Tentang Kami</a>
                 </div>
                 <Divider orientation="vertical"/>
                 <div className="col col-lg-2">
