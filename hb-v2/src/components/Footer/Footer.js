@@ -27,7 +27,7 @@ export default function Footer(){
             </div>
             <div className="row links justify-content-center">
                 <div className="col col-lg-2">
-                    <a href="/">Bantuan</a>
+                    <a href="/help">Bantuan</a>
                 </div>
                 <Divider orientation="vertical"/>
                 <div className="col col-lg-2">
