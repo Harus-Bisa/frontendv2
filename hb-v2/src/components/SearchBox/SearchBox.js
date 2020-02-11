@@ -42,10 +42,7 @@ function SearchBox(props){
                         <div className="col-md-4 search-input-wrapper">
                             <RevieweeSearch reviewee={reviewee} setReviewee={setReviewee} setSchool={setSchool}/>
                         </div>
-                        <div className="col-md-1 search-input-wrapper d-none d-md-block" style={{display:'flex'}}>
-                            <Divider orientation="vertical" style={{margin:'auto'}}/>
-                        </div>
-                        <div className="col-md-6 search-input-wrapper">
+                        <div className="col-md-7 search-input-wrapper left-border">
                             <UniversitySearch school={school} setSchool={setSchool}/>
                         </div>
                         <div className="col-md-1">
