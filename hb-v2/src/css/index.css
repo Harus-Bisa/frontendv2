@@ -14,6 +14,7 @@ body {
 
 h1, h2, h3, h4, h5, p, a, input, span, label {
   font-family: 'Poppins', sans-serif !important;
+  color: #40444D;
 }
 
 h1{
@@ -224,6 +225,7 @@ a:hover{
     height:100vh;
   }
 }
+
 
 
 
