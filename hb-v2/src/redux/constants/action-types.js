@@ -2,6 +2,10 @@ export const FIND_REVIEWEES = "FIND_REVIEWEES";
 export const CLEAR_REVIEWEES = "CLEAR_REVIEWEES";
 export const LOAD_REVIEWEES = "LOAD_REVIEWEES";
 
+export const FIND_SCHOOLS = "FIND_SCHOOLS";
+export const CLEAR_SCHOOLS = "CLEAR_SCHOOLS";
+export const LOAD_SCHOOLS = "LOAD_SCHOOLS";
+
 export const GET_REVIEWS = "GET_REVIEWS";
 export const ADD_REVIEW = "ADD_REVIEW";
 export const VOTE = "VOTE"

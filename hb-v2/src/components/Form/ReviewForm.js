@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import { FormGroup, Label, Input, Button } from "reactstrap";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, LocalCafe, LocalCafeOutlined } from "@material-ui/icons";
 import { StyledRating } from "../Rating/StyledRating";
-import { addReview, getReviews, setError, removeError } from "../../redux/actions";
+import { addReview, getReviews, setError, removeError, findSchools } from "../../redux/actions";
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -12,7 +12,6 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { withStyles } from "@material-ui/core";
 import Popup from "../Popup/Popup";
 import LoginPopup from "../Popup/LoginPopup";
-import {options} from '../../data/UniversityList';
 import { teachingStyleOptions } from "../../data/TeachingStyle";
 import { tagsOptions } from "../../data/TagsOptions";
 import Feedback from "../Feedback/Feedback";
@@ -72,6 +71,8 @@ function ReviewForm(props){
     const getReviews = props.getReviews;
     const professor = props.professor
     const history = props.history
+    const schools = props.schools
+    const findSchools = props.findSchools
     React.useEffect(() =>{
         if(existingProf){
             if(!professor){
@@ -105,7 +106,12 @@ function ReviewForm(props){
                 history.push("/review/"+professor.revieweeId)
             }
         }
-    }, [getReviews, revieweeId, existingProf, professor, revieweeName, submitted, history])
+
+        if(schools.length === 0){
+            findSchools("")
+        }
+
+    }, [getReviews, revieweeId, existingProf, professor, revieweeName, submitted, history,schools, findSchools])
 
     const submit = (event) =>{
         event.preventDefault()
@@ -229,10 +235,12 @@ function ReviewForm(props){
                     <Label>Nama Perguruan Tinggi*</Label>
                     <Autocomplete
                         id="profSchool"
-                        options={options}
+                        options={schools}
                         freeSolo
+                        disableClearable
                         getOptionLabel={option => option}
                         value={profSchool}
+                        inputValue={profSchool}
                         onChange={(event, value) => setProfSchool(value)}
                         onInputChange={(event, value) => setProfSchool(value)}
                         style={{ width: "100% "}}
@@ -416,7 +424,8 @@ function mapStateToProps(state){
     return{
         professor: state.professor,
         loggedIn: state.loggedIn,
-        error: state.error
+        error: state.error,
+        schools: state.schools
     }
 }
-export default connect(mapStateToProps,{addReview, getReviews, setError, removeError})(ReviewForm);
+export default connect(mapStateToProps,{addReview, getReviews, setError, removeError,findSchools})(ReviewForm);

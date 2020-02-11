@@ -99,6 +99,16 @@ class Services{
             this.errorHandling(error)
         })
     }
+    async findSchools(school){
+        const url = this.domain + "/schools?school="+school
+        return axios.get(url, {headers: this.headers()})
+        .then(response =>{
+            return response.data
+        })
+        .catch(error =>{
+            this.errorHandling(error)
+        })
+    }
     async findReviewees(name, school){
         const url = this.domain + "/reviewees/?name="+name+"&school="+school;
         return axios.get(url,{headers:this.headers()})

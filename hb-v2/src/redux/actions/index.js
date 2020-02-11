@@ -1,5 +1,5 @@
 import services from "../../Services"
-import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS } from "../constants/action-types"
+import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS, LOAD_SCHOOLS, FIND_SCHOOLS, CLEAR_SCHOOLS } from "../constants/action-types"
 
 export function signup(newUserData){
     return async function(dispatch){
@@ -56,6 +56,22 @@ export function logout(){
         services.logout()
         return dispatch({type: LOGOUT})
     }
+}
+export function findSchools(school){
+    return async function(dispatch){
+        dispatch({type:LOAD_SCHOOLS})
+        return await services.findSchools(school)
+        .then(async response =>{
+            await dispatch({type:FIND_SCHOOLS, payload: response})
+            dispatch(removeError())
+        })
+        .catch(error =>{
+            dispatch(setError(error))
+        })
+    }
+}
+export function clearSchools(){
+    return ({type:CLEAR_SCHOOLS})
 }
 export function findReviewees(name, school){
     return async function(dispatch){
