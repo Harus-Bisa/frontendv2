@@ -1,0 +1,30 @@
+.footer .row{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.footer .col{
+    display: flex;
+    text-align: center;
+}
+
+.footer .links .col a{
+    margin: auto;
+    text-align: center;
+}
+
+.footer .MuiDivider-vertical{
+    height: auto !important;
+}
+
+.footer .trademark{
+    font-size: 12px;
+    line-height: 286%;
+    text-align: center;
+    color: #C4C4C4;
+}
+
+@media (max-width: 576px) {
+    .footer h2{
+        font-size:29px;
+    }
+}
