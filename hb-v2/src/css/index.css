@@ -12,6 +12,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html, body{
+  width: 100%;
+  height: 100%;
+  color: #40444D;
+}
 h1, h2, h3, h4, h5, p, a, input, span, label {
   font-family: 'Poppins', sans-serif !important;
 }
@@ -32,12 +37,12 @@ h2{
 h3{
   font-style: normal;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 28px;
   line-height: 27px;
 }
 h4{
   font-weight: 600;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 24px;
 }
 h5{
@@ -54,33 +59,44 @@ p, a, input, label{
   line-height: 20px;
   margin-bottom: 0.5rem;
 }
-
+a{
+  color: #0D7CBB;
+}
 a:hover{
   text-decoration-line: underline;
 }
-
+label{
+  font-weight: 600;
+}
 .center{
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
+.flex{
+  display:flex;
+  flex-direction: column;
+}
+.margin-auto{
+  margin:auto !important;
+}
 .content{
   padding: 1rem 2rem !important;
 }
 
 .page-container{
   padding-top: calc(64px + 1rem) !important;
+  position: relative;
+  min-height: 100vh;
+}
+.red{
+  color: #E05D3E;
+}
+.blue{
+  color: var(--hb-blue);
 }
 
-.navbar{
-  background-color:white;
-  position:fixed;
-  top:0;
-  z-index:999;
-  width:100%;
-}
 .blue-button{
   background-color: black;
 }
@@ -132,8 +148,8 @@ a:hover{
   color: white !important;
   background-color: var(--hb-blue) !important;
   font-weight: normal !important;
+  min-width: 150px !important;
 }
-
 .contrast-opposite-button{
   color: var(--hb-blue) !important;
   background-color: white !important;
@@ -155,10 +171,18 @@ a:hover{
 
 .form-control:focus{
   outline-color: var(--hb-blue);
-  border-color: var(--hb-blue);
-  box-shadow: none;
+  border-color: #00ACF9 !important;
+  box-shadow: 0px 0px 4px rgba(0, 172, 249, 0.45);
 }
 
+/* NAV */
+.navbar{
+  background-color:white;
+  position:fixed;
+  top:0;
+  z-index:999;
+  width:100%;
+}
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
   color:black;
   font-weight: bold;
@@ -170,6 +194,18 @@ a:hover{
 }
 .nav-link{
   margin-bottom: 0;
+  padding-right: 1rem !important;
+  padding-left: 1rem !important;
+  cursor: pointer;
+}
+.nav-item{
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+.contrast-navlink{
+  color: white !important;
+  background-color: var(--hb-blue) !important;
+  border-radius: 10px;
 }
 
 .blue-box{
@@ -213,17 +249,43 @@ a:hover{
 .large-rating svg{
   font-size: 3rem;
 }
-
-.nav-link{
-  /* font-weight: bold; */
-  cursor: pointer;
+.footer-adjust{
+  padding-bottom: 160px;
 }
+.brand{
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 40px;
+  /* or 167% */
 
+  text-align: center;
+  text-transform: uppercase;
+
+}
+/* SM */
+@media (max-width: 576px) {
+  .footer-adjust{
+    padding-bottom: 179px;
+  }
+  
+}
+/* MD */
 @media (max-width: 767px){
   .full-height{
     height:100vh;
   }
+  .footer-adjust{
+    padding-bottom: 250px;
+  }
 }
+
+/*LG*/
+@media (max-width: 992px) {
+  
+}
+
 
 
 

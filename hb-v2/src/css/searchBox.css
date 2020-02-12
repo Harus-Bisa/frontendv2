@@ -1,44 +1,51 @@
 .search-box{
-    margin-top: 15px;
-    margin-bottom: 15px;
-    background: #FFFFFF;
-    border: 1px solid #EEEEEE;
-    box-sizing: border-box;
-    border-radius: 10px;
-  }
-  .search-box .search-input, .search-box .search-input:focus{
-    border: 0px;
-    /* width: 100%; */
-    box-shadow: none;
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 27px;
-    display: flex;
-    align-items: center;
-    color: black;
-  }
-  
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background: #FFFFFF;
+  border: 1px solid #EEEEEE;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+.search-box .search-input, .search-box .search-input:focus{
+  border: 0px;
+  /* width: 100%; */
+  box-shadow: none;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  color: black;
+}
+
+.search-box .search-button{
+  border-radius: 10px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  min-width: 0 !important;
+  height:100%;
+}
+
+.search-box .search-input-wrapper{
+  padding: .375rem .75rem !important;
+}
+
+.search-box .MuiInput-underline::before, .search-box .MuiInput-underline::after, .search-box .MuiInput-underline:hover:not(.Mui-disabled):before, .search-box .MuiInput-underline:focus{
+  border-bottom: 0px;
+}
+
+.search-box .left-border{
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 767px){
   .search-box .search-button{
-    border-radius: 10px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    min-width: 0 !important;
-    height:100%;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 10px;
   }
-  
-  .search-box .search-input-wrapper{
-    padding: .375rem .75rem !important;
+  .search-box .left-border{
+    border-left: 0px solid;
   }
-
-  .search-box .MuiInput-underline::before, .search-box .MuiInput-underline::after, .search-box .MuiInput-underline:hover:not(.Mui-disabled):before, .search-box .MuiInput-underline:focus{
-    border-bottom: 0px;
-  }
-
-  @media (max-width: 767px){
-    .search-box .search-button{
-      border-top-right-radius: 0;
-      border-bottom-left-radius: 10px;
-    }
-  }
+}

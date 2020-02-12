@@ -1,4 +1,4 @@
-import { FIND_REVIEWEES, GET_REVIEWS, CLEAR_REVIEWEES, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, REMOVE_SUCCESS, SET_SUCCESS } from "../constants/action-types";
+import { FIND_REVIEWEES, GET_REVIEWS, CLEAR_REVIEWEES, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, REMOVE_SUCCESS, SET_SUCCESS, FIND_SCHOOLS, LOAD_SCHOOLS, CLEAR_SCHOOLS } from "../constants/action-types";
 import services from "../../Services";
 
 const initialState ={
@@ -7,6 +7,8 @@ const initialState ={
     loading: true,
     reviewees:[],
     loadReviewees: false,
+    schools: [],
+    loadSchools: false,
     success: false
 }
 export default function rootReducer(state = initialState, action){
@@ -20,6 +22,27 @@ export default function rootReducer(state = initialState, action){
             reviewees: action.payload,
             found: action.payload.length !== 0,
             loadReviewees: false
+        })
+    }
+    if(action.type === CLEAR_REVIEWEES){
+        return Object.assign({}, state, {
+            reviewees: []
+        })
+    }
+    if(action.type === LOAD_SCHOOLS){
+        return Object.assign({}, state, {
+            loadSchools: true,
+        })
+    }
+    if(action.type === FIND_SCHOOLS){
+        return Object.assign({}, state, {
+            schools: action.payload,
+            loadSchools: false
+        })
+    }
+    if(action.type === CLEAR_SCHOOLS){
+        return Object.assign({}, state, {
+            schools: []
         })
     }
     if(action.type === GET_REVIEWS){
@@ -37,11 +60,6 @@ export default function rootReducer(state = initialState, action){
                 reviews: newReviews
                 
             }
-        })
-    }
-    if(action.type === CLEAR_REVIEWEES){
-        return Object.assign({}, state, {
-            reviewees: []
         })
     }
     if(action.type === SET_ERROR){
