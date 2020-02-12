@@ -90,22 +90,17 @@ label{
   position: relative;
   min-height: 100vh;
 }
-.navbar{
-  background-color:white;
-  position:fixed;
-  top:0;
-  z-index:999;
-  width:100%;
-}
-.blue-button{
-  background-color: black;
-}
 .red{
   color: #E05D3E;
 }
 .blue{
   color: var(--hb-blue);
 }
+
+.blue-button{
+  background-color: black;
+}
+
 .red-button{
   background-color: #FA514B !important;
   width:100%;
@@ -155,7 +150,6 @@ label{
   font-weight: normal !important;
   min-width: 150px !important;
 }
-
 .contrast-opposite-button{
   color: var(--hb-blue) !important;
   background-color: white !important;
@@ -181,6 +175,14 @@ label{
   box-shadow: 0px 0px 4px rgba(0, 172, 249, 0.45);
 }
 
+/* NAV */
+.navbar{
+  background-color:white;
+  position:fixed;
+  top:0;
+  z-index:999;
+  width:100%;
+}
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
   color:black;
   font-weight: bold;
@@ -192,6 +194,18 @@ label{
 }
 .nav-link{
   margin-bottom: 0;
+  padding-right: 1rem !important;
+  padding-left: 1rem !important;
+  cursor: pointer;
+}
+.nav-item{
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+.contrast-navlink{
+  color: white !important;
+  background-color: var(--hb-blue) !important;
+  border-radius: 10px;
 }
 
 .blue-box{
@@ -235,13 +249,20 @@ label{
 .large-rating svg{
   font-size: 3rem;
 }
-
-.nav-link{
-  /* font-weight: bold; */
-  cursor: pointer;
-}
 .footer-adjust{
   padding-bottom: 160px;
+}
+.brand{
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 40px;
+  /* or 167% */
+
+  text-align: center;
+  text-transform: uppercase;
+
 }
 /* SM */
 @media (max-width: 576px) {

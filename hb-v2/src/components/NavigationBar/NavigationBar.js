@@ -15,6 +15,8 @@ import Popup from '../Popup/Popup';
 import LoginPopup from '../Popup/LoginPopup';
 import SignUpPopup from '../Popup/SignupPopup';
 import { withRouter } from 'react-router-dom';
+import { Search } from '@material-ui/icons';
+import { Button } from '@material-ui/core';
 
 function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +41,7 @@ function NavigationBar(props){
   return (
     <div>
       <Navbar light expand="md" className="navbar">
-        <NavbarBrand href="/">Dosen Ku</NavbarBrand>
+        <NavbarBrand href="/" className="brand">Dosen Ku</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar className="justify-content-end full-height">
           <Nav navbar>
@@ -67,12 +69,16 @@ function NavigationBar(props){
                 <Popup
                   trigger={{
                       component:NavLink,
-                      id:'signup'
+                      id:'signup',
+                      className:'contrast-navlink'
                   }}
                   purpose="Sign Up"
                   content={SignUp}
                 />
               }
+            </NavItem>
+            <NavItem>
+              <NavLink className="contrast-navlink navlink"><Search style={{fontSize:'14px'}}/></NavLink>
             </NavItem>
           </Nav>
         </Collapse>
