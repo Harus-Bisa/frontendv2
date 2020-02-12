@@ -103,6 +103,9 @@ label{
 .red{
   color: #E05D3E;
 }
+.blue{
+  color: var(--hb-blue);
+}
 .red-button{
   background-color: #FA514B !important;
   width:100%;
@@ -253,7 +256,7 @@ label{
     height:100vh;
   }
   .footer-adjust{
-    padding-bottom: 160px;
+    padding-bottom: 250px;
   }
 }
 

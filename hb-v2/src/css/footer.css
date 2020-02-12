@@ -8,12 +8,8 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.footer .col{
-    display: flex;
-    text-align: center;
-}
 
-.footer .links .col a{
+.footer .links a{
     margin: auto;
     text-align: center;
     color: #40444D;
@@ -21,6 +17,7 @@
 
 .footer .MuiDivider-vertical{
     height: auto !important;
+    background-color: #40444D;
 }
 
 .footer .trademark{
@@ -34,6 +31,9 @@
 @media (max-width: 576px) {
     .footer h2{
         font-size:29px;
+    }
+    .footer .links a{
+        font-size: 11.5px;
     }
 }
 
