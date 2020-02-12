@@ -2,7 +2,14 @@ import React from "react";
 import Footer from "../../components/Footer/Footer";
 import { Button, Divider } from "@material-ui/core";
 import "../../css/helpPage.css";
+import Popup from "../../components/Popup/Popup";
+import ContactUsPopup from "../../components/Popup/ContactUsPopup";
 
+// const ContactUsButton = (props)=>{
+//     return(
+//         <Button className="contrast-button button margin-auto">Hubungi Kami</Button>
+//     )
+// }
 export default function Help(){
     return(
         <div className="page-container flex help-page">
@@ -31,7 +38,15 @@ export default function Help(){
                             <h2>Butuh Bantuan Lebih</h2>
                             <p>Tidak menemukan jawaban Anda?</p>
                             <div className="flex">
-                                <Button className="contrast-button button margin-auto">Hubungi Kami</Button>
+                                <Popup
+                                    trigger={{
+                                        component:Button,
+                                        id:'contact-us-button',
+                                        className:"contrast-button button margin-auto"
+                                    }}
+                                    purpose="Hubungi Kami"
+                                    content={ContactUsPopup}
+                                />
                             </div>
                         </div>
                     </div>

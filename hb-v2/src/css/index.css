@@ -65,7 +65,9 @@ a{
 a:hover{
   text-decoration-line: underline;
 }
-
+label{
+  font-weight: 600;
+}
 .center{
   position: fixed;
   top: 50%;
@@ -98,7 +100,9 @@ a:hover{
 .blue-button{
   background-color: black;
 }
-
+.red{
+  color: #E05D3E;
+}
 .red-button{
   background-color: #FA514B !important;
   width:100%;
@@ -146,6 +150,7 @@ a:hover{
   color: white !important;
   background-color: var(--hb-blue) !important;
   font-weight: normal !important;
+  min-width: 150px !important;
 }
 
 .contrast-opposite-button{
