@@ -31,7 +31,7 @@ export default function Help(){
                             <h2>Butuh Bantuan Lebih</h2>
                             <p>Tidak menemukan jawaban Anda?</p>
                             <div className="flex">
-                                <Button className="contrast-button margin-auto">Hubungi Kami</Button>
+                                <Button className="contrast-button button margin-auto">Hubungi Kami</Button>
                             </div>
                         </div>
                     </div>

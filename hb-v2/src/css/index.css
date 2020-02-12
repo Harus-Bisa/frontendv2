@@ -59,7 +59,9 @@ p, a, input, label{
   line-height: 20px;
   margin-bottom: 0.5rem;
 }
-
+a{
+  color: #0D7CBB;
+}
 a:hover{
   text-decoration-line: underline;
 }
