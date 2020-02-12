@@ -5,11 +5,6 @@ import "../../css/helpPage.css";
 import Popup from "../../components/Popup/Popup";
 import ContactUsPopup from "../../components/Popup/ContactUsPopup";
 
-// const ContactUsButton = (props)=>{
-//     return(
-//         <Button className="contrast-button button margin-auto">Hubungi Kami</Button>
-//     )
-// }
 export default function Help(){
     return(
         <div className="page-container flex help-page">

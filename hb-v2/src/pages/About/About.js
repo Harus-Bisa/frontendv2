@@ -5,7 +5,7 @@ import aboutPageImg from "../../img/aboutpageimg.png";
 export default function About(){
     return(
         <div className="container page-container flex">
-            <div className="flex footer-adjust">
+            <div className="flex footer-adjust margin-auto">
                 <div className="row justify-content-center margin-auto">
                     <div className="col-lg-9">
                         <div className="row">
