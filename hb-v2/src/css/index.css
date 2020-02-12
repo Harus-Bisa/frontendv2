@@ -174,8 +174,8 @@ label{
 
 .form-control:focus{
   outline-color: var(--hb-blue);
-  border-color: var(--hb-blue);
-  box-shadow: none;
+  border-color: #00ACF9 !important;
+  box-shadow: 0px 0px 4px rgba(0, 172, 249, 0.45);
 }
 
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{

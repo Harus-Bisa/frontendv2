@@ -10,6 +10,7 @@ function SignUpForm(props){
     var [email, setEmail] = React.useState("")
     var [password, setPassword] = React.useState("")
     var [confirmPassword, setConfirmPassword] = React.useState("")
+    var [showPasswordText, setShowPasswordText] = React.useState(false)
     var [name, setName] = React.useState("")
 
     const submit = async (event) =>{
@@ -44,11 +45,12 @@ function SignUpForm(props){
                         value={name} 
                         onChange={(event) => setName(event.target.value)} 
                         required
+                        placeholder="Dosen Ku"
                     />
                 </FormGroup>
                 <FormGroup>
                     <Label>Email<span className="red">*</span></Label>
-                    <FormText>Untuk membuat Akun bersama kami, anda harus menggunakan email universitas anda</FormText>
+                    <FormText style={{marginBottom:'0.25rem'}}>Untuk membuat Akun bersama kami, anda harus menggunakan email universitas anda</FormText>
                     <Input 
                         valid={validEmail} 
                         type="email" 
@@ -68,10 +70,14 @@ function SignUpForm(props){
                         value={password} 
                         onChange={(event) => setPassword(event.target.value)} 
                         required
+                        onFocus={() => setShowPasswordText(true)}
+                        onBlur={() => setShowPasswordText(false)}
+                        placeholder="******"
                     />
+                    {showPasswordText  && <FormText>6+ characters/upper/lower/symbol</FormText>}
                 </FormGroup>
                 <FormGroup>
-                    <Label>Confirm Password<span className="red">*</span></Label>
+                    <Label>Konfirmasi Password<span className="red">*</span></Label>
                     <Input 
                         valid={validPassword}
                         type="password" 
@@ -79,10 +85,11 @@ function SignUpForm(props){
                         value={confirmPassword} 
                         onChange={(event) => setConfirmPassword(event.target.value)} 
                         required
+                        placeholder="******"
                     />
                 </FormGroup>
                 <FormGroup>
-                    <FormText>Dengan melanjutkan, Anda menyetujui Syarat dan Ketentuan Dosen Ku dan menyetujui Kebijakan Privasi Dosen Ku</FormText>
+                    <FormText>Dengan melanjutkan, Anda menyetujui <a href="/">Syarat dan Ketentuan</a> Dosen Ku dan menyetujui <a href="/">Kebijakan Privasi</a> Dosen Ku</FormText>
                 </FormGroup>
                 {props.error && <Feedback color={"danger"} message={props.error.message}/>}
                 <FormGroup>
