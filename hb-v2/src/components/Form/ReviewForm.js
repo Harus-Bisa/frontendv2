@@ -220,7 +220,7 @@ function ReviewForm(props){
             {props.error && <Feedback color={"danger"} message={props.error.message}/>}
             <form onSubmit={submit}> 
                 <FormGroup>
-                    <Label>Nama Dosen*</Label>
+                    <Label>Nama Dosen<span className="red">*</span></Label>
                     <TextField 
                         id="profName" 
                         value={profName} 
@@ -232,7 +232,7 @@ function ReviewForm(props){
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Label>Nama Perguruan Tinggi*</Label>
+                    <Label>Nama Perguruan Tinggi<span className="red">*</span></Label>
                     <Autocomplete
                         id="profSchool"
                         options={schools}
@@ -256,7 +256,7 @@ function ReviewForm(props){
                     />
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
-                    <Label>Penilaian*</Label>
+                    <Label>Penilaian<span className="red">*</span></Label>
                     <StyledRating
                         style={style.ratingSpan} 
                         id="overallRating" 
@@ -267,7 +267,7 @@ function ReviewForm(props){
                     />
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
-                    <Label>Apakah anda akan merekomendasi dosen ini ke teman anda?*</Label>
+                    <Label>Apakah anda akan merekomendasi dosen ini ke teman anda?<span className="red">*</span></Label>
                     <StyledRating
                         style={style.ratingSpan} 
                         id="recommendationRating" 
@@ -278,7 +278,7 @@ function ReviewForm(props){
                     />
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
-                    <Label>Kesusahan Kelas*</Label>
+                    <Label>Kesusahan Kelas<span className="red">*</span></Label>
                     <StyledRating 
                         style={style.ratingSpan} 
                         id="difficultyRating" 
@@ -289,7 +289,7 @@ function ReviewForm(props){
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Label>Nama Kelas*</Label>
+                    <Label>Nama Kelas<span className="red">*</span></Label>
                     <TextField 
                         id="courseName" 
                         value={courseName} 
@@ -300,7 +300,7 @@ function ReviewForm(props){
                     />
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
-                    <Label>Apakah anda sedang mengambil kelas ini?*</Label>
+                    <Label>Apakah anda sedang mengambil kelas ini?<span className="red">*</span></Label>
                     <div className="button-group-container" id="currentlyTaking">
                         <Button type="button" id="currentlyTaking-Yes" onClick={(event) => setCurrentlyTaking(true)} className={currentlyTaking ? "button-group-selected" : "button-group"}>Iya!</Button>
                         <Button type="button" id="currentlyTaking-No" onClick={(event) => setCurrentlyTaking(false)} className={!currentlyTaking ? "button-group-selected" : "button-group"}>Sudah lama!</Button>
@@ -315,7 +315,7 @@ function ReviewForm(props){
                     </FormGroup>
                 }
                 <FormGroup>
-                    <Label>Nilai yang Anda dapatkan*</Label>
+                    <Label>Nilai yang Anda dapatkan<span className="red">*</span></Label>
                     <Autocomplete
                         id="grade"
                         options={["A", "B", "C", "D", "E", "F", "N/A"]}
@@ -336,7 +336,7 @@ function ReviewForm(props){
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Label>Gaya mengajar dosen*</Label>
+                    <Label>Gaya mengajar dosen<span className="red">*</span></Label>
                     <Autocomplete
                         multiple
                         id="teachingStyle"
@@ -367,14 +367,14 @@ function ReviewForm(props){
                     />
                 </FormGroup>
                 <FormGroup style={style.ratingBox}>
-                    <Label>Apakah Textbook digunakan?*</Label>
+                    <Label>Apakah Textbook digunakan?<span className="red">*</span></Label>
                     <div className="button-group-container" id="textbookRequired">
                         <Button type="button" id="textbookRequired-Yes" onClick={(event) => setTextbookRequired(true)} className={textbookRequired ? "button-group-selected" : "button-group"}>Iya</Button>
                         <Button type="button" id="textbookRequired-No" onClick={(event) => setTextbookRequired(false)} className={!textbookRequired ? "button-group-selected" : "button-group"}>Tidak</Button>
                     </div>
                 </FormGroup>
                 <FormGroup>
-                    <Label>Pilih tag yang mendeskripsikan dosen ini (Max. 3)*</Label>
+                    <Label>Pilih tag yang mendeskripsikan dosen ini (Max. 3)<span className="red">*</span></Label>
                     <Autocomplete
                         multiple
                         id="tags"
@@ -410,7 +410,7 @@ function ReviewForm(props){
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Label>Review anda*</Label>
+                    <Label>Review anda<span className="red">*</span></Label>
                     <Input type="textarea" id="review" value={review} required onChange={(event) => setReview(event.target.value)}/>
                 </FormGroup>
                 {flag && <Popup content={LoginPopup} auto disableFlag={() => setFlag(false)}/>}

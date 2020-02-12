@@ -36,19 +36,18 @@ function SignUpForm(props){
         <div className="container content" id="sign-up-form">
             <Form onSubmit={submit}>
                 <FormGroup>
-                    <Label>Nama Lengkap*</Label>
+                    <Label>Nama Lengkap<span className="red">*</span></Label>
                     <Input 
                         valid={validName} 
                         type="text" 
                         id="name" 
                         value={name} 
                         onChange={(event) => setName(event.target.value)} 
-                        required 
-                        autoFocus
+                        required
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Label>Email*</Label>
+                    <Label>Email<span className="red">*</span></Label>
                     <FormText>Untuk membuat Akun bersama kami, anda harus menggunakan email universitas anda</FormText>
                     <Input 
                         valid={validEmail} 
@@ -56,12 +55,12 @@ function SignUpForm(props){
                         id="email" 
                         value={email} 
                         onChange={(event) => setEmail(event.target.value)} 
-                        placeholder={"contoh: userwah@sekolah.edu"} 
+                        placeholder={"userwah@sekolah.edu"} 
                         required
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Label>Password*</Label>
+                    <Label>Password<span className="red">*</span></Label>
                     <Input 
                         valid={validPassword}
                         type="password" 
@@ -72,7 +71,7 @@ function SignUpForm(props){
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Label>Confirm Password*</Label>
+                    <Label>Confirm Password<span className="red">*</span></Label>
                     <Input 
                         valid={validPassword}
                         type="password" 
