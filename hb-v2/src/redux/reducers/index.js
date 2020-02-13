@@ -1,5 +1,7 @@
-import { FIND_REVIEWEES, GET_REVIEWS, CLEAR_REVIEWEES, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, REMOVE_SUCCESS, SET_SUCCESS, FIND_SCHOOLS, LOAD_SCHOOLS, CLEAR_SCHOOLS } from "../constants/action-types";
+import { FIND_REVIEWEES, GET_REVIEWS, CLEAR_REVIEWEES, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, REMOVE_SUCCESS, SET_SUCCESS, FIND_SCHOOLS, LOAD_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES } from "../constants/action-types";
 import services from "../../Services";
+import { NAME, POPULARITY, RATING } from "../../pages/Query/Query";
+import { sortName, sortPopularity, sortRating } from "./revieweeSortFunctions";
 
 const initialState ={
     loggedIn: services.isLoggedIn(),
@@ -12,14 +14,29 @@ const initialState ={
     loadSchools: false,
     success: false
 }
+
 export default function rootReducer(state = initialState, action){
+    if(action.type === SORT_REVIEWEES){
+        const newPageReviewees = state.pageReviewees;
+        if(action.payload === NAME){  
+            newPageReviewees.sort(sortName);
+        }
+        else if(action.payload === POPULARITY){
+            newPageReviewees.sort(sortPopularity);
+        }
+        else if(action.payload === RATING){
+            newPageReviewees.sort(sortRating);
+        }
+        return Object.assign({}, state, {
+            pageReviewees: newPageReviewees
+        })
+    }
     if(action.type === LOAD_REVIEWEES){
         return Object.assign({}, state, {
             loadReviewees: true
         })
     }
     if(action.type === FIND_REVIEWEES){
-        const type = action.payload.type
         if(action.payload.type === "page"){
             return Object.assign({}, state, {
                 pageReviewees: action.payload.response,

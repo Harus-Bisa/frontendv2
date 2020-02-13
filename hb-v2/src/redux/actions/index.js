@@ -1,5 +1,5 @@
 import services from "../../Services"
-import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS, LOAD_SCHOOLS, FIND_SCHOOLS, CLEAR_SCHOOLS } from "../constants/action-types"
+import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS, LOAD_SCHOOLS, FIND_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES } from "../constants/action-types"
 
 export function signup(newUserData){
     return async function(dispatch){
@@ -72,6 +72,9 @@ export function findSchools(school){
 }
 export function clearSchools(){
     return ({type:CLEAR_SCHOOLS})
+}
+export function sortReviewees(sortBy){
+    return ({type:SORT_REVIEWEES, payload: sortBy})
 }
 export function findReviewees(name, school, type){
     return async function(dispatch){

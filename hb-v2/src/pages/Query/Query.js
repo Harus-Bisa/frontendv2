@@ -1,16 +1,36 @@
 import React from "react";
 import { connect } from "react-redux";
-import { findReviewees } from "../../redux/actions";
+import { findReviewees, sortReviewees } from "../../redux/actions";
 import { useLocation } from "react-router-dom";
-import { Divider } from "@material-ui/core";
+import { Divider, RadioGroup, Radio, FormControlLabel, withStyles } from "@material-ui/core";
 import RevieweeCard from "../../components/Card/RevieweeCard";
 import SearchBox from "../../components/SearchBox/SearchBox";
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
-  }
+}
+
+const BlueRadio = withStyles({
+    root: {
+      color: "#39A3FF",
+      '&$checked': {
+        color: "#39A3FF",
+      },
+    },
+    checked: {},
+  })(props => <Radio color="default" {...props} />);
+
+export const POPULARITY = "POPULARITY";
+export const RATING = "RATING";
+export const NAME = "NAME";
 
 function Query(props){
+    const [sortBy, setSortBy] = React.useState(POPULARITY)
+
+    const handleChange = (event) =>{
+        setSortBy(event.target.value)
+        props.sortReviewees(event.target.value)
+    }
     let query = useQuery();
     const revieweeName = query.get('name');
     const revieweeSchool = query.get('school');
@@ -44,7 +64,7 @@ function Query(props){
                         <div className="col">
                             <p style={{fontStyle:'italic'}}>{props.reviewees.length} Hasil pencarian untuk</p>
                             <h2>
-                                <span className="blue">{revieweeName}</span> {revieweeSchool  && <span>di <span className="blue">{revieweeSchool}</span></span>}
+                                {revieweeName ? <span className="blue">revieweeName</span> : <span>Dosen</span>} {revieweeSchool  && <span>di <span className="blue">{revieweeSchool}</span></span>}
                             </h2>
                         </div>  
                     </div>
@@ -54,6 +74,11 @@ function Query(props){
                 <div className="row">
                     <div className="col-lg-3 d-none d-lg-block">
                         <h4>Urutkan berdasarkan</h4>
+                        <RadioGroup aria-label="sortBy" name="sortBy" value={sortBy} onChange={handleChange}>
+                            <FormControlLabel value={POPULARITY} control={<BlueRadio/>} label="Paling Populer" />
+                            <FormControlLabel value={RATING} control={<BlueRadio/>} label="Penilaian Tertinggi" />
+                            <FormControlLabel value={NAME} control={<BlueRadio/>} label="Nama"/>
+                        </RadioGroup>
                     </div>
                     <Divider orientation={"vertical"}/>
                     <div className="col-lg-8">
@@ -62,8 +87,8 @@ function Query(props){
                                 {renderQueryResults()}
                                 {props.found === false && 
                                     <div>
-                                        <p>Tidak ada dosen dengan nama dan di sekolah itu.</p>
-                                        <p>Silahkan mulai menulis dan <a href={"/review/new/"+revieweeName}>jadilah penulis pertama!</a></p>
+                                        <p style={{fontWeight:'bold'}}>Dosen yang anda cari tidak ditemukan dalam database kami.</p>
+                                        <a href={"/review/new/"+revieweeName}>Jadilah penulis pertama!</a>
                                     </div>
                                 } 
                             </div>
@@ -82,4 +107,4 @@ function mapStateToProps(state){
         found: state.found
     }
 }
-export default connect(mapStateToProps,{findReviewees})(Query);
+export default connect(mapStateToProps,{findReviewees, sortReviewees})(Query);
