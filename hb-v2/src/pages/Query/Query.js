@@ -18,7 +18,7 @@ function Query(props){
 
     React.useEffect(() =>{
         findReviewees(revieweeName, revieweeSchool)
-    },[findReviewees])
+    },[findReviewees, revieweeName, revieweeSchool])
 
     const renderQueryResults = () =>{
         var queryResultsComponent = []
