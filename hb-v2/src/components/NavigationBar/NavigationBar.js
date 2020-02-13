@@ -42,9 +42,13 @@ function NavigationBar(props){
       getUser(localStorage.getItem("userId"))
     }
   }, [loggedIn, name, getUser])
+
+  const atLanding = props.location.pathname === "/"
+  const navlinkClassname = atLanding ? "contrast-navlink dark-navlink navlink" : "contrast-navlink navlink"
+
   return (
     <div>
-      <Navbar light expand="md" className="navbar">
+      <Navbar light expand="md" className="navbar" style={{backgroundColor:(isOpen ? "white" : "transparent")}}>
         <NavbarBrand href="/" className="brand">Dosen Ku</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar className="justify-content-end full-height">
@@ -83,7 +87,7 @@ function NavigationBar(props){
                   trigger={{
                       component:NavLink,
                       id:'signup',
-                      className:'contrast-navlink'
+                      className:navlinkClassname
                   }}
                   purpose="Sign Up"
                   content={SignUp}
@@ -92,7 +96,7 @@ function NavigationBar(props){
             </React.Fragment>
             }
             <NavItem>
-              <NavLink className="contrast-navlink navlink"><Search style={{fontSize:'14px'}}/></NavLink>
+              <NavLink className={navlinkClassname}><Search style={{fontSize:'14px'}}/></NavLink>
             </NavItem>
           </Nav>
         </Collapse>

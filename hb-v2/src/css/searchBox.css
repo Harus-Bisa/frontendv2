@@ -2,7 +2,7 @@
   margin-top: 15px;
   margin-bottom: 15px;
   background: #FFFFFF;
-  border: 1px solid #EEEEEE;
+  border: 1px solid #C4C4C4;
   box-sizing: border-box;
   border-radius: 10px;
 }
@@ -26,6 +26,8 @@
   border-bottom-left-radius: 0;
   min-width: 0 !important;
   height:100%;
+  background-color: #40444D !important;
+  color: white;
 }
 
 .search-box .search-input-wrapper{
