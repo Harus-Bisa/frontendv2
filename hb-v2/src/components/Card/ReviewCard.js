@@ -40,6 +40,7 @@ function ReviewCard(props){
         <div className='col-12' style={{paddingTop:'15px', paddingBottom:'15px'}}>
             <div className="review-card" style={props.blur ? {filter: "blur(4px)"} : {}}>
                 <div className="review-details">
+                    <p id="course-name">{props.review.courseName}</p>
                     <p id="review">{props.review.review}</p>
                 </div>
                 <div className="review-details">
@@ -95,14 +96,6 @@ function ReviewCard(props){
                             />
                         </div>
                     </div>
-                    <div className="row justify-content-between">
-                        <div className="col-7">
-                            <p >Kelas:</p>
-                        </div>
-                        <div className="col-5" style={{textAlign:'right'}}>
-                            <p>{props.review.courseName}</p>
-                        </div>
-                    </div>
                     <Collapse in={expand} timeout="auto" unmountOnExit>
                         <div style={{marginRight:'15px', marginLeft:'15px'}}>
                             <div className="row justify-content-between">
@@ -110,7 +103,7 @@ function ReviewCard(props){
                                     <p>Tahun mengambil kelas:</p>
                                 </div>
                                 <div className="col-5" style={{textAlign:'right'}}>
-                                    <p>{props.review.yearTaken}</p>
+                                    <p className="bold">{props.review.yearTaken}</p>
                                 </div>
                             </div>
                             <div className="row justify-content-between">
@@ -118,7 +111,7 @@ function ReviewCard(props){
                                     <p>Nilai:</p>
                                 </div>
                                 <div className="col-5" style={{textAlign:'right'}}>
-                                    <p>{props.review.grade ? props.review.grade : "-"}</p>
+                                    <p className="bold">{props.review.grade ? props.review.grade : "-"}</p>
                                 </div>
                             </div>
                             <div className="row justify-content-between">
@@ -126,7 +119,7 @@ function ReviewCard(props){
                                     <p>Gaya Mengajar:</p>
                                 </div>
                                 <div className="col-5" style={{textAlign:'right'}}>
-                                    <p>{props.review.teachingStyles.length === 0 ? "-" : props.review.teachingStyles.join(', ')}</p>
+                                    <p className="bold">{props.review.teachingStyles.length === 0 ? "-" : props.review.teachingStyles.join(', ')}</p>
                                 </div>
                             </div>
                             <div className="row justify-content-between">
@@ -134,12 +127,12 @@ function ReviewCard(props){
                                     <p>Membutuhkan textbook:</p>
                                 </div>
                                 <div className="col-5" style={{textAlign:'right'}}>
-                                    <p>{props.review.textbookRequired ? "Iya" : "Tidak"}</p>
+                                    <p className="bold">{props.review.textbookRequired ? "Iya" : "Tidak"}</p>
                                 </div>
                             </div>
                         </div>
                     </Collapse>
-                    <Button className="show-button" onClick={() => setExpand(!expand)}>Show {expand ? "less" : "more"} {expand ? <KeyboardArrowUp/>: <KeyboardArrowDown/>}</Button>
+                    <Button className="show-button" onClick={() => setExpand(!expand)}>{expand ? "Baca lebih sedikit" : "Selengkapnya"} {expand ? <KeyboardArrowUp/>: <KeyboardArrowDown/>}</Button>
                     <div id="tags" className="row">
                         {makeTags()}
                     </div>

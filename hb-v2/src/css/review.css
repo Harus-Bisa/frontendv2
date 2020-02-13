@@ -14,7 +14,14 @@
     font-weight: bold;
     font-size: 12px;
 }
-
+.review-card #course-name{
+    font-style: italic;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 16px;
+    color: var(--hb-blue);
+    margin-bottom: 0.25rem;
+}
 .review-details{
     padding: 15px;
 }
@@ -24,6 +31,9 @@
     color: #000000;
 }
 
+.review-details .bold{
+    font-weight: 500;
+}
 .review-details .MuiSvgIcon-root{
     font-size: inherit;
 }
@@ -75,15 +85,12 @@
 }
 
 .tag{
-    background: #E0E0E0;
-    border-radius: 3px;
+    background: #F3FBFF;
+    border-radius: 30px;
     padding: 5px 10px;
     margin: 5px 10px;
 }
 
-.tag p{
-    color: var(--hb-blue) !important;
-}
 
 .review-header{
     margin-bottom: 15px;
