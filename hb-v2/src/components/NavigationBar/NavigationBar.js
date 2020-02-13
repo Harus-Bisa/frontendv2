@@ -48,7 +48,7 @@ function NavigationBar(props){
 
   return (
     <div>
-      <Navbar light expand="md" className="navbar" style={{backgroundColor:(isOpen ? "white" : "transparent")}}>
+      <Navbar light expand="md" className="navbar" style={{backgroundColor:(isOpen || !atLanding ? "white" : "transparent")}}>
         <NavbarBrand href="/" className="brand">Dosen Ku</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar className="justify-content-end full-height">
