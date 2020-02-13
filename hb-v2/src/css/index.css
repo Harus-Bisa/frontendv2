@@ -211,7 +211,7 @@ label{
   background-color: #40444D !important;
 }
 .blue-box{
-  background-color: var(--hb-blue);
+  background-color: #0D7CBB;
   color:white !important;
   padding: 2rem;
   box-shadow: 0 0.3125rem 1rem 0 rgba(0,0,0,.24);
