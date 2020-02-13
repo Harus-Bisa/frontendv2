@@ -73,12 +73,16 @@ export function findSchools(school){
 export function clearSchools(){
     return ({type:CLEAR_SCHOOLS})
 }
-export function findReviewees(name, school){
+export function findReviewees(name, school, type){
     return async function(dispatch){
         dispatch({type:LOAD_REVIEWEES})
         return await services.findReviewees(name, school)
         .then(async response =>{
-            await dispatch({type:FIND_REVIEWEES, payload: response})
+            const payload = {
+                response: response,
+                type: type
+            }
+            await dispatch({type:FIND_REVIEWEES, payload: payload})
             dispatch(removeError())
         })
         .catch(error =>{

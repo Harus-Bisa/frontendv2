@@ -17,7 +17,7 @@ function Query(props){
     const findReviewees = props.findReviewees
 
     React.useEffect(() =>{
-        findReviewees(revieweeName, revieweeSchool)
+        findReviewees(revieweeName, revieweeSchool, "page")
     },[findReviewees, revieweeName, revieweeSchool])
 
     const renderQueryResults = () =>{
@@ -31,9 +31,13 @@ function Query(props){
     }
     return(
         <div className="page-container flex">
-            {/* <div className="container" style={{padding:'1rem 0rem'}}>
-                <SearchBox/>
-            </div> */}
+            <div className="container" style={{padding:'1rem 0rem'}}>
+                <div className="row justify-content-center">
+                    <div className="col-lg-10">
+                        <SearchBox/>
+                    </div>
+                </div> 
+            </div>
             <div className="page-header">
                 <div className="container">
                     <div className="row no-gutters">
@@ -73,7 +77,7 @@ function Query(props){
 
 function mapStateToProps(state){
     return{
-        reviewees: state.reviewees,
+        reviewees: state.pageReviewees,
         loading: state.loadReviewees,
         found: state.found
     }

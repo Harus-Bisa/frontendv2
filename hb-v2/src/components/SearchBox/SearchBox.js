@@ -17,7 +17,7 @@ function SearchBox(props){
 
     const find = async (event) =>{
         event.preventDefault();
-        props.findReviewees(reviewee, school)
+        props.findReviewees(reviewee, school, "searchBox")
         .then(response =>{
             if(props.reviewees.length === 1){
                 var id = props.reviewees[0].revieweeId
