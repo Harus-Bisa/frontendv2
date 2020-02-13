@@ -9,7 +9,7 @@ export default function Help(){
     return(
         <div className="page-container flex help-page">
             <div className="flex footer-adjust">
-                <div className="row header no-gutters padding">
+                <div className="row page-header no-gutters">
                     <div className="col">
                         <h1>Bantuan</h1>
                         <p>Temukan jawaban Anda disini</p>

@@ -261,8 +261,15 @@ label{
   /* or 167% */
 
   text-align: center;
-  text-transform: uppercase;
+  text-transform: uppercase
+}
 
+.page-header{
+  background-color: #F3FBFF;
+  padding: 1rem 0rem;
+}
+.MuiDivider-vertical{
+  height: auto !important;
 }
 /* SM */
 @media (max-width: 576px) {
