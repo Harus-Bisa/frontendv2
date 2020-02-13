@@ -72,7 +72,7 @@ function Query(props){
             </div>
             <div className="container content">
                 <div className="row">
-                    <div className="col-lg-3 d-none d-lg-block">
+                    <div className="col-lg-3">
                         <h4>Urutkan berdasarkan</h4>
                         <RadioGroup aria-label="sortBy" name="sortBy" value={sortBy} onChange={handleChange}>
                             <FormControlLabel value={POPULARITY} control={<BlueRadio/>} label="Paling Populer" />
