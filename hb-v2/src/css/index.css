@@ -25,7 +25,7 @@ h1{
   font-style: normal;
   font-weight: bold;
   font-size: 48px;
-  line-height: 83%;
+  line-height: 111%;
   margin-bottom: 1rem;
 }
 h2{
@@ -266,7 +266,7 @@ label{
 
 .page-header{
   background-color: #F3FBFF;
-  padding: 1rem 0rem;
+  padding: 2rem 0rem;
 }
 .MuiDivider-vertical{
   height: auto !important;
@@ -275,6 +275,12 @@ label{
 @media (max-width: 576px) {
   .footer-adjust{
     padding-bottom: 179px;
+  }
+  h1{
+    font-size: 36px;
+  }
+  h2{
+    font-size: 28px;
   }
   
 }
