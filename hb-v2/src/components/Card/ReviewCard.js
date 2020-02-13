@@ -175,13 +175,13 @@ function ReviewCard(props){
                             </React.Fragment>
                             }
                         </div>
-                        {/* <Popup 
+                        <Popup 
                             content={props.loggedIn ? ReportInappropriatePopup : LoginPopup}
                             trigger={{
                                 component:ReportInappropriateTrigger,
                                 id:'report-inappropriate-button'
                             }}
-                        /> */}
+                        />
                     </div>
                 </div>
             </div>
