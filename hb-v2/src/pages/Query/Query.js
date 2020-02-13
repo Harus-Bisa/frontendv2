@@ -32,8 +32,8 @@ function Query(props){
     return(
         <div className="page-container flex">
             <div className="container" style={{padding:'1rem 0rem'}}>
-                <div className="row justify-content-center">
-                    <div className="col-lg-10">
+                <div className="row justify-content-center no-gutters">
+                    <div className="col-lg-10 col">
                         <SearchBox/>
                     </div>
                 </div> 
@@ -57,8 +57,8 @@ function Query(props){
                     </div>
                     <Divider orientation={"vertical"}/>
                     <div className="col-lg-8">
-                        <div className="row justify-content-center">
-                            <div className="col-lg-10">
+                        <div className="row justify-content-end">
+                            <div className="col-lg-12">
                                 {renderQueryResults()}
                                 {props.found === false && 
                                     <div>

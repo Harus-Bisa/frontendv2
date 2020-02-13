@@ -121,12 +121,26 @@
 }
 
 .reviewee-card {
-    padding: 1rem 0rem;
-    border-bottom: 1px solid #ECECEC;
+    padding: 0.25rem 0 !important;
+    border-bottom: 1px solid #ECECEC !important;
+}
+
+.reviewee-card .reviewee-card-content{
+    width: 100%;
+    text-transform: none;
+    text-align: left;
 }
 
 .reviewee-card h3{
     font-size: 24px;
     line-height: 167%;
     color: black;
+}
+@media (max-width: 576px) {
+    .reviewee-card h3{
+        font-size: 18px;
+    }
+    .reviewee-card p{
+        font-size: 14px;
+    }
 }
