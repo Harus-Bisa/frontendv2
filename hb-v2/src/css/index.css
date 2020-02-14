@@ -273,6 +273,9 @@ label{
 .MuiDivider-vertical{
   height: auto !important;
 }
+.blur{
+  filter: blur(4px);
+}
 /* SM */
 @media (max-width: 576px) {
   .footer-adjust{
