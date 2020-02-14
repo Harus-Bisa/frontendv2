@@ -45,11 +45,12 @@ function NavigationBar(props){
 
   const atLanding = props.location.pathname === "/"
   const navlinkClassname = atLanding ? "contrast-navlink dark-navlink navlink" : "contrast-navlink navlink"
+  const textColor = atLanding && !isOpen ? "white":"inherit";
 
   return (
     <div>
       <Navbar light expand="md" className="navbar" style={{backgroundColor:(isOpen || !atLanding ? "white" : "transparent")}}>
-        <NavbarBrand href="/" className="brand">Dosen Ku</NavbarBrand>
+        <NavbarBrand href="/" className="brand" style={{color:textColor}}>Dosen Ku</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar className="justify-content-end full-height">
           <Nav navbar>
@@ -76,7 +77,8 @@ function NavigationBar(props){
                 <Popup
                     trigger={{
                         component:NavLink,
-                        id:'login'
+                        id:'login',
+                        style:{color:textColor}
                     }}
                     purpose="Login"
                     content={LoginPopup}
