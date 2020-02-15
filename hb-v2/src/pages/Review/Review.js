@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {ThumbUp, ThumbUpOutlined, Info, Check, CheckOutlined} from "@material-ui/icons"
+import {ThumbUp, ThumbUpOutlined, Info, Check, CheckOutlined, LocalCafe, LocalCafeOutlined} from "@material-ui/icons"
 import { StyledRating } from "../../components/Rating/StyledRating";
 import ReviewContent from "../../components/ReviewContent/ReviewContent";
 import "../../css/review.css";
@@ -11,6 +11,7 @@ import Feedback from "../../components/Feedback/Feedback";
 import Footer from "../../components/Footer/Footer";
 import { Divider } from "@material-ui/core";
 import Reviews from "../../components/ReviewContent/Reviews";
+import SignUpLoginPrompt from "../../components/Card/SignUpLoginPrompt";
 
 export const WEB = "WEB";
 export const MOBILE = "MOBILE";
@@ -97,7 +98,7 @@ function Review(props){
                                     <h4>Penilaian keseluruhan <Info/></h4>
                                     <div className="row no-gutters">
                                         <div className="col-4 flex">
-                                            <h1 className="margin-auto" style={{fontSize:"64px", fontWeight:'500'}}>{props.professor.overallRating === "-" ? 0 : props.professor.overallRating}.0</h1>
+                                            <h1 className="margin-auto" style={{fontSize:"64px", fontWeight:'500'}}>{props.professor.overallRating === "-" ? 0 : props.professor.overallRating}</h1>
                                         </div>
                                         <div className="col-8 flex">
                                             <div className="margin-auto"style={{marginLeft:"0!important"}}>
@@ -114,8 +115,8 @@ function Review(props){
                                     </div>
                                 </div>
                                 <Divider orientation={"vertical"}/>
-                                <div className={props.loggedIn ? "col-lg-7 flex" : "col-lg-7 flex blur"}>
-                                    <div className="margin-auto container">
+                                <div className={"col-lg-7 flex"}>
+                                    <div className={props.loggedIn ? "margin-auto container" : "margin-auto container blur"}>
                                         <div className="row no-gutters">
                                             <div className="col-1 flex">
                                                 <h5 className="margin-auto">{props.professor.recommendationRating === "-" ? 0 : props.professor.recommendationRating}</h5>
@@ -144,8 +145,8 @@ function Review(props){
                                                     precision={0.1}
                                                     value={props.professor.difficultyRating === "-" ? 0 : props.professor.difficultyRating} 
                                                     readOnly 
-                                                    icon={<Check/>}
-                                                    emptyIcon={<CheckOutlined/>} 
+                                                    icon={<LocalCafe/>}
+                                                    emptyIcon={<LocalCafeOutlined/>} 
                                                     className="margin-auto"
                                                 />
                                             </div>
@@ -154,6 +155,11 @@ function Review(props){
                                             </div>
                                         </div>
                                     </div>
+                                    {!props.loggedIn && 
+                                        <div className="blue-box" style={{width:'50%', height:'100%', position:'absolute'}}>
+                                            <h5>Sign up dan lihat semua statistik. Gratis!</h5>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>

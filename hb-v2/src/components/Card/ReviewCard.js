@@ -173,19 +173,17 @@ function ReviewCard(props){
         return(
             <div className='col-12' style={{paddingTop:'15px', paddingBottom:'15px'}}>
                 <div className="review-card" style={props.blur ? {filter: "blur(4px)"} : {}}>
-                    <div className="row">
+                    <div className="row review-details">
                         <div className="col-8">
-                            <div className="review-details">
+                            <div>
                                 <div>
                                     <p id="course-name">{props.review.courseName}</p>
                                     <p id="review">{props.review.review}</p>
                                 </div>
                                 <div>
-                                    <div className="row justify-content-between">
-                                        <div className="col" style={{display:'flex'}}>
-                                            <p style={{margin:'auto 0'}}>Penilaian Keseluruhan</p>
-                                        </div>
-                                        <div className="col-5" style={{display:'flex'}}>
+                                    <div className="row justify-content-between" style={{marginTop:"15px"}}>
+                                        <div className="col-4 flex">
+                                            <p className="margin-auto" style={{textAlign:'center', fontWeight:'500'}}>Penilaian Keseluruhan</p>
                                             <StyledRating
                                                 size="small" 
                                                 id="overallRating"
@@ -194,14 +192,11 @@ function ReviewCard(props){
                                                 readOnly
                                                 icon={<ThumbUp/>} 
                                                 emptyIcon={<ThumbUpOutlined/>}
+                                                className="margin-auto"
                                             />
                                         </div>
-                                    </div>
-                                    <div className="row justify-content-between">
-                                        <div className="col-7" style={{display:'flex'}}>
-                                            <p style={{margin:'auto 0'}}>Kemungkinan untuk merekomendasi</p>
-                                        </div>
-                                        <div className="col-5" style={{display:'flex'}}>
+                                        <div className="col-4 flex">
+                                            <p className="margin-auto" style={{textAlign:'center', fontWeight:'500'}}>Kemungkinan untuk merekomendasi</p>
                                             <StyledRating
                                                 size="small" 
                                                 id="recommendationRating"
@@ -210,15 +205,11 @@ function ReviewCard(props){
                                                 readOnly
                                                 icon={<Check/>}
                                                 emptyIcon={<CheckOutlined/>}
-                                                style={{margin:'auto 0'}}
+                                                className="margin-auto"
                                             />
                                         </div>
-                                    </div>
-                                    <div className="row justify-content-between">
-                                        <div className="col-7" style={{display:'flex'}}>
-                                            <p style={{margin:'auto 0'}}>Tingkat kesusahan Kelas</p>
-                                        </div>
-                                        <div className="col-5" style={{display:'flex'}}>
+                                        <div className="col-4 flex">
+                                            <p className="margin-auto" style={{textAlign:'center', fontWeight:'500'}}>Tingkat kesusahan Kelas</p>
                                             <StyledRating
                                                 size="small" 
                                                 id="difficultyRating"
@@ -227,15 +218,21 @@ function ReviewCard(props){
                                                 readOnly
                                                 icon={<LocalCafe/>}
                                                 emptyIcon={<LocalCafeOutlined/>}
+                                                className="margin-auto"
                                             />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <Divider orientation={"vertical"}/>
-                        <div className="col-3">
-                            <div className="review-details" style={{marginRight:'15px', marginLeft:'15px'}}>
+                        
+                        <div className="col-4" style={{borderLeft: "1px solid #F4F4F4"}}>
+                            <div>
+                                <div className="row justify-content-between">
+                                    <div className="col" style={{textAlign:"right"}}>
+                                        <p>{(new Date()).toLocaleDateString()}</p>
+                                    </div>
+                                </div>
                                 <div className="row justify-content-between">
                                     <div className="col">
                                         <p>Tahun mengambil kelas: <span className="bold">{props.review.yearTaken}</span></p>
@@ -267,8 +264,8 @@ function ReviewCard(props){
                                 </div>
                             </div>
                             <div className="col-4">
-                                <div className="row justify-content-between">
-                                    <div className="col-6" style={{display:'flex', flexDirection:'row'}}>
+                                <div className="row justify-content-between no-gutters">
+                                    <div className="col-8" style={{display:'flex', flexDirection:'row'}}>
                                         <p>Membantu?</p>
                                         {props.loggedIn && 
                                         <React.Fragment>
@@ -297,7 +294,7 @@ function ReviewCard(props){
                                         </React.Fragment>
                                         }
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-4">
                                         <Popup 
                                             content={props.loggedIn ? ReportInappropriatePopup : LoginPopup}
                                             trigger={{
