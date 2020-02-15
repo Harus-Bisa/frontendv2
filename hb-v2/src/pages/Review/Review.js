@@ -100,8 +100,8 @@ function Review(props){
                                         <div className="col-4 flex">
                                             <h1 className="margin-auto" style={{fontSize:"64px", fontWeight:'500'}}>{props.professor.overallRating === "-" ? 0 : props.professor.overallRating}</h1>
                                         </div>
-                                        <div className="col-8 flex">
-                                            <div className="margin-auto"style={{marginLeft:"0!important"}}>
+                                        <div className="col-6 flex">
+                                            <div className="margin-auto" style={{marginLeft:"0!Important"}}>
                                                 <StyledRating
                                                     precision={0.1}
                                                     value={props.professor.overallRating === "-" ? 0 : props.professor.overallRating} 

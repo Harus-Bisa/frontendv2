@@ -19,13 +19,13 @@ export default function RevieweeCard(props){
                         <div className="flex margin-auto">
                             <StyledRating
                                 precision={0.1}
-                                value={3} 
+                                value={reviewee.overallRating === "-" ? 0 : reviewee.overallRating} 
                                 readOnly 
                                 icon={<ThumbUp/>}
                                 emptyIcon={<ThumbUpOutlined/>} 
                                 className="margin-auto"
                             />
-                            <p className="margin-auto">{10} Review</p>
+                            <p className="margin-auto">{reviewee.numberOfReviews} Review</p>
                         </div>
                     </div>
                 </div>

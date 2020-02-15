@@ -42,7 +42,14 @@ function ReviewCard(props){
             <div className='col-12' style={{paddingTop:'15px', paddingBottom:'15px'}}>
                 <div className="review-card" style={props.blur ? {filter: "blur(4px)"} : {}}>
                     <div className="review-details">
-                        <p id="course-name">{props.review.courseName}</p>
+                        <div className="row justify-content-between">
+                            <div className="col">
+                                <p id="course-name">{props.review.courseName}</p>
+                            </div>
+                            {props.review.createdAt && <div className="col">
+                                <p style={{textAlign:'right'}}>{(new Date(props.review.createdAt)).toLocaleDateString()}</p>
+                            </div>}
+                        </div>
                         <p id="review">{props.review.review}</p>
                     </div>
                     <div className="review-details">
@@ -228,11 +235,11 @@ function ReviewCard(props){
                         
                         <div className="col-4" style={{borderLeft: "1px solid #F4F4F4"}}>
                             <div>
-                                <div className="row justify-content-between">
+                                {props.review.createdAt && <div className="row justify-content-between">
                                     <div className="col" style={{textAlign:"right"}}>
-                                        <p>{(new Date()).toLocaleDateString()}</p>
+                                        <p>{(new Date(props.review.createdAt)).toLocaleDateString()}</p>
                                     </div>
-                                </div>
+                                </div>}
                                 <div className="row justify-content-between">
                                     <div className="col">
                                         <p>Tahun mengambil kelas: <span className="bold">{props.review.yearTaken}</span></p>
