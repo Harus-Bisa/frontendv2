@@ -64,7 +64,7 @@ function Query(props){
                         <div className="col">
                             <p style={{fontStyle:'italic'}}>{props.reviewees.length} Hasil pencarian untuk</p>
                             <h2>
-                                {revieweeName ? <span className="blue">revieweeName</span> : <span>Dosen</span>} {revieweeSchool  && <span>di <span className="blue">{revieweeSchool}</span></span>}
+                                {revieweeName ? <span className="blue">{revieweeName}</span> : <span>Dosen</span>} {revieweeSchool  && <span>di <span className="blue">{revieweeSchool}</span></span>}
                             </h2>
                         </div>  
                     </div>
