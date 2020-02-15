@@ -25,7 +25,7 @@ h1{
   font-style: normal;
   font-weight: bold;
   font-size: 48px;
-  line-height: 83%;
+  line-height: 111%;
   margin-bottom: 1rem;
 }
 h2{
@@ -174,10 +174,9 @@ label{
   border-color: #00ACF9 !important;
   box-shadow: 0px 0px 4px rgba(0, 172, 249, 0.45);
 }
-
 /* NAV */
 .navbar{
-  background-color:white;
+  background-color:transparent;
   position:fixed;
   top:0;
   z-index:999;
@@ -208,8 +207,11 @@ label{
   border-radius: 10px;
 }
 
+.dark-navlink{
+  background-color: #40444D !important;
+}
 .blue-box{
-  background-color: var(--hb-blue);
+  background-color: #0D7CBB;
   color:white !important;
   padding: 2rem;
   box-shadow: 0 0.3125rem 1rem 0 rgba(0,0,0,.24);
@@ -261,13 +263,29 @@ label{
   /* or 167% */
 
   text-align: center;
-  text-transform: uppercase;
+  text-transform: uppercase
+}
 
+.page-header{
+  background-color: #F3FBFF;
+  padding: 2rem 0rem;
+}
+.MuiDivider-vertical{
+  height: auto !important;
+}
+.blur{
+  filter: blur(4px);
 }
 /* SM */
 @media (max-width: 576px) {
   .footer-adjust{
     padding-bottom: 179px;
+  }
+  h1{
+    font-size: 36px;
+  }
+  h2{
+    font-size: 28px;
   }
   
 }

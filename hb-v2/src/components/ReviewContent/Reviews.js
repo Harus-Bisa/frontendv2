@@ -8,14 +8,14 @@ function Reviews(props){
         var cards = [];
         if(props.loggedIn){
             for (let i=0; i<props.numberOfReviews; i++){
-                cards.push(<ReviewCard key={i} id={i}/>)
+                cards.push(<ReviewCard type={props.type} key={i} id={i}/>)
             }
         }
         else{
             var max = props.numberOfReviews > 3 ? 3 : props.numberOfReviews
             if(max<3){
                 for(let i=0; i<max; i++){
-                    cards.push(<ReviewCard key={i} id={i}/>)
+                    cards.push(<ReviewCard type={props.type} key={i} id={i}/>)
                 }
                 cards.push(
                     <div className="col-12" key={0}>
@@ -28,10 +28,10 @@ function Reviews(props){
             else{
                 for (let i=0; i<max; i++){
                     if (i === max-1){
-                        cards.push(<ReviewCard key={i} id={i} blur={true}/>)
+                        cards.push(<ReviewCard type={props.type} key={i} id={i} blur={true}/>)
                     }
                     else{
-                        cards.push(<ReviewCard key={i} id={i}/>)
+                        cards.push(<ReviewCard type={props.type} key={i} id={i}/>)
                     }  
                 }
             }

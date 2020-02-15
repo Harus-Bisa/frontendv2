@@ -14,7 +14,14 @@
     font-weight: bold;
     font-size: 12px;
 }
-
+.review-card #course-name{
+    font-style: italic;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 16px;
+    color: var(--hb-blue);
+    margin-bottom: 0.25rem;
+}
 .review-details{
     padding: 15px;
 }
@@ -24,6 +31,9 @@
     color: #000000;
 }
 
+.review-details .bold{
+    font-weight: 500;
+}
 .review-details .MuiSvgIcon-root{
     font-size: inherit;
 }
@@ -56,12 +66,16 @@
     font-size: 11px !important;
     line-height: 15px;
     min-width: 40px;
+    margin: auto;
     margin-left: 5px;
     margin-right: 5px;
+    max-height: 22px;
 }
 
 .review-footer .vote-button-selected, .review-footer .vote-button.selected:hover{
     background-color: var(--hb-blue) !important;
+    border-color: transparent;
+    color: white;
 }
 
 .show-button{
@@ -75,15 +89,12 @@
 }
 
 .tag{
-    background: #E0E0E0;
-    border-radius: 3px;
+    background: #F3FBFF;
+    border-radius: 30px;
     padding: 5px 10px;
     margin: 5px 10px;
 }
 
-.tag p{
-    color: var(--hb-blue) !important;
-}
 
 .review-header{
     margin-bottom: 15px;
@@ -92,6 +103,15 @@
     margin: auto 0;
 }
 
+.write-review{
+    background: #FCFCFC;
+    border: 1px solid #E6E6E6;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.5rem;
+}
 .review-statistics h2{
     color: var(--hb-blue);
     margin: auto;
@@ -118,4 +138,46 @@
     display: flex;
     padding-right: 5px;
     padding-left:5px;
+}
+.review-statistics-web{
+    margin:2rem 0rem;
+}
+.review-content-header{
+    padding: 1rem 0;
+    border:1px solid #F4F4F4; 
+    border-right: 0;
+    border-left: 0;
+}
+.reviewee-card {
+    padding: 0.25rem 0 !important;
+    border-bottom: 1px solid #ECECEC !important;
+}
+
+.reviewee-card .reviewee-card-content{
+    width: 100%;
+    text-transform: none;
+    text-align: left;
+}
+
+.reviewee-card h3{
+    font-size: 24px;
+    line-height: 167%;
+    color: black;
+}
+/*SM*/
+@media (max-width: 576px) {
+    .reviewee-card h3{
+        font-size: 18px;
+    }
+    .reviewee-card p{
+        font-size: 14px;
+    }
+}
+@media (max-width: 768px){
+    .write-review{
+        background: transparent;
+        border: 1px solid transparent;
+        box-sizing: border-box;
+        padding: 0;
+    }
 }

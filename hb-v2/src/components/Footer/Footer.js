@@ -35,15 +35,15 @@ export default function Footer(){
                 </div>
                 <Divider orientation="vertical"/>
                 <div className="col-4 col-lg-2 flex">
-                    <a href="/">Kebijakan Privasi</a>
+                    <a href="/info/privacypolicy">Kebijakan Privasi</a>
                 </div>
                 <Divider orientation="vertical"/>
                 <div className="col-5 col-lg-2 flex">
-                    <a href="/">Syarat & Kententuan</a>
+                    <a href="/info/termsandconditions">Syarat & Kententuan</a>
                 </div>
                 <Divider orientation="vertical"/>
                 <div className="col-5 col-lg-2 flex">
-                    <a href="/">Peraturan Konten</a>
+                    <a href="/info/communityguidelines">Peraturan Konten</a>
                 </div>
             </div>
             <div>

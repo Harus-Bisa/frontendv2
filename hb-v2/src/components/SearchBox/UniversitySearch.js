@@ -6,6 +6,7 @@ import { TextField, CircularProgress } from "@material-ui/core";
 import { connect } from "react-redux";
 import { findSchools, clearSchools } from "../../redux/actions";
 import { throttle, debounce } from "throttle-debounce";
+import { School } from "@material-ui/icons";
 
 function UniversitySearch(props){
     const handleChange = (event, value) =>{
@@ -37,15 +38,21 @@ function UniversitySearch(props){
                 <TextField
                     {...params}
                     fullWidth
-                    placeholder={"Nama perguruan tinggi/universitas"}
+                    placeholder={"Ketik Nama Perguruan Tinggi/Universitas"}
                     InputProps={{
                         ...params.InputProps,
                         endAdornment: (
                             <React.Fragment>
-                            {props.loading ? <CircularProgress color="inherit" size={15} /> : null}
-                            {params.InputProps.endAdornment}
+                                {props.loading ? <CircularProgress color="inherit" size={15} /> : null}
+                                {params.InputProps.endAdornment}
                             </React.Fragment>
                         ),
+                        startAdornment:(
+                            <React.Fragment>
+                                <School/>
+                                {params.InputProps.startAdornment}
+                            </React.Fragment>
+                        )
                     }}
                 />
             )}

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { TabContent, TabPane, Nav, NavItem, NavLink} from 'reactstrap';
 import ReviewStatistics from "./ReviewStatistics";
 import Reviews from "./Reviews";
+import { MOBILE } from "../../pages/Review/Review";
 
 function ReviewContent(props){
     const [activeTab, setActiveTab] = React.useState('review');
@@ -34,7 +35,7 @@ function ReviewContent(props){
             </Nav>
             <TabContent activeTab={activeTab}>
                 <TabPane tabId="review">
-                    <Reviews/>
+                    <Reviews type={MOBILE}/>
                 </TabPane>
                 <TabPane tabId="statistics">
                     <ReviewStatistics/>
