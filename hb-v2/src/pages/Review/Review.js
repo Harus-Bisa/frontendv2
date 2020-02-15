@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {ThumbUp, ThumbUpOutlined, Info, Check, CheckOutlined, LocalCafe, LocalCafeOutlined} from "@material-ui/icons"
+import {ThumbUp, ThumbUpOutlined, Info, Check, CheckOutlined, LocalCafe, LocalCafeOutlined, Search} from "@material-ui/icons"
 import { StyledRating } from "../../components/Rating/StyledRating";
 import ReviewContent from "../../components/ReviewContent/ReviewContent";
 import "../../css/review.css";
@@ -9,9 +9,8 @@ import Popup from "../../components/Popup/Popup";
 import LoginPopup from "../../components/Popup/LoginPopup";
 import Feedback from "../../components/Feedback/Feedback";
 import Footer from "../../components/Footer/Footer";
-import { Divider } from "@material-ui/core";
+import { Divider, TextField } from "@material-ui/core";
 import Reviews from "../../components/ReviewContent/Reviews";
-import SignUpLoginPrompt from "../../components/Card/SignUpLoginPrompt";
 
 export const WEB = "WEB";
 export const MOBILE = "MOBILE";
@@ -27,6 +26,7 @@ function ThumbRating(props){
 }
 function Review(props){
     var [rating, setRating] = React.useState(0)
+    var [findReviewText, setFindReviewText] = React.useState("")
 
     const addReview = (event, value) =>{
         setRating(value)
@@ -166,10 +166,23 @@ function Review(props){
                         <div className="review-content-header">
                             <div className="row">
                                 <div className="col-6">
-                                    <input type="text" placeholder={"Cari review"}/>
+                                    <TextField
+                                        variant="outlined"
+                                        placeholder="Cari review"
+                                        value={findReviewText}
+                                        onChange={(event) => {setFindReviewText(event.target.value)}}
+                                        fullWidth
+                                        InputProps={{
+                                            startAdornment:(
+                                                <React.Fragment>
+                                                    <Search/>
+                                                </React.Fragment>
+                                            )
+                                        }}
+                                    />
                                 </div>
                                 <div className="col-6">
-                                    <p>Urutkan berdasarkan</p>
+                                    {/* <p>Urutkan berdasarkan</p> */}
                                 </div>
                             </div>
                         </div>

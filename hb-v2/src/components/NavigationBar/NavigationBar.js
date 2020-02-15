@@ -20,7 +20,6 @@ import LoginPopup from '../Popup/LoginPopup';
 import SignUpPopup from '../Popup/SignupPopup';
 import { withRouter } from 'react-router-dom';
 import { Search } from '@material-ui/icons';
-import { Button } from '@material-ui/core';
 
 function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);

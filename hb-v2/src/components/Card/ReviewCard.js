@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { StyledRating } from "../Rating/StyledRating";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, EmojiFlagsOutlined, ArrowUpward, ArrowDownward, LocalCafe, LocalCafeOutlined, KeyboardArrowUp, KeyboardArrowDown } from "@material-ui/icons";
-import { Button, Collapse, Divider } from "@material-ui/core";
+import { Button, Collapse } from "@material-ui/core";
 import { voteReview } from "../../redux/actions";
 import Popup from "../Popup/Popup";
 import SignUpLoginPrompt from "./SignUpLoginPrompt";
