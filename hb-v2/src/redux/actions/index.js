@@ -1,6 +1,7 @@
 import services from "../../Services"
 import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS, LOAD_SCHOOLS, FIND_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES } from "../constants/action-types"
 
+
 export function signup(newUserData){
     return async function(dispatch){
         dispatch(removeSuccess())
@@ -78,7 +79,7 @@ export function sortReviewees(sortBy){
 }
 export function findReviewees(name, school, type){
     return async function(dispatch){
-        dispatch({type:LOAD_REVIEWEES})
+        dispatch({type:LOAD_REVIEWEES, payload:type})
         return await services.findReviewees(name, school)
         .then(async response =>{
             const payload = {
