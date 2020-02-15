@@ -11,12 +11,12 @@ function Landing(props){
             <div className="container footer-adjust">
                 <header className="flex">
                     <div className="margin-auto">
-                        <h1>Review Dosen anda Sekarang</h1>
+                        <h1>Review Dosen Anda Sekarang</h1>
                         <SearchBox/>
                     </div>
                 </header>
-                <div className="row justify-content-center" style={{marginTop: "30vh"}}>
-                    <div className="col-lg-8">
+                <div className="row justify-content-center" style={{height:"70vh"}}>
+                    <div className="col-lg-8 margin-auto">
                         <img src={newestReview} alt={"newestReview"} style={{width:"100%"}}/>
                     </div>
                 </div>
