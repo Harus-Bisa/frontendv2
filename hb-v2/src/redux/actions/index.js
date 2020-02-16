@@ -1,5 +1,5 @@
 import services from "../../Services"
-import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS, LOAD_SCHOOLS, FIND_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES } from "../constants/action-types"
+import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS, LOAD_SCHOOLS, FIND_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES, REPORT_INAPPROPRIATE_REVIEW } from "../constants/action-types"
 
 
 export function signup(newUserData){
@@ -145,7 +145,18 @@ export function voteReview(revieweeId, reviewId, vote){
         })
     }
 }
-
+export function reportInappropriateness(report){
+    return async function(dispatch){
+        return await services.reportInappropriateness(report)
+        .then(async response =>{
+            await dispatch({type: REPORT_INAPPROPRIATE_REVIEW, payload: response})
+            dispatch(removeError())
+        })
+        .catch(error =>{
+            dispatch(setError(error));
+        })
+    }
+}
 export function setError(error){
     window.scrollTo(0,0)
     return {type: SET_ERROR, payload: error}

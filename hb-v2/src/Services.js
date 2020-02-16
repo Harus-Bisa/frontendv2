@@ -165,6 +165,17 @@ class Services{
             this.errorHandling(error)
         }) 
     }
+
+    async reportInappropriateness(report){
+        const url = this.domain + "/tickets";
+        return axios.post(url, report, {headers: this.headers()})
+        .then(response =>{
+            return response.data
+        })
+        .catch(error =>{
+            this.errorHandling(error)
+        })
+    }
 }
 const services = new Services();
 export default services;

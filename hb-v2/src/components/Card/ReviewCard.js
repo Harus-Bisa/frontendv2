@@ -37,6 +37,12 @@ function ReviewCard(props){
             </Button>
         </div>)
     }
+    const reviewId = props.review.reviewId
+    const _reportInappropriatePopup = (props) => {
+        return(
+            <ReportInappropriatePopup {...props} reviewId={reviewId}/>
+        )
+    }
     if(props.type === MOBILE){
         return(
             <div className='col-12' style={{paddingTop:'15px', paddingBottom:'15px'}}>
@@ -163,7 +169,7 @@ function ReviewCard(props){
                                 }
                             </div>
                             <Popup 
-                                content={props.loggedIn ? ReportInappropriatePopup : LoginPopup}
+                                content={props.loggedIn ? _reportInappropriatePopup : LoginPopup}
                                 trigger={{
                                     component:ReportInappropriateTrigger,
                                     id:'report-inappropriate-button'
@@ -302,8 +308,8 @@ function ReviewCard(props){
                                         }
                                     </div>
                                     <div className="col-4">
-                                        <Popup 
-                                            content={props.loggedIn ? ReportInappropriatePopup : LoginPopup}
+                                        <Popup
+                                            content={props.loggedIn ? _reportInappropriatePopup : LoginPopup}
                                             trigger={{
                                                 component:ReportInappropriateTrigger,
                                                 id:'report-inappropriate-button'
