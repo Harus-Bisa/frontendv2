@@ -31,7 +31,7 @@
 }
 
 .search-box .search-input-wrapper{
-  padding: .375rem .75rem !important;
+  padding: 1rem .75rem !important;
 }
 
 .search-box .MuiInput-underline::before, .search-box .MuiInput-underline::after, .search-box .MuiInput-underline:hover:not(.Mui-disabled):before, .search-box .MuiInput-underline:focus{
@@ -42,6 +42,7 @@
   border-left: 1px solid rgba(0, 0, 0, 0.12);
 }
 
+/*SM*/
 @media (max-width: 767px){
   .search-box .search-button{
     border-top-right-radius: 0!important;
@@ -50,4 +51,12 @@
   .search-box .left-border{
     border-left: 0px solid;
   }
+}
+
+/*MD*/
+@media (min-width: 768px) and (max-width: 991.98px){
+  .search-box .search-input-wrapper{
+    padding: .75rem !important;
+  }
+  
 }

@@ -1,16 +1,23 @@
 import React from "react";
 import { Form, FormGroup, Input, Label } from "reactstrap";
 import { Button } from "@material-ui/core";
+import { connect } from "react-redux";
+import { reportInappropriateness } from "../../redux/actions";
 
-export default function ReportInappropriateForm(props){
+function ReportInappropriateForm(props){
     const [otherInformation, setOtherInformation] = React.useState("")
-    const submit = (event) =>{
+    const submit = async (event) =>{
         event.preventDefault();
-        const data = {
-            type: props.type,
-            otherInformation: otherInformation
+        const report = {
+            authorId:props.userId,
+            authorEmail:props.userEmail,
+            targetId:props.reviewId,
+            targetType:"review",
+            issueType: props.type,
+            message: otherInformation
         }
-        console.log(data)
+        await props.reportInappropriateness(report)
+        alert("Terima kasih sudah melaporkan review ini! Tim Dosen Ku akan segera menangani kasus ini.")
         props.closePopup();
     }
     return(
@@ -31,3 +38,11 @@ export default function ReportInappropriateForm(props){
         </Form>
     )
 }
+
+function mapStateToProps(state){
+    return{
+        userId: state.user.userId,
+        userEmail: state.user.email
+    }
+}
+export default connect(mapStateToProps,{reportInappropriateness})(ReportInappropriateForm)

@@ -10,6 +10,7 @@ const initialState ={
     reviewees:[],
     loadReviewees: false,
     pageReviewees: [],
+    loadPageReviewees: false,
     schools: [],
     loadSchools: false,
     success: false
@@ -32,6 +33,11 @@ export default function rootReducer(state = initialState, action){
         })
     }
     if(action.type === LOAD_REVIEWEES){
+        if(action.payload === "page"){
+            return Object.assign({}, state, {
+                loadPageReviewees: true
+            })
+        }
         return Object.assign({}, state, {
             loadReviewees: true
         })
@@ -39,9 +45,9 @@ export default function rootReducer(state = initialState, action){
     if(action.type === FIND_REVIEWEES){
         if(action.payload.type === "page"){
             return Object.assign({}, state, {
-                pageReviewees: action.payload.response,
+                pageReviewees: action.payload.response.sort(sortName),
                 found: action.payload.response.length !== 0,
-                loadReviewees: false
+                loadPageReviewees: false
             })
         }
         else if (action.payload.type === "searchBox"){

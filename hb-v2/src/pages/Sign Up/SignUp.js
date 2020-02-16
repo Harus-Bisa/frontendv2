@@ -1,5 +1,4 @@
 import React from "react";
-import SignUpPopup from "../../components/Popup/SignupPopup";
 import SignUpForm from "../../components/Form/SignUpForm";
 import sun from "../../img/sun.png";
 

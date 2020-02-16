@@ -65,7 +65,7 @@
     padding:1px 1.5px;
     font-size: 11px !important;
     line-height: 15px;
-    min-width: 40px;
+    min-width: 30px;
     margin: auto;
     margin-left: 5px;
     margin-right: 5px;
@@ -165,15 +165,21 @@
     color: black;
 }
 /*SM*/
-@media (max-width: 576px) {
+@media (max-width: 767px) {
     .reviewee-card h3{
         font-size: 18px;
     }
     .reviewee-card p{
         font-size: 14px;
     }
+    .write-review{
+        background: transparent;
+        border: 1px solid transparent;
+        box-sizing: border-box;
+        padding: 0;
+    }
 }
-@media (max-width: 768px){
+@media (min-width: 768px) and (max-width: 991.98px){
     .write-review{
         background: transparent;
         border: 1px solid transparent;

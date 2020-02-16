@@ -167,6 +167,7 @@ label{
   border-color: black !important;
   box-sizing: border-box;
   border-radius: 0px !important;
+  /* border: 0.5px solid #C4C4C4 !important; */
 }
 
 .form-control:focus{
@@ -276,8 +277,11 @@ label{
 .blur{
   filter: blur(4px);
 }
+.full-height{
+  height:100vh;
+}
 /* SM */
-@media (max-width: 576px) {
+@media (max-width: 767.98px) {
   .footer-adjust{
     padding-bottom: 179px;
   }
@@ -290,9 +294,9 @@ label{
   
 }
 /* MD */
-@media (max-width: 767px){
-  .full-height{
-    height:100vh;
+@media (min-width: 768px) and (max-width: 991.98px){
+  h1{
+    font-size: 36px;
   }
   .footer-adjust{
     padding-bottom: 250px;
@@ -300,7 +304,7 @@ label{
 }
 
 /*LG*/
-@media (max-width: 992px) {
+@media (max-width: 1199.98px) {
   
 }
 

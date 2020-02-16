@@ -5,7 +5,7 @@ import { findReviewees } from "../../redux/actions";
 import { connect } from "react-redux";
 import Feedback from "../Feedback/Feedback";
 import RevieweeSearch from "./RevieweeSearch";
-import { Button, Divider } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import "../../css/searchBox.css";
 import UniversitySearch from "./UniversitySearch";

@@ -25,7 +25,7 @@ export const RATING = "RATING";
 export const NAME = "NAME";
 
 function Query(props){
-    const [sortBy, setSortBy] = React.useState(POPULARITY)
+    const [sortBy, setSortBy] = React.useState(NAME)
 
     const handleChange = (event) =>{
         setSortBy(event.target.value)
@@ -75,15 +75,16 @@ function Query(props){
                     <div className="col-lg-3">
                         <h4>Urutkan berdasarkan</h4>
                         <RadioGroup aria-label="sortBy" name="sortBy" value={sortBy} onChange={handleChange}>
+                            <FormControlLabel value={NAME} control={<BlueRadio/>} label="Nama"/>
                             <FormControlLabel value={POPULARITY} control={<BlueRadio/>} label="Paling Populer" />
                             <FormControlLabel value={RATING} control={<BlueRadio/>} label="Penilaian Tertinggi" />
-                            <FormControlLabel value={NAME} control={<BlueRadio/>} label="Nama"/>
                         </RadioGroup>
                     </div>
                     <Divider orientation={"vertical"}/>
                     <div className="col-lg-8">
                         <div className="row justify-content-end">
                             <div className="col-lg-12">
+                                {props.loading && <p>Loading...</p>}
                                 {renderQueryResults()}
                                 {props.found === false && 
                                     <div>
@@ -103,7 +104,7 @@ function Query(props){
 function mapStateToProps(state){
     return{
         reviewees: state.pageReviewees,
-        loading: state.loadReviewees,
+        loading: state.loadPageReviewees,
         found: state.found
     }
 }
