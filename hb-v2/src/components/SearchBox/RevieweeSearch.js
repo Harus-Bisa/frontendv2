@@ -28,9 +28,13 @@ function RevieweeSearch(props){
                 props.clearReviewees()
             }}
             onChange={(event, value) => {
-                if(value){
+                if(value && value.name && value.school){
                     props.setReviewee(value.name)
                     props.setSchool(value.school)
+                }
+                else if(value){
+                    props.setReviewee(value)
+                    props.setSchool("")
                 }
             }}
             disableClearable
