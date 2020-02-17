@@ -15,9 +15,9 @@ function Landing(props){
                         <SearchBox/>
                     </div>
                 </header>
-                <div className="row justify-content-center" style={{height:"70vh"}}>
+                <div className="row justify-content-center" style={{height:"50vh"}}>
                     <div className="col-lg-8 margin-auto">
-                        <img src={newestReview} alt={"newestReview"} style={{width:"100%"}}/>
+                        {/* <img src={newestReview} alt={"newestReview"} style={{width:"100%"}}/> */}
                     </div>
                 </div>
             </div>

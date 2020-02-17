@@ -96,7 +96,9 @@ label{
 .blue{
   color: var(--hb-blue);
 }
-
+.italic{
+  font-style: italic;
+}
 .blue-button{
   background-color: black;
 }
@@ -163,8 +165,8 @@ label{
   padding: 0 2rem !important;
 }
 .form-control, .PrivateNotchedOutline-root-102, .MuiOutlinedInput-notchedOutline{
-  border: 1px solid #000000;
-  border-color: black !important;
+  border: 1px solid  !important;
+  border-color: #C4C4C4 !important;
   box-sizing: border-box;
   border-radius: 0px !important;
   /* border: 0.5px solid #C4C4C4 !important; */

@@ -1,8 +1,8 @@
 .landing-page{
-    background-image: url("../img/landingpageimg.png");
+    background-image: url("../img/landingpageimgTemp.png");
     background-repeat: no-repeat;
     background-position: top;
-    background-size: contain;
+    /* background-size: contain; */
 }
 
 .landing-page header{
