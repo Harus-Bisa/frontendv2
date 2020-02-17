@@ -1,21 +1,27 @@
 import React from "react";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import { connect } from "react-redux";
-import landingpageimg from "../../img/landingpageimg.png";
+import "../../css/landingPage.css";
+import Footer from "../../components/Footer/Footer";
+import newestReview from "../../img/newestreviewimg.png";
 
 function Landing(props){
     return(
-        <div className='container page-container'>
-            <div style={{margin:'32vh 0'}}>
-                <header>
-                    <h1>Review Dosen anda Sekarang</h1>
-                    <p>Bergabung dengan komunitas pelajar seluruh Indonesia</p>
+        <div className='page-container landing-page'>
+            <div className="container footer-adjust">
+                <header className="flex">
+                    <div className="margin-auto">
+                        <h1>Review Dosen Anda Sekarang</h1>
+                        <SearchBox/>
+                    </div>
                 </header>
-                <SearchBox/>
+                <div className="row justify-content-center" style={{height:"50vh"}}>
+                    <div className="col-lg-8 margin-auto">
+                        {/* <img src={newestReview} alt={"newestReview"} style={{width:"100%"}}/> */}
+                    </div>
+                </div>
             </div>
-            <div style={{marginBottom:'10vh'}} className="d-sm-none">
-                <img src={landingpageimg} alt="landing" style={{width:"100%"}}/>
-            </div>
+            <Footer/>
         </div>
     )
 }

@@ -12,6 +12,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html, body{
+  width: 100%;
+  height: 100%;
+  color: #40444D;
+}
 h1, h2, h3, h4, h5, p, a, input, span, label {
   font-family: 'Poppins', sans-serif !important;
 }
@@ -20,7 +25,7 @@ h1{
   font-style: normal;
   font-weight: bold;
   font-size: 48px;
-  line-height: 83%;
+  line-height: 111%;
   margin-bottom: 1rem;
 }
 h2{
@@ -32,12 +37,12 @@ h2{
 h3{
   font-style: normal;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 28px;
   line-height: 27px;
 }
 h4{
   font-weight: 600;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 24px;
 }
 h5{
@@ -54,32 +59,45 @@ p, a, input, label{
   line-height: 20px;
   margin-bottom: 0.5rem;
 }
-
+a{
+  color: #0D7CBB;
+}
 a:hover{
   text-decoration-line: underline;
 }
-
+label{
+  font-weight: 600;
+}
 .center{
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
+.flex{
+  display:flex;
+  flex-direction: column;
+}
+.margin-auto{
+  margin:auto !important;
+}
 .content{
   padding: 1rem 2rem !important;
 }
 
 .page-container{
   padding-top: calc(64px + 1rem) !important;
+  position: relative;
+  min-height: 100vh;
 }
-
-.navbar{
-  background-color:white;
-  position:fixed;
-  top:0;
-  z-index:999;
-  width:100%;
+.red{
+  color: #E05D3E;
+}
+.blue{
+  color: var(--hb-blue);
+}
+.italic{
+  font-style: italic;
 }
 .blue-button{
   background-color: black;
@@ -132,8 +150,8 @@ a:hover{
   color: white !important;
   background-color: var(--hb-blue) !important;
   font-weight: normal !important;
+  min-width: 150px !important;
 }
-
 .contrast-opposite-button{
   color: var(--hb-blue) !important;
   background-color: white !important;
@@ -147,18 +165,26 @@ a:hover{
   padding: 0 2rem !important;
 }
 .form-control, .PrivateNotchedOutline-root-102, .MuiOutlinedInput-notchedOutline{
-  border: 1px solid #000000;
-  border-color: black !important;
+  border: 1px solid  !important;
+  border-color: #C4C4C4 !important;
   box-sizing: border-box;
   border-radius: 0px !important;
+  /* border: 0.5px solid #C4C4C4 !important; */
 }
 
 .form-control:focus{
   outline-color: var(--hb-blue);
-  border-color: var(--hb-blue);
-  box-shadow: none;
+  border-color: #00ACF9 !important;
+  box-shadow: 0px 0px 4px rgba(0, 172, 249, 0.45);
 }
-
+/* NAV */
+.navbar{
+  background-color:transparent;
+  position:fixed;
+  top:0;
+  z-index:999;
+  width:100%;
+}
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
   color:black;
   font-weight: bold;
@@ -170,10 +196,25 @@ a:hover{
 }
 .nav-link{
   margin-bottom: 0;
+  padding-right: 1rem !important;
+  padding-left: 1rem !important;
+  cursor: pointer;
+}
+.nav-item{
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+.contrast-navlink{
+  color: white !important;
+  background-color: var(--hb-blue) !important;
+  border-radius: 10px;
 }
 
+.dark-navlink{
+  background-color: #40444D !important;
+}
 .blue-box{
-  background-color: var(--hb-blue);
+  background-color: #0D7CBB;
   color:white !important;
   padding: 2rem;
   box-shadow: 0 0.3125rem 1rem 0 rgba(0,0,0,.24);
@@ -213,17 +254,62 @@ a:hover{
 .large-rating svg{
   font-size: 3rem;
 }
+.footer-adjust{
+  padding-bottom: 160px;
+}
+.brand{
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 40px;
+  /* or 167% */
 
-.nav-link{
-  /* font-weight: bold; */
-  cursor: pointer;
+  text-align: center;
+  text-transform: uppercase
 }
 
-@media (max-width: 767px){
-  .full-height{
-    height:100vh;
+.page-header{
+  background-color: #F3FBFF;
+  padding: 2rem 0rem;
+}
+.MuiDivider-vertical{
+  height: auto !important;
+}
+.blur{
+  filter: blur(4px);
+}
+.full-height{
+  height:100vh;
+}
+/* SM */
+@media (max-width: 767.98px) {
+  .footer-adjust{
+    padding-bottom: 179px;
+  }
+  h1{
+    font-size: 36px;
+  }
+  h2{
+    font-size: 28px;
+  }
+  
+}
+/* MD */
+@media (min-width: 768px) and (max-width: 991.98px){
+  h1{
+    font-size: 36px;
+  }
+  .footer-adjust{
+    padding-bottom: 250px;
   }
 }
+
+/*LG*/
+@media (max-width: 1199.98px) {
+  
+}
+
 
 
 

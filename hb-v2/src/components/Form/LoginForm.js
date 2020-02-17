@@ -35,23 +35,22 @@ function LoginForm(props){
             {props.error && <Feedback color={"danger"} message={props.error.message}/>}
             <Form onSubmit={submit}>
                 <FormGroup>
-                    <Label>Email*</Label>
+                    <Label>Email<span className="red">*</span></Label>
                     <Input 
                         type="email" 
                         id="email" 
                         value={email} 
                         onChange={(event) => setEmail(event.target.value)} 
-                        required 
-                        autoFocus
+                        required
                         placeholder="Email Sekolah Anda"
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Label>Password*</Label>
+                    <Label>Password<span className="red">*</span></Label>
                     <Input type="password" id="password" value={password} onChange={(event) => setPassword(event.target.value)} required/>
                 </FormGroup>
                 <FormGroup>
-                    <FormText>Dengan masuk, Anda setuju dengan Syarat dan Ketentuan dan Kebijakan Privasi.</FormText>
+                    <FormText>Dengan masuk, Anda setuju dengan <a href="/info/termsandconditions">Syarat dan Ketentuan</a> dan <a href="/info/privacypolicy">Kebijakan Privasi</a>.</FormText>
                 </FormGroup>
                 <FormGroup>
                     <Button type="submit" className="contrast-button" fullWidth>Login</Button>

@@ -5,16 +5,17 @@ import { TextField, CircularProgress } from "@material-ui/core";
 import { throttle, debounce } from "throttle-debounce";
 import { findReviewees, clearReviewees } from "../../redux/actions";
 import { connect } from "react-redux";
+import { Person } from "@material-ui/icons";
 
 function RevieweeSearch(props){
 
     const handleChange = (event, value) =>{
         props.setReviewee(value)
         if(value.length < 2 || value.endsWith(' ')){
-            throttle(500, props.findReviewees(value, ""))
+            throttle(500, props.findReviewees(value, "", "searchBox"))
         }
         else{
-            debounce(500, props.findReviewees(value, ""))
+            debounce(500, props.findReviewees(value, "", "searchBox"))
         }
     }
     return(
@@ -27,9 +28,13 @@ function RevieweeSearch(props){
                 props.clearReviewees()
             }}
             onChange={(event, value) => {
-                if(value){
+                if(value && value.name && value.school){
                     props.setReviewee(value.name)
                     props.setSchool(value.school)
+                }
+                else if(value){
+                    props.setReviewee(value)
+                    props.setSchool("")
                 }
             }}
             disableClearable
@@ -40,17 +45,23 @@ function RevieweeSearch(props){
             renderInput={params => (
                 <TextField
                     {...params}
-                    placeholder="Cari dosen"
+                    placeholder="Ketik Nama Dosen Anda"
                     fullWidth
                     value={props.reviewee}
                     InputProps={{
-                    ...params.InputProps,
-                    endAdornment: (
-                        <React.Fragment>
-                        {props.loading ? <CircularProgress color="inherit" size={15} /> : null}
-                        {params.InputProps.endAdornment}
-                        </React.Fragment>
-                    ),
+                        ...params.InputProps,
+                        endAdornment: (
+                            <React.Fragment>
+                                {props.loading ? <CircularProgress color="inherit" size={15} /> : null}
+                                {params.InputProps.endAdornment}
+                            </React.Fragment>
+                        ),
+                        startAdornment:(
+                            <React.Fragment>
+                                <Person/>
+                                {params.InputProps.startAdornment}
+                            </React.Fragment>
+                        )
                     }}
                 />
             )}

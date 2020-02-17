@@ -6,7 +6,11 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink
+  NavLink,
+  DropdownToggle,
+  DropdownMenu,
+  UncontrolledDropdown,
+  DropdownItem
 } from 'reactstrap';
 import SearchBox from "../SearchBox/SearchBox";
 import { connect } from 'react-redux';
@@ -15,6 +19,7 @@ import Popup from '../Popup/Popup';
 import LoginPopup from '../Popup/LoginPopup';
 import SignUpPopup from '../Popup/SignupPopup';
 import { withRouter } from 'react-router-dom';
+import { Search } from '@material-ui/icons';
 
 function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);
@@ -36,43 +41,63 @@ function NavigationBar(props){
       getUser(localStorage.getItem("userId"))
     }
   }, [loggedIn, name, getUser])
-  return (
+
+  const atLanding = props.location.pathname === "/"
+  const navlinkClassname = atLanding ? "contrast-navlink dark-navlink navlink" : "contrast-navlink navlink"
+  const textColor = atLanding && !isOpen ? "white":"inherit";
+  
+  return(
     <div>
-      <Navbar light expand="md" className="navbar">
-        <NavbarBrand href="/">Dosen Ku</NavbarBrand>
+      <Navbar light expand="md" className="navbar" style={{backgroundColor:(isOpen || !atLanding  ? "white" : "transparent")}}>
+        <NavbarBrand href="/" className="brand" style={{color:textColor}}>Dosen Ku</NavbarBrand>
         <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar className="justify-content-end full-height">
+        <Collapse isOpen={isOpen} navbar className={isOpen ? "justify-content-end full-height" : "justify-content-end"}>
           <Nav navbar>
             <div className="d-md-none">
               <NavItem>
                 <SearchBox close={toggle}/>
               </NavItem>
             </div>
-            <NavItem>
-            {props.loggedIn && props.name && <NavLink id="name" onClick={() => {}}>Hello, {props.name}!</NavLink>}
-            {!props.loggedIn && 
-              <Popup
-                  trigger={{
-                      component:NavLink,
-                      id:'login'
-                  }}
-                  purpose="Login"
-                  content={LoginPopup}
-              />
+            {props.loggedIn && props.name &&
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Hello, {props.name}!
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>
+                    <NavLink id="logoff" onClick={logout}>Log Out</NavLink>
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
             }
-            </NavItem>
-            <NavItem>
-              {props.loggedIn && <NavLink id="logoff" onClick={logout}>Log Out</NavLink>}
-              {!props.loggedIn &&
+            {!props.loggedIn && 
+            <React.Fragment>
+              <NavItem>
+                <Popup
+                    trigger={{
+                        component:NavLink,
+                        id:'login',
+                        style:{color:textColor}
+                    }}
+                    purpose="Login"
+                    content={LoginPopup}
+                />
+              </NavItem>
+              <NavItem>
                 <Popup
                   trigger={{
                       component:NavLink,
-                      id:'signup'
+                      id:'signup',
+                      className:navlinkClassname
                   }}
                   purpose="Sign Up"
                   content={SignUp}
                 />
-              }
+              </NavItem>
+            </React.Fragment>
+            }
+            <NavItem>
+              <NavLink className={navlinkClassname}><Search style={{fontSize:'14px'}}/></NavLink>
             </NavItem>
           </Nav>
         </Collapse>

@@ -13,7 +13,7 @@ export default function ReportInappropriatePopup(props){
         <div>
             <div className="content" style={{ marginBottom:'-15px'}}>
                 <h3>Baca sebelum laporkan</h3>
-                <p>Silakan merujuk pada Peraturan Konten dan Syarat dan Ketentuan kami dan beri tahu kami mengapa menurut Anda konten yang Anda laporkan melanggar pedoman ini:</p>
+                <p>Silakan merujuk pada <a href="/info/communityguidelines">Peraturan Konten</a> dan <a href="/info/termsandconditions">Syarat dan Ketentuan</a> kami dan beri tahu kami mengapa menurut Anda konten yang Anda laporkan melanggar pedoman ini:</p>
             </div>
             <div>
                 <div className="content" style={{paddingBottom:0}}>
@@ -25,7 +25,7 @@ export default function ReportInappropriatePopup(props){
                             <p>Konten yang ada tidak tepat</p>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails className="content">
-                            <ReportInappropriateForm closePopup={props.closePopup} type="inaccurate" />
+                            <ReportInappropriateForm reviewId={props.reviewId} closePopup={props.closePopup} type="inaccurate" />
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
                     <ExpansionPanel id="irrelevant-content" expanded={expanded === 'irrelevant-content'} onChange={handleChange('irrelevant-content')}>
@@ -33,7 +33,7 @@ export default function ReportInappropriatePopup(props){
                             <p>Konten yang ada tidak relevan</p>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails className="content">
-                            <ReportInappropriateForm closePopup={props.closePopup} type="irrelevant"/>
+                            <ReportInappropriateForm reviewId={props.reviewId} closePopup={props.closePopup} type="irrelevant"/>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
                     <ExpansionPanel id="inconsistent-content" expanded={expanded === 'inconsistent-content'} onChange={handleChange('inconsistent-content')}>
@@ -41,7 +41,7 @@ export default function ReportInappropriatePopup(props){
                             <p>Konten yang ada tidak konsisten</p>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails className="content">
-                            <ReportInappropriateForm closePopup={props.closePopup} type="inconsistent"/>
+                            <ReportInappropriateForm reviewId={props.reviewId} closePopup={props.closePopup} type="inconsistent"/>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>  
                     <ExpansionPanel id="foulLanguage-content" expanded={expanded === 'foulLanguage-content'} onChange={handleChange('foulLanguage-content')}>  
@@ -49,7 +49,7 @@ export default function ReportInappropriatePopup(props){
                             <p>Konten terdapat bahasa yang kasar, ungkapan kebencian, prasangka, ancaman, atau hinaan pribadi.</p>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails className="content">
-                            <ReportInappropriateForm closePopup={props.closePopup} type="foulLanguage"/>
+                            <ReportInappropriateForm reviewId={props.reviewId} closePopup={props.closePopup} type="foulLanguage"/>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
                 </div>                

@@ -3,16 +3,15 @@ import {connect} from "react-redux";
 import { FormGroup, Label, Input, Button } from "reactstrap";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, LocalCafe, LocalCafeOutlined } from "@material-ui/icons";
 import { StyledRating } from "../Rating/StyledRating";
-import { addReview, getReviews, setError, removeError } from "../../redux/actions";
+import { addReview, getReviews, setError, removeError, findSchools } from "../../redux/actions";
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import { withStyles } from "@material-ui/core";
+import { withStyles, Divider } from "@material-ui/core";
 import Popup from "../Popup/Popup";
 import LoginPopup from "../Popup/LoginPopup";
-import {options} from '../../data/UniversityList';
 import { teachingStyleOptions } from "../../data/TeachingStyle";
 import { tagsOptions } from "../../data/TagsOptions";
 import Feedback from "../Feedback/Feedback";
@@ -72,6 +71,8 @@ function ReviewForm(props){
     const getReviews = props.getReviews;
     const professor = props.professor
     const history = props.history
+    const schools = props.schools
+    const findSchools = props.findSchools
     React.useEffect(() =>{
         if(existingProf){
             if(!professor){
@@ -105,7 +106,12 @@ function ReviewForm(props){
                 history.push("/review/"+professor.revieweeId)
             }
         }
-    }, [getReviews, revieweeId, existingProf, professor, revieweeName, submitted, history])
+
+        if(schools.length === 0){
+            findSchools("")
+        }
+
+    }, [getReviews, revieweeId, existingProf, professor, revieweeName, submitted, history,schools, findSchools])
 
     const submit = (event) =>{
         event.preventDefault()
@@ -209,205 +215,249 @@ function ReviewForm(props){
         return yearOptions;
     }
     return(
-        <div className="container content page-container">
-            <h5>Terima kasih atas kontribusi anda!</h5>
-            {props.error && <Feedback color={"danger"} message={props.error.message}/>}
-            <form onSubmit={submit}> 
-                <FormGroup>
-                    <Label>Nama Dosen*</Label>
-                    <TextField 
-                        id="profName" 
-                        value={profName} 
-                        required 
-                        onChange={(event) => setProfName(event.target.value)} 
-                        fullWidth 
-                        variant="outlined"
-                        disabled={existingProf}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <Label>Nama Perguruan Tinggi*</Label>
-                    <Autocomplete
-                        id="profSchool"
-                        options={options}
-                        freeSolo
-                        getOptionLabel={option => option}
-                        value={profSchool}
-                        onChange={(event, value) => setProfSchool(value)}
-                        onInputChange={(event, value) => setProfSchool(value)}
-                        style={{ width: "100% "}}
-                        disabled={existingProf}
-                        renderInput={params => (
-                            <TextField
-                                {...params}
-                                variant="outlined"
-                                fullWidth
-                                required
-                            />
-                        )}
-                    />
-                </FormGroup>
-                <FormGroup style={style.ratingBox}>
-                    <Label>Penilaian*</Label>
-                    <StyledRating
-                        style={style.ratingSpan} 
-                        id="overallRating" 
-                        value={overallRating} 
-                        onChange={(event, value) => setOverallRating(value)}
-                        icon={<ThumbUp/>}
-                        emptyIcon={<ThumbUpOutlined/>}
-                    />
-                </FormGroup>
-                <FormGroup style={style.ratingBox}>
-                    <Label>Apakah anda akan merekomendasi dosen ini ke teman anda?*</Label>
-                    <StyledRating
-                        style={style.ratingSpan} 
-                        id="recommendationRating" 
-                        value={recommendationRating} 
-                        onChange={(event, value) => setRecommendationRating(value)}
-                        icon={<Check/>}
-                        emptyIcon={<CheckOutlined/>}
-                    />
-                </FormGroup>
-                <FormGroup style={style.ratingBox}>
-                    <Label>Kesusahan Kelas*</Label>
-                    <StyledRating 
-                        style={style.ratingSpan} 
-                        id="difficultyRating" 
-                        value={difficultyRating} 
-                        onChange={(event, value) => setDifficultyRating(value)}
-                        icon={<LocalCafe/>}
-                        emptyIcon={<LocalCafeOutlined/>}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <Label>Nama Kelas*</Label>
-                    <TextField 
-                        id="courseName" 
-                        value={courseName} 
-                        required 
-                        onChange={(event) => setCourseName(event.target.value)}
-                        fullWidth 
-                        variant="outlined"
-                    />
-                </FormGroup>
-                <FormGroup style={style.ratingBox}>
-                    <Label>Apakah anda sedang mengambil kelas ini?*</Label>
-                    <div className="button-group-container" id="currentlyTaking">
-                        <Button type="button" id="currentlyTaking-Yes" onClick={(event) => setCurrentlyTaking(true)} className={currentlyTaking ? "button-group-selected" : "button-group"}>Iya!</Button>
-                        <Button type="button" id="currentlyTaking-No" onClick={(event) => setCurrentlyTaking(false)} className={!currentlyTaking ? "button-group-selected" : "button-group"}>Sudah lama!</Button>
+        <div className="page-container">
+            {existingProf && 
+                <div className="page-header" style={{backgroundColor:'#F7F7F7'}}>
+                    <div className="container">
+                        <div className="row no-gutters">
+                            <div className="col">
+                                <h2 className="blue">{profName}</h2>
+                                <p className="italic">{profSchool}</p>
+                            </div>  
+                        </div>
                     </div>
-                </FormGroup>
-                {!currentlyTaking && 
-                    <FormGroup>
-                        <Label>Tahun mengambil kelas</Label>
-                        <Input type="select" name="yearTaken" id="yearTaken" onChange={(event) => {setYearTaken(event.target.value)}}>
-                            {renderYears()}
-                        </Input>
-                    </FormGroup>
-                }
-                <FormGroup>
-                    <Label>Nilai yang Anda dapatkan*</Label>
-                    <Autocomplete
-                        id="grade"
-                        options={["A", "B", "C", "D", "E", "F", "N/A"]}
-                        freeSolo
-                        getOptionLabel={option => option}
-                        value={grade}
-                        onChange={(event, value) => setGrade(value)}
-                        style={{ width: "100% "}}
-                        renderInput={params => (
-                            <TextField
-                                {...params}
-                                variant="outlined"
-                                fullWidth
-                                required
-                                onChange={(event) => setGrade(event.target.value)}
-                            />
-                        )}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <Label>Gaya mengajar dosen*</Label>
-                    <Autocomplete
-                        multiple
-                        id="teachingStyle"
-                        options={teachingStyleOptions}
-                        disableCloseOnSelect
-                        getOptionLabel={option => option}
-                        onChange={(event, value) => setTeachingStyle(value)}
-                        value={teachingStyle}
-                        renderOption={(option, { selected }) => (
+                </div>
+            }
+            <div className="container content">
+                <div className="row">
+                    <div className="col-md-8">
+                        <div style={{marginBottom:'2.5rem'}}>
+                            <h5>Terima kasih atas kontribusinya! Review <span className="blue">anonimus</span> anda sangat membantu mahasiswa lainnya!</h5>
+                        </div>
+                        {props.error && <Feedback color={"danger"} message={props.error.message}/>}
+                        <form onSubmit={submit}> 
+                            {!existingProf && 
                             <React.Fragment>
-                                <Checkbox
-                                    icon={<Icon/>}
-                                    checkedIcon={<CheckedIcon/>}
-                                    style={{ marginRight: 8 }}
-                                    checked={selected}
-                                />
-                                {option}
+                                <FormGroup>
+                                    <Label>Nama Dosen<span className="red">*</span></Label>
+                                    <TextField 
+                                        id="profName" 
+                                        value={profName} 
+                                        required 
+                                        onChange={(event) => setProfName(event.target.value)} 
+                                        fullWidth 
+                                        variant="outlined"
+                                        disabled={existingProf}
+                                    />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>Nama Perguruan Tinggi<span className="red">*</span></Label>
+                                    <Autocomplete
+                                        id="profSchool"
+                                        options={schools}
+                                        freeSolo
+                                        disableClearable
+                                        getOptionLabel={option => option}
+                                        value={profSchool}
+                                        inputValue={profSchool}
+                                        onChange={(event, value) => setProfSchool(value)}
+                                        onInputChange={(event, value) => setProfSchool(value)}
+                                        style={{ width: "100% "}}
+                                        disabled={existingProf}
+                                        renderInput={params => (
+                                            <TextField
+                                                {...params}
+                                                variant="outlined"
+                                                fullWidth
+                                                required
+                                            />
+                                        )}
+                                    />
+                                </FormGroup>
                             </React.Fragment>
-                        )}
-                        style={{ width: "100% "}}
-                        renderInput={params => (
-                            <TextField
-                                {...params}
-                                variant="outlined"
-                                fullWidth
-                            />
-                        )}
-                    />
-                </FormGroup>
-                <FormGroup style={style.ratingBox}>
-                    <Label>Apakah Textbook digunakan?*</Label>
-                    <div className="button-group-container" id="textbookRequired">
-                        <Button type="button" id="textbookRequired-Yes" onClick={(event) => setTextbookRequired(true)} className={textbookRequired ? "button-group-selected" : "button-group"}>Iya</Button>
-                        <Button type="button" id="textbookRequired-No" onClick={(event) => setTextbookRequired(false)} className={!textbookRequired ? "button-group-selected" : "button-group"}>Tidak</Button>
-                    </div>
-                </FormGroup>
-                <FormGroup>
-                    <Label>Pilih tag yang mendeskripsikan dosen ini (Max. 3)*</Label>
-                    <Autocomplete
-                        multiple
-                        id="tags"
-                        options={tagsOptions}
-                        disableCloseOnSelect
-                        getOptionLabel={option => option}
-                        value={tags}
-                        onChange={(event, value) => {
-                            if(value.length > 3){
-                                value = value.slice(1,value.length)
                             }
-                            setTags(value)
-                        }}
-                        renderOption={(option, { selected }) => (
-                            <React.Fragment>
-                                <Checkbox
-                                    icon={<Icon/>}
-                                    checkedIcon={<CheckedIcon/>}
-                                    style={{ marginRight: 8 }}
-                                    checked={selected}
+                            <FormGroup row>
+                                <div className="col-lg-6 col-md-8">
+                                    <Label>Penilaian keseluruhan kamu<span className="red">*</span></Label>
+                                </div>
+                                <div className="col-md-4 flex">
+                                    <StyledRating
+                                        className="margin-auto"
+                                        style={style.ratingSpan} 
+                                        id="overallRating" 
+                                        value={overallRating} 
+                                        onChange={(event, value) => setOverallRating(value)}
+                                        icon={<ThumbUp/>}
+                                        emptyIcon={<ThumbUpOutlined/>}
+                                        size="large"
+                                    />
+                                </div>
+                            </FormGroup>
+                            <FormGroup row>
+                                <div className="col-lg-6 col-md-8">
+                                    <Label>Akan merekomendasi ke teman?<span className="red">*</span></Label>
+                                </div>
+                                <div className="col-md-4 flex">
+                                    <StyledRating
+                                        className="margin-auto"
+                                        style={style.ratingSpan} 
+                                        id="recommendationRating" 
+                                        value={recommendationRating} 
+                                        onChange={(event, value) => setRecommendationRating(value)}
+                                        icon={<Check/>}
+                                        emptyIcon={<CheckOutlined/>}
+                                    />
+                                </div>
+                            </FormGroup>
+                            <FormGroup row>
+                                <div className="col-lg-6 col-md-8">
+                                    <Label>Kesusahan kelas<span className="red">*</span></Label>
+                                </div>
+                                <div className="col-md-4 flex">
+                                    <StyledRating 
+                                        className="margin-auto"
+                                        style={style.ratingSpan} 
+                                        id="difficultyRating" 
+                                        value={difficultyRating} 
+                                        onChange={(event, value) => setDifficultyRating(value)}
+                                        icon={<LocalCafe/>}
+                                        emptyIcon={<LocalCafeOutlined/>}
+                                    />
+                                </div>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Nama Kelas<span className="red">*</span></Label>
+                                <TextField 
+                                    id="courseName" 
+                                    value={courseName} 
+                                    required 
+                                    onChange={(event) => setCourseName(event.target.value)}
+                                    fullWidth 
+                                    variant="outlined"
                                 />
-                                {option}
-                            </React.Fragment>
-                        )}
-                        style={{ width: "100% "}}
-                        renderInput={params => (
-                            <TextField
-                                {...params}
-                                variant="outlined"
-                                fullWidth
-                            />
-                        )}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <Label>Review anda*</Label>
-                    <Input type="textarea" id="review" value={review} required onChange={(event) => setReview(event.target.value)}/>
-                </FormGroup>
-                {flag && <Popup content={LoginPopup} auto disableFlag={() => setFlag(false)}/>}
-                <SubmitButton/>
-            </form>
+                            </FormGroup>
+                            <FormGroup style={style.ratingBox}>
+                                <Label>Apakah anda sedang mengambil kelas ini?<span className="red">*</span></Label>
+                                <div className="button-group-container" id="currentlyTaking">
+                                    <Button type="button" id="currentlyTaking-Yes" onClick={(event) => setCurrentlyTaking(true)} className={currentlyTaking ? "button-group-selected" : "button-group"}>Iya!</Button>
+                                    <Button type="button" id="currentlyTaking-No" onClick={(event) => setCurrentlyTaking(false)} className={!currentlyTaking ? "button-group-selected" : "button-group"}>Sudah lama!</Button>
+                                </div>
+                            </FormGroup>
+                            {!currentlyTaking && 
+                                <FormGroup>
+                                    <Label>Tahun mengambil kelas</Label>
+                                    <Input type="select" name="yearTaken" id="yearTaken" onChange={(event) => {setYearTaken(event.target.value)}}>
+                                        {renderYears()}
+                                    </Input>
+                                </FormGroup>
+                            }
+                            <FormGroup>
+                                <Label>Nilai yang Anda dapatkan<span className="red">*</span></Label>
+                                <Autocomplete
+                                    id="grade"
+                                    options={["A", "B", "C", "D", "E", "F", "N/A"]}
+                                    freeSolo
+                                    getOptionLabel={option => option}
+                                    value={grade}
+                                    onChange={(event, value) => setGrade(value)}
+                                    style={{ width: "100% "}}
+                                    renderInput={params => (
+                                        <TextField
+                                            {...params}
+                                            variant="outlined"
+                                            fullWidth
+                                            required
+                                            onChange={(event) => setGrade(event.target.value)}
+                                        />
+                                    )}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Gaya mengajar dosen<span className="red">*</span></Label>
+                                <Autocomplete
+                                    multiple
+                                    id="teachingStyle"
+                                    options={teachingStyleOptions}
+                                    disableCloseOnSelect
+                                    getOptionLabel={option => option}
+                                    onChange={(event, value) => setTeachingStyle(value)}
+                                    value={teachingStyle}
+                                    renderOption={(option, { selected }) => (
+                                        <React.Fragment>
+                                            <Checkbox
+                                                icon={<Icon/>}
+                                                checkedIcon={<CheckedIcon/>}
+                                                style={{ marginRight: 8 }}
+                                                checked={selected}
+                                            />
+                                            {option}
+                                        </React.Fragment>
+                                    )}
+                                    style={{ width: "100% "}}
+                                    renderInput={params => (
+                                        <TextField
+                                            {...params}
+                                            variant="outlined"
+                                            fullWidth
+                                        />
+                                    )}
+                                />
+                            </FormGroup>
+                            <FormGroup style={style.ratingBox}>
+                                <Label>Apakah Textbook digunakan?<span className="red">*</span></Label>
+                                <div className="button-group-container" id="textbookRequired">
+                                    <Button type="button" id="textbookRequired-Yes" onClick={(event) => setTextbookRequired(true)} className={textbookRequired ? "button-group-selected" : "button-group"}>Iya</Button>
+                                    <Button type="button" id="textbookRequired-No" onClick={(event) => setTextbookRequired(false)} className={!textbookRequired ? "button-group-selected" : "button-group"}>Tidak</Button>
+                                </div>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Pilih tag yang mendeskripsikan dosen ini (Max. 3)<span className="red">*</span></Label>
+                                <Autocomplete
+                                    multiple
+                                    id="tags"
+                                    options={tagsOptions}
+                                    disableCloseOnSelect
+                                    getOptionLabel={option => option}
+                                    value={tags}
+                                    onChange={(event, value) => {
+                                        if(value.length > 3){
+                                            value = value.slice(1,value.length)
+                                        }
+                                        setTags(value)
+                                    }}
+                                    renderOption={(option, { selected }) => (
+                                        <React.Fragment>
+                                            <Checkbox
+                                                icon={<Icon/>}
+                                                checkedIcon={<CheckedIcon/>}
+                                                style={{ marginRight: 8 }}
+                                                checked={selected}
+                                            />
+                                            {option}
+                                        </React.Fragment>
+                                    )}
+                                    style={{ width: "100% "}}
+                                    renderInput={params => (
+                                        <TextField
+                                            {...params}
+                                            variant="outlined"
+                                            fullWidth
+                                        />
+                                    )}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Review anda<span className="red">*</span></Label>
+                                <Input type="textarea" id="review" value={review} required onChange={(event) => setReview(event.target.value)}/>
+                            </FormGroup>
+                            {flag && <Popup content={LoginPopup} auto disableFlag={() => setFlag(false)}/>}
+                            <SubmitButton/>
+                        </form>
+                    
+                    </div>
+                    <Divider orientation={"vertical"} className="d-none d-md-block"/>
+                </div>
+            </div>
         </div>
     )
 }
@@ -416,7 +466,8 @@ function mapStateToProps(state){
     return{
         professor: state.professor,
         loggedIn: state.loggedIn,
-        error: state.error
+        error: state.error,
+        schools: state.schools
     }
 }
-export default connect(mapStateToProps,{addReview, getReviews, setError, removeError})(ReviewForm);
+export default connect(mapStateToProps,{addReview, getReviews, setError, removeError,findSchools})(ReviewForm);

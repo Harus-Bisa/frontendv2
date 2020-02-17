@@ -5,7 +5,7 @@ import { findReviewees } from "../../redux/actions";
 import { connect } from "react-redux";
 import Feedback from "../Feedback/Feedback";
 import RevieweeSearch from "./RevieweeSearch";
-import { Button, Divider } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import "../../css/searchBox.css";
 import UniversitySearch from "./UniversitySearch";
@@ -17,7 +17,7 @@ function SearchBox(props){
 
     const find = async (event) =>{
         event.preventDefault();
-        props.findReviewees(reviewee, school)
+        props.findReviewees(reviewee, school, "searchBox")
         .then(response =>{
             if(props.reviewees.length === 1){
                 var id = props.reviewees[0].revieweeId
@@ -42,10 +42,7 @@ function SearchBox(props){
                         <div className="col-md-4 search-input-wrapper">
                             <RevieweeSearch reviewee={reviewee} setReviewee={setReviewee} setSchool={setSchool}/>
                         </div>
-                        <div className="col-md-1 search-input-wrapper d-none d-md-block" style={{display:'flex'}}>
-                            <Divider orientation="vertical" style={{margin:'auto'}}/>
-                        </div>
-                        <div className="col-md-6 search-input-wrapper">
+                        <div className="col-md-7 search-input-wrapper left-border">
                             <UniversitySearch school={school} setSchool={setSchool}/>
                         </div>
                         <div className="col-md-1">
@@ -56,11 +53,6 @@ function SearchBox(props){
                     </div>
                 </form>
             </div>
-            {props.found === false && 
-                <div style={{marginTop:'1.5rem'}}>
-                    <p>Tidak menemukan nama Dosen Anda? <a href={"/review/new/"+ (reviewee === "" ? "Nama Dosen" : reviewee)}>Jadilah penulis pertama!</a></p>
-                </div>
-            }
             {props.error && <Feedback color={"danger"} message={props.error.message}/>}
         </div>
     )

@@ -1,5 +1,6 @@
 import services from "../../Services"
-import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS } from "../constants/action-types"
+import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS, LOAD_SCHOOLS, FIND_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES, REPORT_INAPPROPRIATE_REVIEW } from "../constants/action-types"
+
 
 export function signup(newUserData){
     return async function(dispatch){
@@ -57,12 +58,35 @@ export function logout(){
         return dispatch({type: LOGOUT})
     }
 }
-export function findReviewees(name, school){
+export function findSchools(school){
     return async function(dispatch){
-        dispatch({type:LOAD_REVIEWEES})
+        dispatch({type:LOAD_SCHOOLS})
+        return await services.findSchools(school)
+        .then(async response =>{
+            await dispatch({type:FIND_SCHOOLS, payload: response})
+            dispatch(removeError())
+        })
+        .catch(error =>{
+            dispatch(setError(error))
+        })
+    }
+}
+export function clearSchools(){
+    return ({type:CLEAR_SCHOOLS})
+}
+export function sortReviewees(sortBy){
+    return ({type:SORT_REVIEWEES, payload: sortBy})
+}
+export function findReviewees(name, school, type){
+    return async function(dispatch){
+        dispatch({type:LOAD_REVIEWEES, payload:type})
         return await services.findReviewees(name, school)
         .then(async response =>{
-            await dispatch({type:FIND_REVIEWEES, payload: response})
+            const payload = {
+                response: response,
+                type: type
+            }
+            await dispatch({type:FIND_REVIEWEES, payload: payload})
             dispatch(removeError())
         })
         .catch(error =>{
@@ -121,7 +145,18 @@ export function voteReview(revieweeId, reviewId, vote){
         })
     }
 }
-
+export function reportInappropriateness(report){
+    return async function(dispatch){
+        return await services.reportInappropriateness(report)
+        .then(async response =>{
+            await dispatch({type: REPORT_INAPPROPRIATE_REVIEW, payload: response})
+            dispatch(removeError())
+        })
+        .catch(error =>{
+            dispatch(setError(error));
+        })
+    }
+}
 export function setError(error){
     window.scrollTo(0,0)
     return {type: SET_ERROR, payload: error}

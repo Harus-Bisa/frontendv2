@@ -1,0 +1,26 @@
+.help-page{
+    text-align: center;
+}
+.help-page .header{
+    background-color: #F3FBFF;
+}
+
+.help-page .padding{
+    padding-top: 2.5rem;
+    padding-bottom:2.5rem;
+}
+
+.help-page .faq{
+    text-align: left;
+    color: var(--hb-blue);
+}
+
+.help-page .faq p{
+    margin: 1.5rem 0rem;
+}
+
+.help-page .divider{
+    background-color: var(--hb-blue);
+    width: 137px;
+    height: 3px;
+}

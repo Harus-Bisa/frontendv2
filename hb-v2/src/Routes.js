@@ -7,11 +7,21 @@ import Login from './pages/Login/Login';
 import SignUp from './pages/Sign Up/SignUp';
 import Verification from './pages/Verification/Verification';
 import Query from './pages/Query/Query';
+import About from './pages/About/About';
+import Help from './pages/Help/Help';
+import TermsAndConditions from './pages/Info/TermsAndConditions';
+import PrivacyPolicy from './pages/Info/PrivacyPolicy';
+import CommunityGuidelines from './pages/Info/CommunityGuidelines';
 
 function Routes() {
     return(
         <Switch>
             <Route exact path="/" component={Landing}/>
+            <Route exact path="/about" component={About}/>
+            <Route exact path="/help" component={Help}/>
+            <Route exact path="/info/termsandconditions" component={TermsAndConditions}/>
+            <Route exact path="/info/privacypolicy" component={PrivacyPolicy}/>
+            <Route exact path="/info/communityguidelines" component={CommunityGuidelines}/>
             <Route exact path={["/review/new/:revieweeName", "/review/:revieweeId/add/:overallRating" ]}component={ReviewForm}/>
             <Route exact path="/review/:revieweeId" component={Review}/>
             <Route exact path="/query" component={Query}/>
