@@ -116,7 +116,8 @@ function Review(props){
                                 </div>
                                 <Divider orientation={"vertical"}/>
                                 <div className={"col-lg-7 flex"}>
-                                    <div className={props.loggedIn ? "margin-auto container" : "margin-auto container blur"}>
+                                    <div className="margin-auto container">
+                                        <h4 style={{color:'transparent'}}>DOSENKU DUMMY TEXT</h4>
                                         <div className="row no-gutters">
                                             <div className="col-1 flex">
                                                 <h5 className="margin-auto">{props.professor.recommendationRating === "-" ? 0 : props.professor.recommendationRating}</h5>
@@ -155,11 +156,11 @@ function Review(props){
                                             </div>
                                         </div>
                                     </div>
-                                    {!props.loggedIn && 
+                                    {/* {!props.loggedIn && 
                                         <div className="blue-box" style={{width:'50%', height:'100%', position:'absolute'}}>
                                             <h5>Sign up dan lihat semua statistik. Gratis!</h5>
                                         </div>
-                                    }
+                                    } */}
                                 </div>
                             </div>
                         </div>
