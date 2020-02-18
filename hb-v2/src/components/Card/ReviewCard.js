@@ -188,17 +188,16 @@ function ReviewCard(props){
                 <div className="review-card" style={props.blur ? {filter: "blur(4px)"} : {}}>
                     <div className="row review-details">
                         <div className="col-8">
-                            <div>
-                                <div>
+                            <div style={{height:"100%"}}>
+                                <div style={{minHeight:'50%'}}>
                                     <p id="course-name">{props.review.courseName}</p>
-                                    <p id="review">{props.review.review}</p>
+                                    <h4 id="review">{props.review.review}</h4>
                                 </div>
                                 <div>
                                     <div className="row justify-content-between" style={{marginTop:"15px"}}>
                                         <div className="col-4 flex">
                                             <p className="margin-auto" style={{textAlign:'center', fontWeight:'500'}}>Penilaian Keseluruhan</p>
                                             <StyledRating
-                                                size="small" 
                                                 id="overallRating"
                                                 precision={0.5}
                                                 value={props.review.overallRating} 
@@ -211,7 +210,6 @@ function ReviewCard(props){
                                         <div className="col-4 flex">
                                             <p className="margin-auto" style={{textAlign:'center', fontWeight:'500'}}>Kemungkinan untuk merekomendasi</p>
                                             <StyledRating
-                                                size="small" 
                                                 id="recommendationRating"
                                                 precision={0.5}
                                                 value={props.review.recommendationRating} 
@@ -224,7 +222,6 @@ function ReviewCard(props){
                                         <div className="col-4 flex">
                                             <p className="margin-auto" style={{textAlign:'center', fontWeight:'500'}}>Tingkat kesusahan Kelas</p>
                                             <StyledRating
-                                                size="small" 
                                                 id="difficultyRating"
                                                 precision={0.5}
                                                 value={props.review.difficultyRating} 
@@ -248,22 +245,22 @@ function ReviewCard(props){
                                 </div>}
                                 <div className="row justify-content-between">
                                     <div className="col">
-                                        <p>Tahun mengambil kelas: <span className="bold">{props.review.yearTaken}</span></p>
+                                        <h5><span className="light">Tahun mengambil kelas: </span>{props.review.yearTaken}</h5>
                                     </div>
                                 </div>
                                 <div className="row justify-content-between">
                                     <div className="col">
-                                        <p>Nilai:<span className="bold"> {props.review.grade ? props.review.grade : "-"}</span></p>
+                                        <h5><span className="light">Nilai:</span> {props.review.grade ? props.review.grade : "-"}</h5>
                                     </div>
                                 </div>
                                 <div className="row justify-content-between">
                                     <div className="col">
-                                        <p>Gaya Mengajar: <span className="bold">{props.review.teachingStyles.length === 0 ? "-" : props.review.teachingStyles.join(', ')}</span></p>
+                                        <h5><span className="light">Gaya Mengajar: </span>{props.review.teachingStyles.length === 0 ? "-" : props.review.teachingStyles.join(', ')}</h5>
                                     </div>
                                 </div>
                                 <div className="row justify-content-between">
                                     <div className="col">
-                                        <p>Membutuhkan textbook: <span className="bold">{props.review.textbookRequired ? "Iya" : "Tidak"}</span></p>
+                                        <h5><span className="light">Membutuhkan textbook: </span>{props.review.textbookRequired ? "Iya" : "Tidak"}</h5>
                                     </div>
                                 </div>
                             </div>
