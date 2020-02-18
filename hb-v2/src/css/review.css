@@ -121,7 +121,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 1.5rem;
+    padding: 1rem;
 }
 .review-statistics h2{
     color: var(--hb-blue);
