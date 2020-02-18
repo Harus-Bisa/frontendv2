@@ -89,7 +89,7 @@ function SignUpForm(props){
                     />
                 </FormGroup>
                 <FormGroup>
-                    <FormText>Dengan melanjutkan, Anda menyetujui <a href="/info/termsandconditions">Syarat dan Ketentuan</a> Dosen Ku dan menyetujui <a href="/info/privacypolicy">Kebijakan Privasi</a> Dosen Ku</FormText>
+                    <p>Dengan melanjutkan, Anda menyetujui <a href="/info/termsandconditions">Syarat dan Ketentuan</a> Dosen Ku dan menyetujui <a href="/info/privacypolicy">Kebijakan Privasi</a> Dosen Ku</p>
                 </FormGroup>
                 {props.error && <Feedback color={"danger"} message={props.error.message}/>}
                 <FormGroup>

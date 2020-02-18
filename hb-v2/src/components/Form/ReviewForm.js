@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import { FormGroup, Label, Input, Button } from "reactstrap";
+import { FormGroup, Label, Input, Button, Form } from "reactstrap";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, LocalCafe, LocalCafeOutlined } from "@material-ui/icons";
 import { StyledRating } from "../Rating/StyledRating";
 import { addReview, getReviews, setError, removeError, findSchools } from "../../redux/actions";
@@ -232,7 +232,7 @@ function ReviewForm(props){
                 <div className="row">
                     <div className="col-md-8">
                         <div style={{marginBottom:'2.5rem'}}>
-                            <h5>Terima kasih atas kontribusinya! Review <span className="blue">anonimus</span> anda sangat membantu mahasiswa lainnya!</h5>
+                            <h5>Terima kasih atas kontribusinya! Review <span className="blue">anonimus</span> Anda sangat membantu mahasiswa lainnya!</h5>
                         </div>
                         {props.error && <Feedback color={"danger"} message={props.error.message}/>}
                         <form onSubmit={submit}> 
@@ -276,55 +276,57 @@ function ReviewForm(props){
                                 </FormGroup>
                             </React.Fragment>
                             }
-                            <FormGroup row>
-                                <div className="col-lg-6 col-md-8">
-                                    <Label>Penilaian keseluruhan kamu<span className="red">*</span></Label>
-                                </div>
-                                <div className="col-md-4 flex">
-                                    <StyledRating
-                                        className="margin-auto"
-                                        style={style.ratingSpan} 
-                                        id="overallRating" 
-                                        value={overallRating} 
-                                        onChange={(event, value) => setOverallRating(value)}
-                                        icon={<ThumbUp/>}
-                                        emptyIcon={<ThumbUpOutlined/>}
-                                        size="large"
-                                    />
-                                </div>
-                            </FormGroup>
-                            <FormGroup row>
-                                <div className="col-lg-6 col-md-8">
-                                    <Label>Akan merekomendasi ke teman?<span className="red">*</span></Label>
-                                </div>
-                                <div className="col-md-4 flex">
-                                    <StyledRating
-                                        className="margin-auto"
-                                        style={style.ratingSpan} 
-                                        id="recommendationRating" 
-                                        value={recommendationRating} 
-                                        onChange={(event, value) => setRecommendationRating(value)}
-                                        icon={<Check/>}
-                                        emptyIcon={<CheckOutlined/>}
-                                    />
-                                </div>
-                            </FormGroup>
-                            <FormGroup row>
-                                <div className="col-lg-6 col-md-8">
-                                    <Label>Kesusahan kelas<span className="red">*</span></Label>
-                                </div>
-                                <div className="col-md-4 flex">
-                                    <StyledRating 
-                                        className="margin-auto"
-                                        style={style.ratingSpan} 
-                                        id="difficultyRating" 
-                                        value={difficultyRating} 
-                                        onChange={(event, value) => setDifficultyRating(value)}
-                                        icon={<LocalCafe/>}
-                                        emptyIcon={<LocalCafeOutlined/>}
-                                    />
-                                </div>
-                            </FormGroup>
+                            <div style={{margin:"2rem 0"}}>
+                                <FormGroup row>
+                                    <div className="col-lg-6 col-md-8">
+                                        <Label>Penilaian keseluruhan kamu<span className="red">*</span></Label>
+                                    </div>
+                                    <div className="col-md-4 flex">
+                                        <StyledRating
+                                            className="margin-auto"
+                                            style={style.ratingSpan} 
+                                            id="overallRating" 
+                                            value={overallRating} 
+                                            onChange={(event, value) => setOverallRating(value)}
+                                            icon={<ThumbUp/>}
+                                            emptyIcon={<ThumbUpOutlined/>}
+                                            size="large"
+                                        />
+                                    </div>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <div className="col-lg-6 col-md-8">
+                                        <Label>Akan merekomendasi ke teman?<span className="red">*</span></Label>
+                                    </div>
+                                    <div className="col-md-4 flex">
+                                        <StyledRating
+                                            className="margin-auto"
+                                            style={style.ratingSpan} 
+                                            id="recommendationRating" 
+                                            value={recommendationRating} 
+                                            onChange={(event, value) => setRecommendationRating(value)}
+                                            icon={<Check/>}
+                                            emptyIcon={<CheckOutlined/>}
+                                        />
+                                    </div>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <div className="col-lg-6 col-md-8">
+                                        <Label>Kesusahan kelas<span className="red">*</span></Label>
+                                    </div>
+                                    <div className="col-md-4 flex">
+                                        <StyledRating 
+                                            className="margin-auto"
+                                            style={style.ratingSpan} 
+                                            id="difficultyRating" 
+                                            value={difficultyRating} 
+                                            onChange={(event, value) => setDifficultyRating(value)}
+                                            icon={<LocalCafe/>}
+                                            emptyIcon={<LocalCafeOutlined/>}
+                                        />
+                                    </div>
+                                </FormGroup>
+                            </div>
                             <FormGroup>
                                 <Label>Nama Kelas<span className="red">*</span></Label>
                                 <TextField 

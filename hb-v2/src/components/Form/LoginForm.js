@@ -50,7 +50,7 @@ function LoginForm(props){
                     <Input type="password" id="password" value={password} onChange={(event) => setPassword(event.target.value)} required/>
                 </FormGroup>
                 <FormGroup>
-                    <FormText>Dengan masuk, Anda setuju dengan <a href="/info/termsandconditions">Syarat dan Ketentuan</a> dan <a href="/info/privacypolicy">Kebijakan Privasi</a>.</FormText>
+                    <p>Dengan masuk, Anda setuju dengan <a href="/info/termsandconditions">Syarat dan Ketentuan</a> dan <a href="/info/privacypolicy">Kebijakan Privasi</a>.</p>
                 </FormGroup>
                 <FormGroup>
                     <Button type="submit" className="contrast-button" fullWidth>Login</Button>

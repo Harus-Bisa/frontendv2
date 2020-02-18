@@ -9,8 +9,9 @@ import Popup from "../../components/Popup/Popup";
 import LoginPopup from "../../components/Popup/LoginPopup";
 import Feedback from "../../components/Feedback/Feedback";
 import Footer from "../../components/Footer/Footer";
-import { Divider, TextField, Tooltip } from "@material-ui/core";
+import { Divider, TextField, Tooltip, Select, MenuItem } from "@material-ui/core";
 import Reviews from "../../components/ReviewContent/Reviews";
+import { NEWEST, OLDEST } from "../../redux/constants/sort-types";
 
 export const WEB = "WEB";
 export const MOBILE = "MOBILE";
@@ -27,6 +28,7 @@ function ThumbRating(props){
 function Review(props){
     var [rating, setRating] = React.useState(0)
     var [findReviewText, setFindReviewText] = React.useState("")
+    var [sortBy, setSortBy] = React.useState(NEWEST)
 
     const addReview = (event, value) =>{
         setRating(value)
@@ -68,7 +70,7 @@ function Review(props){
                                 </div>
                                 <div className="col-lg-5">
                                     <div className="write-review">
-                                        <p className="grey-text">{props.professor.numberOfReviews === 0 ? "Be the first to review!" : "Tulis Review Anda"}</p>
+                                        <p className="grey-text">{props.professor.numberOfReviews === 0 ? "Jadilah penulis pertama!" : "Tulis Review Anda"}</p>
                                         {props.loggedIn && 
                                             <StyledRating
                                                 name="addReview"
@@ -231,8 +233,14 @@ function Review(props){
                                         }}
                                     />
                                 </div>
-                                <div className="col-6">
-                                    {/* <p>Urutkan berdasarkan</p> */}
+                                <div className="col-6 flex" style={{flexDirection:'row', justifyContent:'center'}}>
+                                    <p style={{margin:'auto 0'}} >Urutkan berdasarkan:</p>
+                                    <div style={{margin:"auto 0 auto 15px"}}>
+                                        <Select value={sortBy} onChange={(event) =>{setSortBy(event.target.value)}} displayEmpty>
+                                            <MenuItem value={NEWEST}>Paling baru</MenuItem>
+                                            <MenuItem value={OLDEST}>Paling lama</MenuItem>
+                                        </Select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -263,7 +271,7 @@ function Review(props){
                         </div>
                     </header>
                     <div className="write-review">
-                        <p className="grey-text">{props.professor.numberOfReviews === 0 ? "Be the first to review!" : "Tulis Review Anda"}</p>
+                        <p className="grey-text">{props.professor.numberOfReviews === 0 ? "Jadilah penulis pertama!" : "Tulis Review Anda"}</p>
                         {props.loggedIn && 
                             <StyledRating
                                 name="addReview"
