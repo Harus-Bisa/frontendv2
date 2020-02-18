@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import { FormGroup, Label, Input, Button, Form } from "reactstrap";
+import { FormGroup, Label, Input, Button } from "reactstrap";
 import { ThumbUp, ThumbUpOutlined, Check, CheckOutlined, LocalCafe, LocalCafeOutlined } from "@material-ui/icons";
 import { StyledRating } from "../Rating/StyledRating";
 import { addReview, getReviews, setError, removeError, findSchools } from "../../redux/actions";
