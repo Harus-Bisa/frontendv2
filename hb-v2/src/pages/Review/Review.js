@@ -9,7 +9,7 @@ import Popup from "../../components/Popup/Popup";
 import LoginPopup from "../../components/Popup/LoginPopup";
 import Feedback from "../../components/Feedback/Feedback";
 import Footer from "../../components/Footer/Footer";
-import { Divider, TextField } from "@material-ui/core";
+import { Divider, TextField, Tooltip } from "@material-ui/core";
 import Reviews from "../../components/ReviewContent/Reviews";
 
 export const WEB = "WEB";
@@ -95,7 +95,25 @@ function Review(props){
                         <div className="review-statistics-web">
                             <div className="row">
                                 <div className="col-lg-4">
-                                    <h4>Penilaian keseluruhan <Info/></h4>
+                                    <div style={{display:'flex', flexDirection:"row"}}>
+                                        <h4>Penilaian keseluruhan </h4>
+                                        <Tooltip 
+                                            arrow
+                                            placement="right" 
+                                            title={
+                                                <React.Fragment>
+                                                    <p>5 Jempol: Sangat Bagus</p>
+                                                    <p>4 Jempol: Bagus</p>
+                                                    <p>3 Jempol: Sedang</p>
+                                                    <p>2 Jempol: Buruk</p>
+                                                    <p>1 Jempol: Sangat Buruk</p>
+                                                </React.Fragment>
+                                            }
+                                        >
+                                            <Info style={{color:"#0D7CBB", margin:'0 15px'}}/>
+                                        </Tooltip>
+                                    </div>
+                                    
                                     <div className="row no-gutters">
                                         <div className="col-4 flex">
                                             <h1 className="margin-auto" style={{fontSize:"64px", fontWeight:'500'}}>{props.professor.overallRating === "-" ? 0 : props.professor.overallRating}</h1>
@@ -132,9 +150,25 @@ function Review(props){
                                                     className="margin-auto"
                                                 />
                                             </div>
-                                            <div className="col flex">
-                                                <h5 style={{marginBottom:0}}>Kemungkinan untuk merekomendasikan <Info/></h5>
+                                            <div className="col flex" style={{display:'flex', flexDirection:"row"}}>
+                                                <h5 style={{marginBottom:0}}>Kemungkinan untuk merekomendasikan </h5>
+                                                <Tooltip 
+                                                    arrow
+                                                    placement="right" 
+                                                    title={
+                                                        <React.Fragment>
+                                                            <p>5 Centang: Rekomen banget</p>
+                                                            <p>4 Centang: Rekomen</p>
+                                                            <p>3 Centang: Mungkin</p>
+                                                            <p>2 Centang: Tidak</p>
+                                                            <p>1 Centang: Tidak akan</p>
+                                                        </React.Fragment>
+                                                    }
+                                                >
+                                                    <Info style={{color:"#0D7CBB", margin:'0 15px'}}/>
+                                                </Tooltip>
                                             </div>
+                                            
                                         </div>
 
                                         <div className="row no-gutters">
@@ -151,8 +185,23 @@ function Review(props){
                                                     className="margin-auto"
                                                 />
                                             </div>
-                                            <div className="col flex">
-                                                <h5 style={{marginBottom:0}}>Kesusahan kelas <Info/></h5>
+                                            <div className="col flex" style={{display:'flex', flexDirection:"row"}}>
+                                                <h5 style={{marginBottom:0}}>Kesusahan kelas </h5>
+                                                <Tooltip 
+                                                    arrow
+                                                    placement="right" 
+                                                    title={
+                                                        <React.Fragment>
+                                                            <p>5 Kopi: Susah banget</p>
+                                                            <p>4 Kopi: Susah</p>
+                                                            <p>3 Kopi: Lumayan</p>
+                                                            <p>2 Kopi: Mudah</p>
+                                                            <p>1 Kopi: Mudah banget</p>
+                                                        </React.Fragment>
+                                                    }
+                                                >
+                                                    <Info style={{color:"#0D7CBB", margin:'0 15px'}}/>
+                                                </Tooltip>
                                             </div>
                                         </div>
                                     </div>

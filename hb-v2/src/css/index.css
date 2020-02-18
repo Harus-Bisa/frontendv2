@@ -255,7 +255,7 @@ label{
   font-size: 2.5rem;
 }
 .footer-adjust{
-  padding-bottom: 160px;
+  padding-bottom: 170px;
 }
 .brand{
   font-family: Poppins;
@@ -285,7 +285,7 @@ label{
 /* SM */
 @media (max-width: 767.98px) {
   .footer-adjust{
-    padding-bottom: 179px;
+    padding-bottom: 220px;
   }
   h1{
     font-size: 36px;
@@ -301,7 +301,7 @@ label{
     font-size: 36px;
   }
   .footer-adjust{
-    padding-bottom: 250px;
+    padding-bottom: 230px;
   }
 }
 
