@@ -66,7 +66,7 @@ function Review(props){
                             <div className="row">
                                 <div className="col-lg-7">
                                     <h2 style={{borderBottom:"4px solid #39A3FF", width:'fit-content', fontSize: "calc(100% + 17px)"}}>{props.professor.name}</h2>
-                                    <p>{props.professor.school}</p>
+                                    <p style={{fontSize:'16px'}}>{props.professor.school}</p>
                                 </div>
                                 <div className="col-lg-5">
                                     <div className="write-review">
