@@ -58,7 +58,7 @@ function RevieweeSearch(props){
                         ),
                         startAdornment:(
                             <React.Fragment>
-                                <Person style={{fill:"#40444D !important"}}/>
+                                <Person style={{color:"#40444D"}}/>
                                 {params.InputProps.startAdornment}
                             </React.Fragment>
                         )
