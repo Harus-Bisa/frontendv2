@@ -23,6 +23,22 @@ import { Search } from '@material-ui/icons';
 
 function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);
+  const [navBackground, setNavBackground] = useState(false)
+
+  const navRef = React.useRef()
+  navRef.current = navBackground
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const show = window.scrollY > 0
+      if (navRef.current !== show) {
+        setNavBackground(show)
+      }
+    }
+    document.addEventListener('scroll', handleScroll)
+    return () => {
+      document.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   const toggle = () => setIsOpen(!isOpen);
   const SignUp = (props) =>{
@@ -44,11 +60,11 @@ function NavigationBar(props){
 
   const atLanding = props.location.pathname === "/"
   const navlinkClassname = atLanding ? "contrast-navlink dark-navlink navlink" : "contrast-navlink navlink"
-  const textColor = atLanding && !isOpen ? "white":"inherit";
+  const textColor = isOpen || !atLanding || navBackground ? "inherit":"white";
   
   return(
     <div>
-      <Navbar light expand="md" className="navbar" style={{backgroundColor:(isOpen || !atLanding  ? "white" : "transparent")}}>
+      <Navbar light expand="md" className="navbar" style={{backgroundColor:(isOpen || !atLanding || navBackground  ? "white" : "transparent")}}>
         <NavbarBrand href="/" className="brand" style={{color:textColor}}>Dosen Ku</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar className={isOpen ? "justify-content-end full-height" : "justify-content-end"}>
