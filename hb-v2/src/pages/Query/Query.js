@@ -75,9 +75,9 @@ function Query(props){
                     <div className="col-lg-3">
                         <h4>Urutkan berdasarkan</h4>
                         <RadioGroup aria-label="sortBy" name="sortBy" value={sortBy} onChange={handleChange}>
-                            <FormControlLabel value={NAME} control={<BlueRadio/>} label="Nama"/>
-                            <FormControlLabel value={POPULARITY} control={<BlueRadio/>} label="Paling Populer" />
-                            <FormControlLabel value={RATING} control={<BlueRadio/>} label="Penilaian Tertinggi" />
+                            <FormControlLabel style={{marginBottom:0}} value={NAME} control={<BlueRadio/>} label="Nama"/>
+                            <FormControlLabel style={{marginBottom:0}} value={POPULARITY} control={<BlueRadio/>} label="Paling Populer" />
+                            <FormControlLabel style={{marginBottom:0}} value={RATING} control={<BlueRadio/>} label="Penilaian Tertinggi" />
                         </RadioGroup>
                     </div>
                     <Divider orientation={"vertical"}/>

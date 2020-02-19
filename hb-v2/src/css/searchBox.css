@@ -2,9 +2,14 @@
   margin-top: 15px;
   margin-bottom: 15px;
   background: #FFFFFF;
-  border: 1px solid #C4C4C4;
-  box-sizing: border-box;
   border-radius: 10px;
+}
+.search-box .border{
+  border: 1px solid #C4C4C4 !important;
+  box-sizing: border-box;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-right-color: transparent !important;
 }
 .search-box .search-input, .search-box .search-input:focus{
   border: 0px;
@@ -50,6 +55,13 @@
   }
   .search-box .left-border{
     border-left: 0px solid;
+  }
+
+  .search-box .border{
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-color: transparent !important;
+    border-right-color: #C4C4C4 !important;
   }
 }
 

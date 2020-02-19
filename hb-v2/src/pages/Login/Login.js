@@ -15,7 +15,7 @@ export default function Login(){
                 <div className="col-lg-5 flex">
                     <LoginForm className="margin-auto"/>
                     <div className="content container" style={{marginTop:'-30px', textAlign:'right'}}>
-                        <p>Tidak punya akun? <a href="/signup">Sign up!</a></p>
+                        <p>Tidak punya akun? <a href="/signup">Daftar!</a></p>
                     </div>
                 </div>
             </div>

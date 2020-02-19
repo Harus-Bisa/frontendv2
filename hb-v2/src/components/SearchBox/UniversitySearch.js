@@ -49,7 +49,7 @@ function UniversitySearch(props){
                         ),
                         startAdornment:(
                             <React.Fragment>
-                                <School/>
+                                <School style={{color:"#40444D"}}/>
                                 {params.InputProps.startAdornment}
                             </React.Fragment>
                         )
