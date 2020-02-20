@@ -32,7 +32,7 @@ function Popup(props){
                     </div>
                     <div className="container">
                         <div className="row justify-content-center">
-                            <div className="col-md-10 col-lg-9">
+                            <div className="col-md-11 col-lg-10">
                                 <ContentComponent closePopup={() => setOpen(false)}/>
                             </div>
                         </div>
