@@ -50,7 +50,7 @@ function SignUpForm(props){
                 </FormGroup>
                 <FormGroup>
                     <Label>Email<span className="red">*</span></Label>
-                    <FormText style={{marginBottom:'0.25rem'}}>Untuk membuat Akun bersama kami, anda harus menggunakan email universitas anda</FormText>
+                    <p style={{marginBottom:'0.25rem'}}>Untuk membuat Akun bersama kami, anda harus menggunakan email universitas anda</p>
                     <Input 
                         valid={validEmail} 
                         type="email" 

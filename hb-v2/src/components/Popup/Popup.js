@@ -21,14 +21,22 @@ function Popup(props){
                 style={{padding:0}} 
                 onBackdropClick={props.disableFlag ? props.disableFlag : () =>{}}
                 fullScreen={fullScreen}
+                fullWidth={true}
+                maxWidth={"sm"}
             >
-                <DialogContent style={{padding:'0'}}> 
+                <DialogContent style={{padding:'0 0 2rem 0'}}> 
                     <div className="content" style={{display:'flex', justifyContent:'flex-end', marginBottom:'-30px'}}>
                         <IconButton onClick={() => setOpen(false)}>
                             <Close/>
                         </IconButton>
                     </div>
-                    <ContentComponent closePopup={() => setOpen(false)}/>
+                    <div className="container">
+                        <div className="row justify-content-center">
+                            <div className="col-md-11 col-lg-10">
+                                <ContentComponent closePopup={() => setOpen(false)}/>
+                            </div>
+                        </div>
+                    </div>
                 </DialogContent>
             </Dialog>
         </React.Fragment>
