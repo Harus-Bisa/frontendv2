@@ -20,10 +20,12 @@ import LoginPopup from '../Popup/LoginPopup';
 import SignUpPopup from '../Popup/SignupPopup';
 import { withRouter } from 'react-router-dom';
 import { Search } from '@material-ui/icons';
+import { IconButton, Button, ButtonBase } from '@material-ui/core';
 
 function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);
   const [navBackground, setNavBackground] = useState(false)
+  const [showSearchBox, setShowSearchBox] = useState(false);
 
   const navRef = React.useRef()
   navRef.current = navBackground
@@ -64,17 +66,12 @@ function NavigationBar(props){
   
   return(
     <div>
-      <Navbar light expand="md" className="navbar" style={{backgroundColor:(isOpen || !atLanding || navBackground  ? "white" : "transparent")}}>
+      <Navbar light expand="md" className={isOpen ? "navbar full-height" : "navbar"} style={{backgroundColor:(isOpen || !atLanding || navBackground  ? "white" : "transparent"), height:"75px"}}>
         <NavbarBrand href="/" className="brand" style={{color:textColor}}>Dosen Ku</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar className={isOpen ? "justify-content-end full-height" : "justify-content-end"}>
-          <Nav navbar>
-            <div className="d-md-none">
-              <NavItem>
-                <SearchBox close={toggle}/>
-              </NavItem>
-            </div>
-            {props.loggedIn && props.name &&
+          <Nav navbar className="navbar-width">          
+            {props.loggedIn && props.name && !showSearchBox && 
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   Hello, {props.name}!
@@ -86,7 +83,7 @@ function NavigationBar(props){
                 </DropdownMenu>
               </UncontrolledDropdown>
             }
-            {!props.loggedIn && 
+            {(!props.loggedIn && !showSearchBox) && 
             <React.Fragment>
               <NavItem>
                 <Popup
@@ -112,9 +109,20 @@ function NavigationBar(props){
               </NavItem>
             </React.Fragment>
             }
+            {showSearchBox &&   
+              <NavItem style={{width:'inherit'}}>
+                <SearchBox 
+                  close={() => {
+                    setIsOpen(false)
+                    setShowSearchBox(false)
+                  }}
+                />
+              </NavItem>
+            }
+            {!showSearchBox && 
             <NavItem>
-              <NavLink className={navlinkClassname}><Search style={{fontSize:'14px'}}/></NavLink>
-            </NavItem>
+              <ButtonBase onClick={() => setShowSearchBox(true)}><NavLink className={navlinkClassname}><Search style={{fontSize:'14px'}}/></NavLink></ButtonBase>
+            </NavItem>}
           </Nav>
         </Collapse>
       </Navbar>

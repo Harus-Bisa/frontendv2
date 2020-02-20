@@ -116,6 +116,9 @@
     }
 }
 
+.review-form .form-group{
+    margin-bottom: 2rem;
+}
 .review-form .tags-button-group{
     margin-right: -10px;
     margin-left: -10px;

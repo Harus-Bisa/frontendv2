@@ -17,20 +17,28 @@ function SearchBox(props){
 
     const find = async (event) =>{
         event.preventDefault();
-        props.findReviewees(reviewee, school, "searchBox")
-        .then(response =>{
-            if(props.reviewees.length === 1){
-                var id = props.reviewees[0].revieweeId
-                history.push("/review/"+id)
-            }
-            else{
-                history.push("/query?name="+reviewee+"&school="+school)
-            }
-            
+        if(reviewee !== "" || school !== ""){
+            props.findReviewees(reviewee, school, "searchBox")
+            .then(response =>{
+                if(props.reviewees.length === 1){
+                    var id = props.reviewees[0].revieweeId
+                    history.push("/review/"+id)
+                }
+                else{
+                    history.push("/query?name="+reviewee+"&school="+school)
+                }
+                
+                if(props.close){
+                    props.close();
+                }
+            })
+        }
+        else{
             if(props.close){
                 props.close();
             }
-        })
+        }
+        
 
     }
 
@@ -53,7 +61,7 @@ function SearchBox(props){
                         <div className="col-md-1">
                             <div className="row" style={{height:"100%"}}>
                                 <div className="col">
-                                    <Button className="grey-box search-button" fullWidth type="submit">
+                                    <Button className="grey-box search-button" fullWidth type="submit" onClick={find}>
                                         <Search/>
                                     </Button>
                                 </div>
