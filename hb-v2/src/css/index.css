@@ -10,6 +10,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 html, body{
@@ -112,6 +113,7 @@ label{
 .button{
   text-transform: none !important;
   letter-spacing: normal !important;
+  font-size: inherit !important;
 }
 
 .option-button{
@@ -170,6 +172,7 @@ label{
   border-color: #C4C4C4 !important;
   box-sizing: border-box;
   border-radius: 0px !important;
+  font-family: 'Poppins', sans-serif !important;
   /* border: 0.5px solid #C4C4C4 !important; */
 }
 
@@ -178,9 +181,14 @@ label{
   border-color: #00ACF9 !important;
   box-shadow: 0px 0px 4px rgba(0, 172, 249, 0.45);
 }
+
+.form-group{
+  margin-bottom: 2rem;
+}
+
 .MuiInputBase-root, .MuiMenuItem-root{
   font-family: 'Poppins', sans-serif !important;
-  font-size: 14px !important;
+  /* font-size: 14px !important; */
 }
 /* NAV */
 .navbar{
@@ -287,6 +295,7 @@ label{
 .full-height{
   height:100vh;
 }
+
 /* SM */
 @media (max-width: 767.98px) {
   .footer-adjust{
@@ -305,6 +314,9 @@ label{
   h1{
     font-size: 36px;
   }
+  label{
+    font-size: 18px;
+  }
   .footer-adjust{
     padding-bottom: 230px;
   }
@@ -312,7 +324,6 @@ label{
 
 /*LG*/
 @media (max-width: 1199.98px) {
-  
 }
 
 

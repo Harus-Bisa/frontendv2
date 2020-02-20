@@ -101,11 +101,41 @@
 
 .tag{
     background: #F3FBFF;
-    border-radius: 30px;
-    padding: 5px 10px;
-    margin: 5px 10px;
+    border-radius: 30px !important;
+    padding: 5px 15px !important;
+    margin: 5px 10px !important;
 }
 
+.review-form label{
+    font-size: 18px;
+    font-weight: 500;
+}
+@media (max-width: 767.98px){
+    .review-form label{
+        font-size: 16px;
+    }
+}
+
+.review-form .tags-button-group{
+    margin-right: -10px;
+    margin-left: -10px;
+    display: block;
+}
+
+.review-form .tag-button, .review-form .tag-button:hover,.review-form .tag-button:focus{
+    border: 1px solid var(--hb-blue) !important;
+    color: black;
+    background-color: white !important;
+    height: auto;
+    outline: 0!important;
+}
+
+.review-form .tag-button-selected, .review-form .tag-button-selected:focus{
+    color: white  !important;
+    background-color: var(--hb-blue) !important;
+    height: auto;
+    outline: 0!important;
+}
 
 .review-header{
     margin-bottom: 15px;

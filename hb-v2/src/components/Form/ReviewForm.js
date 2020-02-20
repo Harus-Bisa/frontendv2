@@ -10,11 +10,16 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { withStyles, Divider } from "@material-ui/core";
+import MuiButton from "@material-ui/core/Button";
 import Popup from "../Popup/Popup";
 import LoginPopup from "../Popup/LoginPopup";
 import { teachingStyleOptions } from "../../data/TeachingStyle";
 import { tagsOptions } from "../../data/TagsOptions";
 import Feedback from "../Feedback/Feedback";
+import { overallRatingLabels, recommendationRatingLabels, difficultyRatingLabels } from "../Rating/RatingLabel";
+import "../../css/review.css";
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import ToggleButton from '@material-ui/lab/ToggleButton';
 
 const Icon = withStyles({
     root: {
@@ -52,19 +57,33 @@ function ReviewForm(props){
     var [review, setReview] = React.useState("")
     var [yearTaken, setYearTaken] = React.useState((new Date()).getFullYear())
     var [textbookRequired, setTextbookRequired] = React.useState(true)
+    var [agree, setAgree] = React.useState(false)
     var [submitted, setSubmitted] = React.useState(false)
     var [flag, setFlag] = React.useState(false)
 
-    const valid = profName !== "" && profSchool !== "" && courseName !== "" && overallRating !== 0 && recommendationRating !== 0 && difficultyRating !== 0 && grade !== "" && teachingStyle.length >0 && tags.length > 0 && review !== ""
+    const [overallHover, setOverallHover] = React.useState(-1);
+    const [recommendationHover, setRecommendationHover]  = React.useState(-1);
+    const [difficultyHover, setDifficultyHover] =  React.useState(-1);
+
+    const valid = profName !== "" && profSchool !== "" && courseName !== "" && overallRating !== 0 && recommendationRating !== 0 && difficultyRating !== 0 && grade !== "" && teachingStyle.length >0 && tags.length > 0 && review !== "" && agree
     const SubmitButton = (props) => {
         return(
         <Button 
             className="blue-button" 
             style={{width:'100%'}}
         >
-            Selesai
+            Kirim Review Anda
         </Button>)
     }
+    const BlueCheckbox = withStyles({
+        root: {
+            color: "#39A3FF",
+            '&$checked': {
+            color: "#39A3FF",
+            },
+        },
+        checked: {},
+    })(props => <Checkbox color="default" {...props} />);
 
     const revieweeId = props.match.params.revieweeId;
     const revieweeName = props.match.params.revieweeName;
@@ -187,11 +206,14 @@ function ReviewForm(props){
         if(teachingStyle.length === 0){
             errorMessage += "- Gaya mengajar\n"
         }
-        if(tags.length !== 3){
+        if(tags.length === 0){
             errorMessage += "- Tag\n"
         }
         if(review === ""){
             errorMessage += "- Review anda\n"
+        }
+        if(!agree){
+            errorMessage += "- Setuju dengan Syarat dan Ketentuan"
         }
         return errorMessage
     }
@@ -214,6 +236,22 @@ function ReviewForm(props){
         }
         return yearOptions;
     }
+    const makeTags = () =>{
+        var tagsComponent = []
+        for (let i=0; i<tagsOptions.length; i++){
+            const selected = tags.includes(tagsOptions[i])
+            tagsComponent.push(
+                <ToggleButton 
+                    value={tagsOptions[i]} 
+                    key={i} 
+                    className={selected ? "tag button tag-button-selected" : "tag button tag-button"}
+                >
+                    {tagsOptions[i]}
+                </ToggleButton>
+            )
+        }
+        return tagsComponent;
+    }
     return(
         <div className="page-container">
             {existingProf && 
@@ -224,18 +262,21 @@ function ReviewForm(props){
                                 <h2 className="blue">{profName}</h2>
                                 <p className="italic">{profSchool}</p>
                             </div>  
+                            <div className="col-2" style={{textAlign:'right'}}>
+                                <a href={"/review/new/Dosen"}>Ganti Dosen?</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             }
             <div className="container content">
                 <div className="row">
-                    <div className="col-md-8">
+                    <div className="col-md-9">
                         <div style={{marginBottom:'2.5rem'}}>
-                            <h5>Terima kasih atas kontribusinya! Review <span className="blue">anonimus</span> Anda sangat membantu mahasiswa lainnya!</h5>
+                            <h4>Terima kasih atas kontribusinya! Review <span className="blue">anonimus</span> Anda sangat membantu mahasiswa lainnya!</h4>
                         </div>
                         {props.error && <Feedback color={"danger"} message={props.error.message}/>}
-                        <form onSubmit={submit}> 
+                        <form onSubmit={submit} className="review-form"> 
                             {!existingProf && 
                             <React.Fragment>
                                 <FormGroup>
@@ -278,52 +319,82 @@ function ReviewForm(props){
                             }
                             <div style={{margin:"2rem 0"}}>
                                 <FormGroup row>
-                                    <div className="col-lg-6 col-md-8">
+                                    <div className="col-lg-5 col-md-5">
                                         <Label>Penilaian keseluruhan kamu<span className="red">*</span></Label>
                                     </div>
-                                    <div className="col-md-4 flex">
-                                        <StyledRating
-                                            className="margin-auto"
-                                            style={style.ratingSpan} 
-                                            id="overallRating" 
-                                            value={overallRating} 
-                                            onChange={(event, value) => setOverallRating(value)}
-                                            icon={<ThumbUp/>}
-                                            emptyIcon={<ThumbUpOutlined/>}
-                                            size="large"
-                                        />
+                                    <div className="col flex">
+                                        <div className="row">
+                                            <div className="col-md-6 flex">
+                                                <StyledRating
+                                                    className="margin-auto large-rating"
+                                                    style={style.ratingSpan} 
+                                                    id="overallRating" 
+                                                    value={overallRating} 
+                                                    onChange={(event, value) => setOverallRating(value)}
+                                                    icon={<ThumbUp/>}
+                                                    emptyIcon={<ThumbUpOutlined/>}
+                                                    size="large"
+                                                    onChangeActive={(event, newHover) => {
+                                                        setOverallHover(newHover);
+                                                    }}
+                                                />
+                                            </div>
+                                            <div className="col-md-4 flex">
+                                                {overallRating !== null && <p className="margin-auto">{overallRatingLabels[overallHover !== -1 ? overallHover : overallRating]}</p>}
+                                            </div>
+                                        </div>
                                     </div>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <div className="col-lg-6 col-md-8">
+                                    <div className="col-lg-5 col-md-5">
                                         <Label>Akan merekomendasi ke teman?<span className="red">*</span></Label>
                                     </div>
-                                    <div className="col-md-4 flex">
-                                        <StyledRating
-                                            className="margin-auto"
-                                            style={style.ratingSpan} 
-                                            id="recommendationRating" 
-                                            value={recommendationRating} 
-                                            onChange={(event, value) => setRecommendationRating(value)}
-                                            icon={<Check/>}
-                                            emptyIcon={<CheckOutlined/>}
-                                        />
+                                    <div className="col flex">
+                                        <div className="row">
+                                            <div className="col-md-6 flex">
+                                                <StyledRating
+                                                    className="margin-auto large-rating"
+                                                    style={style.ratingSpan} 
+                                                    id="recommendationRating" 
+                                                    value={recommendationRating} 
+                                                    onChange={(event, value) => setRecommendationRating(value)}
+                                                    icon={<Check/>}
+                                                    emptyIcon={<CheckOutlined/>}
+                                                    onChangeActive={(event, newHover) => {
+                                                        setRecommendationHover(newHover);
+                                                    }}
+                                                />
+                                            </div>
+                                            <div className="col-md-4 flex">
+                                                {recommendationRating !== null && <p className="margin-auto">{recommendationRatingLabels[recommendationHover !== -1 ? recommendationHover : recommendationRating]}</p>}
+                                            </div>
+                                        </div>
                                     </div>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <div className="col-lg-6 col-md-8">
+                                    <div className="col-lg-5 col-md-5">
                                         <Label>Kesusahan kelas<span className="red">*</span></Label>
                                     </div>
-                                    <div className="col-md-4 flex">
-                                        <StyledRating 
-                                            className="margin-auto"
-                                            style={style.ratingSpan} 
-                                            id="difficultyRating" 
-                                            value={difficultyRating} 
-                                            onChange={(event, value) => setDifficultyRating(value)}
-                                            icon={<LocalCafe/>}
-                                            emptyIcon={<LocalCafeOutlined/>}
-                                        />
+                                    <div className="col flex">
+                                        <div className="row">
+                                            <div className="col-md-6 flex">
+                                                <StyledRating 
+                                                    className="margin-auto large-rating"
+                                                    style={style.ratingSpan} 
+                                                    id="difficultyRating" 
+                                                    value={difficultyRating} 
+                                                    onChange={(event, value) => setDifficultyRating(value)}
+                                                    icon={<LocalCafe/>}
+                                                    emptyIcon={<LocalCafeOutlined/>}
+                                                    onChangeActive={(event, newHover) => {
+                                                        setDifficultyHover(newHover);
+                                                    }}
+                                                />
+                                            </div>
+                                            <div className="col-md-4 flex">
+                                                {difficultyRating !== null && <p className="margin-auto">{difficultyRatingLabels[difficultyHover !== -1 ? difficultyHover : difficultyRating]}</p>}
+                                            </div>
+                                        </div>
                                     </div>
                                 </FormGroup>
                             </div>
@@ -336,6 +407,7 @@ function ReviewForm(props){
                                     onChange={(event) => setCourseName(event.target.value)}
                                     fullWidth 
                                     variant="outlined"
+                                    placeholder="Nama kelas yang anda ambil"
                                 />
                             </FormGroup>
                             <FormGroup style={style.ratingBox}>
@@ -401,20 +473,22 @@ function ReviewForm(props){
                                             {...params}
                                             variant="outlined"
                                             fullWidth
+                                            
                                         />
                                     )}
                                 />
                             </FormGroup>
                             <FormGroup style={style.ratingBox}>
-                                <Label>Apakah Textbook digunakan?<span className="red">*</span></Label>
+                                <Label>Apakah wajib mengunakan buku pelajaran?<span className="red">*</span></Label>
                                 <div className="button-group-container" id="textbookRequired">
                                     <Button type="button" id="textbookRequired-Yes" onClick={(event) => setTextbookRequired(true)} className={textbookRequired ? "button-group-selected" : "button-group"}>Iya</Button>
                                     <Button type="button" id="textbookRequired-No" onClick={(event) => setTextbookRequired(false)} className={!textbookRequired ? "button-group-selected" : "button-group"}>Tidak</Button>
                                 </div>
                             </FormGroup>
                             <FormGroup>
-                                <Label>Pilih tag yang mendeskripsikan dosen ini (Max. 3)<span className="red">*</span></Label>
+                                <Label>Pilih <span style={{fontWeight:"bold"}}>tag</span> yang sesuai dengan pengalamanmu!<span className="red">*</span> (maks: 3)</Label>
                                 <Autocomplete
+                                    className="d-md-none"
                                     multiple
                                     id="tags"
                                     options={tagsOptions}
@@ -447,10 +521,42 @@ function ReviewForm(props){
                                         />
                                     )}
                                 />
+                                <div className="d-none d-md-block">
+                                    <ToggleButtonGroup 
+                                        className="tags-button-group"
+                                        value={tags} 
+                                        onChange={(event, value) => {
+                                            if(value.length > 3){
+                                                value = value.slice(1,value.length)
+                                            }
+                                            setTags(value)
+                                        }}
+                                    >
+                                        {makeTags()}
+                                    </ToggleButtonGroup>
+                                </div>
                             </FormGroup>
                             <FormGroup>
                                 <Label>Review anda<span className="red">*</span></Label>
-                                <Input type="textarea" id="review" value={review} required onChange={(event) => setReview(event.target.value)}/>
+                                <Input 
+                                    type="textarea" 
+                                    rows={8} 
+                                    id="review" 
+                                    value={review} 
+                                    required 
+                                    onChange={(event) => setReview(event.target.value)}
+                                    placeholder="Beri tahu mahasiswa lainnya tentang pengalaman Anda"
+                                />
+                            </FormGroup>
+                            <FormGroup className="container">
+                                <div className="row">
+                                    <div className="col-1">
+                                        <BlueCheckbox checked={agree} onChange={() => setAgree(!agree)}/>
+                                    </div>
+                                    <div className="col">
+                                        <p>Dengan ini saya menyatakan bahwa review ini dibuat berdasarkan pengalaman saya dan benar-benar opini pribadi saya tentang dosen ini, dan saya tidak menerima tawaran insentif maupun pembayaran apapun dari dosen ini untuk menulis review ini. Saya memahami bahwa Dosenku sama sekali tidak mentoleransi ulasan palsu Dengan melanjutkan, Anda menyetujui <a href="/info/termsandconditions">Syarat dan Ketentuan</a> dan <a href="/info/privacypolicy">Kebijakan Privasi</a> Dosen Ku<span className="red">*</span></p>
+                                    </div>
+                                </div>
                             </FormGroup>
                             {flag && <Popup content={LoginPopup} auto disableFlag={() => setFlag(false)}/>}
                             <SubmitButton/>
