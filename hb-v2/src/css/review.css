@@ -21,7 +21,7 @@
 .review-card #course-name{
     font-style: italic;
     font-weight: normal;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 16px;
     color: var(--hb-blue);
     margin-bottom: 0.25rem;
