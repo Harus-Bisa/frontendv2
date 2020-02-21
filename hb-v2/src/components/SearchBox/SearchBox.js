@@ -6,15 +6,16 @@ import { connect } from "react-redux";
 import Feedback from "../Feedback/Feedback";
 import RevieweeSearch from "./RevieweeSearch";
 import { Button } from "@material-ui/core";
-import { Search } from "@material-ui/icons";
+import { Search, School } from "@material-ui/icons";
 import "../../css/searchBox.css";
 import UniversitySearch from "./UniversitySearch";
 
 function SearchBox(props){
     const [reviewee, setReviewee] = React.useState("");
     const [school, setSchool] = React.useState("");
+    const [showSchool, setShowSchool] = React.useState(false);
     let history = useHistory()
-
+    
     const find = async (event) =>{
         event.preventDefault();
         if(reviewee !== "" || school !== ""){
@@ -41,7 +42,27 @@ function SearchBox(props){
         
 
     }
-
+    if(props.isMobile){
+        return(
+            <div>
+            <div className="search-box">
+                <form onSubmit={find}>
+                    <div className="row">
+                        <div className="col-12 search-input-wrapper">
+                            <RevieweeSearch reviewee={reviewee} setReviewee={setReviewee} setSchool={setSchool}/>
+                        </div>
+                        {showSchool && <div className="col-12 search-input-wrapper">
+                            <UniversitySearch school={school} setSchool={setSchool}/>
+                        </div>}
+                        {!showSchool && <div className="col-12">
+                            <Button onClick={() => setShowSchool(true)}><School/>Universitas</Button>
+                        </div>}
+                    </div>
+                </form>
+            </div>
+            </div>
+        )
+    }
     return(
         <div>
             <div className="search-box">
@@ -54,15 +75,13 @@ function SearchBox(props){
                                 </div>
                                 <div className="col-md-7 search-input-wrapper left-border">
                                     <UniversitySearch school={school} setSchool={setSchool}/>
-                                </div>
-                                
+                                </div> 
                             </div>
                         </div>
-                        {/* {!props.type === "navbar-xs" &&  */}
                         <div className="col-md-1">
                             <div className="row" style={{height:"100%"}}>
                                 <div className="col">
-                                    <Button className="grey-box search-button" fullWidth type="submit" onClick={find}>
+                                    <Button className={props.type === "dark" ? "search-button dark-search-button": "search-button"} fullWidth type="submit" onClick={find}>
                                         <Search/>
                                     </Button>
                                 </div>
@@ -81,11 +100,17 @@ SearchBox.propTypes={
     findReviewees: PropTypes.func
 }
 
+SearchBox.defaultProps={
+    reviewees: [],
+    findReviewees: () => {},
+    type: "normal"
+}
 function mapStateToProps(state){
     return{
         reviewees:state.reviewees,
         error: state.error,
-        found: state.found
+        found: state.found,
+        isMobile: state.isMobile
     }
 }
 export default connect(mapStateToProps, {findReviewees})(SearchBox);

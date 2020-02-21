@@ -26,7 +26,6 @@ function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);
   const [navBackground, setNavBackground] = useState(false)
   const [showSearchBox, setShowSearchBox] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
 
   const navRef = React.useRef()
   navRef.current = navBackground
@@ -37,14 +36,9 @@ function NavigationBar(props){
         setNavBackground(show)
       }
     }
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    window.addEventListener("resize", handleResize)
     document.addEventListener('scroll', handleScroll)
     return () => {
       document.removeEventListener('scroll', handleScroll)
-      window.removeEventListener("resize", handleResize)
     }
   }, [])
 
@@ -81,7 +75,7 @@ function NavigationBar(props){
         <NavbarBrand href="/" className="brand" style={{color:textColor}}>Dosen Ku</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar className={isOpen ? "justify-content-end full-height" : "justify-content-end"}>
-        {!isMobile &&  
+        {!props.isMobile &&  
           <Nav navbar className="navbar-width">          
             {props.loggedIn && props.name && !showSearchBox && 
               <UncontrolledDropdown nav inNavbar>
@@ -128,6 +122,7 @@ function NavigationBar(props){
                     setIsOpen(false)
                     setShowSearchBox(false)
                   }}
+                  type={atLanding ? "dark" : "normal"}
                 />
               </NavItem>
             }
@@ -138,7 +133,7 @@ function NavigationBar(props){
           </Nav>
         }
         {
-          isMobile &&
+          props.isMobile &&
           <Nav navbar className="navbar-width">          
             {props.loggedIn && props.name && !showSearchBox && 
               <UncontrolledDropdown nav inNavbar>
@@ -159,7 +154,6 @@ function NavigationBar(props){
                     setIsOpen(false)
                     setShowSearchBox(false)
                   }}
-                  type="navbar-xs"
                 />
               </NavItem>
             }
@@ -211,7 +205,8 @@ function NavigationBar(props){
 function mapStateToProps(state){
   return{
     loggedIn: state.loggedIn,
-    name: state.user? state.user.name : null
+    name: state.user? state.user.name : null,
+    isMobile: state.isMobile
   }
 }
 export default connect(mapStateToProps, {logout, getUser})(withRouter(NavigationBar));

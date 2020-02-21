@@ -35,6 +35,9 @@
   color: white;
 }
 
+.search-box .dark-search-button{
+  background-color: #40444D !important;
+}
 .search-box .search-input-wrapper{
   padding: 1rem .75rem !important;
 }
