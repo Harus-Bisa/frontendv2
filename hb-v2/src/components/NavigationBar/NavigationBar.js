@@ -26,6 +26,7 @@ function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);
   const [navBackground, setNavBackground] = useState(false)
   const [showSearchBox, setShowSearchBox] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
 
   const navRef = React.useRef()
   navRef.current = navBackground
@@ -36,13 +37,23 @@ function NavigationBar(props){
         setNavBackground(show)
       }
     }
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    window.addEventListener("resize", handleResize)
     document.addEventListener('scroll', handleScroll)
     return () => {
       document.removeEventListener('scroll', handleScroll)
+      window.removeEventListener("resize", handleResize)
     }
   }, [])
 
-  const toggle = () => setIsOpen(!isOpen);
+  const toggle = () => {
+    if(isOpen){
+      setShowSearchBox(false)
+    }
+    setIsOpen(!isOpen)
+  };
   const SignUp = (props) =>{
     return(<SignUpPopup collapseNavbar={() => setIsOpen(false)} closePopup={props.closePopup}/>)
   }
@@ -70,6 +81,7 @@ function NavigationBar(props){
         <NavbarBrand href="/" className="brand" style={{color:textColor}}>Dosen Ku</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar className={isOpen ? "justify-content-end full-height" : "justify-content-end"}>
+        {!isMobile &&  
           <Nav navbar className="navbar-width">          
             {props.loggedIn && props.name && !showSearchBox && 
               <UncontrolledDropdown nav inNavbar>
@@ -124,6 +136,72 @@ function NavigationBar(props){
               <ButtonBase onClick={() => setShowSearchBox(true)}><NavLink className={navlinkClassname}><Search style={{fontSize:'14px'}}/></NavLink></ButtonBase>
             </NavItem>}
           </Nav>
+        }
+        {
+          isMobile &&
+          <Nav navbar className="navbar-width">          
+            {props.loggedIn && props.name && !showSearchBox && 
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Hello, {props.name}!
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>
+                    <NavLink id="logoff" onClick={logout}>Log Out</NavLink>
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            }
+            {showSearchBox &&   
+              <NavItem style={{width:'inherit'}}>
+                <SearchBox 
+                  close={() => {
+                    setIsOpen(false)
+                    setShowSearchBox(false)
+                  }}
+                  type="navbar-xs"
+                />
+              </NavItem>
+            }
+            {!showSearchBox && 
+            <NavItem style={{paddingTop:'4rem', paddingBottom:'3rem'}}>
+              <ButtonBase onClick={() => setShowSearchBox(true)}>
+                <NavLink style={{color:'black'}}>
+                  <Search/> Cari Dosen Anda
+                </NavLink>
+              </ButtonBase>
+            </NavItem>
+            }
+            {(!props.loggedIn && !showSearchBox) && 
+            <React.Fragment>
+              <NavItem>
+                <Popup
+                    trigger={{
+                        component:NavLink,
+                        id:'login',
+                        style:{color:"black", backgroundColor:"#F1F1F1"},
+                        className:"navbar-full-width"
+                    }}
+                    purpose="Login"
+                    content={LoginPopup}
+                />
+              </NavItem>
+              <NavItem>
+                <Popup
+                  trigger={{
+                      component:NavLink,
+                      id:'signup',
+                      style:{backgroundColor:"var(--hb-blue)", color:'white'},
+                      className:"navbar-full-width"
+                  }}
+                  purpose="Sign Up"
+                  content={SignUp}
+                />
+              </NavItem>
+            </React.Fragment>
+            }
+          </Nav>
+        }
         </Collapse>
       </Navbar>
     </div>

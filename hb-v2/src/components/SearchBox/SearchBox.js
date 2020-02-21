@@ -58,6 +58,7 @@ function SearchBox(props){
                                 
                             </div>
                         </div>
+                        {/* {!props.type === "navbar-xs" &&  */}
                         <div className="col-md-1">
                             <div className="row" style={{height:"100%"}}>
                                 <div className="col">

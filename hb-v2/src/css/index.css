@@ -294,6 +294,7 @@ label{
 }
 .full-height{
   height:100vh !important;
+  transition: height 0.5s;
 }
 
 /* SM */
@@ -309,6 +310,17 @@ label{
   }
   .navbar-width{
     width: inherit;
+  }
+  .navbar-full-width{
+    margin-right: -1.5rem;
+    margin-left: -1.5rem;
+  }
+  .nav-link{
+    text-align: center;
+    font-size: 18px;
+  }
+  .navbar-nav{
+    text-align: center;
   }
   
 }
