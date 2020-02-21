@@ -57,7 +57,7 @@ function Review(props){
     }
     if(props.professor){
         //web
-        if(window.screen.width > 768){
+        if(!props.isMobile){
             return(
                 <div className="container content page-container">
                     <div className="footer-adjust">
@@ -307,7 +307,8 @@ function mapStateToProps(state){
         professor: state.professor,
         error: state.error,
         loggedIn: state.loggedIn,
-        loading: state.loading
+        loading: state.loading,
+        isMobile: state.isMobile
     }
 }
 export default connect(mapStateToProps, {getReviews})(Review);
