@@ -80,7 +80,7 @@ function NavigationBar(props){
             {props.loggedIn && props.name && !showSearchBox && 
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Hello, {props.name}!
+                  Hi, {props.name}
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
@@ -135,18 +135,6 @@ function NavigationBar(props){
         {
           props.isMobile &&
           <Nav navbar className="navbar-width">          
-            {props.loggedIn && props.name && !showSearchBox && 
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Hello, {props.name}!
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    <NavLink id="logoff" onClick={logout}>Log Out</NavLink>
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            }
             {showSearchBox &&   
               <NavItem style={{width:'inherit'}}>
                 <SearchBox 
@@ -154,6 +142,7 @@ function NavigationBar(props){
                     setIsOpen(false)
                     setShowSearchBox(false)
                   }}
+                  showSchool={true}
                 />
               </NavItem>
             }
@@ -165,6 +154,16 @@ function NavigationBar(props){
                 </NavLink>
               </ButtonBase>
             </NavItem>
+            }
+            {props.loggedIn && props.name && !showSearchBox && 
+              <React.Fragment>
+                <NavItem>
+                  <NavLink className="navbar-full-width" style={{color:"black"}}>Hi, {props.name}</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink id="logoff" onClick={logout} className="navbar-full-width" style={{color:"black", backgroundColor:"#F1F1F1"}}>Log Out</NavLink>
+                </NavItem>
+              </React.Fragment>
             }
             {(!props.loggedIn && !showSearchBox) && 
             <React.Fragment>

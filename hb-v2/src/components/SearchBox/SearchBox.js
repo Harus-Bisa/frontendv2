@@ -6,14 +6,14 @@ import { connect } from "react-redux";
 import Feedback from "../Feedback/Feedback";
 import RevieweeSearch from "./RevieweeSearch";
 import { Button } from "@material-ui/core";
-import { Search, School } from "@material-ui/icons";
+import { Search, School, KeyboardArrowDown } from "@material-ui/icons";
 import "../../css/searchBox.css";
 import UniversitySearch from "./UniversitySearch";
 
 function SearchBox(props){
     const [reviewee, setReviewee] = React.useState("");
     const [school, setSchool] = React.useState("");
-    const [showSchool, setShowSchool] = React.useState(false);
+    const [showSchool, setShowSchool] = React.useState(props.showSchool);
     let history = useHistory()
     
     const find = async (event) =>{
@@ -45,21 +45,25 @@ function SearchBox(props){
     if(props.isMobile){
         return(
             <div>
-            <div className="search-box">
-                <form onSubmit={find}>
-                    <div className="row">
-                        <div className="col-12 search-input-wrapper">
-                            <RevieweeSearch reviewee={reviewee} setReviewee={setReviewee} setSchool={setSchool}/>
+                <div className="search-box border">
+                    <form onSubmit={find}>
+                        <div className="row no-gutters">
+                            <div className="col-12 search-input-wrapper">
+                                <RevieweeSearch reviewee={reviewee} setReviewee={setReviewee} setSchool={setSchool}/>
+                            </div>
+                            {showSchool && <div className="col-12 search-input-wrapper">
+                                <UniversitySearch school={school} setSchool={setSchool}/>
+                            </div>}
                         </div>
-                        {showSchool && <div className="col-12 search-input-wrapper">
-                            <UniversitySearch school={school} setSchool={setSchool}/>
-                        </div>}
-                        {!showSchool && <div className="col-12">
-                            <Button onClick={() => setShowSchool(true)}><School/>Universitas</Button>
-                        </div>}
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
+                {!showSchool && 
+                <div style={{marginTop:"-0.5rem"}}>
+                    <Button onClick={() => setShowSchool(true)} className="button">
+                        <School style={{marginRight:"10px"}}/><span style={{color:'white', fontWeight:"300"}}>Universitas</span><KeyboardArrowDown style={{marginLeft:'10px'}}/>
+                    </Button>
+                </div>
+                }
             </div>
         )
     }
@@ -103,7 +107,8 @@ SearchBox.propTypes={
 SearchBox.defaultProps={
     reviewees: [],
     findReviewees: () => {},
-    type: "normal"
+    type: "normal",
+    showSchool:false
 }
 function mapStateToProps(state){
     return{
