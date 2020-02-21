@@ -60,7 +60,7 @@ function SearchBox(props){
                 {!showSchool && 
                 <div style={{marginTop:"-0.5rem"}}>
                     <Button onClick={() => setShowSchool(true)} className="button">
-                        <School style={{marginRight:"10px"}}/><span style={{color:'white', fontWeight:"300"}}>Universitas</span><KeyboardArrowDown style={{marginLeft:'10px'}}/>
+                        <School style={{marginRight:"10px"}}/><span style={{fontWeight:"300"}}>Universitas</span><KeyboardArrowDown style={{marginLeft:'10px'}}/>
                     </Button>
                 </div>
                 }

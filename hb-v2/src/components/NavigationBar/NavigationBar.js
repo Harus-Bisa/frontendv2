@@ -51,6 +51,15 @@ function NavigationBar(props){
   const SignUp = (props) =>{
     return(<SignUpPopup collapseNavbar={() => setIsOpen(false)} closePopup={props.closePopup}/>)
   }
+  const DummyMobileSearchBox = (props)=>{
+    return(
+      <ButtonBase onClick={props.onClick}>
+        <NavLink style={{color:'black'}}>
+          <Search/> Cari Dosen Anda
+        </NavLink>
+      </ButtonBase>
+    )
+  }
   const logout = () =>{
     props.logout()
     setIsOpen(false)
@@ -135,26 +144,14 @@ function NavigationBar(props){
         {
           props.isMobile &&
           <Nav navbar className="navbar-width">          
-            {showSearchBox &&   
-              <NavItem style={{width:'inherit'}}>
-                <SearchBox 
-                  close={() => {
-                    setIsOpen(false)
-                    setShowSearchBox(false)
-                  }}
-                  showSchool={true}
-                />
-              </NavItem>
-            }
-            {!showSearchBox && 
             <NavItem style={{paddingTop:'4rem', paddingBottom:'3rem'}}>
-              <ButtonBase onClick={() => setShowSearchBox(true)}>
-                <NavLink style={{color:'black'}}>
-                  <Search/> Cari Dosen Anda
-                </NavLink>
-              </ButtonBase>
+              <Popup
+                  trigger={{
+                      component:DummyMobileSearchBox
+                  }}
+                  content={SearchBox}
+              />
             </NavItem>
-            }
             {props.loggedIn && props.name && !showSearchBox && 
               <React.Fragment>
                 <NavItem>

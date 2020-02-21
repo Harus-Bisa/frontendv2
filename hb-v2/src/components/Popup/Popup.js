@@ -14,7 +14,18 @@ function Popup(props){
     }
     return(
         <React.Fragment>
-            {Trigger && <Trigger className={props.trigger.className} onClick={openPopup} onChange={openPopup} style={props.trigger.style} id={props.trigger.id}>{props.purpose}</Trigger>}
+            {Trigger && 
+                <Trigger 
+                    {...props}
+                    className={props.trigger.className} 
+                    onClick={openPopup} 
+                    onChange={openPopup} 
+                    // onFocus={openPopup}
+                    style={props.trigger.style} 
+                    id={props.trigger.id}
+                >
+                    {props.purpose}
+                </Trigger>}
             <Dialog 
                 open={open} 
                 onClose={() => setOpen(false)} 
@@ -26,7 +37,9 @@ function Popup(props){
             >
                 <DialogContent style={{padding:'0 0 2rem 0'}}> 
                     <div className="content" style={{display:'flex', justifyContent:'flex-end', marginBottom:'-30px'}}>
-                        <IconButton onClick={() => setOpen(false)}>
+                        <IconButton onClick={() => {
+                            setOpen(false)
+                        }}>
                             <Close/>
                         </IconButton>
                     </div>
