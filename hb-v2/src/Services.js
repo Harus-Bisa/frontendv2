@@ -167,7 +167,7 @@ class Services{
     }
 
     async reportInappropriateness(report){
-        const url = this.domain + "/tickets";
+        const url = this.domain + "/tickets/reviews";
         return axios.post(url, report, {headers: this.headers()})
         .then(response =>{
             return response.data
