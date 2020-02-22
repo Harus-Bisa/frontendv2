@@ -35,6 +35,9 @@
   color: white;
 }
 
+.search-box .dark-search-button{
+  background-color: #40444D !important;
+}
 .search-box .search-input-wrapper{
   padding: 1rem .75rem !important;
 }
@@ -62,6 +65,9 @@
     border-bottom-left-radius: 0px;
     border-bottom-color: transparent !important;
     border-right-color: #C4C4C4 !important;
+  }
+  .search-box .search-input-wrapper{
+    /* border-bottom: 1px solid #c4c4c4; */
   }
 }
 

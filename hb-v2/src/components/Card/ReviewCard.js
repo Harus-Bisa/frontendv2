@@ -43,6 +43,13 @@ function ReviewCard(props){
             <ReportInappropriatePopup {...props} reviewId={reviewId}/>
         )
     }
+    const getDateString = (millisecond) =>{
+        var date = new Date(millisecond)
+        var day = date.getDate();
+        var month = date.getMonth()+1;
+        var year = date.getFullYear();
+        return day + "/" + month + "/" + year;
+    }
     if(props.type === MOBILE){
         return(
             <div className='col-12' style={{paddingTop:'15px', paddingBottom:'15px'}}>
@@ -53,7 +60,7 @@ function ReviewCard(props){
                                 <p id="course-name">{props.review.courseName}</p>
                             </div>
                             {props.review.createdAt && <div className="col">
-                                <p style={{textAlign:'right'}}>{(new Date(props.review.createdAt)).toLocaleDateString()}</p>
+                                <p style={{textAlign:'right'}}>{getDateString(props.review.createdAt)}</p>
                             </div>}
                         </div>
                         <p id="review">{props.review.review}</p>
@@ -240,7 +247,7 @@ function ReviewCard(props){
                             <div>
                                 {props.review.createdAt && <div className="row justify-content-between">
                                     <div className="col" style={{textAlign:"right"}}>
-                                        <p>{(new Date(props.review.createdAt)).toLocaleDateString()}</p>
+                                        <p>{getDateString(props.review.createdAt)}</p>
                                     </div>
                                 </div>}
                                 <div className="row justify-content-between">

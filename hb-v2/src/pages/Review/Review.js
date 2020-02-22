@@ -57,7 +57,7 @@ function Review(props){
     }
     if(props.professor){
         //web
-        if(window.screen.width > 768){
+        if(!props.isMobile){
             return(
                 <div className="container content page-container">
                     <div className="footer-adjust">
@@ -118,13 +118,13 @@ function Review(props){
                                     
                                     <div className="row no-gutters">
                                         <div className="col-4 flex">
-                                            <h1 className="margin-auto" style={{fontSize:"64px", fontWeight:'500'}}>{props.professor.overallRating === "-" ? 0 : props.professor.overallRating}</h1>
+                                            <h1 className="margin-auto" style={{fontSize:"64px", fontWeight:'500'}}>{props.professor.overallRating.toFixed(1)}</h1>
                                         </div>
                                         <div className="col-6 flex">
                                             <div className="margin-auto" style={{marginLeft:"0!Important"}}>
                                                 <StyledRating
                                                     precision={0.1}
-                                                    value={props.professor.overallRating === "-" ? 0 : props.professor.overallRating} 
+                                                    value={props.professor.overallRating} 
                                                     readOnly 
                                                     icon={<ThumbUp/>}
                                                     emptyIcon={<ThumbUpOutlined/>} 
@@ -140,12 +140,12 @@ function Review(props){
                                         <h4 style={{color:'transparent'}}>DOSENKU DUMMY TEXT</h4>
                                         <div className="row no-gutters">
                                             <div className="col-1 flex">
-                                                <h5 className="margin-auto">{props.professor.recommendationRating === "-" ? 0 : props.professor.recommendationRating}</h5>
+                                                <h5 className="margin-auto">{props.professor.recommendationRating.toFixed(1)}</h5>
                                             </div>
                                             <div className="col-3 flex">
                                                 <StyledRating
                                                     precision={0.1}
-                                                    value={props.professor.recommendationRating === "-" ? 0 : props.professor.recommendationRating} 
+                                                    value={props.professor.recommendationRating} 
                                                     readOnly 
                                                     icon={<Check/>}
                                                     emptyIcon={<CheckOutlined/>} 
@@ -175,12 +175,12 @@ function Review(props){
 
                                         <div className="row no-gutters">
                                             <div className="col-1 flex">
-                                                <h5 className="margin-auto">{props.professor.difficultyRating === "-" ? 0 : props.professor.difficultyRating}</h5>
+                                                <h5 className="margin-auto">{props.professor.difficultyRating.toFixed(1)}</h5>
                                             </div>
                                             <div className="col-3 flex">
                                                 <StyledRating
                                                     precision={0.1}
-                                                    value={props.professor.difficultyRating === "-" ? 0 : props.professor.difficultyRating} 
+                                                    value={props.professor.difficultyRating} 
                                                     readOnly 
                                                     icon={<LocalCafe/>}
                                                     emptyIcon={<LocalCafeOutlined/>} 
@@ -262,7 +262,7 @@ function Review(props){
                         <div style={{display:'flex', marginTop:'10px'}}>
                             <StyledRating
                                 precision={0.1}
-                                value={props.professor.overallRating === "-" ? 0 : props.professor.overallRating} 
+                                value={props.professor.overallRating} 
                                 readOnly 
                                 icon={<ThumbUp/>}
                                 emptyIcon={<ThumbUpOutlined/>} 
@@ -307,7 +307,8 @@ function mapStateToProps(state){
         professor: state.professor,
         error: state.error,
         loggedIn: state.loggedIn,
-        loading: state.loading
+        loading: state.loading,
+        isMobile: state.isMobile
     }
 }
 export default connect(mapStateToProps, {getReviews})(Review);
