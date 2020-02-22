@@ -21,6 +21,8 @@ import SignUpPopup from '../Popup/SignupPopup';
 import { withRouter } from 'react-router-dom';
 import { Search } from '@material-ui/icons';
 import { IconButton, Button, ButtonBase } from '@material-ui/core';
+import Query from '../../pages/Query/Query';
+import SearchBoxPopup from '../Popup/SearchBoxPopup';
 
 function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);
@@ -53,13 +55,19 @@ function NavigationBar(props){
   }
   const DummyMobileSearchBox = (props)=>{
     return(
-      <ButtonBase onClick={props.onClick}>
+      <ButtonBase 
+        onClick={() => {
+          props.onClick()
+          setIsOpen(false)
+        }}
+      >
         <NavLink style={{color:'black'}}>
           <Search/> Cari Dosen Anda
         </NavLink>
       </ButtonBase>
     )
   }
+  
   const logout = () =>{
     props.logout()
     setIsOpen(false)
@@ -149,7 +157,7 @@ function NavigationBar(props){
                   trigger={{
                       component:DummyMobileSearchBox
                   }}
-                  content={SearchBox}
+                  content={SearchBoxPopup}
               />
             </NavItem>
             {props.loggedIn && props.name && !showSearchBox && 

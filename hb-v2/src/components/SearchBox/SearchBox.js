@@ -17,7 +17,7 @@ function SearchBox(props){
     let history = useHistory()
     
     const find = async (event) =>{
-        event.preventDefault();
+        event.preventDefault();        
         if(reviewee !== "" || school !== ""){
             props.findReviewees(reviewee, school, "searchBox")
             .then(response =>{
@@ -49,11 +49,13 @@ function SearchBox(props){
                     <form onSubmit={find}>
                         <div className="row no-gutters">
                             <div className="col-12 search-input-wrapper">
-                                <RevieweeSearch reviewee={reviewee} setReviewee={setReviewee} setSchool={setSchool}/>
+                                <RevieweeSearch reviewee={reviewee} setReviewee={setReviewee} setSchool={setSchool} submit={find}/>
                             </div>
-                            {showSchool && <div className="col-12 search-input-wrapper">
-                                <UniversitySearch school={school} setSchool={setSchool}/>
-                            </div>}
+                            {showSchool && 
+                            <div className="col-12 search-input-wrapper">
+                                <UniversitySearch school={school} setSchool={setSchool} submit={find}/>
+                            </div>
+                            }
                         </div>
                     </form>
                 </div>

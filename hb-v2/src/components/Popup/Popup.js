@@ -46,7 +46,15 @@ function Popup(props){
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-md-11 col-lg-10">
-                                <ContentComponent closePopup={() => setOpen(false)}/>
+                                <ContentComponent 
+                                    closePopup={() => setOpen(false)} 
+                                    close={() =>{
+                                        if(props.close){
+                                            props.close();
+                                        }
+                                        setOpen(false);
+                                    }}
+                                />
                             </div>
                         </div>
                     </div>

@@ -7,6 +7,7 @@ import newestReview from "../../img/newestreviewimg.png";
 import Popup from "../../components/Popup/Popup";
 import { Person, School, KeyboardArrowDown } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
+import SearchBoxPopup from "../../components/Popup/SearchBoxPopup";
 
 function Landing(props){
     const DummyMobileSearchBox = (props) =>{
@@ -36,6 +37,7 @@ function Landing(props){
             </React.Fragment>
         )
     }
+
     return(
         <div className='page-container landing-page'>
             <div className="container footer-adjust">
@@ -48,7 +50,7 @@ function Landing(props){
                                 trigger={{
                                     component:DummyMobileSearchBox
                                 }}
-                                content={SearchBox}
+                                content={SearchBoxPopup}
                             />
                         }
                     </div>

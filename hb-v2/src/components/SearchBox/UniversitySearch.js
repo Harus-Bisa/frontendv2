@@ -39,6 +39,13 @@ function UniversitySearch(props){
                     {...params}
                     fullWidth
                     placeholder={"Ketik Nama Perguruan Tinggi/Universitas"}
+                    onKeyPress={(event) => {
+                        if(event.key === "Enter"){
+                            if (props.submit){
+                                props.submit(event);
+                            }
+                        }
+                    }}
                     InputProps={{
                         ...params.InputProps,
                         endAdornment: (
