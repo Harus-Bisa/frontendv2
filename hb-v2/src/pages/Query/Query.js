@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 import { Divider, RadioGroup, Radio, FormControlLabel, withStyles, Select, MenuItem, InputLabel, FormControl } from "@material-ui/core";
 import RevieweeCard from "../../components/Card/RevieweeCard";
 import SearchBox from "../../components/SearchBox/SearchBox";
-import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);

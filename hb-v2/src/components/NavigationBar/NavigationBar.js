@@ -20,8 +20,7 @@ import LoginPopup from '../Popup/LoginPopup';
 import SignUpPopup from '../Popup/SignupPopup';
 import { withRouter } from 'react-router-dom';
 import { Search } from '@material-ui/icons';
-import { IconButton, Button, ButtonBase } from '@material-ui/core';
-import Query from '../../pages/Query/Query';
+import { ButtonBase } from '@material-ui/core';
 import SearchBoxPopup from '../Popup/SearchBoxPopup';
 
 function NavigationBar(props){
