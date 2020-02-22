@@ -44,7 +44,7 @@ function Popup(props){
                         </IconButton>
                     </div>
                     <div className="container">
-                        <div className="row justify-content-center">
+                        <div className="row justify-content-center no-gutters">
                             <div className="col-md-11 col-lg-10">
                                 <ContentComponent 
                                     closePopup={() => setOpen(false)} 

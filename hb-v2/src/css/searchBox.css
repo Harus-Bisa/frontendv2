@@ -68,6 +68,7 @@
   }
   .search-box .search-input-wrapper{
     /* border-bottom: 1px solid #c4c4c4; */
+    padding: 0.5rem .75rem !important;
   }
 }
 
@@ -77,4 +78,11 @@
     padding: .75rem !important;
   }
   
+}
+
+.search-box-popup .text-button{
+  border-bottom: 1px solid #E4E4E4;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  justify-content: left;
 }

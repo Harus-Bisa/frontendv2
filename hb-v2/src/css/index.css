@@ -109,6 +109,16 @@ label{
   width:100%;
 }
 
+.text-button{
+  text-transform: none !important;
+  font-size: inherit !important;
+  min-width: auto !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+  padding-top: inherit !important;
+  padding-bottom: inherit !important;
+}
 
 .button{
   text-transform: none !important;

@@ -8,8 +8,11 @@ import Popup from "../../components/Popup/Popup";
 import { Person, School, KeyboardArrowDown } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
 import SearchBoxPopup from "../../components/Popup/SearchBoxPopup";
+import { getTopSchools } from "../../redux/actions";
 
 function Landing(props){
+    const [school, setSchool] = React.useState("")
+
     const DummyMobileSearchBox = (props) =>{
         return(
             <React.Fragment>
@@ -37,14 +40,32 @@ function Landing(props){
             </React.Fragment>
         )
     }
+    const topSchools = props.topSchools
+    const getTopSchools = props.getTopSchools
 
+    React.useEffect(() =>{
+        if(!topSchools){
+            getTopSchools()
+        }
+    },[topSchools, getTopSchools])
+
+    
     return(
         <div className='page-container landing-page'>
             <div className="container footer-adjust">
                 <header className="flex">
                     <div className="margin-auto">
                         <h1>Review Dosen Anda Sekarang</h1>
-                        {!props.isMobile && <SearchBox/>}
+                        {!props.isMobile && 
+                        <React.Fragment>
+                            <SearchBox school={school}/>
+                            {props.topSchools && 
+                            <div className="flex">
+                                <h3 style={{fontWeight:'normal', fontSize:"24px"}}><span>Pencarian Populer:</span> <Button style={{color: "white"}} className="text-button" onClick={() => setSchool(topSchools[0])}>{topSchools[0]},</Button><Button style={{color: "white"}} className="text-button" onClick={() => setSchool(topSchools[1])}>{topSchools[1]}</Button></h3>
+                            </div>
+                            }
+                        </React.Fragment>
+                        }
                         {props.isMobile &&
                             <Popup
                                 trigger={{
@@ -67,7 +88,8 @@ function Landing(props){
 }
 function mapStateToProps(state){
     return{
-        isMobile: state.isMobile
+        isMobile: state.isMobile,
+        topSchools: state.topSchools
     }
 }
-export default connect(mapStateToProps)(Landing);
+export default connect(mapStateToProps,{getTopSchools})(Landing);

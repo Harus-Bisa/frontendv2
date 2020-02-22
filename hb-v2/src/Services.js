@@ -176,6 +176,28 @@ class Services{
             this.errorHandling(error)
         })
     }
+
+    async getRecentReviews(){
+        const url = this.domain + "/recents/reviews";
+        return axios.get(url, {headers: this.headers()})
+        .then(response =>{
+            return response.data
+        })
+        .catch(error =>{
+            this.errorHandling(error)
+        })
+    }
+
+    async getTopSchools(){
+        const url = this.domain +"/schools/popular"
+        return axios.get(url, {headers: this.headers()})
+        .then(response =>{
+            return response.data
+        })
+        .catch(error =>{
+            this.errorHandling(error)
+        })
+    }
 }
 const services = new Services();
 export default services;
