@@ -15,7 +15,12 @@ function SearchBox(props){
     const [school, setSchool] = React.useState("");
     const [showSchool, setShowSchool] = React.useState(props.showSchool);
     let history = useHistory()
-    
+    const propsSchool = props.school
+    React.useEffect(() =>{
+        if(propsSchool !== school){
+            setSchool(propsSchool)
+        }
+    },[propsSchool])
     const find = async (event) =>{
         event.preventDefault();        
         if(reviewee !== "" || school !== ""){
@@ -110,7 +115,8 @@ SearchBox.defaultProps={
     reviewees: [],
     findReviewees: () => {},
     type: "normal",
-    showSchool:false
+    showSchool:false,
+    school: ""
 }
 function mapStateToProps(state){
     return{

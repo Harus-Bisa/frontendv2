@@ -68,6 +68,7 @@
   }
   .search-box .search-input-wrapper{
     /* border-bottom: 1px solid #c4c4c4; */
+    padding: 0.5rem .75rem !important;
   }
 }
 
@@ -75,6 +76,18 @@
 @media (min-width: 768px) and (max-width: 991.98px){
   .search-box .search-input-wrapper{
     padding: .75rem !important;
+  }  
+}
+@media (min-width: 992px) {
+  .search-box .search-input-wrapper input{
+    font-size: 20px;
   }
-  
+}
+
+
+.search-box-popup .text-button{
+  border-bottom: 1px solid #E4E4E4;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  justify-content: left;
 }

@@ -10,11 +10,10 @@ function ReportInappropriateForm(props){
         event.preventDefault();
         const report = {
             authorId:props.userId,
-            authorEmail:props.userEmail,
-            targetId:props.reviewId,
-            targetType:"review",
+            reviewId:props.reviewId,
+            revieweeId: props.revieweeId,
             issueType: props.type,
-            message: otherInformation
+            additionalMessage: otherInformation
         }
         await props.reportInappropriateness(report)
         alert("Terima kasih sudah melaporkan review ini! Tim Dosen Ku akan segera menangani kasus ini.")
@@ -42,7 +41,7 @@ function ReportInappropriateForm(props){
 function mapStateToProps(state){
     return{
         userId: state.user.userId,
-        userEmail: state.user.email
+        revieweeId: state.professor.revieweeId
     }
 }
 export default connect(mapStateToProps,{reportInappropriateness})(ReportInappropriateForm)
