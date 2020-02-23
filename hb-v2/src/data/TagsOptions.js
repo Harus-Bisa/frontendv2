@@ -8,6 +8,7 @@ export const tagsOptions=[
     "Adil memperlakukan siswa",
     "Kelas bermanfaat",
     "Membosankan",
+    "Harus membaca buku",
     "Kalo kasi nilai susah",
     "Banyak PR/proyek",
     "Banyak tugas kelompok",

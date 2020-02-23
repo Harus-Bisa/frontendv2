@@ -53,8 +53,8 @@
 /*SM*/
 @media (max-width: 767px){
   .search-box .search-button{
-    border-top-right-radius: 0!important;
-    border-bottom-left-radius: 10px!important;
+    /* border-top-right-radius: 0!important;
+    border-bottom-left-radius: 10px!important; */
   }
   .search-box .left-border{
     border-left: 0px solid;

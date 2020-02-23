@@ -103,7 +103,7 @@ function Query(props){
                                 {props.found === false && 
                                     <div>
                                         <p style={{fontWeight:'bold'}}>Dosen yang anda cari tidak ditemukan dalam database kami.</p>
-                                        <a href={"/review/new/"+revieweeName}>Jadilah penulis pertama!</a>
+                                        <a href={"/review/new/"+(revieweeName ? revieweeName : "Dosen")}>Jadilah penulis pertama!</a>
                                     </div>
                                 } 
                             </div>
