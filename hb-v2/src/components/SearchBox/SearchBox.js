@@ -53,14 +53,23 @@ function SearchBox(props){
                 <div className="search-box border">
                     <form onSubmit={find}>
                         <div className="row no-gutters">
-                            <div className="col-12 search-input-wrapper">
-                                <RevieweeSearch reviewee={reviewee} setReviewee={setReviewee} setSchool={setSchool} submit={find}/>
+                            <div className="col-10">
+                                <div clasName="row">
+                                    <div className="col-12 search-input-wrapper">
+                                        <RevieweeSearch reviewee={reviewee} setReviewee={setReviewee} setSchool={setSchool} submit={find}/>
+                                    </div>
+                                    {showSchool && 
+                                    <div className="col-12 search-input-wrapper">
+                                        <UniversitySearch school={school} setSchool={setSchool} submit={find}/>
+                                    </div>
+                                    }
+                                </div>
                             </div>
-                            {showSchool && 
-                            <div className="col-12 search-input-wrapper">
-                                <UniversitySearch school={school} setSchool={setSchool} submit={find}/>
+                            <div className="col-2">
+                                <Button className={props.type === "dark" ? "search-button dark-search-button": "search-button"} fullWidth type="submit" onClick={find}>
+                                    <Search/>
+                                </Button>
                             </div>
-                            }
                         </div>
                     </form>
                 </div>
