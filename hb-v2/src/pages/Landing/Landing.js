@@ -61,7 +61,7 @@ function Landing(props){
                             <SearchBox school={school}/>
                             {props.topSchools && 
                             <div className="flex">
-                                <h3 style={{fontWeight:'normal', fontSize:"24px"}}><span>Pencarian Populer:</span> <Button style={{color: "white"}} className="text-button" onClick={() => setSchool(topSchools[0])}>{topSchools[0]},</Button><Button style={{color: "white"}} className="text-button" onClick={() => setSchool(topSchools[1])}>{topSchools[1]}</Button></h3>
+                                <h3 style={{fontWeight:'normal', fontSize:"24px"}}><span style={{fontWeight:"600"}}>Pencarian Populer: </span><Button style={{color: "white"}} className="text-button" onClick={() => setSchool(topSchools[0])}>{topSchools[0]},</Button><Button style={{color: "white"}} className="text-button" onClick={() => setSchool(topSchools[1])}>{topSchools[1]}</Button></h3>
                             </div>
                             }
                         </React.Fragment>
