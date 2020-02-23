@@ -39,6 +39,13 @@ function UniversitySearch(props){
                     {...params}
                     fullWidth
                     placeholder={"Ketik Nama Perguruan Tinggi/Universitas"}
+                    onKeyPress={(event) => {
+                        if(event.key === "Enter"){
+                            if (props.submit){
+                                props.submit(event);
+                            }
+                        }
+                    }}
                     InputProps={{
                         ...params.InputProps,
                         endAdornment: (
@@ -49,7 +56,7 @@ function UniversitySearch(props){
                         ),
                         startAdornment:(
                             <React.Fragment>
-                                <School/>
+                                <School style={{color:"#40444D"}}/>
                                 {params.InputProps.startAdornment}
                             </React.Fragment>
                         )

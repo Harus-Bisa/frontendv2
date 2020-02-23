@@ -14,21 +14,50 @@ function Popup(props){
     }
     return(
         <React.Fragment>
-            {Trigger && <Trigger className={props.trigger.className} onClick={openPopup} onChange={openPopup} style={props.trigger.style} id={props.trigger.id}>{props.purpose}</Trigger>}
+            {Trigger && 
+                <Trigger 
+                    {...props}
+                    className={props.trigger.className} 
+                    onClick={openPopup} 
+                    onChange={openPopup} 
+                    // onFocus={openPopup}
+                    style={props.trigger.style} 
+                    id={props.trigger.id}
+                >
+                    {props.purpose}
+                </Trigger>}
             <Dialog 
                 open={open} 
                 onClose={() => setOpen(false)} 
                 style={{padding:0}} 
                 onBackdropClick={props.disableFlag ? props.disableFlag : () =>{}}
                 fullScreen={fullScreen}
+                fullWidth={true}
+                maxWidth={"sm"}
             >
-                <DialogContent style={{padding:'0'}}> 
+                <DialogContent style={{padding:'0 0 2rem 0'}}> 
                     <div className="content" style={{display:'flex', justifyContent:'flex-end', marginBottom:'-30px'}}>
-                        <IconButton onClick={() => setOpen(false)}>
+                        <IconButton onClick={() => {
+                            setOpen(false)
+                        }}>
                             <Close/>
                         </IconButton>
                     </div>
-                    <ContentComponent closePopup={() => setOpen(false)}/>
+                    <div className="container">
+                        <div className="row justify-content-center no-gutters">
+                            <div className="col-md-11 col-lg-10">
+                                <ContentComponent 
+                                    closePopup={() => setOpen(false)} 
+                                    close={() =>{
+                                        if(props.close){
+                                            props.close();
+                                        }
+                                        setOpen(false);
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </DialogContent>
             </Dialog>
         </React.Fragment>

@@ -7,17 +7,17 @@ export const overallRatingLabels = {
 };
 
 export const recommendationRatingLabels = {
-    1: 'Tidak akan',
+    1: 'Tidak Akan',
     2: 'Tidak',
     3: 'Mungkin',
     4: 'Rekomen',
-    5: 'Rekomen banget'
+    5: 'Rekomen Banget'
 };
 
 export const difficultyRatingLabels = {
-    1: 'Mudah banget',
+    1: 'Mudah Banget',
     2: 'Mudah',
     3: 'Lumayan',
     4: 'Susah',
-    5: 'Susah banget',
+    5: 'Susah Banget',
 };

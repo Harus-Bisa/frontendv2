@@ -9,8 +9,9 @@ import Popup from "../../components/Popup/Popup";
 import LoginPopup from "../../components/Popup/LoginPopup";
 import Feedback from "../../components/Feedback/Feedback";
 import Footer from "../../components/Footer/Footer";
-import { Divider, TextField } from "@material-ui/core";
+import { Divider, TextField, Tooltip, Select, MenuItem } from "@material-ui/core";
 import Reviews from "../../components/ReviewContent/Reviews";
+import { NEWEST, OLDEST } from "../../redux/constants/sort-types";
 
 export const WEB = "WEB";
 export const MOBILE = "MOBILE";
@@ -27,6 +28,7 @@ function ThumbRating(props){
 function Review(props){
     var [rating, setRating] = React.useState(0)
     var [findReviewText, setFindReviewText] = React.useState("")
+    var [sortBy, setSortBy] = React.useState(NEWEST)
 
     const addReview = (event, value) =>{
         setRating(value)
@@ -55,7 +57,7 @@ function Review(props){
     }
     if(props.professor){
         //web
-        if(window.screen.width > 768){
+        if(!props.isMobile){
             return(
                 <div className="container content page-container">
                     <div className="footer-adjust">
@@ -64,11 +66,11 @@ function Review(props){
                             <div className="row">
                                 <div className="col-lg-7">
                                     <h2 style={{borderBottom:"4px solid #39A3FF", width:'fit-content', fontSize: "calc(100% + 17px)"}}>{props.professor.name}</h2>
-                                    <p>{props.professor.school}</p>
+                                    <p style={{fontSize:'16px'}}>{props.professor.school}</p>
                                 </div>
                                 <div className="col-lg-5">
                                     <div className="write-review">
-                                        <p className="grey-text">{props.professor.numberOfReviews === 0 ? "Be the first to review!" : "Tulis Review Anda"}</p>
+                                        <p className="grey-text">{props.professor.numberOfReviews === 0 ? "Jadilah penulis pertama!" : "Tulis Review Anda"}</p>
                                         {props.loggedIn && 
                                             <StyledRating
                                                 name="addReview"
@@ -95,16 +97,34 @@ function Review(props){
                         <div className="review-statistics-web">
                             <div className="row">
                                 <div className="col-lg-4">
-                                    <h4>Penilaian keseluruhan <Info/></h4>
+                                    <div style={{display:'flex', flexDirection:"row"}}>
+                                        <h4>Penilaian keseluruhan </h4>
+                                        <Tooltip 
+                                            arrow
+                                            placement="right" 
+                                            title={
+                                                <React.Fragment>
+                                                    <p>5 Jempol: Sangat Bagus</p>
+                                                    <p>4 Jempol: Bagus</p>
+                                                    <p>3 Jempol: Sedang</p>
+                                                    <p>2 Jempol: Buruk</p>
+                                                    <p>1 Jempol: Sangat Buruk</p>
+                                                </React.Fragment>
+                                            }
+                                        >
+                                            <Info style={{color:"#0D7CBB", margin:'0 15px'}}/>
+                                        </Tooltip>
+                                    </div>
+                                    
                                     <div className="row no-gutters">
                                         <div className="col-4 flex">
-                                            <h1 className="margin-auto" style={{fontSize:"64px", fontWeight:'500'}}>{props.professor.overallRating === "-" ? 0 : props.professor.overallRating}</h1>
+                                            <h1 className="margin-auto" style={{fontSize:"64px", fontWeight:'500'}}>{props.professor.overallRating.toFixed(1)}</h1>
                                         </div>
                                         <div className="col-6 flex">
                                             <div className="margin-auto" style={{marginLeft:"0!Important"}}>
                                                 <StyledRating
                                                     precision={0.1}
-                                                    value={props.professor.overallRating === "-" ? 0 : props.professor.overallRating} 
+                                                    value={props.professor.overallRating} 
                                                     readOnly 
                                                     icon={<ThumbUp/>}
                                                     emptyIcon={<ThumbUpOutlined/>} 
@@ -116,50 +136,82 @@ function Review(props){
                                 </div>
                                 <Divider orientation={"vertical"}/>
                                 <div className={"col-lg-7 flex"}>
-                                    <div className={props.loggedIn ? "margin-auto container" : "margin-auto container blur"}>
+                                    <div className="margin-auto container">
+                                        <h4 style={{color:'transparent'}}>DOSENKU DUMMY TEXT</h4>
                                         <div className="row no-gutters">
                                             <div className="col-1 flex">
-                                                <h5 className="margin-auto">{props.professor.recommendationRating === "-" ? 0 : props.professor.recommendationRating}</h5>
+                                                <h5 className="margin-auto">{props.professor.recommendationRating.toFixed(1)}</h5>
                                             </div>
                                             <div className="col-3 flex">
                                                 <StyledRating
                                                     precision={0.1}
-                                                    value={props.professor.recommendationRating === "-" ? 0 : props.professor.recommendationRating} 
+                                                    value={props.professor.recommendationRating} 
                                                     readOnly 
                                                     icon={<Check/>}
                                                     emptyIcon={<CheckOutlined/>} 
                                                     className="margin-auto"
                                                 />
                                             </div>
-                                            <div className="col flex">
-                                                <h5 style={{marginBottom:0}}>Kemungkinan untuk merekomendasikan <Info/></h5>
+                                            <div className="col flex" style={{display:'flex', flexDirection:"row"}}>
+                                                <h5 style={{marginBottom:0}}>Kemungkinan untuk merekomendasikan </h5>
+                                                <Tooltip 
+                                                    arrow
+                                                    placement="right" 
+                                                    title={
+                                                        <React.Fragment>
+                                                            <p>5 Centang: Rekomen banget</p>
+                                                            <p>4 Centang: Rekomen</p>
+                                                            <p>3 Centang: Mungkin</p>
+                                                            <p>2 Centang: Tidak</p>
+                                                            <p>1 Centang: Tidak akan</p>
+                                                        </React.Fragment>
+                                                    }
+                                                >
+                                                    <Info style={{color:"#0D7CBB", margin:'0 15px'}}/>
+                                                </Tooltip>
                                             </div>
+                                            
                                         </div>
 
                                         <div className="row no-gutters">
                                             <div className="col-1 flex">
-                                                <h5 className="margin-auto">{props.professor.difficultyRating === "-" ? 0 : props.professor.difficultyRating}</h5>
+                                                <h5 className="margin-auto">{props.professor.difficultyRating.toFixed(1)}</h5>
                                             </div>
                                             <div className="col-3 flex">
                                                 <StyledRating
                                                     precision={0.1}
-                                                    value={props.professor.difficultyRating === "-" ? 0 : props.professor.difficultyRating} 
+                                                    value={props.professor.difficultyRating} 
                                                     readOnly 
                                                     icon={<LocalCafe/>}
                                                     emptyIcon={<LocalCafeOutlined/>} 
                                                     className="margin-auto"
                                                 />
                                             </div>
-                                            <div className="col flex">
-                                                <h5 style={{marginBottom:0}}>Kesusahan kelas <Info/></h5>
+                                            <div className="col flex" style={{display:'flex', flexDirection:"row"}}>
+                                                <h5 style={{marginBottom:0}}>Kesusahan kelas </h5>
+                                                <Tooltip 
+                                                    arrow
+                                                    placement="right" 
+                                                    title={
+                                                        <React.Fragment>
+                                                            <p>5 Kopi: Susah banget</p>
+                                                            <p>4 Kopi: Susah</p>
+                                                            <p>3 Kopi: Lumayan</p>
+                                                            <p>2 Kopi: Mudah</p>
+                                                            <p>1 Kopi: Mudah banget</p>
+                                                        </React.Fragment>
+                                                    }
+                                                >
+                                                    <Info style={{color:"#0D7CBB", margin:'0 15px'}}/>
+                                                </Tooltip>
                                             </div>
                                         </div>
                                     </div>
-                                    {!props.loggedIn && 
+                                    {/* {!props.loggedIn && 
                                         <div className="blue-box" style={{width:'50%', height:'100%', position:'absolute'}}>
                                             <h5>Sign up dan lihat semua statistik. Gratis!</h5>
                                         </div>
-                                    }
+                                    } */}
                                 </div>
                             </div>
                         </div>
@@ -181,8 +233,14 @@ function Review(props){
                                         }}
                                     />
                                 </div>
-                                <div className="col-6">
-                                    {/* <p>Urutkan berdasarkan</p> */}
+                                <div className="col-6 flex" style={{flexDirection:'row', justifyContent:'center'}}>
+                                    <p style={{margin:'auto 0'}} >Urutkan berdasarkan:</p>
+                                    <div style={{margin:"auto 0 auto 15px"}}>
+                                        <Select value={sortBy} onChange={(event) =>{setSortBy(event.target.value)}} displayEmpty>
+                                            <MenuItem value={NEWEST}>Paling baru</MenuItem>
+                                            <MenuItem value={OLDEST}>Paling lama</MenuItem>
+                                        </Select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -204,7 +262,7 @@ function Review(props){
                         <div style={{display:'flex', marginTop:'10px'}}>
                             <StyledRating
                                 precision={0.1}
-                                value={props.professor.overallRating === "-" ? 0 : props.professor.overallRating} 
+                                value={props.professor.overallRating} 
                                 readOnly 
                                 icon={<ThumbUp/>}
                                 emptyIcon={<ThumbUpOutlined/>} 
@@ -213,7 +271,7 @@ function Review(props){
                         </div>
                     </header>
                     <div className="write-review">
-                        <p className="grey-text">{props.professor.numberOfReviews === 0 ? "Be the first to review!" : "Tulis Review Anda"}</p>
+                        <p className="grey-text">{props.professor.numberOfReviews === 0 ? "Jadilah penulis pertama!" : "Tulis Review Anda"}</p>
                         {props.loggedIn && 
                             <StyledRating
                                 name="addReview"
@@ -249,7 +307,8 @@ function mapStateToProps(state){
         professor: state.professor,
         error: state.error,
         loggedIn: state.loggedIn,
-        loading: state.loading
+        loading: state.loading,
+        isMobile: state.isMobile
     }
 }
 export default connect(mapStateToProps, {getReviews})(Review);

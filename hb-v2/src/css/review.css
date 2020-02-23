@@ -14,16 +14,23 @@
     font-weight: bold;
     font-size: 12px;
 }
+
+.review-card h4{
+    font-size: inherit !important;
+}
 .review-card #course-name{
     font-style: italic;
     font-weight: normal;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 16px;
     color: var(--hb-blue);
     margin-bottom: 0.25rem;
 }
 .review-details{
     padding: 15px;
+}
+.review-details h5{
+    margin-bottom: 0;
 }
 .review-details p{
     font-size: 12px;
@@ -33,6 +40,10 @@
 
 .review-details .bold{
     font-weight: 500;
+}
+
+.review-details .light{
+    font-weight: 300;
 }
 .review-details .MuiSvgIcon-root{
     font-size: inherit;
@@ -47,8 +58,8 @@
     padding: 10px 15px;
 }
 .review-footer p, .review-footer a{
-    font-size: 11px !important;
-    line-height: 15px;
+    font-size: 12px !important;
+    line-height: 16px;
     color: #000000;
     margin: auto 5px;
 }
@@ -90,11 +101,44 @@
 
 .tag{
     background: #F3FBFF;
-    border-radius: 30px;
-    padding: 5px 10px;
-    margin: 5px 10px;
+    border-radius: 30px !important;
+    padding: 5px 15px !important;
+    margin: 5px 10px !important;
 }
 
+.review-form label{
+    font-size: 18px;
+    font-weight: 500;
+}
+@media (max-width: 767.98px){
+    .review-form label{
+        font-size: 16px;
+    }
+}
+
+.review-form .form-group{
+    margin-bottom: 2rem;
+}
+.review-form .tags-button-group{
+    margin-right: -10px;
+    margin-left: -10px;
+    display: block;
+}
+
+.review-form .tag-button, .review-form .tag-button:hover,.review-form .tag-button:focus{
+    border: 1px solid var(--hb-blue) !important;
+    color: black;
+    background-color: white !important;
+    height: auto;
+    outline: 0!important;
+}
+
+.review-form .tag-button-selected, .review-form .tag-button-selected:focus{
+    color: white  !important;
+    background-color: var(--hb-blue) !important;
+    height: auto;
+    outline: 0!important;
+}
 
 .review-header{
     margin-bottom: 15px;
@@ -110,7 +154,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 1.5rem;
+    padding: 1rem;
 }
 .review-statistics h2{
     color: var(--hb-blue);

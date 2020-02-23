@@ -1,4 +1,4 @@
-import { FIND_REVIEWEES, GET_REVIEWS, CLEAR_REVIEWEES, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, REMOVE_SUCCESS, SET_SUCCESS, FIND_SCHOOLS, LOAD_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES } from "../constants/action-types";
+import { FIND_REVIEWEES, GET_REVIEWS, CLEAR_REVIEWEES, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, REMOVE_SUCCESS, SET_SUCCESS, FIND_SCHOOLS, LOAD_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES, CHANGE_IS_MOBILE, GET_TOP_SCHOOLS, GET_RECENT_REVIEWS } from "../constants/action-types";
 import services from "../../Services";
 import { NAME, POPULARITY, RATING } from "../../pages/Query/Query";
 import { sortName, sortPopularity, sortRating } from "./revieweeSortFunctions";
@@ -13,7 +13,8 @@ const initialState ={
     loadPageReviewees: false,
     schools: [],
     loadSchools: false,
-    success: false
+    success: false,
+    isMobile:(window.innerWidth < 768)
 }
 
 export default function rootReducer(state = initialState, action){
@@ -78,6 +79,16 @@ export default function rootReducer(state = initialState, action){
     if(action.type === CLEAR_SCHOOLS){
         return Object.assign({}, state, {
             schools: []
+        })
+    }
+    if(action.type === GET_TOP_SCHOOLS){
+        return Object.assign({}, state, {
+            topSchools: action.payload
+        })
+    }
+    if(action.type === GET_RECENT_REVIEWS){
+        return Object.assign({}, state, {
+            recentReviews: action.payload
         })
     }
     if(action.type === GET_REVIEWS){
@@ -145,6 +156,11 @@ export default function rootReducer(state = initialState, action){
         return Object.assign({}, state, {
             loadingCount: count,
             loading: count !== 0
+        })
+    }
+    if(action.type === CHANGE_IS_MOBILE){
+        return Object.assign({}, state, {
+            isMobile: action.payload
         })
     }
     return state;

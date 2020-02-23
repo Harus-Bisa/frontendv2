@@ -1,5 +1,5 @@
 import services from "../../Services"
-import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS, LOAD_SCHOOLS, FIND_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES, REPORT_INAPPROPRIATE_REVIEW } from "../constants/action-types"
+import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS, LOAD_SCHOOLS, FIND_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES, REPORT_INAPPROPRIATE_REVIEW, CHANGE_IS_MOBILE, GET_TOP_SCHOOLS } from "../constants/action-types"
 
 
 export function signup(newUserData){
@@ -56,6 +56,19 @@ export function logout(){
     return async function(dispatch){
         services.logout()
         return dispatch({type: LOGOUT})
+    }
+}
+
+export function getTopSchools(){
+    return async function(dispatch){
+        return await services.getTopSchools()
+        .then(async response => {
+            await dispatch({type: GET_TOP_SCHOOLS, payload: response})
+            dispatch(removeError())
+        })
+        .catch(error =>{
+            dispatch(setError(error))
+        })
     }
 }
 export function findSchools(school){
@@ -179,4 +192,8 @@ export function setLoading(){
 
 export function removeLoading(){
     return {type:REMOVE_LOADING}
+}
+
+export function changeIsMobile(isMobile){
+    return {type: CHANGE_IS_MOBILE, payload: isMobile}
 }

@@ -12,9 +12,9 @@ export function sortName(a,b){
 }
 
 export function sortPopularity(a, b) {
-    return a.popularity - b.popularity;
+    return b.numberOfReviews - a.numberOfReviews;
 }
 
 export function sortRating(a,b){
-    return a.rating - b.rating;
+    return b.overallRating - a.overallRating;
 }

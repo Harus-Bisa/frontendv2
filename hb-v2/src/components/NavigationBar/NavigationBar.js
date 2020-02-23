@@ -20,14 +20,53 @@ import LoginPopup from '../Popup/LoginPopup';
 import SignUpPopup from '../Popup/SignupPopup';
 import { withRouter } from 'react-router-dom';
 import { Search } from '@material-ui/icons';
+import { ButtonBase } from '@material-ui/core';
+import SearchBoxPopup from '../Popup/SearchBoxPopup';
 
 function NavigationBar(props){
   const [isOpen, setIsOpen] = useState(false);
+  const [navBackground, setNavBackground] = useState(false)
+  const [showSearchBox, setShowSearchBox] = useState(false);
 
-  const toggle = () => setIsOpen(!isOpen);
+  const navRef = React.useRef()
+  navRef.current = navBackground
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const show = window.scrollY > 0
+      if (navRef.current !== show) {
+        setNavBackground(show)
+      }
+    }
+    document.addEventListener('scroll', handleScroll)
+    return () => {
+      document.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  const toggle = () => {
+    if(isOpen){
+      setShowSearchBox(false)
+    }
+    setIsOpen(!isOpen)
+  };
   const SignUp = (props) =>{
     return(<SignUpPopup collapseNavbar={() => setIsOpen(false)} closePopup={props.closePopup}/>)
   }
+  const DummyMobileSearchBox = (props)=>{
+    return(
+      <ButtonBase 
+        onClick={() => {
+          props.onClick()
+          setIsOpen(false)
+        }}
+      >
+        <NavLink style={{color:'black'}}>
+          <Search/> Cari Dosen Anda
+        </NavLink>
+      </ButtonBase>
+    )
+  }
+  
   const logout = () =>{
     props.logout()
     setIsOpen(false)
@@ -44,24 +83,20 @@ function NavigationBar(props){
 
   const atLanding = props.location.pathname === "/"
   const navlinkClassname = atLanding ? "contrast-navlink dark-navlink navlink" : "contrast-navlink navlink"
-  const textColor = atLanding && !isOpen ? "white":"inherit";
+  const textColor = isOpen || !atLanding || navBackground ? "inherit":"white";
   
   return(
     <div>
-      <Navbar light expand="md" className="navbar" style={{backgroundColor:(isOpen || !atLanding  ? "white" : "transparent")}}>
+      <Navbar light expand="md" className={isOpen ? "navbar full-height" : "navbar"} style={{backgroundColor:(isOpen || !atLanding || navBackground  ? "white" : "transparent"), height:"75px"}}>
         <NavbarBrand href="/" className="brand" style={{color:textColor}}>Dosen Ku</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar className={isOpen ? "justify-content-end full-height" : "justify-content-end"}>
-          <Nav navbar>
-            <div className="d-md-none">
-              <NavItem>
-                <SearchBox close={toggle}/>
-              </NavItem>
-            </div>
-            {props.loggedIn && props.name &&
+        {!props.isMobile &&  
+          <Nav navbar className="navbar-width">          
+            {props.loggedIn && props.name && !showSearchBox && 
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Hello, {props.name}!
+                  Hi, {props.name}
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
@@ -70,7 +105,7 @@ function NavigationBar(props){
                 </DropdownMenu>
               </UncontrolledDropdown>
             }
-            {!props.loggedIn && 
+            {(!props.loggedIn && !showSearchBox) && 
             <React.Fragment>
               <NavItem>
                 <Popup
@@ -96,10 +131,74 @@ function NavigationBar(props){
               </NavItem>
             </React.Fragment>
             }
+            {showSearchBox &&   
+              <NavItem style={{width:'inherit'}}>
+                <SearchBox 
+                  close={() => {
+                    setIsOpen(false)
+                    setShowSearchBox(false)
+                  }}
+                  type={atLanding ? "dark" : "normal"}
+                />
+              </NavItem>
+            }
+            {!showSearchBox && 
             <NavItem>
-              <NavLink className={navlinkClassname}><Search style={{fontSize:'14px'}}/></NavLink>
-            </NavItem>
+              <ButtonBase onClick={() => setShowSearchBox(true)}><NavLink className={navlinkClassname}><Search style={{fontSize:'14px'}}/></NavLink></ButtonBase>
+            </NavItem>}
           </Nav>
+        }
+        {
+          props.isMobile &&
+          <Nav navbar className="navbar-width">          
+            <NavItem style={{paddingTop:'4rem', paddingBottom:'3rem'}}>
+              <Popup
+                  trigger={{
+                      component:DummyMobileSearchBox
+                  }}
+                  content={SearchBoxPopup}
+              />
+            </NavItem>
+            {props.loggedIn && props.name && !showSearchBox && 
+              <React.Fragment>
+                <NavItem>
+                  <NavLink className="navbar-full-width" style={{color:"black"}}>Hi, {props.name}</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink id="logoff" onClick={logout} className="navbar-full-width" style={{color:"black", backgroundColor:"#F1F1F1"}}>Log Out</NavLink>
+                </NavItem>
+              </React.Fragment>
+            }
+            {(!props.loggedIn && !showSearchBox) && 
+            <React.Fragment>
+              <NavItem>
+                <Popup
+                    trigger={{
+                        component:NavLink,
+                        id:'login',
+                        style:{color:"black", backgroundColor:"#F1F1F1"},
+                        className:"navbar-full-width"
+                    }}
+                    purpose="Login"
+                    content={LoginPopup}
+                />
+              </NavItem>
+              <NavItem>
+                <Popup
+                  trigger={{
+                      component:NavLink,
+                      id:'signup',
+                      style:{backgroundColor:"var(--hb-blue)", color:'white'},
+                      className:"navbar-full-width"
+                  }}
+                  purpose="Sign Up"
+                  content={SignUp}
+                />
+              </NavItem>
+            </React.Fragment>
+            }
+          </Nav>
+        }
         </Collapse>
       </Navbar>
     </div>
@@ -109,7 +208,8 @@ function NavigationBar(props){
 function mapStateToProps(state){
   return{
     loggedIn: state.loggedIn,
-    name: state.user? state.user.name : null
+    name: state.user? state.user.name : null,
+    isMobile: state.isMobile
   }
 }
 export default connect(mapStateToProps, {logout, getUser})(withRouter(NavigationBar));

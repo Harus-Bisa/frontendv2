@@ -2,7 +2,7 @@ import React from "react";
 import { FormGroup, Input, Label, Form, FormText } from "reactstrap";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
-import { signup, removeSuccess } from "../../redux/actions";
+import { signup, removeSuccess, setError, removeError } from "../../redux/actions";
 import { withRouter } from "react-router-dom";
 import Feedback from "../Feedback/Feedback";
 
@@ -15,15 +15,32 @@ function SignUpForm(props){
 
     const submit = async (event) =>{
         event.preventDefault();
-        const data = {
-            name: name,
-            email: email,
-            password: password
+        if(validEmail && validPassword && validName){
+            const data = {
+                name: name,
+                email: email,
+                password: password
+            }
+            props.removeError()
+            await props.signup(data)
         }
-        await props.signup(data)
+        else{
+            var errorMessage = "Tolong cek/isi berikut ini:\n"
+            if(!validName){
+                errorMessage += "- Isi nama Anda"
+            }
+            if(!validEmail){
+                errorMessage += "- Pastikan Anda menggunakan email sekolah anda"
+            }
+            if(!validPassword){
+                errorMessage += "- Pastikan password Anda benar"
+            }
+            props.setError(new Error(errorMessage))
+        }
+        
     }
 
-    var validEmail = email !==""
+    var validEmail = email !=="" && email.includes("ac.id")
     var validPassword = password === confirmPassword && password !== ""
     var validName = name !== ""
     if(props.success){
@@ -45,19 +62,18 @@ function SignUpForm(props){
                         value={name} 
                         onChange={(event) => setName(event.target.value)} 
                         required
-                        placeholder="Dosen Ku"
                     />
                 </FormGroup>
                 <FormGroup>
                     <Label>Email<span className="red">*</span></Label>
-                    <FormText style={{marginBottom:'0.25rem'}}>Untuk membuat Akun bersama kami, anda harus menggunakan email universitas anda</FormText>
+                    <p style={{marginBottom:'0.25rem'}}>Gunakan email universitas agar dapat memverifikasi status mahasiswa Anda</p>
                     <Input 
                         valid={validEmail} 
                         type="email" 
                         id="email" 
                         value={email} 
                         onChange={(event) => setEmail(event.target.value)} 
-                        placeholder={"userwah@sekolah.edu"} 
+                        placeholder={"dosenku@universitas.ac.id"} 
                         required
                     />
                 </FormGroup>
@@ -89,7 +105,7 @@ function SignUpForm(props){
                     />
                 </FormGroup>
                 <FormGroup>
-                    <FormText>Dengan melanjutkan, Anda menyetujui <a href="/info/termsandconditions">Syarat dan Ketentuan</a> Dosen Ku dan menyetujui <a href="/info/privacypolicy">Kebijakan Privasi</a> Dosen Ku</FormText>
+                    <p>Dengan melanjutkan, Anda menyetujui <a href="/info/termsandconditions">Syarat dan Ketentuan</a> Dosen Ku dan menyetujui <a href="/info/privacypolicy">Kebijakan Privasi</a> Dosen Ku</p>
                 </FormGroup>
                 {props.error && <Feedback color={"danger"} message={props.error.message}/>}
                 <FormGroup>
@@ -105,4 +121,4 @@ function mapStateToProps(state){
         success: state.success
     }
 }
-export default connect(mapStateToProps, {signup, removeSuccess})(withRouter(SignUpForm));
+export default connect(mapStateToProps, {signup, removeSuccess, removeError, setError})(withRouter(SignUpForm));

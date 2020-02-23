@@ -10,6 +10,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 html, body{
@@ -17,7 +18,7 @@ html, body{
   height: 100%;
   color: #40444D;
 }
-h1, h2, h3, h4, h5, p, a, input, span, label {
+h1, h2, h3, h4, h5, p, a, input, span, label, button {
   font-family: 'Poppins', sans-serif !important;
 }
 
@@ -108,10 +109,21 @@ label{
   width:100%;
 }
 
+.text-button{
+  text-transform: none !important;
+  font-size: inherit !important;
+  min-width: auto !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+  padding-top: inherit !important;
+  padding-bottom: inherit !important;
+}
 
 .button{
   text-transform: none !important;
   letter-spacing: normal !important;
+  font-size: inherit !important;
 }
 
 .option-button{
@@ -122,6 +134,7 @@ label{
 .button-group-container{
   width: 100%;
   display: flex;
+  font-family: 'Poppins', sans-serif !important;
 }
 .button-group, .button-group:active, .button-group:focus, .button-group:not(:disabled):not(.disabled):active, .button-group:hover{
   border-radius: 0;
@@ -142,7 +155,7 @@ label{
   border: 1px solid var(--hb-blue) !important;
   box-sizing: border-box !important;
   font-weight: bold !important;
-  font-size: 12px !important;
+  font-size: 14px !important;
   line-height: 18px !important;
   display: flex !important;
   align-items: center !important;
@@ -169,6 +182,7 @@ label{
   border-color: #C4C4C4 !important;
   box-sizing: border-box;
   border-radius: 0px !important;
+  font-family: 'Poppins', sans-serif !important;
   /* border: 0.5px solid #C4C4C4 !important; */
 }
 
@@ -177,6 +191,11 @@ label{
   border-color: #00ACF9 !important;
   box-shadow: 0px 0px 4px rgba(0, 172, 249, 0.45);
 }
+
+.MuiInputBase-root, .MuiMenuItem-root{
+  font-family: 'Poppins', sans-serif !important;
+  /* font-size: 14px !important; */
+}
 /* NAV */
 .navbar{
   background-color:transparent;
@@ -184,6 +203,10 @@ label{
   top:0;
   z-index:999;
   width:100%;
+}
+.navbar-width{
+  width: 75%;
+  justify-content: flex-end;
 }
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
   color:black;
@@ -252,10 +275,10 @@ label{
   color: #979797;
 }
 .large-rating svg{
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 .footer-adjust{
-  padding-bottom: 160px;
+  padding-bottom: 170px;
 }
 .brand{
   font-family: Poppins;
@@ -271,7 +294,7 @@ label{
 
 .page-header{
   background-color: #F3FBFF;
-  padding: 2rem 0rem;
+  padding: 1rem 0rem;
 }
 .MuiDivider-vertical{
   height: auto !important;
@@ -280,18 +303,36 @@ label{
   filter: blur(4px);
 }
 .full-height{
-  height:100vh;
+  height:100vh !important;
+  transition: height 0.5s;
 }
+
 /* SM */
 @media (max-width: 767.98px) {
   .footer-adjust{
-    padding-bottom: 179px;
+    padding-bottom: 220px;
   }
   h1{
     font-size: 36px;
   }
   h2{
     font-size: 28px;
+  }
+  .navbar-width{
+    width: inherit;
+  }
+  .navbar-full-width{
+    margin-right: -1.5rem;
+    margin-left: -1.5rem;
+    padding: 0.75rem 0;
+  }
+  .nav-link{
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .navbar-nav{
+    text-align: center;
   }
   
 }
@@ -300,14 +341,16 @@ label{
   h1{
     font-size: 36px;
   }
+  label{
+    font-size: 18px;
+  }
   .footer-adjust{
-    padding-bottom: 250px;
+    padding-bottom: 230px;
   }
 }
 
 /*LG*/
 @media (max-width: 1199.98px) {
-  
 }
 
 

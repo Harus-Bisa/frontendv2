@@ -45,6 +45,13 @@ function RevieweeSearch(props){
             renderInput={params => (
                 <TextField
                     {...params}
+                    onKeyPress={(event) => {
+                        if(event.key === "Enter"){
+                            if (props.submit){
+                                props.submit(event);
+                            }
+                        }
+                    }}
                     placeholder="Ketik Nama Dosen Anda"
                     fullWidth
                     value={props.reviewee}
@@ -58,7 +65,7 @@ function RevieweeSearch(props){
                         ),
                         startAdornment:(
                             <React.Fragment>
-                                <Person/>
+                                <Person style={{color:"#40444D"}}/>
                                 {params.InputProps.startAdornment}
                             </React.Fragment>
                         )

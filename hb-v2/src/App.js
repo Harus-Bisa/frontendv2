@@ -5,8 +5,19 @@ import {connect} from "react-redux";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./css/index.css";
 import NavigationBar from './components/NavigationBar/NavigationBar';
+import { changeIsMobile } from './redux/actions';
 
-function App() {
+function App(props) {
+  const changeIsMobile = props.changeIsMobile
+  React.useEffect(() => {
+    const handleResize = () => {
+      changeIsMobile(window.innerWidth < 768)
+    }
+    window.addEventListener("resize", handleResize)
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [changeIsMobile])
   return (
     <Router>
       <NavigationBar/>
@@ -15,4 +26,4 @@ function App() {
   );
 }
 
-export default connect()(App);
+export default connect(null, {changeIsMobile})(App);

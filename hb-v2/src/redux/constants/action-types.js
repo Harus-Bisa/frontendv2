@@ -6,11 +6,13 @@ export const SORT_REVIEWEES = "SORT_REVIEWEES";
 export const FIND_SCHOOLS = "FIND_SCHOOLS";
 export const CLEAR_SCHOOLS = "CLEAR_SCHOOLS";
 export const LOAD_SCHOOLS = "LOAD_SCHOOLS";
+export const GET_TOP_SCHOOLS = "GET_TOP_SCHOOLS";
 
 export const GET_REVIEWS = "GET_REVIEWS";
 export const ADD_REVIEW = "ADD_REVIEW";
 export const VOTE = "VOTE"
 export const REPORT_INAPPROPRIATE_REVIEW = "REPORT_INAPPROPRIATE_REVIEW";
+export const GET_RECENT_REVIEWS = "GET_RECENT_REVIEWS";
 
 export const RESEND_VERIFICATION = "RESEND_VERIFICATION";
 
@@ -24,4 +26,6 @@ export const LOGOUT = "LOGOUT";
 
 export const SET_LOADING = "SET_LOADING";
 export const REMOVE_LOADING = "REMOVE_LOADING";
+
+export const CHANGE_IS_MOBILE = "CHANGE_IS_MOBILE";
 
