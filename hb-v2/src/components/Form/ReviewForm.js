@@ -334,7 +334,7 @@ function ReviewForm(props){
                                                     icon={<ThumbUp/>}
                                                     emptyIcon={<ThumbUpOutlined/>}
                                                     size="large"
-                                                    onChangeActive={(event, newHover) => {
+                                                    onChangeActive={props.isMobile ? () =>{} : (event, newHover) => {
                                                         setOverallHover(newHover);
                                                     }}
                                                 />
@@ -360,7 +360,7 @@ function ReviewForm(props){
                                                     onChange={(event, value) => setRecommendationRating(value)}
                                                     icon={<Check/>}
                                                     emptyIcon={<CheckOutlined/>}
-                                                    onChangeActive={(event, newHover) => {
+                                                    onChangeActive={props.isMobile ? () =>{} : (event, newHover) => {
                                                         setRecommendationHover(newHover);
                                                     }}
                                                 />
@@ -386,7 +386,10 @@ function ReviewForm(props){
                                                     onChange={(event, value) => setDifficultyRating(value)}
                                                     icon={<LocalCafe/>}
                                                     emptyIcon={<LocalCafeOutlined/>}
-                                                    onChangeActive={(event, newHover) => {
+                                                    // onChangeActive={(event, newHover) => {
+                                                    //     setDifficultyHover(newHover);
+                                                    // }}
+                                                    onChangeActive={props.isMobile ? () =>{} : (event, newHover) => {
                                                         setDifficultyHover(newHover);
                                                     }}
                                                 />
@@ -575,7 +578,8 @@ function mapStateToProps(state){
         professor: state.professor,
         loggedIn: state.loggedIn,
         error: state.error,
-        schools: state.schools
+        schools: state.schools,
+        isMobile: state.isMobile
     }
 }
 export default connect(mapStateToProps,{addReview, getReviews, setError, removeError,findSchools})(ReviewForm);
