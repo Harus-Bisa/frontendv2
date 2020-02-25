@@ -386,9 +386,6 @@ function ReviewForm(props){
                                                     onChange={(event, value) => setDifficultyRating(value)}
                                                     icon={<LocalCafe/>}
                                                     emptyIcon={<LocalCafeOutlined/>}
-                                                    // onChangeActive={(event, newHover) => {
-                                                    //     setDifficultyHover(newHover);
-                                                    // }}
                                                     onChangeActive={props.isMobile ? () =>{} : (event, newHover) => {
                                                         setDifficultyHover(newHover);
                                                     }}
