@@ -39,7 +39,7 @@
   background-color: #40444D !important;
 }
 .search-box .search-input-wrapper{
-  padding: 1rem .75rem !important;
+  padding: 0.5rem .75rem !important;
 }
 
 .search-box .MuiInput-underline::before, .search-box .MuiInput-underline::after, .search-box .MuiInput-underline:hover:not(.Mui-disabled):before, .search-box .MuiInput-underline:focus{
@@ -52,10 +52,6 @@
 
 /*SM*/
 @media (max-width: 767px){
-  .search-box .search-button{
-    /* border-top-right-radius: 0!important;
-    border-bottom-left-radius: 10px!important; */
-  }
   .search-box .left-border{
     border-left: 0px solid;
   }
@@ -74,9 +70,6 @@
 
 /*MD*/
 @media (min-width: 768px) and (max-width: 991.98px){
-  .search-box .search-input-wrapper{
-    padding: .75rem !important;
-  }  
 }
 @media (min-width: 992px) {
   .search-box .search-input-wrapper input{
@@ -90,4 +83,12 @@
   padding-top: 0.5rem !important;
   padding-bottom: 0.5rem !important;
   justify-content: left;
+}
+
+.nav-item .search-box, .nav-item .search-box div, .nav-item .search-box form, .nav-item .search-box input{
+  height: inherit;
+  font-size: 14px;
+}
+.nav-item .search-box{
+  margin: 0;
 }

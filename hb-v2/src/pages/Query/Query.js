@@ -73,7 +73,7 @@ function Query(props){
             <div className="container content">
                 <div className="row">
                     <div className="col-lg-3">
-                        {props.reviewees.length !== 0 && 
+                        {!props.isMobile && 
                         <React.Fragment>
                             <h4>Urutkan berdasarkan</h4>
                             <RadioGroup aria-label="sortBy" name="sortBy" value={sortBy} onChange={handleChange}>
@@ -83,16 +83,16 @@ function Query(props){
                             </RadioGroup>
                         </React.Fragment>
                         }
-                        {/* {props.isMobile && 
-                        <FormControl>
+                        {props.isMobile && 
+                        <FormControl style={{margin:'0 0 15px 0', width:'100%'}}>
                             <InputLabel>Urutkan berdasarkan</InputLabel>
-                            <Select value={sortBy} onChange={handleChange}>
+                            <Select fullWidth value={sortBy} onChange={handleChange}>
                                 <MenuItem value={NAME}>Nama</MenuItem>
                                 <MenuItem value={POPULARITY}>Paling Populer</MenuItem>
                                 <MenuItem value={RATING}>Penilaian Tertinggi</MenuItem>
                             </Select>
                         </FormControl>
-                        } */}
+                        }
                     </div>
                     <Divider orientation={"vertical"}/>
                     <div className="col-lg-8">

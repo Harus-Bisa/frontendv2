@@ -132,7 +132,7 @@ function NavigationBar(props){
             </React.Fragment>
             }
             {showSearchBox &&   
-              <NavItem style={{width:'inherit'}}>
+              <NavItem style={{width:'100%'}}>
                 <SearchBox 
                   close={() => {
                     setIsOpen(false)

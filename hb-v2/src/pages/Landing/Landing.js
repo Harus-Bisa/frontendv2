@@ -53,32 +53,36 @@ function Landing(props){
     return(
         <div className='page-container landing-page'>
             <div className="container footer-adjust">
-                <header className="flex">
-                    <div className="margin-auto">
-                        <h1>Review Dosen Anda Sekarang</h1>
-                        {!props.isMobile && 
-                        <React.Fragment>
-                            <SearchBox school={school}/>
-                            {props.topSchools && 
-                            <div className="flex" style={{textAlign:'center'}}>
-                                <h3 style={{fontWeight:'normal', fontSize:"24px"}}><span style={{fontWeight:"600"}}>Pencarian Populer: </span><Button style={{color: "white"}} className="text-button" onClick={() => setSchool(topSchools[0])}>{topSchools[0]},</Button><Button style={{color: "white"}} className="text-button" onClick={() => setSchool(topSchools[1])}>{topSchools[1]}</Button></h3>
+                <div className="row justify-content-center">
+                    <div className="col-lg-10">
+                        <header className="flex">
+                            <div className="margin-auto">
+                                <h1>Review Dosen Anda Sekarang</h1>
+                                {!props.isMobile && 
+                                <React.Fragment>
+                                    <SearchBox school={school}/>
+                                    {props.topSchools && 
+                                    <div className="flex" style={{textAlign:'center'}}>
+                                        <h3 style={{fontWeight:'normal', fontSize:"20px"}}><span style={{fontWeight:"600"}}>Pencarian Populer: </span><Button style={{color: "white"}} className="text-button" onClick={() => setSchool(topSchools[0])}>{topSchools[0]},</Button><Button style={{color: "white"}} className="text-button" onClick={() => setSchool(topSchools[1])}>{topSchools[1]}</Button></h3>
+                                    </div>
+                                    }
+                                </React.Fragment>
+                                }
+                                {props.isMobile &&
+                                    <Popup
+                                        trigger={{
+                                            component:DummyMobileSearchBox
+                                        }}
+                                        content={SearchBoxPopup}
+                                    />
+                                }
                             </div>
-                            }
-                        </React.Fragment>
-                        }
-                        {props.isMobile &&
-                            <Popup
-                                trigger={{
-                                    component:DummyMobileSearchBox
-                                }}
-                                content={SearchBoxPopup}
-                            />
-                        }
-                    </div>
-                </header>
-                <div className="row justify-content-center" style={{height:"50vh"}}>
-                    <div className="col-lg-8 margin-auto">
-                        {/* <img src={newestReview} alt={"newestReview"} style={{width:"100%"}}/> */}
+                        </header>
+                        <div className="row justify-content-center" style={{height:"50vh"}}>
+                            <div className="col-lg-8 margin-auto">
+                                {/* <img src={newestReview} alt={"newestReview"} style={{width:"100%"}}/> */}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
