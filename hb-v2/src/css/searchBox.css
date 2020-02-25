@@ -84,3 +84,11 @@
   padding-bottom: 0.5rem !important;
   justify-content: left;
 }
+
+.nav-item .search-box, .nav-item .search-box div, .nav-item .search-box form, .nav-item .search-box input{
+  height: inherit;
+  font-size: 14px;
+}
+.nav-item .search-box{
+  margin: 0;
+}

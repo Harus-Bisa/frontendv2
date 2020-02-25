@@ -84,7 +84,7 @@ function SearchBox(props){
         )
     }
     return(
-        <div>
+        <div style={{height:'100%'}}>
             <div className="search-box">
                 <form onSubmit={find}>
                     <div className="row no-gutters">
