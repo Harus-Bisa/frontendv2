@@ -6,7 +6,7 @@ import { sortName, sortPopularity, sortRating } from "./revieweeSortFunctions";
 const initialState ={
     loggedIn: services.isLoggedIn(),
     loadingCount:0,
-    loading: true,
+    loading: false,
     reviewees:[],
     loadReviewees: false,
     pageReviewees: [],

@@ -300,6 +300,7 @@ function Review(props){
             </div>
         )
     }
+    return(<div></div>)
 }
 
 function mapStateToProps(state){
