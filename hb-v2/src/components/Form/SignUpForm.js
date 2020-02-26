@@ -1,6 +1,6 @@
 import React from "react";
 import { FormGroup, Input, Label, Form, FormText } from "reactstrap";
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 import { connect } from "react-redux";
 import { signup, removeSuccess, setError, removeError } from "../../redux/actions";
 import { withRouter } from "react-router-dom";
@@ -108,8 +108,9 @@ function SignUpForm(props){
                     <p>Dengan melanjutkan, Anda menyetujui <a href="/info/termsandconditions">Syarat dan Ketentuan</a> Dosen Ku dan menyetujui <a href="/info/privacypolicy">Kebijakan Privasi</a> Dosen Ku</p>
                 </FormGroup>
                 {props.error && <Feedback color={"danger"} message={props.error.message}/>}
-                <FormGroup>
-                    <Button type="submit" className="contrast-button" fullWidth>Daftar</Button>
+                <FormGroup style={{position:'relative'}}>
+                    <Button type="submit" className="contrast-button" fullWidth disabled={props.loading}>Daftar</Button>
+                    {props.loading && <CircularProgress size={14} style={{position:'absolute', top:'50%', left:"50%"}}/>}
                 </FormGroup>
             </Form>
         </div>
@@ -118,7 +119,8 @@ function SignUpForm(props){
 function mapStateToProps(state){
     return{
         error: state.error,
-        success: state.success
+        success: state.success,
+        loading: state.loading
     }
 }
 export default connect(mapStateToProps, {signup, removeSuccess, removeError, setError})(withRouter(SignUpForm));

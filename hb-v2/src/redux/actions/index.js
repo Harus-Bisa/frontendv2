@@ -4,26 +4,32 @@ import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_
 
 export function signup(newUserData){
     return async function(dispatch){
+        dispatch(setLoading())
         dispatch(removeSuccess())
         return await services.signup(newUserData)
         .then(async response => {
             await dispatch(setSuccess())
             dispatch(removeError())
+            dispatch(removeLoading())
         })
         .catch(error =>{
             dispatch(setError(error))
+            dispatch(removeLoading())
         })
     }
 }
 export function login(email, password){
     return async function(dispatch){
         dispatch(removeError())
+        dispatch(setLoading())
         return await services.login(email, password)
         .then(async userId => {
-            await dispatch(getUser(userId))        
+            await dispatch(getUser(userId))    
+            dispatch(removeLoading())    
         })
         .catch(error =>{
             dispatch(setError(error))
+            dispatch(removeLoading())  
         })
     }
 }
