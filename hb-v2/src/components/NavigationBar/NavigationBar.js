@@ -73,13 +73,13 @@ function NavigationBar(props){
     props.history.push("/")
   }
   const loggedIn = props.loggedIn
-  const name = props.name
+  const email = props.email
   const getUser = props.getUser
   React.useEffect(() =>{
-    if(loggedIn && !name){
+    if(loggedIn && !email){
       getUser(localStorage.getItem("userId"))
     }
-  }, [loggedIn, name, getUser])
+  }, [loggedIn, email, getUser])
 
   const atLanding = props.location.pathname === "/"
   const navlinkClassname = atLanding ? "contrast-navlink dark-navlink navlink" : "contrast-navlink navlink"
@@ -92,11 +92,11 @@ function NavigationBar(props){
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar className={isOpen ? "justify-content-end full-height" : "justify-content-end"}>
         {!props.isMobile &&  
-          <Nav navbar className="navbar-width">          
-            {props.loggedIn && props.name && !showSearchBox && 
+          <Nav navbar className="navbar-width" style={{height:"36px"}}>          
+            {props.loggedIn && props.email && !showSearchBox && 
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Hi, {props.name}
+                  {props.email}
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
@@ -159,10 +159,10 @@ function NavigationBar(props){
                   content={SearchBoxPopup}
               />
             </NavItem>
-            {props.loggedIn && props.name && !showSearchBox && 
+            {props.loggedIn && props.email && !showSearchBox && 
               <React.Fragment>
                 <NavItem>
-                  <NavLink className="navbar-full-width" style={{color:"black"}}>Hi, {props.name}</NavLink>
+                  <NavLink className="navbar-full-width" style={{color:"black"}}>{props.email}</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink id="logoff" onClick={logout} className="navbar-full-width" style={{color:"black", backgroundColor:"#F1F1F1"}}>Log Out</NavLink>
@@ -208,7 +208,7 @@ function NavigationBar(props){
 function mapStateToProps(state){
   return{
     loggedIn: state.loggedIn,
-    name: state.user? state.user.name : null,
+    email: state.user? state.user.email : null,
     isMobile: state.isMobile
   }
 }
