@@ -53,7 +53,7 @@ function SignUpForm(props){
     return(
         <div className="container content" id="sign-up-form">
             <Form onSubmit={submit}>
-                <FormGroup>
+                {/* <FormGroup>
                     <Label>Nama Lengkap<span className="red">*</span></Label>
                     <Input 
                         valid={validName} 
@@ -63,7 +63,7 @@ function SignUpForm(props){
                         onChange={(event) => setName(event.target.value)} 
                         required
                     />
-                </FormGroup>
+                </FormGroup> */}
                 <FormGroup>
                     <Label>Email<span className="red">*</span></Label>
                     <p style={{marginBottom:'0.25rem'}}>Gunakan email universitas agar dapat memverifikasi status mahasiswa Anda</p>
