@@ -20,6 +20,7 @@ import { overallRatingLabels, recommendationRatingLabels, difficultyRatingLabels
 import "../../css/review.css";
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import ToggleButton from '@material-ui/lab/ToggleButton';
+import { Prompt } from "react-router-dom";
 
 const Icon = withStyles({
     root: {
@@ -277,6 +278,10 @@ function ReviewForm(props){
                         </div>
                         {props.error && <Feedback color={"danger"} message={props.error.message}/>}
                         <form onSubmit={submit} className="review-form"> 
+                            <Prompt
+                                when={!submitted}
+                                message={"Are you sure?"}
+                            />
                             {!existingProf && 
                             <React.Fragment>
                                 <FormGroup>
