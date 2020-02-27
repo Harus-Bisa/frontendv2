@@ -280,7 +280,7 @@ function ReviewForm(props){
                         <form onSubmit={submit} className="review-form"> 
                             <Prompt
                                 when={!submitted}
-                                message={"Are you sure?"}
+                                message={"Apakah anda yakin? Kami tidak menyimpan data yang sudah terisi."}
                             />
                             {!existingProf && 
                             <React.Fragment>

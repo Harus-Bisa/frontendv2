@@ -3,7 +3,7 @@ import { FormGroup, Input, Label, Form, FormText } from "reactstrap";
 import { Button, CircularProgress } from "@material-ui/core";
 import { connect } from "react-redux";
 import { signup, removeSuccess, setError, removeError } from "../../redux/actions";
-import { withRouter } from "react-router-dom";
+import { withRouter, Prompt } from "react-router-dom";
 import Feedback from "../Feedback/Feedback";
 
 function SignUpForm(props){
@@ -52,6 +52,10 @@ function SignUpForm(props){
     }  
     return(
         <div className="container content" id="sign-up-form">
+            <Prompt
+                when={!validEmail && !validPassword && !validName}
+                message={"Apakah anda yakin? Kami tidak menyimpan data yang sudah terisi."}
+            />
             <Form onSubmit={submit}>
                 {/* <FormGroup>
                     <Label>Nama Lengkap<span className="red">*</span></Label>
