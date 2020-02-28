@@ -20,7 +20,7 @@ import { overallRatingLabels, recommendationRatingLabels, difficultyRatingLabels
 import "../../css/review.css";
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import ToggleButton from '@material-ui/lab/ToggleButton';
-import { Prompt } from "react-router-dom";
+import { Prompt, Link } from "react-router-dom";
 
 const Icon = withStyles({
     root: {
@@ -264,7 +264,7 @@ function ReviewForm(props){
                                 <p className="italic">{profSchool}</p>
                             </div>  
                             <div className="col-2" style={{textAlign:'right'}}>
-                                <a href={"/review/new/Dosen"}>Ganti Dosen?</a>
+                                <Link to={"/review/new/Dosen"}>Ganti Dosen?</Link>
                             </div>
                         </div>
                     </div>
@@ -559,7 +559,7 @@ function ReviewForm(props){
                                         <BlueCheckbox checked={agree} onChange={() => setAgree(!agree)}/>
                                     </div>
                                     <div className="col">
-                                        <p>Dengan ini saya menyatakan bahwa review ini dibuat berdasarkan pengalaman saya dan benar-benar opini pribadi saya tentang dosen ini, dan saya tidak menerima tawaran insentif maupun pembayaran apapun dari dosen ini untuk menulis review ini. Saya memahami bahwa Dosenku sama sekali tidak mentoleransi ulasan palsu Dengan melanjutkan, Anda menyetujui <a href="/info/termsandconditions">Syarat dan Ketentuan</a> dan <a href="/info/privacypolicy">Kebijakan Privasi</a> Dosen Ku<span className="red">*</span></p>
+                                        <p>Dengan ini saya menyatakan bahwa review ini dibuat berdasarkan pengalaman saya dan benar-benar opini pribadi saya tentang dosen ini, dan saya tidak menerima tawaran insentif maupun pembayaran apapun dari dosen ini untuk menulis review ini. Saya memahami bahwa Dosenku sama sekali tidak mentoleransi ulasan palsu Dengan melanjutkan, Anda menyetujui <Link to="/info/termsandconditions">Syarat dan Ketentuan</Link> dan <Link to="/info/privacypolicy">Kebijakan Privasi</Link> Dosen Ku<span className="red">*</span></p>
                                     </div>
                                 </div>
                             </FormGroup>

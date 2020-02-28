@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from '@material-ui/core';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { StyledRating } from "../Rating/StyledRating";
 import { ThumbUp, ThumbUpOutlined } from "@material-ui/icons";
 
@@ -12,7 +12,7 @@ export default function RevieweeCard(props){
             <div className="reviewee-card-content">
                 <div className="row justify-content-center no-gutters">
                     <div className="col-md-8 col-6">
-                        <a href={"/review/"+reviewee.revieweeId}><h3>{reviewee.name}</h3></a>
+                        <Link to={"/review/"+reviewee.revieweeId}><h3>{reviewee.name}</h3></Link>
                         <p>{reviewee.school}</p>
                     </div>
                     <div className="col-md-3 col-6 flex">

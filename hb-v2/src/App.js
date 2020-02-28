@@ -18,6 +18,7 @@ function App(props) {
       window.removeEventListener("resize", handleResize)
     }
   }, [changeIsMobile])
+
   return (
     <Router>
       <NavigationBar/>

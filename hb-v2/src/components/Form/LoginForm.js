@@ -3,7 +3,7 @@ import { FormGroup, Input, Label, Form } from "reactstrap";
 import { Button, CircularProgress } from "@material-ui/core";
 import { connect } from "react-redux";
 import { login } from "../../redux/actions";
-import { withRouter, Prompt } from "react-router-dom";
+import { withRouter, Prompt, Link } from "react-router-dom";
 import Feedback from "../Feedback/Feedback";
 
 function LoginForm(props){
@@ -33,10 +33,6 @@ function LoginForm(props){
     return(
         <div className="container content">
             {props.error && <Feedback color={"danger"} message={props.error.message}/>}
-            <Prompt
-                when={!email && !password}
-                message={"Apakah anda yakin? Kami tidak menyimpan data yang sudah terisi."}
-            />
             <Form onSubmit={submit}>
                 <FormGroup>
                     <Label>Email<span className="red">*</span></Label>
@@ -54,7 +50,7 @@ function LoginForm(props){
                     <Input type="password" id="password" value={password} onChange={(event) => setPassword(event.target.value)} required/>
                 </FormGroup>
                 <FormGroup>
-                    <p>Dengan masuk, Anda setuju dengan <a href="/info/termsandconditions">Syarat dan Ketentuan</a> dan <a href="/info/privacypolicy">Kebijakan Privasi</a>.</p>
+                    <p>Dengan masuk, Anda setuju dengan <Link to="/info/termsandconditions">Syarat dan Ketentuan</Link> dan <Link to="/info/privacypolicy">Kebijakan Privasi</Link>.</p>
                 </FormGroup>
                 <FormGroup style={{position:'relative'}}>
                     <Button type="submit" className="contrast-button" fullWidth disabled={props.loading}>Login</Button>

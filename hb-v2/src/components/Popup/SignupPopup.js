@@ -1,6 +1,7 @@
 import React from "react";
 import PopupForm from "./PopupForm";
 import SignUpForm from "../Form/SignUpForm";
+import { Link } from "react-router-dom";
 
 export default function SignUpPopup(props){
     if(props.collapseNavbar){

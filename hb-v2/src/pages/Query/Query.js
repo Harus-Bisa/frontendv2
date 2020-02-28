@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { findReviewees, sortReviewees } from "../../redux/actions";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { Divider, RadioGroup, Radio, FormControlLabel, withStyles, Select, MenuItem, InputLabel, FormControl } from "@material-ui/core";
 import RevieweeCard from "../../components/Card/RevieweeCard";
 import SearchBox from "../../components/SearchBox/SearchBox";
@@ -103,7 +103,7 @@ function Query(props){
                                 {props.found === false && 
                                     <div>
                                         <p style={{fontWeight:'bold'}}>Dosen yang anda cari tidak ditemukan dalam database kami.</p>
-                                        <a href={"/review/new/"+(revieweeName ? revieweeName : "Dosen")}>Jadilah penulis pertama!</a>
+                                        <Link to={"/review/new/"+(revieweeName ? revieweeName : "Dosen")}>Jadilah penulis pertama!</Link>
                                     </div>
                                 } 
                             </div>
