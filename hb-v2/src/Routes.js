@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, withRouter} from "react-router-dom";
+import { Route, Switch, withRouter, useHistory} from "react-router-dom";
 import Landing from './pages/Landing/Landing';
 import Review from './pages/Review/Review';
 import ReviewForm from './components/Form/ReviewForm';
@@ -14,6 +14,24 @@ import PrivacyPolicy from './pages/Info/PrivacyPolicy';
 import CommunityGuidelines from './pages/Info/CommunityGuidelines';
 
 function Routes() {
+    const history = useHistory()
+    const [ locationKeys, setLocationKeys ] = React.useState([])
+
+    React.useEffect(() => {
+    return history.listen(location => {
+        if (history.action === 'PUSH') {
+            setLocationKeys([ location.key ])
+        }
+
+        if (history.action === 'POP') {
+        if (locationKeys[1] === location.key) {
+            setLocationKeys(([ _, ...keys ]) => keys)
+        } else {
+            setLocationKeys((keys) => [ location.key, ...keys ])
+        }
+        }
+    })
+    }, [ locationKeys, ])
     return(
         <Switch>
             <Route exact path="/" component={Landing}/>
