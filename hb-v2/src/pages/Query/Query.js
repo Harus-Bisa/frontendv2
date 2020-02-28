@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { findReviewees, sortReviewees } from "../../redux/actions";
+import { findReviewees, sortReviewees, clearReviewees } from "../../redux/actions";
 import { useLocation, Link } from "react-router-dom";
 import { Divider, RadioGroup, Radio, FormControlLabel, withStyles, Select, MenuItem, InputLabel, FormControl } from "@material-ui/core";
 import RevieweeCard from "../../components/Card/RevieweeCard";
@@ -35,10 +35,14 @@ function Query(props){
     const revieweeName = query.get('name');
     const revieweeSchool = query.get('school');
     const findReviewees = props.findReviewees
+    const clearReviewees = props.clearReviewees;
 
     React.useEffect(() =>{
         findReviewees(revieweeName, revieweeSchool, "page")
-    },[findReviewees, revieweeName, revieweeSchool])
+        return () =>{
+            clearReviewees()
+        }
+    },[findReviewees, revieweeName, revieweeSchool, clearReviewees])
 
     const renderQueryResults = () =>{
         var queryResultsComponent = []
@@ -123,4 +127,4 @@ function mapStateToProps(state){
         isMobile: state.isMobile
     }
 }
-export default connect(mapStateToProps,{findReviewees, sortReviewees})(Query);
+export default connect(mapStateToProps,{findReviewees, sortReviewees, clearReviewees})(Query);

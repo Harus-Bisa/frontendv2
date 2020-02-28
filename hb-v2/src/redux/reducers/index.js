@@ -62,7 +62,8 @@ export default function rootReducer(state = initialState, action){
     }
     if(action.type === CLEAR_REVIEWEES){
         return Object.assign({}, state, {
-            reviewees: []
+            reviewees: [],
+            pageReviewees:[]
         })
     }
     if(action.type === LOAD_SCHOOLS){
