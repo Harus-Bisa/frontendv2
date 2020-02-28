@@ -94,6 +94,7 @@ function ReviewForm(props){
     const schools = props.schools
     const findSchools = props.findSchools
     React.useEffect(() =>{
+        window.scroll(0,0)
         if(existingProf){
             if(!professor){
                 getReviews(revieweeId)
