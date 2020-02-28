@@ -88,6 +88,8 @@
 .nav-item .search-box, .nav-item .search-box div, .nav-item .search-box form, .nav-item .search-box input{
   height: inherit;
   font-size: 14px;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 .nav-item .search-box{
   margin: 0;

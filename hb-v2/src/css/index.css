@@ -183,10 +183,15 @@ label{
   box-sizing: border-box;
   border-radius: 0px !important;
   font-family: 'Poppins', sans-serif !important;
+  padding: .375rem .75rem;
   /* border: 0.5px solid #C4C4C4 !important; */
 }
+.MuiAutocomplete-inputRoot{
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
 
-.form-control:focus{
+.form-control:focus,  .PrivateNotchedOutline-root-102:focus , .MuiOutlinedInput-notchedOutline:focus{
   outline-color: var(--hb-blue);
   border-color: #00ACF9 !important;
   box-shadow: 0px 0px 4px rgba(0, 172, 249, 0.45);
