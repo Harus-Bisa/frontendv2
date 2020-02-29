@@ -18,7 +18,7 @@ import { logout, getUser } from '../../redux/actions';
 import Popup from '../Popup/Popup';
 import LoginPopup from '../Popup/LoginPopup';
 import SignUpPopup from '../Popup/SignupPopup';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { Search } from '@material-ui/icons';
 import { ButtonBase } from '@material-ui/core';
 import SearchBoxPopup from '../Popup/SearchBoxPopup';
@@ -83,12 +83,12 @@ function NavigationBar(props){
 
   const atLanding = props.location.pathname === "/"
   const navlinkClassname = atLanding ? "contrast-navlink dark-navlink navlink" : "contrast-navlink navlink"
-  const textColor = isOpen || !atLanding || navBackground ? "inherit":"white";
+  const textColor = isOpen || !atLanding || navBackground ? "rgba(0,0,0,.9)":"white";
   
   return(
     <div>
       <Navbar light expand="md" className={isOpen ? "navbar full-height" : "navbar"} style={{backgroundColor:(isOpen || !atLanding || navBackground  ? "white" : "transparent"), height:"75px"}}>
-        <NavbarBrand href="/" className="brand" style={{color:textColor}}>Dosen Ku</NavbarBrand>
+        <Link to="/" style={{marginBottom:'0'}}><NavbarBrand className="brand" style={{color:textColor}}>Dosen Ku</NavbarBrand></Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar className={isOpen ? "justify-content-end full-height" : "justify-content-end"}>
         {!props.isMobile &&  

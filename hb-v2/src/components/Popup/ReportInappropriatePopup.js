@@ -2,6 +2,7 @@ import React from "react";
 import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import ReportInappropriateForm from "../Form/ReportInappropriateForm";
+import { Link } from "react-router-dom";
 
 export default function ReportInappropriatePopup(props){
     const [expanded, setExpanded] = React.useState(false);
@@ -13,7 +14,7 @@ export default function ReportInappropriatePopup(props){
         <div>
             <div className="content" style={{ marginBottom:'-15px'}}>
                 <h3>Baca sebelum laporkan</h3>
-                <p>Silakan merujuk pada <a href="/info/communityguidelines">Peraturan Konten</a> dan <a href="/info/termsandconditions">Syarat dan Ketentuan</a> kami dan beri tahu kami mengapa menurut Anda konten yang Anda laporkan melanggar pedoman ini:</p>
+                <p>Silakan merujuk pada <Link to="/info/communityguidelines">Peraturan Konten</Link> dan <Link to="/info/termsandconditions">Syarat dan Ketentuan</Link> kami dan beri tahu kami mengapa menurut Anda konten yang Anda laporkan melanggar pedoman ini:</p>
             </div>
             <div>
                 <div className="content" style={{paddingBottom:0}}>

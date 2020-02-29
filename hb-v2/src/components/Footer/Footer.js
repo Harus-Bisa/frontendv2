@@ -3,6 +3,7 @@ import { Divider, IconButton } from "@material-ui/core";
 import "../../css/footer.css";
 import { IoLogoFacebook, IoLogoTwitter } from 'react-icons/io';
 import { AiFillInstagram } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 export default function Footer(){
     return(
@@ -29,23 +30,23 @@ export default function Footer(){
                     </div>
                     <div className="row links no-gutters justify-content-center">
                         <div className="col-3 col-lg-2 flex">
-                            <a href="/help">Bantuan</a>
+                            <Link to="/help">Bantuan</Link>
                         </div>
                         <Divider orientation="vertical"/>
                         <div className="col-4 col-lg-2 flex">
-                            <a href="/about">Tentang Kami</a>
+                            <Link to="/about">Tentang Kami</Link>
                         </div>
                         <Divider orientation="vertical"/>
                         <div className="col-4 col-lg-2 flex">
-                            <a href="/info/privacypolicy">Kebijakan Privasi</a>
+                            <Link to="/info/privacypolicy">Kebijakan Privasi</Link>
                         </div>
                         <Divider orientation="vertical"/>
                         <div className="col-5 col-lg-2 flex">
-                            <a href="/info/termsandconditions">Syarat & Kententuan</a>
+                            <Link to="/info/termsandconditions">Syarat & Kententuan</Link>
                         </div>
                         <Divider orientation="vertical"/>
                         <div className="col-5 col-lg-2 flex">
-                            <a href="/info/communityguidelines">Peraturan Konten</a>
+                            <Link to="/info/communityguidelines">Peraturan Konten</Link>
                         </div>
                     </div>
                     <div>

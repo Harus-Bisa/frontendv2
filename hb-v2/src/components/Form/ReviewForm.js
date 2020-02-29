@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import { withStyles, Divider } from "@material-ui/core";
+import { withStyles, Divider, Select, MenuItem } from "@material-ui/core";
 import MuiButton from "@material-ui/core/Button";
 import Popup from "../Popup/Popup";
 import LoginPopup from "../Popup/LoginPopup";
@@ -20,7 +20,7 @@ import { overallRatingLabels, recommendationRatingLabels, difficultyRatingLabels
 import "../../css/review.css";
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import ToggleButton from '@material-ui/lab/ToggleButton';
-import { Prompt } from "react-router-dom";
+import { Prompt, Link } from "react-router-dom";
 
 const Icon = withStyles({
     root: {
@@ -94,6 +94,7 @@ function ReviewForm(props){
     const schools = props.schools
     const findSchools = props.findSchools
     React.useEffect(() =>{
+        window.scroll(0,0)
         if(existingProf){
             if(!professor){
                 getReviews(revieweeId)
@@ -122,9 +123,9 @@ function ReviewForm(props){
                     setTextbookRequired(savedReview.textbookRequired)
                 }
             }
-            if(submitted && professor){
-                history.push("/review/"+professor.revieweeId)
-            }
+        }
+        if(submitted && professor){
+            history.push("/review/"+professor.revieweeId)
         }
 
         if(schools.length === 0){
@@ -149,10 +150,10 @@ function ReviewForm(props){
             grade: grade
         }
         if(props.loggedIn && valid){
+            setSubmitted(true)
             props.removeError()
             if (existingProf){
                 props.addReview(revieweeId, newReview);
-                props.history.push("/review/"+revieweeId)
             }
             else{
                 newReview.name = profName;
@@ -162,7 +163,7 @@ function ReviewForm(props){
             if(localStorage.getItem("review")){
                 localStorage.removeItem("review");
             }
-            setSubmitted(true)
+            
         }   
         else if(!valid){
             var errorMessage = makeErrorMessage()
@@ -232,7 +233,7 @@ function ReviewForm(props){
         let currentYear = (new Date()).getFullYear()
         let min = currentYear - 20
         while (currentYear > min){
-            yearOptions.push(<option value={currentYear} key={currentYear}>{currentYear}</option>)
+            yearOptions.push(<MenuItem value={currentYear} key={currentYear}>{currentYear}</MenuItem>)
             currentYear -= 1
         }
         return yearOptions;
@@ -255,16 +256,20 @@ function ReviewForm(props){
     }
     return(
         <div className="page-container">
+            <Prompt
+                when={!submitted}
+                message={"Apakah anda yakin? Kami tidak menyimpan data yang sudah terisi."}
+            />
             {existingProf && 
                 <div className="page-header" style={{backgroundColor:'#F7F7F7'}}>
-                    <div className="container">
+                    <div className="container" style={{padding:'0 2rem'}}>
                         <div className="row no-gutters">
                             <div className="col">
                                 <h2 className="blue">{profName}</h2>
                                 <p className="italic">{profSchool}</p>
                             </div>  
                             <div className="col-2" style={{textAlign:'right'}}>
-                                <a href={"/review/new/Dosen"}>Ganti Dosen?</a>
+                                <Link to={"/review/new/Dosen"}>Ganti Dosen?</Link>
                             </div>
                         </div>
                     </div>
@@ -272,16 +277,12 @@ function ReviewForm(props){
             }
             <div className="container content">
                 <div className="row">
-                    <div className="col-md-9">
+                    <div className="col-lg-9">
                         <div style={{marginBottom:'2.5rem'}}>
                             <h4>Terima kasih atas kontribusinya! Review <span className="blue">anonimus</span> Anda sangat membantu mahasiswa lainnya!</h4>
                         </div>
                         {props.error && <Feedback color={"danger"} message={props.error.message}/>}
                         <form onSubmit={submit} className="review-form"> 
-                            <Prompt
-                                when={!submitted}
-                                message={"Are you sure?"}
-                            />
                             {!existingProf && 
                             <React.Fragment>
                                 <FormGroup>
@@ -425,9 +426,9 @@ function ReviewForm(props){
                             {!currentlyTaking && 
                                 <FormGroup>
                                     <Label>Tahun mengambil kelas</Label>
-                                    <Input type="select" name="yearTaken" id="yearTaken" onChange={(event) => {setYearTaken(event.target.value)}}>
+                                    <Select variant="outlined" fullWidth value={yearTaken} onChange={(event) => {setYearTaken(event.target.value)}}>
                                         {renderYears()}
-                                    </Input>
+                                    </Select>
                                 </FormGroup>
                             }
                             <FormGroup>
@@ -436,6 +437,7 @@ function ReviewForm(props){
                                     id="grade"
                                     options={["A", "B", "C", "D", "E", "F", "N/A"]}
                                     freeSolo
+                                    disableClearable
                                     getOptionLabel={option => option}
                                     value={grade}
                                     onChange={(event, value) => setGrade(value)}
@@ -455,6 +457,7 @@ function ReviewForm(props){
                                 <Label>Gaya mengajar dosen<span className="red">*</span></Label>
                                 <Autocomplete
                                     multiple
+                                    size={"small"}
                                     id="teachingStyle"
                                     options={teachingStyleOptions}
                                     disableCloseOnSelect
@@ -466,7 +469,7 @@ function ReviewForm(props){
                                             <Checkbox
                                                 icon={<Icon/>}
                                                 checkedIcon={<CheckedIcon/>}
-                                                style={{ marginRight: 8 }}
+                                                style={{ marginRight: 8, fontFamily:"'Poppins', sans-serif" }}
                                                 checked={selected}
                                             />
                                             {option}
@@ -495,6 +498,7 @@ function ReviewForm(props){
                                 <Autocomplete
                                     className="d-md-none"
                                     multiple
+                                    size={"small"}
                                     id="tags"
                                     options={tagsOptions}
                                     disableCloseOnSelect
@@ -559,7 +563,7 @@ function ReviewForm(props){
                                         <BlueCheckbox checked={agree} onChange={() => setAgree(!agree)}/>
                                     </div>
                                     <div className="col">
-                                        <p>Dengan ini saya menyatakan bahwa review ini dibuat berdasarkan pengalaman saya dan benar-benar opini pribadi saya tentang dosen ini, dan saya tidak menerima tawaran insentif maupun pembayaran apapun dari dosen ini untuk menulis review ini. Saya memahami bahwa Dosenku sama sekali tidak mentoleransi ulasan palsu Dengan melanjutkan, Anda menyetujui <a href="/info/termsandconditions">Syarat dan Ketentuan</a> dan <a href="/info/privacypolicy">Kebijakan Privasi</a> Dosen Ku<span className="red">*</span></p>
+                                        <p>Dengan ini saya menyatakan bahwa review ini dibuat berdasarkan pengalaman saya dan benar-benar opini pribadi saya tentang dosen ini, dan saya tidak menerima tawaran insentif maupun pembayaran apapun dari dosen ini untuk menulis review ini. Saya memahami bahwa Dosenku sama sekali tidak mentoleransi ulasan palsu Dengan melanjutkan, Anda menyetujui <Link to="/info/termsandconditions">Syarat dan Ketentuan</Link> dan <Link to="/info/privacypolicy">Kebijakan Privasi</Link> Dosen Ku<span className="red">*</span></p>
                                     </div>
                                 </div>
                             </FormGroup>

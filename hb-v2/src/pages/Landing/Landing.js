@@ -47,6 +47,7 @@ function Landing(props){
         if(!topSchools){
             getTopSchools()
         }
+        window.scroll(0,0)
     },[topSchools, getTopSchools])
 
     

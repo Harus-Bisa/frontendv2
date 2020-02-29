@@ -20,7 +20,7 @@ function SearchBox(props){
         if(propsSchool !== school){
             setSchool(propsSchool)
         }
-    },[propsSchool])
+    },[propsSchool, school])
     const find = async (event) =>{
         event.preventDefault();        
         if(reviewee !== "" || school !== ""){
