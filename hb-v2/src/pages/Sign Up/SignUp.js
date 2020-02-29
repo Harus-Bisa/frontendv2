@@ -1,7 +1,7 @@
 import React from "react";
 import SignUpForm from "../../components/Form/SignUpForm";
 import sun from "../../img/sun.png";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function SignUp(){
     

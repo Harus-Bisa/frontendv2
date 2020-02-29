@@ -13,6 +13,7 @@ function SignUpForm(props){
     var [showPasswordText, setShowPasswordText] = React.useState(false)
     var [name, setName] = React.useState("")
     var [filled, setFilled] = React.useState(false);
+    var [submitted, setSubmitted] = React.useState(false);
 
     const submit = async (event) =>{
         event.preventDefault();
@@ -22,6 +23,7 @@ function SignUpForm(props){
                 email: email,
                 password: password
             }
+            setSubmitted(true)
             props.removeError()
             await props.signup(data)
         }
@@ -50,7 +52,7 @@ function SignUpForm(props){
     return(
         <div className="container content" id="sign-up-form">
             <Prompt
-                when={filled}
+                when={filled && !submitted}
                 message={"Apakah anda yakin? Kami tidak menyimpan data yang sudah terisi."}
             />
             <Form onSubmit={submit}>

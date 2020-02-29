@@ -123,9 +123,9 @@ function ReviewForm(props){
                     setTextbookRequired(savedReview.textbookRequired)
                 }
             }
-            if(submitted && professor){
-                history.push("/review/"+professor.revieweeId)
-            }
+        }
+        if(submitted && professor){
+            history.push("/review/"+professor.revieweeId)
         }
 
         if(schools.length === 0){
@@ -150,10 +150,11 @@ function ReviewForm(props){
             grade: grade
         }
         if(props.loggedIn && valid){
+            setSubmitted(true)
             props.removeError()
             if (existingProf){
                 props.addReview(revieweeId, newReview);
-                props.history.push("/review/"+revieweeId)
+                // props.history.push("/review/"+revieweeId)
             }
             else{
                 newReview.name = profName;
@@ -163,7 +164,7 @@ function ReviewForm(props){
             if(localStorage.getItem("review")){
                 localStorage.removeItem("review");
             }
-            setSubmitted(true)
+            
         }   
         else if(!valid){
             var errorMessage = makeErrorMessage()
@@ -256,6 +257,10 @@ function ReviewForm(props){
     }
     return(
         <div className="page-container">
+            <Prompt
+                when={!submitted}
+                message={"Apakah anda yakin? Kami tidak menyimpan data yang sudah terisi."}
+            />
             {existingProf && 
                 <div className="page-header" style={{backgroundColor:'#F7F7F7'}}>
                     <div className="container">
@@ -279,10 +284,6 @@ function ReviewForm(props){
                         </div>
                         {props.error && <Feedback color={"danger"} message={props.error.message}/>}
                         <form onSubmit={submit} className="review-form"> 
-                            <Prompt
-                                when={!submitted}
-                                message={"Apakah anda yakin? Kami tidak menyimpan data yang sudah terisi."}
-                            />
                             {!existingProf && 
                             <React.Fragment>
                                 <FormGroup>
