@@ -31,7 +31,7 @@ function Routes() {
         }
         }
     })
-    }, [ locationKeys, ])
+    }, [ locationKeys, history])
     return(
         <Switch>
             <Route exact path="/" component={Landing}/>

@@ -1,7 +1,6 @@
 import React from "react";
 import PopupForm from "./PopupForm";
 import LoginForm from "../Form/LoginForm";
-import { Link } from "react-router-dom";
 
 export default function LoginPopup(props){
     return(

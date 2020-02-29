@@ -3,7 +3,7 @@ import { FormGroup, Input, Label, Form } from "reactstrap";
 import { Button, CircularProgress } from "@material-ui/core";
 import { connect } from "react-redux";
 import { login } from "../../redux/actions";
-import { withRouter, Prompt, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import Feedback from "../Feedback/Feedback";
 
 function LoginForm(props){
