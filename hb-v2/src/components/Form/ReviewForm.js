@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import { withStyles, Divider } from "@material-ui/core";
+import { withStyles, Divider, Select, MenuItem } from "@material-ui/core";
 import MuiButton from "@material-ui/core/Button";
 import Popup from "../Popup/Popup";
 import LoginPopup from "../Popup/LoginPopup";
@@ -154,7 +154,6 @@ function ReviewForm(props){
             props.removeError()
             if (existingProf){
                 props.addReview(revieweeId, newReview);
-                // props.history.push("/review/"+revieweeId)
             }
             else{
                 newReview.name = profName;
@@ -234,7 +233,7 @@ function ReviewForm(props){
         let currentYear = (new Date()).getFullYear()
         let min = currentYear - 20
         while (currentYear > min){
-            yearOptions.push(<option value={currentYear} key={currentYear}>{currentYear}</option>)
+            yearOptions.push(<MenuItem value={currentYear} key={currentYear}>{currentYear}</MenuItem>)
             currentYear -= 1
         }
         return yearOptions;
@@ -263,7 +262,7 @@ function ReviewForm(props){
             />
             {existingProf && 
                 <div className="page-header" style={{backgroundColor:'#F7F7F7'}}>
-                    <div className="container">
+                    <div className="container" style={{padding:'0 2rem'}}>
                         <div className="row no-gutters">
                             <div className="col">
                                 <h2 className="blue">{profName}</h2>
@@ -278,7 +277,7 @@ function ReviewForm(props){
             }
             <div className="container content">
                 <div className="row">
-                    <div className="col-md-9">
+                    <div className="col-lg-9">
                         <div style={{marginBottom:'2.5rem'}}>
                             <h4>Terima kasih atas kontribusinya! Review <span className="blue">anonimus</span> Anda sangat membantu mahasiswa lainnya!</h4>
                         </div>
@@ -427,9 +426,9 @@ function ReviewForm(props){
                             {!currentlyTaking && 
                                 <FormGroup>
                                     <Label>Tahun mengambil kelas</Label>
-                                    <Input type="select" name="yearTaken" id="yearTaken" onChange={(event) => {setYearTaken(event.target.value)}}>
+                                    <Select variant="outlined" fullWidth value={yearTaken} onChange={(event) => {setYearTaken(event.target.value)}}>
                                         {renderYears()}
-                                    </Input>
+                                    </Select>
                                 </FormGroup>
                             }
                             <FormGroup>
@@ -438,6 +437,7 @@ function ReviewForm(props){
                                     id="grade"
                                     options={["A", "B", "C", "D", "E", "F", "N/A"]}
                                     freeSolo
+                                    disableClearable
                                     getOptionLabel={option => option}
                                     value={grade}
                                     onChange={(event, value) => setGrade(value)}
@@ -457,6 +457,7 @@ function ReviewForm(props){
                                 <Label>Gaya mengajar dosen<span className="red">*</span></Label>
                                 <Autocomplete
                                     multiple
+                                    size={"small"}
                                     id="teachingStyle"
                                     options={teachingStyleOptions}
                                     disableCloseOnSelect
@@ -468,7 +469,7 @@ function ReviewForm(props){
                                             <Checkbox
                                                 icon={<Icon/>}
                                                 checkedIcon={<CheckedIcon/>}
-                                                style={{ marginRight: 8 }}
+                                                style={{ marginRight: 8, fontFamily:"'Poppins', sans-serif" }}
                                                 checked={selected}
                                             />
                                             {option}
@@ -497,6 +498,7 @@ function ReviewForm(props){
                                 <Autocomplete
                                     className="d-md-none"
                                     multiple
+                                    size={"small"}
                                     id="tags"
                                     options={tagsOptions}
                                     disableCloseOnSelect
