@@ -46,6 +46,7 @@ function Review(props){
 
     React.useEffect(() =>{
         getReviews(revieweeId)
+        window.scroll(0,0)
     }, [getReviews, revieweeId, loggedIn])
 
 
