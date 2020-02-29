@@ -17,7 +17,7 @@ function SearchBox(props){
     let history = useHistory()
     const propsSchool = props.school
     React.useEffect(() =>{
-        if(propsSchool !== school){
+        if(propsSchool !== "" && propsSchool !== school){
             setSchool(propsSchool)
         }
     },[propsSchool, school])

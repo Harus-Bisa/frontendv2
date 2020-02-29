@@ -10,7 +10,13 @@ import { Person } from "@material-ui/icons";
 function RevieweeSearch(props){
 
     const handleChange = (event, value) =>{
-        props.setReviewee(value)
+        if(value && value.name && value.school){
+            props.setReviewee(value.name)
+            props.setSchool(value.school)
+        }
+        else{
+            props.setReviewee(value)
+        }
         if(value.length < 2 || value.endsWith(' ')){
             throttle(500, props.findReviewees(value, "", "searchBox"))
         }
@@ -29,12 +35,12 @@ function RevieweeSearch(props){
             }}
             onChange={(event, value) => {
                 if(value && value.name && value.school){
+                    console.log(value)
                     props.setReviewee(value.name)
                     props.setSchool(value.school)
                 }
                 else if(value){
                     props.setReviewee(value)
-                    props.setSchool("")
                 }
             }}
             disableClearable
