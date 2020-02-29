@@ -1,5 +1,5 @@
 import services from "../../Services"
-import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS, LOAD_SCHOOLS, FIND_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES, REPORT_INAPPROPRIATE_REVIEW, CHANGE_IS_MOBILE, GET_TOP_SCHOOLS } from "../constants/action-types"
+import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS, LOAD_SCHOOLS, FIND_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES, REPORT_INAPPROPRIATE_REVIEW, CHANGE_IS_MOBILE, GET_TOP_SCHOOLS, SORT_REVIEWS } from "../constants/action-types"
 
 
 export function signup(newUserData){
@@ -133,6 +133,9 @@ export function getReviews(revieweeId){
     }
 }
 
+export function sortReviews(sortBy){
+    return ({type:SORT_REVIEWS, payload: sortBy})
+}
 export function addReview(revieweeId, review){
     return async function(dispatch){
         return await services.addReview(revieweeId, review)
