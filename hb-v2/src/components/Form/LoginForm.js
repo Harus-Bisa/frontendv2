@@ -21,7 +21,7 @@ function LoginForm(props){
             closePopup()
         }
     }, [loggedIn, closePopup])
-    if(props.loggedIn && props.page && !props.loading){
+    if(props.loggedIn && !props.loading){
         if(localStorage.getItem("review")){
             var name = JSON.parse(localStorage.getItem('review')).name
             props.history.push("/review/new/"+name)
