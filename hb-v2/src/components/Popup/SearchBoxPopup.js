@@ -35,10 +35,10 @@ function SearchBoxPopup(props){
     return(
         <div className="search-box-popup">
             <SearchBox showSchool={true} {...props} school={school}/>
-            <div>
+            {topSchools && <div>
                 <h4>PENCARIAN TERPOPULER</h4>
                 {renderTopSchools()}
-            </div>
+            </div>}
         </div>
         
     )

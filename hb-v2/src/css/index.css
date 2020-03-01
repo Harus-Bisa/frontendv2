@@ -183,10 +183,22 @@ label{
   box-sizing: border-box;
   border-radius: 0px !important;
   font-family: 'Poppins', sans-serif !important;
+  padding: .25rem .75rem;
   /* border: 0.5px solid #C4C4C4 !important; */
 }
+.MuiAutocomplete-inputRoot{
+  padding-top:0rem !important;
+  padding-bottom: 0rem !important;
+}
+.MuiOutlinedInput-input{
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+}
+.MuiAutocomplete-option{
+  font-family:'Poppins', sans-serif !important;
+}
 
-.form-control:focus{
+.form-control:focus,  .PrivateNotchedOutline-root-102:focus , .MuiOutlinedInput-notchedOutline:focus{
   outline-color: var(--hb-blue);
   border-color: #00ACF9 !important;
   box-shadow: 0px 0px 4px rgba(0, 172, 249, 0.45);
@@ -319,7 +331,7 @@ label{
     font-size: 28px;
   }
   .navbar-width{
-    width: inherit;
+    width: 100%;
   }
   .navbar-full-width{
     margin-right: -1.5rem;

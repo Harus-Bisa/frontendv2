@@ -1,9 +1,9 @@
 import React from "react";
 import { FormGroup, Input, Label, Form, FormText } from "reactstrap";
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 import { connect } from "react-redux";
 import { signup, removeSuccess, setError, removeError } from "../../redux/actions";
-import { withRouter } from "react-router-dom";
+import { withRouter, Prompt, Link } from "react-router-dom";
 import Feedback from "../Feedback/Feedback";
 
 function SignUpForm(props){
@@ -11,24 +11,22 @@ function SignUpForm(props){
     var [password, setPassword] = React.useState("")
     var [confirmPassword, setConfirmPassword] = React.useState("")
     var [showPasswordText, setShowPasswordText] = React.useState(false)
-    var [name, setName] = React.useState("")
+    var [filled, setFilled] = React.useState(false);
+    var [submitted, setSubmitted] = React.useState(false);
 
     const submit = async (event) =>{
         event.preventDefault();
-        if(validEmail && validPassword && validName){
+        if(validPassword && validEmail){
             const data = {
-                name: name,
                 email: email,
                 password: password
             }
+            setSubmitted(true)
             props.removeError()
             await props.signup(data)
         }
         else{
             var errorMessage = "Tolong cek/isi berikut ini:\n"
-            if(!validName){
-                errorMessage += "- Isi nama Anda"
-            }
             if(!validEmail){
                 errorMessage += "- Pastikan Anda menggunakan email sekolah anda"
             }
@@ -40,9 +38,8 @@ function SignUpForm(props){
         
     }
 
-    var validEmail = email !=="" && email.includes("ac.id")
+    var validEmail = email !=="" /* && email.includes("ac.id")*/
     var validPassword = password === confirmPassword && password !== ""
-    var validName = name !== ""
     if(props.success){
         if(props.closePopup){
             props.closePopup()
@@ -52,18 +49,11 @@ function SignUpForm(props){
     }  
     return(
         <div className="container content" id="sign-up-form">
+            <Prompt
+                when={filled && !submitted}
+                message={"Apakah anda yakin? Kami tidak menyimpan data yang sudah terisi."}
+            />
             <Form onSubmit={submit}>
-                <FormGroup>
-                    <Label>Nama Lengkap<span className="red">*</span></Label>
-                    <Input 
-                        valid={validName} 
-                        type="text" 
-                        id="name" 
-                        value={name} 
-                        onChange={(event) => setName(event.target.value)} 
-                        required
-                    />
-                </FormGroup>
                 <FormGroup>
                     <Label>Email<span className="red">*</span></Label>
                     <p style={{marginBottom:'0.25rem'}}>Gunakan email universitas agar dapat memverifikasi status mahasiswa Anda</p>
@@ -72,7 +62,10 @@ function SignUpForm(props){
                         type="email" 
                         id="email" 
                         value={email} 
-                        onChange={(event) => setEmail(event.target.value)} 
+                        onChange={(event) => {
+                            setEmail(event.target.value)
+                            setFilled(true)
+                        }} 
                         placeholder={"dosenku@universitas.ac.id"} 
                         required
                     />
@@ -84,7 +77,10 @@ function SignUpForm(props){
                         type="password" 
                         id="password" 
                         value={password} 
-                        onChange={(event) => setPassword(event.target.value)} 
+                        onChange={(event) => {
+                            setPassword(event.target.value)
+                            setFilled(true)
+                        }} 
                         required
                         onFocus={() => setShowPasswordText(true)}
                         onBlur={() => setShowPasswordText(false)}
@@ -99,17 +95,21 @@ function SignUpForm(props){
                         type="password" 
                         id="confirmPassword" 
                         value={confirmPassword} 
-                        onChange={(event) => setConfirmPassword(event.target.value)} 
+                        onChange={(event) => {
+                            setConfirmPassword(event.target.value)
+                            setFilled(true)
+                        }} 
                         required
                         placeholder="******"
                     />
                 </FormGroup>
                 <FormGroup>
-                    <p>Dengan melanjutkan, Anda menyetujui <a href="/info/termsandconditions">Syarat dan Ketentuan</a> Dosen Ku dan menyetujui <a href="/info/privacypolicy">Kebijakan Privasi</a> Dosen Ku</p>
+                    <p>Dengan melanjutkan, Anda menyetujui <Link to="/info/termsandconditions">Syarat dan Ketentuan</Link> Dosen Ku dan menyetujui <Link to="/info/privacypolicy">Kebijakan Privasi</Link> Dosen Ku</p>
                 </FormGroup>
                 {props.error && <Feedback color={"danger"} message={props.error.message}/>}
-                <FormGroup>
-                    <Button type="submit" className="contrast-button" fullWidth>Daftar</Button>
+                <FormGroup style={{position:'relative'}}>
+                    <Button type="submit" className="contrast-button" fullWidth disabled={props.loading}>Daftar</Button>
+                    {props.loading && <CircularProgress size={14} style={{position:'absolute', top:'50%', left:"50%"}}/>}
                 </FormGroup>
             </Form>
         </div>
@@ -118,7 +118,8 @@ function SignUpForm(props){
 function mapStateToProps(state){
     return{
         error: state.error,
-        success: state.success
+        success: state.success,
+        loading: state.loading
     }
 }
 export default connect(mapStateToProps, {signup, removeSuccess, removeError, setError})(withRouter(SignUpForm));

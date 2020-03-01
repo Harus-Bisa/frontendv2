@@ -17,10 +17,10 @@ function SearchBox(props){
     let history = useHistory()
     const propsSchool = props.school
     React.useEffect(() =>{
-        if(propsSchool !== school){
+        if(propsSchool !== "" && propsSchool !== school){
             setSchool(propsSchool)
         }
-    },[propsSchool])
+    },[propsSchool, school])
     const find = async (event) =>{
         event.preventDefault();        
         if(reviewee !== "" || school !== ""){
@@ -84,7 +84,7 @@ function SearchBox(props){
         )
     }
     return(
-        <div>
+        <div style={{height:'100%'}}>
             <div className="search-box">
                 <form onSubmit={find}>
                     <div className="row no-gutters">

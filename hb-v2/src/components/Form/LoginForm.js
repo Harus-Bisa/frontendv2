@@ -1,9 +1,9 @@
 import React from "react";
 import { FormGroup, Input, Label, Form } from "reactstrap";
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 import { connect } from "react-redux";
 import { login } from "../../redux/actions";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import Feedback from "../Feedback/Feedback";
 
 function LoginForm(props){
@@ -21,7 +21,7 @@ function LoginForm(props){
             closePopup()
         }
     }, [loggedIn, closePopup])
-    if(props.loggedIn && props.page){
+    if(props.loggedIn && !props.loading){
         if(localStorage.getItem("review")){
             var name = JSON.parse(localStorage.getItem('review')).name
             props.history.push("/review/new/"+name)
@@ -50,10 +50,11 @@ function LoginForm(props){
                     <Input type="password" id="password" value={password} onChange={(event) => setPassword(event.target.value)} required/>
                 </FormGroup>
                 <FormGroup>
-                    <p>Dengan masuk, Anda setuju dengan <a href="/info/termsandconditions">Syarat dan Ketentuan</a> dan <a href="/info/privacypolicy">Kebijakan Privasi</a>.</p>
+                    <p>Dengan masuk, Anda setuju dengan <Link to="/info/termsandconditions">Syarat dan Ketentuan</Link> dan <Link to="/info/privacypolicy">Kebijakan Privasi</Link>.</p>
                 </FormGroup>
-                <FormGroup>
-                    <Button type="submit" className="contrast-button" fullWidth>Login</Button>
+                <FormGroup style={{position:'relative'}}>
+                    <Button type="submit" className="contrast-button" fullWidth disabled={props.loading}>Login</Button>
+                    {props.loading && <CircularProgress size={14} style={{position:'absolute', top:'50%', left:"50%"}}/>}
                 </FormGroup>
             </Form>
         </div>
@@ -63,7 +64,8 @@ function LoginForm(props){
 function mapStateToProps(state){
     return{
         error: state.error,
-        loggedIn:state.loggedIn
+        loggedIn:state.loggedIn,
+        loading: state.loading
     }
 }
 export default connect(mapStateToProps, {login})(withRouter(LoginForm));

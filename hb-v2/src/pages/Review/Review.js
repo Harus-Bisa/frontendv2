@@ -4,7 +4,7 @@ import {ThumbUp, ThumbUpOutlined, Info, Check, CheckOutlined, LocalCafe, LocalCa
 import { StyledRating } from "../../components/Rating/StyledRating";
 import ReviewContent from "../../components/ReviewContent/ReviewContent";
 import "../../css/review.css";
-import { getReviews } from "../../redux/actions";
+import { getReviews, sortReviews } from "../../redux/actions";
 import Popup from "../../components/Popup/Popup";
 import LoginPopup from "../../components/Popup/LoginPopup";
 import Feedback from "../../components/Feedback/Feedback";
@@ -36,12 +36,17 @@ function Review(props){
             props.history.push("/review/"+props.professor.revieweeId+"/add/"+value)
         }
     }
+    const handleSort = (event) =>{
+        setSortBy(event.target.value)
+        props.sortReviews(event.target.value)
+    }
     const revieweeId = props.match.params.revieweeId;
     const loggedIn = props.loggedIn
     const getReviews = props.getReviews;
 
     React.useEffect(() =>{
         getReviews(revieweeId)
+        window.scroll(0,0)
     }, [getReviews, revieweeId, loggedIn])
 
 
@@ -207,11 +212,6 @@ function Review(props){
                                             </div>
                                         </div>
                                     </div>
-                                    {/* {!props.loggedIn && 
-                                        <div className="blue-box" style={{width:'50%', height:'100%', position:'absolute'}}>
-                                            <h5>Sign up dan lihat semua statistik. Gratis!</h5>
-                                        </div>
-                                    } */}
                                 </div>
                             </div>
                         </div>
@@ -236,7 +236,7 @@ function Review(props){
                                 <div className="col-6 flex" style={{flexDirection:'row', justifyContent:'center'}}>
                                     <p style={{margin:'auto 0'}} >Urutkan berdasarkan:</p>
                                     <div style={{margin:"auto 0 auto 15px"}}>
-                                        <Select value={sortBy} onChange={(event) =>{setSortBy(event.target.value)}} displayEmpty>
+                                        <Select value={sortBy} onChange={handleSort} displayEmpty>
                                             <MenuItem value={NEWEST}>Paling baru</MenuItem>
                                             <MenuItem value={OLDEST}>Paling lama</MenuItem>
                                         </Select>
@@ -300,6 +300,7 @@ function Review(props){
             </div>
         )
     }
+    return(<div></div>)
 }
 
 function mapStateToProps(state){
@@ -311,4 +312,4 @@ function mapStateToProps(state){
         isMobile: state.isMobile
     }
 }
-export default connect(mapStateToProps, {getReviews})(Review);
+export default connect(mapStateToProps, {getReviews, sortReviews})(Review);

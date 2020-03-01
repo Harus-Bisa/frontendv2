@@ -33,6 +33,7 @@
         background-image: url("../img/landingpagemobileimg.png");
         background-repeat: no-repeat;
         background-position: top;
+        background-size: contain;
     }
     .landing-page header{
         min-height: 80vh;

@@ -18,7 +18,7 @@ import { logout, getUser } from '../../redux/actions';
 import Popup from '../Popup/Popup';
 import LoginPopup from '../Popup/LoginPopup';
 import SignUpPopup from '../Popup/SignupPopup';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { Search } from '@material-ui/icons';
 import { ButtonBase } from '@material-ui/core';
 import SearchBoxPopup from '../Popup/SearchBoxPopup';
@@ -73,30 +73,30 @@ function NavigationBar(props){
     props.history.push("/")
   }
   const loggedIn = props.loggedIn
-  const name = props.name
+  const email = props.email
   const getUser = props.getUser
   React.useEffect(() =>{
-    if(loggedIn && !name){
+    if(loggedIn && !email){
       getUser(localStorage.getItem("userId"))
     }
-  }, [loggedIn, name, getUser])
+  }, [loggedIn, email, getUser])
 
   const atLanding = props.location.pathname === "/"
   const navlinkClassname = atLanding ? "contrast-navlink dark-navlink navlink" : "contrast-navlink navlink"
-  const textColor = isOpen || !atLanding || navBackground ? "inherit":"white";
+  const textColor = isOpen || !atLanding || navBackground ? "rgba(0,0,0,.9)":"white";
   
   return(
     <div>
       <Navbar light expand="md" className={isOpen ? "navbar full-height" : "navbar"} style={{backgroundColor:(isOpen || !atLanding || navBackground  ? "white" : "transparent"), height:"75px"}}>
-        <NavbarBrand href="/" className="brand" style={{color:textColor}}>Dosen Ku</NavbarBrand>
+        <Link to="/" style={{marginBottom:'0'}}><NavbarBrand className="brand" style={{color:textColor}}>Dosen Ku</NavbarBrand></Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar className={isOpen ? "justify-content-end full-height" : "justify-content-end"}>
         {!props.isMobile &&  
-          <Nav navbar className="navbar-width">          
-            {props.loggedIn && props.name && !showSearchBox && 
+          <Nav navbar className="navbar-width" style={{height:"36px"}}>          
+            {props.loggedIn && props.email && !showSearchBox && 
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Hi, {props.name}
+                  {props.email}
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
@@ -132,7 +132,7 @@ function NavigationBar(props){
             </React.Fragment>
             }
             {showSearchBox &&   
-              <NavItem style={{width:'inherit'}}>
+              <NavItem style={{width:'100%'}}>
                 <SearchBox 
                   close={() => {
                     setIsOpen(false)
@@ -159,10 +159,10 @@ function NavigationBar(props){
                   content={SearchBoxPopup}
               />
             </NavItem>
-            {props.loggedIn && props.name && !showSearchBox && 
+            {props.loggedIn && props.email && !showSearchBox && 
               <React.Fragment>
                 <NavItem>
-                  <NavLink className="navbar-full-width" style={{color:"black"}}>Hi, {props.name}</NavLink>
+                  <NavLink className="navbar-full-width" style={{color:"black"}}>{props.email}</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink id="logoff" onClick={logout} className="navbar-full-width" style={{color:"black", backgroundColor:"#F1F1F1"}}>Log Out</NavLink>
@@ -208,7 +208,7 @@ function NavigationBar(props){
 function mapStateToProps(state){
   return{
     loggedIn: state.loggedIn,
-    name: state.user? state.user.name : null,
+    email: state.user? state.user.email : null,
     isMobile: state.isMobile
   }
 }

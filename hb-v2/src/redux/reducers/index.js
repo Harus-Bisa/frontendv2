@@ -1,12 +1,14 @@
-import { FIND_REVIEWEES, GET_REVIEWS, CLEAR_REVIEWEES, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, REMOVE_SUCCESS, SET_SUCCESS, FIND_SCHOOLS, LOAD_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES, CHANGE_IS_MOBILE, GET_TOP_SCHOOLS, GET_RECENT_REVIEWS } from "../constants/action-types";
+import { FIND_REVIEWEES, GET_REVIEWS, CLEAR_REVIEWEES, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, REMOVE_SUCCESS, SET_SUCCESS, FIND_SCHOOLS, LOAD_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES, CHANGE_IS_MOBILE, GET_TOP_SCHOOLS, GET_RECENT_REVIEWS, SORT_REVIEWS } from "../constants/action-types";
 import services from "../../Services";
 import { NAME, POPULARITY, RATING } from "../../pages/Query/Query";
 import { sortName, sortPopularity, sortRating } from "./revieweeSortFunctions";
+import { NEWEST, OLDEST } from "../constants/sort-types";
+import { sortNewest, sortOldest } from "./reviewSortFunction";
 
 const initialState ={
     loggedIn: services.isLoggedIn(),
     loadingCount:0,
-    loading: true,
+    loading: false,
     reviewees:[],
     loadReviewees: false,
     pageReviewees: [],
@@ -62,7 +64,8 @@ export default function rootReducer(state = initialState, action){
     }
     if(action.type === CLEAR_REVIEWEES){
         return Object.assign({}, state, {
-            reviewees: []
+            reviewees: [],
+            pageReviewees:[]
         })
     }
     if(action.type === LOAD_SCHOOLS){
@@ -94,6 +97,18 @@ export default function rootReducer(state = initialState, action){
     if(action.type === GET_REVIEWS){
         return Object.assign({}, state, {
             professor: action.payload
+        })
+    } 
+    if(action.type === SORT_REVIEWS){
+        const newReviews = state.professor.reviews;
+        if(action.payload === NEWEST){  
+            newReviews.sort(sortNewest);
+        }
+        else if(action.payload === OLDEST){
+            newReviews.sort(sortOldest);
+        }
+        return Object.assign({}, state, {
+            professor: Object.assign({}, state.professor, {reviews:newReviews})
         })
     }
     if(action.type === VOTE){

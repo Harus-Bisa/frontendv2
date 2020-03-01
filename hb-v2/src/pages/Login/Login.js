@@ -1,6 +1,7 @@
 import React from "react";
 import sun from "../../img/sun.png";
 import LoginForm from "../../components/Form/LoginForm";
+import { Link } from "react-router-dom";
 
 export default function Login(){
     return(
@@ -15,7 +16,7 @@ export default function Login(){
                 <div className="col-lg-5 flex">
                     <LoginForm className="margin-auto"/>
                     <div className="content container" style={{marginTop:'-30px', textAlign:'right'}}>
-                        <p>Tidak punya akun? <a href="/signup">Daftar!</a></p>
+                        <p>Tidak punya akun? <Link to="/signup">Daftar!</Link></p>
                     </div>
                 </div>
             </div>
