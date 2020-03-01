@@ -11,7 +11,6 @@ function SignUpForm(props){
     var [password, setPassword] = React.useState("")
     var [confirmPassword, setConfirmPassword] = React.useState("")
     var [showPasswordText, setShowPasswordText] = React.useState(false)
-    var [name, setName] = React.useState("")
     var [filled, setFilled] = React.useState(false);
     var [submitted, setSubmitted] = React.useState(false);
 
@@ -19,7 +18,6 @@ function SignUpForm(props){
         event.preventDefault();
         if(validPassword && validEmail){
             const data = {
-                name: name,
                 email: email,
                 password: password
             }
@@ -40,7 +38,7 @@ function SignUpForm(props){
         
     }
 
-    var validEmail = email !=="" && email.includes("ac.id")
+    var validEmail = email !=="" /* && email.includes("ac.id")*/
     var validPassword = password === confirmPassword && password !== ""
     if(props.success){
         if(props.closePopup){
