@@ -7,7 +7,8 @@ class Services{
     }
     errorHandling(error){
         if(error.response){
-            throw new Error(error.response.statusText)
+            var errorMessage = "Error " + error.response.status + ": " + error.response.statusText
+            throw new Error(errorMessage)
         }
         else{
             throw error

@@ -2,7 +2,7 @@ import React from "react";
 import { FormGroup, Input, Label, Form } from "reactstrap";
 import { Button, CircularProgress } from "@material-ui/core";
 import { connect } from "react-redux";
-import { login } from "../../redux/actions";
+import { login, removeError } from "../../redux/actions";
 import { withRouter, Link } from "react-router-dom";
 import Feedback from "../Feedback/Feedback";
 
@@ -16,11 +16,19 @@ function LoginForm(props){
     }
     const loggedIn = props.loggedIn
     const closePopup = props.closePopup
+    const error = props.error
+    const history = props.history
+    const removeError = props.removeError
     React.useEffect(() =>{
         if(loggedIn && closePopup){
             closePopup()
         }
-    }, [loggedIn, closePopup])
+        if(error && error.message.includes("401")){
+            closePopup()
+            removeError()
+            history.push("/verification/"+email)
+        }
+    }, [loggedIn, closePopup, error, history, removeError])
     if(props.loggedIn && !props.loading){
         if(localStorage.getItem("review")){
             var name = JSON.parse(localStorage.getItem('review')).name
@@ -30,6 +38,7 @@ function LoginForm(props){
             props.history.push("/")
         }
     }
+    
     return(
         <div className="container content">
             {props.error && <Feedback color={"danger"} message={props.error.message}/>}
@@ -68,4 +77,4 @@ function mapStateToProps(state){
         loading: state.loading
     }
 }
-export default connect(mapStateToProps, {login})(withRouter(LoginForm));
+export default connect(mapStateToProps, {login, removeError})(withRouter(LoginForm));
