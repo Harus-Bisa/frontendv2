@@ -83,6 +83,7 @@
   padding-top: 0.5rem !important;
   padding-bottom: 0.5rem !important;
   justify-content: left;
+  text-align: left;
 }
 
 .nav-item .search-box, .nav-item .search-box div, .nav-item .search-box form, .nav-item .search-box input{
