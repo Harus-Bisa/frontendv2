@@ -1,5 +1,5 @@
 import services from "../../Services"
-import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS, LOAD_SCHOOLS, FIND_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES, REPORT_INAPPROPRIATE_REVIEW, CHANGE_IS_MOBILE, GET_TOP_SCHOOLS, SORT_REVIEWS } from "../constants/action-types"
+import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS, LOAD_SCHOOLS, FIND_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES, REPORT_INAPPROPRIATE_REVIEW, CHANGE_IS_MOBILE, GET_TOP_SCHOOLS, SORT_REVIEWS, GET_RECENT_REVIEWS } from "../constants/action-types"
 
 
 export function signup(newUserData){
@@ -50,7 +50,7 @@ export function resendVerification(email){
         dispatch(removeSuccess())
         return services.resendVerification(email)
         .then(async response =>{
-            dispatch(setSuccess())
+            dispatch(setSuccess({message:"Email konfirmasi Anda sudah terkirim kembali. Silahkan cek email Anda."}))
             dispatch(removeError())
         })
         .catch(error =>{
@@ -133,20 +133,34 @@ export function getReviews(revieweeId){
     }
 }
 
+export function getRecentReviews(){
+    return async function(dispatch){
+        return await services.getRecentReviews()
+        .then(async response =>{
+            await dispatch({type:GET_RECENT_REVIEWS, payload: response})
+            dispatch(removeError())
+        })
+        .catch(error =>{
+            dispatch(setError(error))
+        })
+    }
+}
 export function sortReviews(sortBy){
     return ({type:SORT_REVIEWS, payload: sortBy})
 }
 export function addReview(revieweeId, review){
     return async function(dispatch){
+        dispatch(removeSuccess())
         return await services.addReview(revieweeId, review)
         .then(async response =>{
-            await dispatch({type:ADD_REVIEW, payload: response})
+            await dispatch({type:ADD_REVIEW, payload: response.data})
             if(revieweeId){
                 dispatch(getReviews(revieweeId))
             }
             else{
-                dispatch({type:GET_REVIEWS, payload: response})
+                dispatch({type:GET_REVIEWS, payload: response.data})
             }
+            dispatch(setSuccess({message:response.statusText}))
             dispatch(removeError())
         })
         .catch(error =>{
@@ -169,9 +183,11 @@ export function voteReview(revieweeId, reviewId, vote){
 }
 export function reportInappropriateness(report){
     return async function(dispatch){
+        dispatch(removeSuccess())
         return await services.reportInappropriateness(report)
         .then(async response =>{
             await dispatch({type: REPORT_INAPPROPRIATE_REVIEW, payload: response})
+            dispatch(setSuccess({message:"Terima kasih sudah melaporkan review ini! Tim Dosen Ku akan segera menangani kasus ini."}))
             dispatch(removeError())
         })
         .catch(error =>{
@@ -187,8 +203,9 @@ export function setError(error){
 export function removeError(){
     return {type: REMOVE_ERROR}
 }
-export function setSuccess(){
-    return {type: SET_SUCCESS}
+export function setSuccess(success){
+    window.scrollTo(0,0)
+    return {type: SET_SUCCESS, payload: success}
 }
 
 export function removeSuccess(){

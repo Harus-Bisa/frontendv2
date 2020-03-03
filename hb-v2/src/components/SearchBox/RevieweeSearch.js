@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 import { Person } from "@material-ui/icons";
 
 function RevieweeSearch(props){
+    const debounced = debounce(500, props.findReviewees);
+    const throttled = throttle(500, props.findReviewees)
 
     const handleChange = (event, value) =>{
         if(value && value.name && value.school){
@@ -18,10 +20,10 @@ function RevieweeSearch(props){
             props.setReviewee(value)
         }
         if(value.length < 2 || value.endsWith(' ')){
-            throttle(500, props.findReviewees(value, "", "searchBox"))
+            throttled(value, "", "searchBox")
         }
         else{
-            debounce(500, props.findReviewees(value, "", "searchBox"))
+            debounced(value, "", "searchBox")
         }
     }
     return(

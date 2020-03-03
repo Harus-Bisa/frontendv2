@@ -3,15 +3,17 @@ import SearchBox from "../../components/SearchBox/SearchBox";
 import { connect } from "react-redux";
 import "../../css/landingPage.css";
 import Footer from "../../components/Footer/Footer";
-import newestReview from "../../img/newestreviewimg.png";
 import Popup from "../../components/Popup/Popup";
 import { Person, School, KeyboardArrowDown } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
 import SearchBoxPopup from "../../components/Popup/SearchBoxPopup";
-import { getTopSchools } from "../../redux/actions";
+import { getTopSchools, getRecentReviews } from "../../redux/actions";
+import RecentReviewCard from "../../components/Card/RecentReviewCard";
+import useInterval from "../../components/functions/setInterval";
 
 function Landing(props){
     const [school, setSchool] = React.useState("")
+    const [recentReviewIndex, setRecentReviewIndex] = React.useState(0)
 
     const DummyMobileSearchBox = (props) =>{
         return(
@@ -42,14 +44,25 @@ function Landing(props){
     }
     const topSchools = props.topSchools
     const getTopSchools = props.getTopSchools
+    const recentReviews = props.recentReviews
+    const getRecentReviews = props.getRecentReviews
 
     React.useEffect(() =>{
+        window.scroll(0,0)
         if(!topSchools){
             getTopSchools()
         }
-        window.scroll(0,0)
-    },[topSchools, getTopSchools])
+        if(!recentReviews){
+            getRecentReviews()
+        }
+    },[topSchools, getTopSchools, recentReviews, getRecentReviews])
 
+    const changeIndex = () =>{
+        if(recentReviews){
+            setRecentReviewIndex((recentReviewIndex+1)%recentReviews.length)
+        }
+    }
+    useInterval(changeIndex, 5000);
     
     return(
         <div className='page-container landing-page'>
@@ -79,11 +92,12 @@ function Landing(props){
                                 }
                             </div>
                         </header>
-                        <div className="row justify-content-center" style={{height:"50vh"}}>
-                            <div className="col-lg-8 margin-auto">
-                                {/* <img src={newestReview} alt={"newestReview"} style={{width:"100%"}}/> */}
+                        {props.recentReviews && 
+                        <div className="flex" style={{height:"150vh"}}>
+                            <div className="margin-auto">
+                               <RecentReviewCard review={props.recentReviews[recentReviewIndex]}/>
                             </div>
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </div>
@@ -94,7 +108,8 @@ function Landing(props){
 function mapStateToProps(state){
     return{
         isMobile: state.isMobile,
-        topSchools: state.topSchools
+        topSchools: state.topSchools,
+        recentReviews:state.recentReviews
     }
 }
-export default connect(mapStateToProps,{getTopSchools})(Landing);
+export default connect(mapStateToProps,{getTopSchools, getRecentReviews})(Landing);
