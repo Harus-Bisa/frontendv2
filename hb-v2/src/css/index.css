@@ -100,6 +100,12 @@ label{
 .italic{
   font-style: italic;
 }
+.bold{
+  font-weight: bold;
+}
+.light{
+  font-weight: 300;
+}
 .blue-button{
   background-color: black;
 }

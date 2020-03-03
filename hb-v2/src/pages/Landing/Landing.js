@@ -3,12 +3,12 @@ import SearchBox from "../../components/SearchBox/SearchBox";
 import { connect } from "react-redux";
 import "../../css/landingPage.css";
 import Footer from "../../components/Footer/Footer";
-import newestReview from "../../img/newestreviewimg.png";
 import Popup from "../../components/Popup/Popup";
 import { Person, School, KeyboardArrowDown } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
 import SearchBoxPopup from "../../components/Popup/SearchBoxPopup";
 import { getTopSchools, getRecentReviews } from "../../redux/actions";
+import RecentReviewCard from "../../components/Card/RecentReviewCard";
 
 function Landing(props){
     const [school, setSchool] = React.useState("")
@@ -53,7 +53,7 @@ function Landing(props){
             getRecentReviews()
         }
         window.scroll(0,0)
-    },[topSchools, getTopSchools])
+    },[topSchools, getTopSchools, recentReviews, getRecentReviews])
 
     
     return(
@@ -84,11 +84,12 @@ function Landing(props){
                                 }
                             </div>
                         </header>
-                        <div className="row justify-content-center" style={{height:"50vh"}}>
-                            <div className="col-lg-8 margin-auto">
-                                {/* <img src={newestReview} alt={"newestReview"} style={{width:"100%"}}/> */}
+                        {props.recentReviews && 
+                        <div className="flex" style={{height:"150vh"}}>
+                            <div className="margin-auto">
+                               <RecentReviewCard review={props.recentReviews[0]}/>
                             </div>
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </div>
