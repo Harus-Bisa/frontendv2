@@ -69,12 +69,13 @@ function ReviewForm(props){
     const valid = profName !== "" && profSchool !== "" && courseName !== "" && overallRating !== 0 && recommendationRating !== 0 && difficultyRating !== 0 && grade !== "" && teachingStyle.length >0 && tags.length > 0 && review !== "" && agree
     const SubmitButton = (props) => {
         return(
-        <Button 
-            className="blue-button" 
+        <MuiButton 
+            className="contrast-button" 
             style={{width:'100%'}}
+            type="submit"
         >
             Kirim Review Anda
-        </Button>)
+        </MuiButton>)
     }
     const BlueCheckbox = withStyles({
         root: {

@@ -171,9 +171,11 @@ export function voteReview(revieweeId, reviewId, vote){
 }
 export function reportInappropriateness(report){
     return async function(dispatch){
+        dispatch(removeSuccess())
         return await services.reportInappropriateness(report)
         .then(async response =>{
             await dispatch({type: REPORT_INAPPROPRIATE_REVIEW, payload: response})
+            dispatch(setSuccess({message:"Terima kasih sudah melaporkan review ini! Tim Dosen Ku akan segera menangani kasus ini."}))
             dispatch(removeError())
         })
         .catch(error =>{

@@ -28,7 +28,7 @@ function LoginForm(props){
             removeError()
             history.push("/verification/"+email)
         }
-    }, [loggedIn, closePopup, error, history, removeError])
+    }, [loggedIn, closePopup, error, history, removeError, email])
     if(props.loggedIn && !props.loading){
         if(localStorage.getItem("review")){
             var name = JSON.parse(localStorage.getItem('review')).name
