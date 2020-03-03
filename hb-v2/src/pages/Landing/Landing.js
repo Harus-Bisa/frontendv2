@@ -9,9 +9,11 @@ import { TextField, Button } from "@material-ui/core";
 import SearchBoxPopup from "../../components/Popup/SearchBoxPopup";
 import { getTopSchools, getRecentReviews } from "../../redux/actions";
 import RecentReviewCard from "../../components/Card/RecentReviewCard";
+import useInterval from "../../components/functions/setInterval";
 
 function Landing(props){
     const [school, setSchool] = React.useState("")
+    const [recentReviewIndex, setRecentReviewIndex] = React.useState(0)
 
     const DummyMobileSearchBox = (props) =>{
         return(
@@ -46,15 +48,21 @@ function Landing(props){
     const getRecentReviews = props.getRecentReviews
 
     React.useEffect(() =>{
+        window.scroll(0,0)
         if(!topSchools){
             getTopSchools()
         }
         if(!recentReviews){
             getRecentReviews()
         }
-        window.scroll(0,0)
     },[topSchools, getTopSchools, recentReviews, getRecentReviews])
 
+    const changeIndex = () =>{
+        if(recentReviews){
+            setRecentReviewIndex((recentReviewIndex+1)%recentReviews.length)
+        }
+    }
+    useInterval(changeIndex, 5000);
     
     return(
         <div className='page-container landing-page'>
@@ -87,7 +95,7 @@ function Landing(props){
                         {props.recentReviews && 
                         <div className="flex" style={{height:"150vh"}}>
                             <div className="margin-auto">
-                               <RecentReviewCard review={props.recentReviews[0]}/>
+                               <RecentReviewCard review={props.recentReviews[recentReviewIndex]}/>
                             </div>
                         </div>}
                     </div>

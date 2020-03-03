@@ -11,7 +11,7 @@ export default function RecentReviewCard(props){
                     <h1 className="margin-auto">Review Terbaru</h1>
                 </div>
                 <div className="col-md-8 recent-review-card flex">
-                    <div className="row justify-content-end margin-auto">
+                    <div className="row justify-content-end">
                         <div className="col-md-9">
                             <GoQuote id="quote"/>
                             <h4 style={{fontWeight:"500"}}>{props.review.review}</h4>
