@@ -9,13 +9,16 @@ import { throttle, debounce } from "throttle-debounce";
 import { School } from "@material-ui/icons";
 
 function UniversitySearch(props){
+    const debounced = debounce(500, props.findSchools);
+    const throttled = throttle(500, props.findSchools);
+
     const handleChange = (event, value) =>{
         props.setSchool(value)
-        if(value.length < 2 || value.endsWith(' ')){
-            throttle(500, props.findSchools(value))            
+        if(value.length < 5 || value.endsWith(' ')){
+            throttled(value)            
         }
         else{
-            debounce(500, props.findSchools(value))
+            debounced(value)
         }
     }
     return(
