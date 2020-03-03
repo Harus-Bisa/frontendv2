@@ -8,7 +8,7 @@ import Popup from "../../components/Popup/Popup";
 import { Person, School, KeyboardArrowDown } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
 import SearchBoxPopup from "../../components/Popup/SearchBoxPopup";
-import { getTopSchools } from "../../redux/actions";
+import { getTopSchools, getRecentReviews } from "../../redux/actions";
 
 function Landing(props){
     const [school, setSchool] = React.useState("")
@@ -42,10 +42,15 @@ function Landing(props){
     }
     const topSchools = props.topSchools
     const getTopSchools = props.getTopSchools
+    const recentReviews = props.recentReviews
+    const getRecentReviews = props.getRecentReviews
 
     React.useEffect(() =>{
         if(!topSchools){
             getTopSchools()
+        }
+        if(!recentReviews){
+            getRecentReviews()
         }
         window.scroll(0,0)
     },[topSchools, getTopSchools])
@@ -94,7 +99,8 @@ function Landing(props){
 function mapStateToProps(state){
     return{
         isMobile: state.isMobile,
-        topSchools: state.topSchools
+        topSchools: state.topSchools,
+        recentReviews:state.recentReviews
     }
 }
-export default connect(mapStateToProps,{getTopSchools})(Landing);
+export default connect(mapStateToProps,{getTopSchools, getRecentReviews})(Landing);
