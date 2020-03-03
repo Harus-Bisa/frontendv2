@@ -1,7 +1,7 @@
 import React from "react";
 import { Alert } from "reactstrap";
 import { connect } from "react-redux";
-import { removeError } from "../../redux/actions";
+import { removeError, removeSuccess } from "../../redux/actions";
 
 function Feedback(props){
     const [visible, setVisible] = React.useState(true);
@@ -11,7 +11,7 @@ function Feedback(props){
             props.removeError();
         }
         else if(props.color === "success"){
-            //remove success
+            props.removeSuccess()
         }
     };
     const message = () =>{
@@ -38,4 +38,4 @@ Feedback.defaultProps={
     message: "default error"
 }
 
-export default connect(null,{removeError})(Feedback)
+export default connect(null,{removeError, removeSuccess})(Feedback)

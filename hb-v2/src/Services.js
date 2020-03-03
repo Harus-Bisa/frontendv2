@@ -137,7 +137,7 @@ class Services{
             const url = this.domain+ "/reviewees/"+userId+"/reviews"
             return axios.post(url, review, {headers:this.headers()})
             .then(response =>{
-                return response.data
+                return response
             })
             .catch(error =>{
                 this.errorHandling(error)
@@ -147,7 +147,7 @@ class Services{
             const url = this.domain + "/reviewees"
             return axios.post(url, review, {headers:this.headers()})
             .then(response =>{
-                return response.data
+                return response
             })
             .catch(error =>{
                 this.errorHandling(error)

@@ -48,7 +48,7 @@ export default function rootReducer(state = initialState, action){
     if(action.type === FIND_REVIEWEES){
         if(action.payload.type === "page"){
             return Object.assign({}, state, {
-                pageReviewees: action.payload.response.sort(sortName),
+                pageReviewees: action.payload.response,
                 found: action.payload.response.length !== 0,
                 loadPageReviewees: false
             })
@@ -137,12 +137,12 @@ export default function rootReducer(state = initialState, action){
     }
     if(action.type === SET_SUCCESS){
         return Object.assign({}, state, {
-            success: true
+            success: action.payload ? action.payload : true
         })
     }
     if(action.type === REMOVE_SUCCESS){
         return Object.assign({}, state, {
-            success: false
+            success: null
         })
     }
     if(action.type === LOGIN){

@@ -14,7 +14,7 @@ function Verification(props){
     }
     return(
         <div className="container content page-container">
-            {props.success && <Feedback color={"success"} message="Email Konfirmasi sudah terkirim kembali!"/>}
+            {props.success && <Feedback color={"success"} message={props.success.message}/>}
             {props.error && <Feedback color={"danger"} message={props.error.message}/>}
             <header style={{marginBottom:'30px'}}>
                 <h3 style={{textAlign:'center'}}>Konfirmasi Email Anda</h3>

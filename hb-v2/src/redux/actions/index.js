@@ -50,7 +50,7 @@ export function resendVerification(email){
         dispatch(removeSuccess())
         return services.resendVerification(email)
         .then(async response =>{
-            dispatch(setSuccess())
+            dispatch(setSuccess({message:"Email konfirmasi Anda sudah terkirim kembali. Silahkan cek email Anda."}))
             dispatch(removeError())
         })
         .catch(error =>{
@@ -138,15 +138,17 @@ export function sortReviews(sortBy){
 }
 export function addReview(revieweeId, review){
     return async function(dispatch){
+        dispatch(removeSuccess())
         return await services.addReview(revieweeId, review)
         .then(async response =>{
-            await dispatch({type:ADD_REVIEW, payload: response})
+            await dispatch({type:ADD_REVIEW, payload: response.data})
             if(revieweeId){
                 dispatch(getReviews(revieweeId))
             }
             else{
-                dispatch({type:GET_REVIEWS, payload: response})
+                dispatch({type:GET_REVIEWS, payload: response.data})
             }
+            dispatch(setSuccess({message:response.statusText}))
             dispatch(removeError())
         })
         .catch(error =>{
@@ -187,8 +189,9 @@ export function setError(error){
 export function removeError(){
     return {type: REMOVE_ERROR}
 }
-export function setSuccess(){
-    return {type: SET_SUCCESS}
+export function setSuccess(success){
+    window.scrollTo(0,0)
+    return {type: SET_SUCCESS, payload: success}
 }
 
 export function removeSuccess(){
