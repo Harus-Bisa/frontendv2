@@ -16,7 +16,6 @@ function ReportInappropriateForm(props){
             additionalMessage: otherInformation
         }
         await props.reportInappropriateness(report)
-        alert("Terima kasih sudah melaporkan review ini! Tim Dosen Ku akan segera menangani kasus ini.")
         props.closePopup();
     }
     return(

@@ -12,6 +12,7 @@ import Help from './pages/Help/Help';
 import TermsAndConditions from './pages/Info/TermsAndConditions';
 import PrivacyPolicy from './pages/Info/PrivacyPolicy';
 import CommunityGuidelines from './pages/Info/CommunityGuidelines';
+import NotFound from './pages/NotFound/NotFound';
 
 function Routes() {
     const history = useHistory()
@@ -46,6 +47,7 @@ function Routes() {
             <Route exact path="/login" component={Login}/>
             <Route exact path="/signup" component={SignUp}/>
             <Route exact path="/verification/:email" component={Verification}/>
+            <Route component={NotFound}/>
         </Switch>
     )
 }

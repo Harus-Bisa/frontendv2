@@ -12,12 +12,12 @@ export default function ReportInappropriatePopup(props){
     };
     return(
         <div>
-            <div className="content" style={{ marginBottom:'-15px'}}>
+            <div style={{padding:"1rem 0rem", marginBottom:'-15px'}}>
                 <h3>Baca sebelum laporkan</h3>
                 <p>Silakan merujuk pada <Link to="/info/communityguidelines">Peraturan Konten</Link> dan <Link to="/info/termsandconditions">Syarat dan Ketentuan</Link> kami dan beri tahu kami mengapa menurut Anda konten yang Anda laporkan melanggar pedoman ini:</p>
             </div>
             <div>
-                <div className="content" style={{paddingBottom:0}}>
+                <div style={{padding:"1rem 0rem"}}>
                     <h4>Apa Permasalahannya?</h4>
                 </div>
                 <div>

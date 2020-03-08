@@ -208,6 +208,31 @@
     line-height: 167%;
     color: black;
 }
+
+.recent-review h1{
+    z-index:1;
+    font-weight:600;
+    width: max-content;
+}
+.recent-review .h1-wrapper{
+    padding-top: 4rem;
+}
+.recent-review .recent-review-card{
+    background-color: #EDF7FF;
+    padding: 4rem 3rem !important;
+    height:500px;
+    width: 600px;
+}
+
+.recent-review .recent-review-card #quote{
+    font-size: 65px;
+    color: #39A3FF;
+    position: absolute;
+    top: -100px;
+}
+.recent-review .recent-review-card p{
+    margin-bottom: 0;
+}
 /*SM*/
 @media (max-width: 767px) {
     .reviewee-card h3{
@@ -221,6 +246,17 @@
         border: 1px solid transparent;
         box-sizing: border-box;
         padding: 0;
+    }
+    .recent-review h1{
+        font-size: 48px;
+        width: min-content;
+    }
+    .recent-review .recent-review-card{
+        padding-right: 1rem !important;
+        padding-left: 2rem !important;
+    }
+    .recent-review .h1-wrapper{
+        padding:2rem 0;
     }
 }
 @media (min-width: 768px) and (max-width: 991.98px){

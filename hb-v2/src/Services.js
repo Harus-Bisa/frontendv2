@@ -7,7 +7,8 @@ class Services{
     }
     errorHandling(error){
         if(error.response){
-            throw new Error(error.response.statusText)
+            var errorMessage = "Error " + error.response.status + ": " + error.response.statusText
+            throw new Error(errorMessage)
         }
         else{
             throw error
@@ -136,7 +137,7 @@ class Services{
             const url = this.domain+ "/reviewees/"+userId+"/reviews"
             return axios.post(url, review, {headers:this.headers()})
             .then(response =>{
-                return response.data
+                return response
             })
             .catch(error =>{
                 this.errorHandling(error)
@@ -146,7 +147,7 @@ class Services{
             const url = this.domain + "/reviewees"
             return axios.post(url, review, {headers:this.headers()})
             .then(response =>{
-                return response.data
+                return response
             })
             .catch(error =>{
                 this.errorHandling(error)

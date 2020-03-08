@@ -67,6 +67,7 @@ function Review(props){
                 <div className="container content page-container">
                     <div className="footer-adjust">
                         {props.error && <Feedback color={"danger"} message={props.error.message}/>}
+                        {props.success && <Feedback color={"success"} message={props.success.message}/>}
                         <header className="review-header">
                             <div className="row">
                                 <div className="col-lg-7">
@@ -256,6 +257,7 @@ function Review(props){
             <div className="container content page-container">
                 <div className="footer-adjust">
                 {props.error && <Feedback color={"danger"} message={props.error.message}/>}
+                {props.success && <Feedback color={"success"} message={props.success.message}/>}
                     <header className="review-header">
                         <h2 style={{borderBottom:"4px solid #39A3FF", width:'fit-content', fontSize: "calc(100% + 17px)"}}>{props.professor.name}</h2>
                         <p>{props.professor.school}</p>
@@ -309,7 +311,8 @@ function mapStateToProps(state){
         error: state.error,
         loggedIn: state.loggedIn,
         loading: state.loading,
-        isMobile: state.isMobile
+        isMobile: state.isMobile,
+        success: state.success
     }
 }
 export default connect(mapStateToProps, {getReviews, sortReviews})(Review);
