@@ -28,11 +28,12 @@ function ReviewCard(props){
             props.voteReview(props.revieweeId, props.review.reviewId, v)
         }
     }
+    const hasReported = props.review.hasReported
     const ReportInappropriateTrigger = (props) =>{ 
         return(
         <div className="col" style={{display:'flex', justifyContent:'flex-end'}}>
-            <Button className="button" onClick={props.onClick} style={{color:'black'}}>
-                <p>Laporkan</p>
+            <Button className="button" onClick={props.onClick} disabled={hasReported} style={{color:'black'}}>
+                <p>{hasReported ? "Sudah dilaporkan":"Laporkan"}</p>
                 <EmojiFlagsOutlined className="icon"/>
             </Button>
         </div>)
@@ -282,7 +283,7 @@ function ReviewCard(props){
                             </div>
                             <div className="col-4">
                                 <div className="row justify-content-between no-gutters">
-                                    <div className="col-8" style={{display:'flex', flexDirection:'row'}}>
+                                    <div className="col" style={{display:'flex', flexDirection:'row'}}>
                                         <p>Membantu?</p>
                                         {props.loggedIn && 
                                         <React.Fragment>
@@ -311,7 +312,7 @@ function ReviewCard(props){
                                         </React.Fragment>
                                         }
                                     </div>
-                                    <div className="col-4">
+                                    <div className="col">
                                         <Popup
                                             content={props.loggedIn ? _reportInappropriatePopup : LoginPopup}
                                             trigger={{
