@@ -220,7 +220,8 @@
 .recent-review .recent-review-card{
     background-color: #EDF7FF;
     padding: 4rem 3rem !important;
-    height:500px;
+    padding-bottom: 2rem !important;
+    height:400px;
     width: 600px;
 }
 
@@ -229,6 +230,7 @@
     color: #39A3FF;
     position: absolute;
     top: -100px;
+    left: -5px
 }
 .recent-review .recent-review-card p{
     margin-bottom: 0;
