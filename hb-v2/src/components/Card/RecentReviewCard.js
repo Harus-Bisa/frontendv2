@@ -6,11 +6,11 @@ import { GoQuote } from "react-icons/go"
 export default function RecentReviewCard(props){
     return(
         <div className="container recent-review">
-            <div className="row">
+            <div className="row justify-content-center">
                 <div className="col-md-4 flex h1-wrapper">
                     <h1>Review Terbaru</h1>
                 </div>
-                <div className="col-md-8 recent-review-card flex">
+                <div className="col-md-7 recent-review-card flex">
                     <div className="row justify-content-end" style={{height:"100%"}}>
                         <div className="col-md-9">
                             <GoQuote id="quote"/>
