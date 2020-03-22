@@ -1,4 +1,4 @@
-import { FIND_REVIEWEES, GET_REVIEWS, CLEAR_REVIEWEES, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, REMOVE_SUCCESS, SET_SUCCESS, FIND_SCHOOLS, LOAD_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES, CHANGE_IS_MOBILE, GET_TOP_SCHOOLS, GET_RECENT_REVIEWS, SORT_REVIEWS } from "../constants/action-types";
+import { FIND_REVIEWEES, GET_REVIEWS, CLEAR_REVIEWEES, SET_ERROR, REMOVE_ERROR, VOTE, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, REMOVE_SUCCESS, SET_SUCCESS, FIND_SCHOOLS, LOAD_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES, CHANGE_IS_MOBILE, GET_TOP_SCHOOLS, GET_RECENT_REVIEWS, SORT_REVIEWS, REPORT_INAPPROPRIATE_REVIEW } from "../constants/action-types";
 import services from "../../Services";
 import { NAME, POPULARITY, RATING } from "../../pages/Query/Query";
 import { sortName, sortPopularity, sortRating } from "./revieweeSortFunctions";
@@ -120,6 +120,22 @@ export default function rootReducer(state = initialState, action){
                 ...state.professor,
                 reviews: newReviews
                 
+            }
+        })
+    }
+    if(action.type === REPORT_INAPPROPRIATE_REVIEW){
+        let reviewId = action.payload.reviewId
+        let targetReviewIndex = state.professor.reviews.findIndex((r) => {return r.reviewId === reviewId})
+        let newReviews = state.professor.reviews.slice()
+        let targetReview = newReviews[targetReviewIndex]
+        targetReview = Object.assign({}, targetReview, {
+            hasReported: true
+        })
+        newReviews.splice(targetReviewIndex, 1, targetReview)
+        return Object.assign({}, state, {
+            professor:{
+                ...state.professor,
+                reviews: newReviews
             }
         })
     }

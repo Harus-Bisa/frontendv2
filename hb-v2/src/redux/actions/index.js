@@ -186,7 +186,7 @@ export function reportInappropriateness(report){
         dispatch(removeSuccess())
         return await services.reportInappropriateness(report)
         .then(async response =>{
-            await dispatch({type: REPORT_INAPPROPRIATE_REVIEW, payload: response})
+            await dispatch({type: REPORT_INAPPROPRIATE_REVIEW, payload: {reviewId: report.reviewId}})
             dispatch(setSuccess({message:"Terima kasih sudah melaporkan review ini! Tim Dosen Ku akan segera menangani kasus ini."}))
             dispatch(removeError())
         })
