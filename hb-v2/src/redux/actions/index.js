@@ -1,7 +1,6 @@
 import services from "../../Services"
 import { FIND_REVIEWEES, GET_REVIEWS, ADD_REVIEW, VOTE, CLEAR_REVIEWEES, REMOVE_ERROR, SET_ERROR, LOGIN, LOGOUT, SET_LOADING, REMOVE_LOADING, LOAD_REVIEWEES, SET_SUCCESS, REMOVE_SUCCESS, LOAD_SCHOOLS, FIND_SCHOOLS, CLEAR_SCHOOLS, SORT_REVIEWEES, REPORT_INAPPROPRIATE_REVIEW, CHANGE_IS_MOBILE, GET_TOP_SCHOOLS, SORT_REVIEWS, GET_RECENT_REVIEWS } from "../constants/action-types"
 
-
 export function signup(newUserData){
     return async function(dispatch){
         dispatch(setLoading())
@@ -96,10 +95,10 @@ export function clearSchools(){
 export function sortReviewees(sortBy){
     return ({type:SORT_REVIEWEES, payload: sortBy})
 }
-export function findReviewees(name, school, type){
+export function findReviewees(name, school, type, startIndex, limit){
     return async function(dispatch){
         dispatch({type:LOAD_REVIEWEES, payload:type})
-        return await services.findReviewees(name, school)
+        return await services.findReviewees(name, school, startIndex, limit)
         .then(async response =>{
             const payload = {
                 response: response,
