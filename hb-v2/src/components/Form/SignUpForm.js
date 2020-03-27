@@ -28,10 +28,10 @@ function SignUpForm(props){
         else{
             var errorMessage = "Tolong cek/isi berikut ini:\n"
             if(!validEmail){
-                errorMessage += "- Pastikan Anda menggunakan email sekolah anda"
+                errorMessage += "- Pastikan Anda menggunakan email sekolah anda\n"
             }
             if(!validPassword){
-                errorMessage += "- Pastikan password Anda benar"
+                errorMessage += "- Pastikan password Anda benar\n"
             }
             props.setError(new Error(errorMessage))
         }

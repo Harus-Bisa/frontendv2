@@ -48,7 +48,7 @@ export default function rootReducer(state = initialState, action){
     if(action.type === FIND_REVIEWEES){
         if(action.payload.type === "page"){
             return Object.assign({}, state, {
-                pageReviewees: action.payload.response,
+                pageReviewees: action.payload.response.sort(sortName),
                 found: action.payload.response.length !== 0,
                 loadPageReviewees: false
             })
