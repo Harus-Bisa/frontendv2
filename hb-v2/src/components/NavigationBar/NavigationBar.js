@@ -30,6 +30,7 @@ function NavigationBar(props){
 
   const navRef = React.useRef()
   navRef.current = navBackground
+  const history = props.history
   React.useEffect(() => {
     const handleScroll = () => {
       const show = window.scrollY > 0
@@ -38,10 +39,15 @@ function NavigationBar(props){
       }
     }
     document.addEventListener('scroll', handleScroll)
+
+    const unlisten = history.listen((location, action) => {
+      setShowSearchBox(false)
+    })
     return () => {
       document.removeEventListener('scroll', handleScroll)
+      unlisten();
     }
-  }, [])
+  }, [history])
 
   const toggle = () => {
     if(isOpen){
