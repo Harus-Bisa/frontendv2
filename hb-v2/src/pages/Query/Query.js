@@ -44,7 +44,7 @@ function Query(props){
     const clearReviewees = props.clearReviewees;
 
     React.useEffect(() =>{
-        findReviewees(revieweeName, revieweeSchool, "page", 0, limit)
+        findReviewees(revieweeName, revieweeSchool, "page", 0, 10)
         return () =>{
             clearReviewees()
         }
