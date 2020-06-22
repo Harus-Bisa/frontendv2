@@ -19,7 +19,7 @@ export default function Help(){
                 <div className="container">
                     <div className="row justify-content-center faq padding">
                         <div className="col-lg-9">
-                            <h3>PERTANYAAN POPULER</h3>
+                            <h3 style={{textAlign:"left"}}>PERTANYAAN POPULER</h3>
                             <FAQPanel/>
                         </div>
                     </div>

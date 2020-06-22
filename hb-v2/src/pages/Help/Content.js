@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom";
 const content = {
     "faqs":[
         {
@@ -32,7 +33,7 @@ const content = {
         },
         {
             "question": "Bagaimana cara tahu penulis review?",
-            "answer": <p>Review diberikan secara anonimus. Tolong lihat kembali ke halaman Kebijakan Privasi.</p>
+            "answer": <p>Review diberikan secara anonimus. Tolong lihat kembali ke halaman <Link to="/info/privacypolicy">Kebijakan Privasi</Link>.</p>
         }
     ]
 }

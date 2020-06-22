@@ -10,7 +10,7 @@
     padding-bottom:2.5rem;
 }
 
-.help-page .faq, .expansion-panel .question{
+.expansion-panel .question{
     text-align: left;
     color: var(--hb-blue);
 }
