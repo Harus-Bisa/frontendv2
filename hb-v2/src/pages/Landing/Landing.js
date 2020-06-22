@@ -104,7 +104,7 @@ function Landing(props){
                             </div>
                             <div className="row justify-content-center">
                                 <div className="col-md-3">
-                                    <Button fullWidth className="contrast-button">Daftar Sekarang</Button>
+                                    <Button fullWidth className="contrast-button" onClick={() => {props.history.push("/signup")}}>Daftar Sekarang</Button>
                                 </div>
                             </div>
                         </div>
