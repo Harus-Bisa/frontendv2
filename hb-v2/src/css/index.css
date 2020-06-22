@@ -338,6 +338,10 @@ label{
   h2{
     font-size: 28px;
   }
+  h3{
+    font-size: 24px;
+    line-height:125%;
+  }
   .navbar-width{
     width: 100%;
   }
