@@ -4,6 +4,7 @@ import { Button, Divider } from "@material-ui/core";
 import "../../css/helpPage.css";
 import Popup from "../../components/Popup/Popup";
 import ContactUsPopup from "../../components/Popup/ContactUsPopup";
+import FAQPanel from "../../components/FAQPanel/FAQPanel";
 
 export default function Help(){
     return(
@@ -19,10 +20,7 @@ export default function Help(){
                     <div className="row justify-content-center faq padding">
                         <div className="col-lg-9">
                             <h3>PERTANYAAN POPULER</h3>
-                            <p>Bagaimana apabila tidak ada nama Dosen saya disini?</p>
-                            <p>Cara membuat review</p>
-                            <p>Bagaimana cara menghitung penilaian overall?</p>
-                            <p>Bagaimana cara tahu penulis review?</p>
+                            <FAQPanel/>
                         </div>
                     </div>
                     <div className="flex">
