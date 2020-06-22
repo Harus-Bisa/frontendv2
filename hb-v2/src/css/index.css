@@ -314,7 +314,7 @@ label{
 
 .page-header{
   background-color: #F3FBFF;
-  padding: 1rem 0rem;
+  padding: 4rem 0rem;
 }
 .MuiDivider-vertical{
   height: auto !important;
@@ -325,6 +325,11 @@ label{
 .full-height{
   height:100vh !important;
   transition: height 0.5s;
+}
+
+.info-content p{
+  font-size: 1rem !important;
+  line-height: 1.5;
 }
 
 /* SM */
@@ -357,6 +362,10 @@ label{
   }
   .navbar-nav{
     text-align: center;
+  }
+  .page-header{
+    background-color: #F3FBFF;
+    padding: 2rem 0rem;
   }
   
 }
