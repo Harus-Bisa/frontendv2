@@ -62,6 +62,8 @@ p, a, input, label{
 }
 a{
   color: #0D7CBB;
+  font-size: inherit;
+  font-weight: inherit;
 }
 a:hover{
   text-decoration-line: underline;

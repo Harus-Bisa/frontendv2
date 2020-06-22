@@ -280,7 +280,7 @@ function ReviewForm(props){
                 <div className="row">
                     <div className="col-lg-9">
                         <div style={{marginBottom:'2.5rem'}}>
-                            <h4>Terima kasih atas kontribusinya! Review <span className="blue">anonimus</span> Anda sangat membantu mahasiswa lainnya!</h4>
+                            <h4>Terima kasih atas kontribusinya! Review <Link to="/info/communityguidelines">anonimus</Link> Anda sangat membantu mahasiswa lainnya!</h4>
                         </div>
                         {props.error && <Feedback color={"danger"} message={props.error.message}/>}
                         <form onSubmit={submit} className="review-form"> 
