@@ -93,11 +93,21 @@ function Landing(props){
                             </div>
                         </header>
                         {props.recentReviews && 
-                        <div className="flex" style={{height:"150vh"}}>
+                        <div className="flex" style={{padding:"15rem 0 10rem 0"}}>
                             <div style={{margin:"auto 0"}}>
                                <RecentReviewCard review={props.recentReviews[recentReviewIndex]}/>
                             </div>
                         </div>}
+                        <div className="flex" style={{textAlign:'center', borderTop:"1px solid #40444D", padding:"3rem 0"}}>
+                            <div style={{marginBottom:'2rem'}}>
+                                <h3>Sukseskan Mahasiswa Indonesia dengan membagikan pengalaman Anda</h3>
+                            </div>
+                            <div className="row justify-content-center">
+                                <div className="col-md-3">
+                                    <Button fullWidth className="contrast-button" onClick={() => {props.history.push("/signup")}}>Daftar Sekarang</Button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

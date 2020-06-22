@@ -10,14 +10,11 @@
     padding-bottom:2.5rem;
 }
 
-.help-page .faq{
+.expansion-panel .question{
     text-align: left;
     color: var(--hb-blue);
 }
 
-.help-page .faq p{
-    margin: 1.5rem 0rem;
-}
 
 .help-page .divider{
     background-color: var(--hb-blue);
@@ -27,4 +24,17 @@
 
 .help-page .contact-us{
     padding-bottom: 5rem !important;
+}
+
+.expansion-panel{
+    margin: 1.5rem 0;
+}
+
+.expansion-panel .MuiExpansionPanelDetails-root {
+    display: flex;
+    padding: 8px 47px 16px;
+}
+
+.expansion-panel p{
+    font-size: 16px;
 }
