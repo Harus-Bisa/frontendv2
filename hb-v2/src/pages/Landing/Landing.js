@@ -92,7 +92,7 @@ function Landing(props){
                                 }
                             </div>
                         </header>
-                        {props.recentReviews && 
+                        {props.recentReviews && props.recentReviews.length >0 && 
                         <div className="flex" style={{padding:"15rem 0 10rem 0"}}>
                             <div style={{margin:"auto 0"}}>
                                <RecentReviewCard review={props.recentReviews[recentReviewIndex]}/>
