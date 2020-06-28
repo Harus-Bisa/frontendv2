@@ -27,6 +27,13 @@
     color: white;
 }
 
+.landing-page .divider{
+    background-color: rgb(64, 68, 77);
+    width: 50%;
+    margin:auto;
+    height: 2px;
+}
+
 /*SM*/
 @media (max-width: 767.98px)  {
     .landing-page{
@@ -42,6 +49,9 @@
         color: white;
         text-align: left;
         font-size: 48px;
+    }
+    .landing-page .divider{
+        width: 100%;
     }
 }
 

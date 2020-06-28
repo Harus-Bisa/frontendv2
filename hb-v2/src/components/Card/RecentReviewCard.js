@@ -14,6 +14,7 @@ export default function RecentReviewCard(props){
                     <div className="row justify-content-end" style={{height:"100%"}}>
                         <div className="col-md-9">
                             <GoQuote id="quote"/>
+                            {props.review && 
                             <div className="flex" style={{justifyContent:'space-between', height:'100%'}}>
                                 <h4 style={{fontWeight:"500"}}>{props.review.review}</h4>
                                 <div style={{margin:"15px 0"}}>
@@ -29,7 +30,7 @@ export default function RecentReviewCard(props){
                                         size={"small"}
                                     />
                                 </div>
-                            </div>
+                            </div>}
                         </div>
                     </div>
                 </div>
