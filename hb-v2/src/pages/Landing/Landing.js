@@ -5,7 +5,7 @@ import "../../css/landingPage.css";
 import Footer from "../../components/Footer/Footer";
 import Popup from "../../components/Popup/Popup";
 import { Person, School, KeyboardArrowDown } from "@material-ui/icons";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Divider } from "@material-ui/core";
 import SearchBoxPopup from "../../components/Popup/SearchBoxPopup";
 import { getTopSchools, getRecentReviews } from "../../redux/actions";
 import RecentReviewCard from "../../components/Card/RecentReviewCard";
@@ -92,21 +92,21 @@ function Landing(props){
                                 }
                             </div>
                         </header>
-                        {props.recentReviews && props.recentReviews.length >0 && 
-                        <div className="flex" style={{padding:"15rem 0 10rem 0"}}>
+                        <div className="flex" style={{padding:"18rem 0 10rem 0"}}>
                             <div style={{margin:"auto 0"}}>
-                               <RecentReviewCard review={props.recentReviews[recentReviewIndex]}/>
+                               <RecentReviewCard review={props.recentReviews ? props.recentReviews[recentReviewIndex] : null}/>
                             </div>
-                        </div>}
-                        <div className="flex" style={{textAlign:'center', borderTop:"1px solid #40444D", padding:"3rem 0"}}>
-                            <div style={{marginBottom:'2rem'}}>
+                        </div>
+                        <div className="flex" style={{textAlign:'center', padding:"0 0 3rem 0"}}>
+                            <Divider className="divider"/>
+                            <div style={{margin:'3rem 0 2rem 0'}}>
                                 <h3>Sukseskan Mahasiswa Indonesia dengan membagikan pengalaman Anda</h3>
                             </div>
-                            <div className="row justify-content-center">
+                            {!props.loggedIn && <div className="row justify-content-center">
                                 <div className="col-md-3">
                                     <Button fullWidth className="contrast-button" onClick={() => {props.history.push("/signup")}}>Daftar Sekarang</Button>
                                 </div>
-                            </div>
+                            </div>}
                         </div>
                     </div>
                 </div>
@@ -119,7 +119,8 @@ function mapStateToProps(state){
     return{
         isMobile: state.isMobile,
         topSchools: state.topSchools,
-        recentReviews:state.recentReviews
+        recentReviews:state.recentReviews,
+        loggedIn: state.loggedIn
     }
 }
 export default connect(mapStateToProps,{getTopSchools, getRecentReviews})(Landing);

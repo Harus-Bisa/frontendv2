@@ -38,7 +38,7 @@ function SignUpForm(props){
         
     }
 
-    var validEmail = email !=="" && email.includes("ac.id")
+    var validEmail = email !=="" //&& email.includes("ac.id")
     var validPassword = password === confirmPassword && password !== ""
     if(props.success){
         if(props.closePopup){
