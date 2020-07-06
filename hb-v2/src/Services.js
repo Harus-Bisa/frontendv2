@@ -3,7 +3,7 @@ import decode from 'jwt-decode';
 
 class Services{
     constructor(){
-        this.domain = "https://api.harusbisa.net";
+        this.domain = "https://api.harusbisa.net/dev";
     }
     errorHandling(error){
         if(error.response){
@@ -110,8 +110,8 @@ class Services{
             this.errorHandling(error)
         })
     }
-    async findReviewees(name, school, startIndex, limit){
-        const url = this.domain + "/reviewees/?name="+name+"&school="+school+"&index="+startIndex+"&limit="+limit;
+    async findReviewees(name, school, startIndex, limit, sortBy, isAscending){
+        const url = this.domain + "/reviewees/?name="+name+"&school="+school+"&index="+startIndex+"&limit="+limit+"&sortBy="+sortBy+"&ascending="+isAscending;
         return axios.get(url,{headers:this.headers()})
         .then(response =>{
             return response.data

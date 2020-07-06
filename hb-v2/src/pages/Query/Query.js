@@ -23,9 +23,10 @@ const BlueRadio = withStyles({
     checked: {},
   })(props => <Radio color="default" {...props} />);
 
-export const POPULARITY = "POPULARITY";
-export const RATING = "RATING";
-export const NAME = "NAME";
+export const POPULARITY = "totalReviews";
+export const RATING = "overallRating";
+export const NAME = "name";
+export const SCHOOL = "school";
 
 function Query(props){
     const [sortBy, setSortBy] = React.useState(NAME)
@@ -35,8 +36,13 @@ function Query(props){
 
     const handleChange = (event) =>{
         // changePagination(1)
-        setSortBy(event.target.value)
-        props.sortReviewees(event.target.value)
+        let sort = event.target.value;
+        let isAscending = true;
+        if(sort === POPULARITY || sort === RATING){
+            isAscending = false;
+        }
+        setSortBy(sort)
+        findReviewees(revieweeName, revieweeSchool, "page", 0, limit, sort, isAscending)
     }
     let query = useQuery();
     const revieweeName = query.get('name');
@@ -112,7 +118,8 @@ function Query(props){
                         <React.Fragment>
                             <h4>Urutkan berdasarkan</h4>
                             <RadioGroup aria-label="sortBy" name="sortBy" value={sortBy} onChange={handleChange}>
-                                <FormControlLabel style={{marginBottom:0}} value={NAME} control={<BlueRadio/>} label="Nama"/>
+                                <FormControlLabel style={{marginBottom:0}} value={NAME} control={<BlueRadio/>} label="Nama Dosen"/>
+                                <FormControlLabel style={{marginBottom:0}} value={SCHOOL} control={<BlueRadio/>} label="Nama Sekolah"/>
                                 <FormControlLabel style={{marginBottom:0}} value={POPULARITY} control={<BlueRadio/>} label="Paling Populer" />
                                 <FormControlLabel style={{marginBottom:0}} value={RATING} control={<BlueRadio/>} label="Penilaian Tertinggi" />
                             </RadioGroup>
@@ -122,7 +129,8 @@ function Query(props){
                         <FormControl style={{margin:'0 0 15px 0', width:'100%'}}>
                             <InputLabel>Urutkan berdasarkan</InputLabel>
                             <Select fullWidth value={sortBy} onChange={handleChange}>
-                                <MenuItem value={NAME}>Nama</MenuItem>
+                                <MenuItem value={NAME}>Nama Dosen</MenuItem>
+                                <MenuItem value={SCHOOL}>Nama Sekolah</MenuItem>
                                 <MenuItem value={POPULARITY}>Paling Populer</MenuItem>
                                 <MenuItem value={RATING}>Penilaian Tertinggi</MenuItem>
                             </Select>
@@ -135,7 +143,7 @@ function Query(props){
                             <div className="col-lg-12">
                                 {props.loading && <p>Loading...</p>}
                                 {!props.loading && renderQueryResults()}
-                                {props.found === false && 
+                                {(props.found === false || props.reviewees.length === 0) && !props.loading && 
                                     <div>
                                         <p style={{fontWeight:'bold'}}>Dosen yang anda cari tidak ditemukan dalam database kami.</p>
                                         <Link to={"/review/new/"+(revieweeName ? revieweeName : "Dosen")}>Jadilah penulis pertama!</Link>
