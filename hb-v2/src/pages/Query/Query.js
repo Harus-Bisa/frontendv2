@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { findReviewees, sortReviewees, clearReviewees } from "../../redux/actions";
+import { findReviewees, clearReviewees } from "../../redux/actions";
 import { useLocation, Link } from "react-router-dom";
 import { Divider, RadioGroup, Radio, FormControlLabel, withStyles, Select, MenuItem, InputLabel, FormControl, Button } from "@material-ui/core";
 import RevieweeCard from "../../components/Card/RevieweeCard";
@@ -186,4 +186,4 @@ function mapStateToProps(state){
         isMobile: state.isMobile
     }
 }
-export default connect(mapStateToProps,{findReviewees, sortReviewees, clearReviewees})(Query);
+export default connect(mapStateToProps,{findReviewees, clearReviewees})(Query);
