@@ -31,6 +31,7 @@ function Query(props){
     const [sortBy, setSortBy] = React.useState(NAME)
     const [page, setPage] = React.useState(1)
     const [limit, setLimit] = React.useState(10)
+    const [maxPage, setMaxPage] = React.useState(1)
 
     const handleChange = (event) =>{
         // changePagination(1)
@@ -40,15 +41,15 @@ function Query(props){
     let query = useQuery();
     const revieweeName = query.get('name');
     const revieweeSchool = query.get('school');
-    const findReviewees = props.findReviewees
-    const clearReviewees = props.clearReviewees;
+    const {findReviewees, clearReviewees, totalReviewees} = props
 
     React.useEffect(() =>{
         findReviewees(revieweeName, revieweeSchool, "page", 0, 10)
+        setMaxPage(Math.ceil(totalReviewees/10) !== 0 ? Math.ceil(totalReviewees/10) : 1);
         return () =>{
             clearReviewees()
         }
-    },[findReviewees, revieweeName, revieweeSchool, clearReviewees])
+    },[findReviewees, revieweeName, revieweeSchool, clearReviewees, totalReviewees])
 
     const renderQueryResults = () =>{
         var queryResultsComponent = []
@@ -70,6 +71,19 @@ function Query(props){
         setLimit(limit+10)
         findReviewees(revieweeName, revieweeSchool, "page", 0, limit+10)
     }
+    const renderPagination = () =>{
+        let pagination = [];
+        for(let i=1; i<maxPage+1; i++){
+            pagination.push(
+                <PaginationItem active={i === page} key={i}>
+                    <PaginationLink onClick={() => changePagination(i)}>
+                    {i}
+                    </PaginationLink>
+                </PaginationItem>
+            )
+        }
+        return pagination;
+    }
     return(
         <div className="page-container flex">
             <div className="container" style={{padding:'1rem 0rem'}}>
@@ -83,7 +97,7 @@ function Query(props){
                 <div className="container">
                     <div className="row no-gutters">
                         <div className="col">
-                            <p style={{fontStyle:'italic'}}>{props.reviewees.length} Hasil pencarian untuk</p>
+                            <p style={{fontStyle:'italic'}}>{props.totalReviewees} Hasil pencarian untuk</p>
                             <h2>
                                 {revieweeName ? <span className="blue">{revieweeName}</span> : <span>Dosen</span>} {revieweeSchool  && <span>di <span className="blue">{revieweeSchool}</span></span>}
                             </h2>
@@ -133,14 +147,8 @@ function Query(props){
                                         <PaginationItem disabled={page === 1}>
                                             <PaginationLink previous onClick={() => changePagination(page-1)}/>
                                         </PaginationItem>
-                                        {[1,2,3,4,5,6,7,8,9,10].map((i) => 
-                                            <PaginationItem active={i === page} key={i}>
-                                                <PaginationLink onClick={() => changePagination(i)}>
-                                                 {i}
-                                                </PaginationLink>
-                                            </PaginationItem>
-                                        )}
-                                        <PaginationItem disabled={page === 10}>
+                                        {renderPagination()}
+                                        <PaginationItem disabled={page === maxPage}>
                                             <PaginationLink
                                                 onClick={() => changePagination(page+1)}
                                                 next
@@ -149,8 +157,8 @@ function Query(props){
                                     </Pagination>
                                 </div>
                                 }
-                                {props.found === true && props.isMobile &&
-                                <Button onClick={loadMore} fullWidth>More results</Button>
+                                {props.found === true && props.isMobile && props.reviewees.length !== totalReviewees &&
+                                    <Button onClick={loadMore} fullWidth>More results</Button>
                                 }
                             </div>
                         </div>
@@ -164,6 +172,7 @@ function Query(props){
 function mapStateToProps(state){
     return{
         reviewees: state.pageReviewees,
+        totalReviewees: state.totalReviewees,
         loading: state.loadPageReviewees,
         found: state.found,
         isMobile: state.isMobile
