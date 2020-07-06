@@ -54,7 +54,7 @@ function SearchBox(props){
                     <form onSubmit={find}>
                         <div className="row no-gutters">
                             <div className="col-10">
-                                <div clasName="row">
+                                <div className="row">
                                     <div className="col-12 search-input-wrapper">
                                         <RevieweeSearch reviewee={reviewee} setReviewee={setReviewee} setSchool={setSchool} submit={find}/>
                                     </div>
