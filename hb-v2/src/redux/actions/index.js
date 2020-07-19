@@ -100,7 +100,7 @@ export function findSchools(school){
 export function clearSchools(){
     return ({type:CLEAR_SCHOOLS})
 }
-export function findReviewees(name, school, type, startIndex, limit, sortBy=NAME, isAscending=true){
+export function findReviewees(name, school, type, startIndex=0, limit=10, sortBy=NAME, isAscending=true){
     return async function(dispatch){
         dispatch({type:LOAD_REVIEWEES, payload:type})
         return await services.findReviewees(name, school, startIndex, limit, sortBy, isAscending)
